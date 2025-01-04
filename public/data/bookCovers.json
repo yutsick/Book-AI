@@ -1,0 +1,22 @@
+{
+  "title": "Book Covers",
+  "subtitle": "Our book covers are designed to captivate and reflect the essence of your story. Choose from two binding styles, each with its own appeal—whether you prefer the classic elegance of a hardcover or the lightweight flexibility of a paperback: ",
+  "widgets":[
+    {"imageUrl": "/images/paperback-thumbnail.png", "title": "Paperback", "description": "Light and flexible"},
+    {"imageUrl": "/images/hardcover-thumbnail.png", "title": "Hardcover", "description": "Premium, solid feel"}
+  ],
+  "mainImageUrl": "/images/main-cover.png",
+  "featureText": "Every cover is crafted to showcase creativity and professionalism, ensuring your book makes a lasting impression!",
+  "slidesTitle": "Cover Examples:",
+  "slides":[
+    {"id": 1, "imageUrl": "/images/cover1.png"},
+    {"id": 2, "imageUrl": "/images/cover2.png"},
+    {"id": 3, "imageUrl": "/images/cover3.png"},
+    {"id": 4, "imageUrl": "/images/cover1.png"},
+    {"id": 5, "imageUrl": "/images/cover2.png"},
+    {"id": 6, "imageUrl": "/images/cover3.png"},
+    {"id": 7, "imageUrl": "/images/cover1.png"},
+    {"id": 8, "imageUrl": "/images/cover2.png"}
+  ],
+  "button": "Write Your Book in 5 min"
+}

@@ -1,0 +1,8 @@
+{
+  "title":"Our Highlights",
+  "cards":[
+    {"title": "User-Friendly Interface", "description": "Answer a few simple, guided questions about your story, and let our intuitive platform do the rest. Book creation has never been this easy.", "imageUrl": "/images/hightLight1.png"},
+    {"title": "Customizable Content", "description": "Shape your book the way you want it—adjust the tone, select the genre, and refine the style to ensure it perfectly captures your story.", "imageUrl": "/images/hightLight2.png"},
+    {"title": "AI-Powered Magic", "description": "Turn your ideas into a complete, professionally formatted book using advanced AI technology. Effortless storytelling, tailored to your unique vision.", "imageUrl": "/images/hightLight3.png"}
+  ]
+}

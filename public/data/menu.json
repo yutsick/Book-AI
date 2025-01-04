@@ -1,0 +1,15 @@
+{
+  "links": [
+    { "text": "My Orders", "href": "/orders" },
+    { "text": "How it works", "href": "#how-it-works" },
+    { "text": "Our Highlights", "href": "#highlights" },
+    { "text": "Book Covers", "href": "#book-covers" },
+    { "text": "FAQ", "href": "#faq" },
+    { "text": "About Us", "href": "/about-us" }
+  ],
+  "footerLinks": [
+    { "text": "Terms of Use", "href": "/terms" },
+    { "text": "Privacy Policy", "href": "/privacy" },
+    { "text": "Return Policy", "href": "/returns" }
+  ]
+}

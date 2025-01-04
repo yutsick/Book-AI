@@ -1,0 +1,14 @@
+{
+  "title": "We allow Anyone to own his own unique book",
+  "slides": [
+    { "id": 1, "imageUrl": "/images/video1.png" },
+    { "id": 2, "imageUrl": "/images/video2.png" },
+    { "id": 3, "imageUrl": "/images/video3.png" },
+    { "id": 4, "imageUrl": "/images/video4.png" },
+    { "id": 5, "imageUrl": "/images/video1.png" },
+    { "id": 6, "imageUrl": "/images/video2.png" },
+    { "id": 7, "imageUrl": "/images/video3.png" },
+    { "id": 8, "imageUrl": "/images/video4.png" }
+  ],
+  "button": "Get Your  Book now"
+}

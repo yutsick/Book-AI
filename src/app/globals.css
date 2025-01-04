@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  font-family: var(--font-inter), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,9 +14,24 @@
     --foreground: #ededed;
   }
 }
+html{
+  scroll-behavior: smooth;
+}
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), sans-serif;
 }
+
+
+  .feed-slider .swiper-wrapper {
+    transition-timing-function: linear ;
+  }
+
+  @layer utilities {
+    .text-title {
+      @apply text-[30px] md:text-[44px] text-orange font-bold;
+    }
+  }
+  
