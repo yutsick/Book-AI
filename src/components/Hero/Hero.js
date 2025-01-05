@@ -19,13 +19,13 @@ const Hero = () => {
   if (!heroData) return <div>Loading...</div>;
 
   return (
-    <section className="flex items-center justify-between px-2 md:px-4 py-8 bg-white max-w-[910px] mx-auto flex-col md:flex-row gap-8  ">
+    <section className="flex items-center justify-between px-2 lg:px-0 py-8 bg-white max-w-[910px] mx-auto flex-col md:flex-row gap-8  ">
       <div className="md:flex-1 w-full md:w-auto">
         <h1 className="text-[32px] md:text-[46px] font-bold text-orange leading-[32px] md:leading-[46px] font-roboto md:font-inter">
           {heroData.heading}
           <p className='text-[#4A4949]'>{heroData.subHeading}</p>
         </h1>
-        <p className="mt-4 text-[18px] text-[#4A4949]/77">
+        <p className="mt-4 text-[18px] text-[#4A4949] opacity-[77]">
           {heroData.description}
         </p>
         <div className="relative  w-[287px] h-[255px] mx-auto my-7 md:hidden">
@@ -36,7 +36,7 @@ const Hero = () => {
             objectFit='cover'
           />
         </div>
-        <button className="md:mt-6 w-full max-w-[330px] md:w-[430px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white text-lg font-semibold text-[19px] md:text-[23px] rounded hover:scale-105 transition gap-1">
+        <button className="md:mt-6 w-full max-w-[330px] md:w-[430px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white text-lg font-semibold text-[19px] md:text-[23px] rounded-[10px] hover:scale-105 transition gap-1 shadow-heroBtnShadow">
           <span>{heroData.buttonText}</span>
           <span>
             <svg className='mt-1' width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">

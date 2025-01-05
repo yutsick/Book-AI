@@ -24,7 +24,7 @@ function HighLights() {
     <div>
       <div className="w-full max-w-[1260px] mx-auto px-10 py-11 md:px-4 md:pt-20 md:pb-[52px]" id="highlights">
         <h2 className="text-title text-center">{highLightsData.title}</h2>
-        <div className="mt-[60px] flex flex-col items-center md:flex-row gap-y-6 gap-x-[52px] justify-center">
+        <div className="mt-[60px] grid grid-cols-1 lg:grid-cols-3 gap-y-[20px] justify-items-center max-w-[1140px] w-full mx-auto">
           {highLightsData.cards.map((card, index) => (
             <HighLightCard
               card={card}
