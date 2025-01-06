@@ -17,8 +17,8 @@ function HighLightCard({ card }) {
         </div>
         <div className=" p-[10px]">
           <div className="text-center mt-3 ">
-            <h3 className="text-[18px] md:text-[22px] font-bold text-[#404040]">{title}</h3>
-            <p className="font-medium mt-2 text-[16px] text-[#404040]/83">{description}</p>
+            <h3 className="text-[18px] md:text-[22px] font-bold text-gray">{title}</h3>
+            <p className="font-medium mt-2 text-[16px] text-gray/80">{description}</p>
           </div>
         </div>
 

@@ -77,13 +77,12 @@ const BurgerMenu = () => {
         <div className="flex flex-col items-center mt-12 space-y-4">
           {headerData.links.map((link, index) => (
             <React.Fragment key={index}>
-              <a href={link.href} className="text-[17px] md:text-[20px] font-bold text-[#4A4949]" style={{ fontFamily: "var(--font-)" }} onClick={toggleMenu}>{link.text}</a>
+              <a href={link.href} className="text-[17px] md:text-[20px] font-bold text-gray" style={{ fontFamily: "var(--font-)" }} onClick={toggleMenu}>{link.text}</a>
               <hr className="w-[95px] md:w-[117px] border-t border-[#6F6F6F]" />
             </React.Fragment>
           ))}
         </div>
 
-        {/* <div className="absolute bottom-14 left-4 flex flex-col gap-3"> */}
         <div className="my-12 ml-4 flex flex-col gap-3">
           {headerData.footerLinks.map((link, index) => (
             <a key={index} href={link.href} className="text-[#4A4949] text-[11px] md:text-[16px]" style={{ fontFamily: "var(--font-poppins)" }}>{link.text}</a>

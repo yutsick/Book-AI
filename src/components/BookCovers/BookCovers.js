@@ -46,7 +46,7 @@ const BookCovers = () => {
             <h2 className="text-title">
               {title}
             </h2>
-            <p className="text-[#323738]  text-[19px] mt-2 md:mt-8  ">
+            <p className="text-gray font-medium  text-[19px] mt-2 md:mt-8  ">
               {subtitle}
             </p>
 
@@ -78,7 +78,7 @@ const BookCovers = () => {
               alt='star icon'
             />
           </span>
-          <span> {featureText} </span>
+          <span className='text-gray'> {featureText} </span>
 
         </div>
 

@@ -15,7 +15,7 @@ function WorkCard({ card, stepNumber }) {
 
           <div className="text-center mt-3 ">
             <h3 className="text-[18px] md:text-[22px] font-bold text-[#404040]">{title}</h3>
-            <p className="font-medium mt-2 text-[16px] text-[#404040] opacity-[83]">{description}</p>
+            <p className="font-medium mt-2 text-[16px] text-[#404040]/80">{description}</p>
           </div>
         </div>
 

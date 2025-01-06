@@ -31,19 +31,21 @@ const Footer = () => {
                   <li><a href={link.href} className="" >{link.text}</a></li>
 
                 </React.Fragment>
-              ))}
+              ))}S
             </ul>
           </div>
           <div className="flex flex-col items-center mt-12 space-y-4 ">
             <ul className="space-y-2">
               {footerData.footerLinks.map((link, index) => (
-                <li><a key={index} href={link.href} className="" >{link.text}</a></li>
+                <React.Fragment key={index}>
+                  <li><a href={link.href} className="" >{link.text}</a></li>
+                </React.Fragment>
               ))}
             </ul>
           </div>
         </div>
 
-       
+
 
         {/* Divider */}
         <div className="flex items-center mt-[10px]">

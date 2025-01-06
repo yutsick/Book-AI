@@ -26,9 +26,10 @@ function Videos() {
         <div className="max-w-[1260px] mx-auto">
           <h2 className="text-title text-center">{video.title}</h2>
           <div className="h-[340px]">
-            <div  className="relative mx-auto max-w-[90%] md:max-w-[80%]  mt-6 md:mt-8">
+            <div  className="relative mx-auto max-w-[90%] md:max-w-[850px]  mt-6 md:mt-8">
                 <Slider
                   slides={video.slides}
+
                   breakpoints={{
                     0: { slidesPerView: 1.8, spaceBetween: 10 },
                     425: { slidesPerView: 2.5, spaceBetween: 15 },

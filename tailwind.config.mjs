@@ -9,8 +9,8 @@ export default {
     extend: {
       colors:{
         orange: '#E97F39',
-        pink: '#F6F0EB'
-        
+        pink: '#F6F0EB',
+        gray: '#404040'
       },
       fontFamily: {
         roboto: ['var(--font-roboto)', 'sans-serif'], 
