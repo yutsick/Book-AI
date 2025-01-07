@@ -38,7 +38,7 @@ const Slider = ({ slides, breakpoints, imageSizes, imageClasses }) => {
         modules={[Navigation]}
         loop={true}
         slidesPerView="auto"
-        spaceBetween={20}
+        spaceBetween={40}
         breakpoints={breakpoints}
         className="w-full h-full"
       >

@@ -31,10 +31,8 @@ const BookCovers = () => {
 
   const title = coversData?.title;
   const subtitle = coversData?.subtitle;
-  const widgets = coversData?.widgets || [];
-  const mainImageUrl = coversData?.mainImageUrl;
-  const featureText = coversData?.featureText;
   const slidesTitle = coversData?.slidesTitle;
+  const slidesSubTitle = coversData?.slidesSubTitle;
   const slides = coversData?.slides || [];
   const button = coversData?.button;
 
@@ -42,67 +40,34 @@ const BookCovers = () => {
     <section className="bg-pink text-white py-11 md:pt-[88px] md:pb-14" id='book-covers'>
       <div className="max-w-[1020px] mx-auto px-4">
         <div className="flex">
-          <div className="md:w-2/3 w-full">
-            <h2 className="text-title">
+          <div className="w-full">
+            <h2 className="text-title text-center">
               {title}
             </h2>
-            <p className="text-gray font-medium  text-[19px] mt-2 md:mt-8  ">
-              {subtitle}
+            <p className="text-gray font-medium  text-[19px] mt-2 md:mt-2  "
+            dangerouslySetInnerHTML={{ __html: subtitle }} 
+            >
+           
             </p>
-
-
-            <Widgets widgets={widgets} />
-
-
-
-          </div>
-
-          <div className="md:w-1/3 hidden md:block">
-            <div className="flex justify-center">
-              <Image
-                src={mainImageUrl}
-                alt="Example of a book cover"
-                width={256}
-                height={375}
-
-              />
-            </div>
           </div>
         </div>
-        <div className="mt-6 md:mt-[52px] text-[#323738]/75  text-[16px] md:text-[19px] font-semibold flex gap-2">
-          <span>
-            <Image
-              src="/images/star-covers.png"
-              width={32}
-              height={32}
-              alt='star icon'
-            />
-          </span>
-          <span className='text-gray'> {featureText} </span>
-
-        </div>
-
 
         <div className="mt-11 md:mt-6">
-          <h2 className="text-title !font-medium text-center">{slidesTitle}</h2>
+          <h2 className="text-center text-orange font-semibold text-[30px] md:text-[36px]">{slidesTitle}</h2>
         </div>
+        <p className="text-gray text-center text-[19px] mt-2 md:mt-0  ">
+              {slidesSubTitle}
+            </p>
 
-        <div className="h-[250px] mt-4">
-          <div className="relative mx-auto max-w-[90%] md:max-w-[70%]  mt-6 md:mt-8">
-            <Slider
-              slides={slides}
-              breakpoints={{
-                0: { slidesPerView: 1.8, spaceBetween: 10 },
-                425: { slidesPerView: 2.5, spaceBetween: 15 },
-                625: { slidesPerView: 3.2, spaceBetween: 20 },
-                976: { slidesPerView: 4, spaceBetween: 20 },
-              }}
-              imageSizes={{
-                width: 165,
-                height: 250
-              }}
-              imageClasses={"rounded-md"}
-            />
+        <div className="mx-auto w-fit mt-6 md:mt-8">
+          <div className="grid grid-rows-2 grid-cols-3 gap-x-9 gap-y-6">
+            {slides.map((slide) => (
+              <div className="" key={slide.id}>
+                <img className='w-full h-full object-cover' src={slide.imageUrl} alt="" />
+              </div>
+            )
+            )}
+        
           </div>
         </div>
 

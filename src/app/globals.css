@@ -28,5 +28,15 @@ body {
     .text-title {
       @apply text-[30px] md:text-[44px] text-orange font-bold;
     }
+
+    .button-sec:hover{
+      @apply bg-orange text-white border-orange;
+      svg{
+        path{
+          fill: white;
+        }
+       
+      }
+    }
   }
   

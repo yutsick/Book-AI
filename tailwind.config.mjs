@@ -8,9 +8,9 @@ export default {
   theme: {
     extend: {
       colors:{
-        orange: '#E97F39',
-        pink: '#F6F0EB',
-        gray: '#404040'
+        orange: '#EAAC00',
+        pink: 'rgba(175, 131, 0, 0.08)',
+        gray: '#2B2B2B'
       },
       fontFamily: {
         roboto: ['var(--font-roboto)', 'sans-serif'], 
@@ -20,7 +20,7 @@ export default {
         heroBtnShadow: '0px 0px 2.13px 2.13px #82828275',
         btnShadow: '0px 1.5px 4.12px 0px #000000E0', 
         chatShadow: '0px 2px 4px 2px #00000040',
-        worksShadow: '0px 0px 4px 2px #00000040'
+        worksShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.25)'
 
 
       },

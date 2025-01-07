@@ -1,8 +1,8 @@
 {
   "title":"How It Works?",
   "cards":[
-    {"title": "Share Your Vision", "description": "Answer a few simple questions about your book’s topic", "imageUrl": "/images/works1.png"},
-    {"title": "AI Brings Your Story to Life", "description": "Let our AI turn your ideas into a complete manuscript", "imageUrl": "/images/works2.png"},
-    {"title": "Get Your Perfect Book", "description": "We’ll craft a 240-page book, professionally formatted and ready to impress!", "imageUrl": "/images/works3.png"}
+    {"title": "Tell Us More", "description": "Answer a few questions about the “author”. The more details, the juicier the answers,the funnier the book!", "imageUrl": "/images/works1.png"},
+    {"title": "Pick your vibe", "description": "Choose a title from our AI's comedy goldmine and cool cover designs.", "imageUrl": "/images/works2.png"},
+    {"title": "Get the Goods ", "description": "Sit back and relax while we create a 240-page of AI comedy book and deliver it to your doorstep.", "imageUrl": "/images/works3.png"}
   ]
 }
