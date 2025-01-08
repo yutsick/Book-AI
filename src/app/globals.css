@@ -40,3 +40,10 @@ body {
     }
   }
   
+
+  h1 {
+    white-space: nowrap; 
+    font-size: clamp(24px, 8vw, 46px); 
+    line-height: clamp(1.2em, 5vw, 1.5em);
+}
+  

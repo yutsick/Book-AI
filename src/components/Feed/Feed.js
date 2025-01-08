@@ -34,12 +34,13 @@ const Feed = () => {
           <Swiper
             spaceBetween={10}
             slidesPerView="auto"
+            centeredSlides={true}
             autoplay={{
               delay: 0,
               disableOnInteraction: false,
               pauseOnMouseEnter: false,
             }}
-            speed={feedData.speed || 2000}
+            speed={feedData.speed || 5000}
             loop={true}
             modules={[Autoplay]}
             className="h-full feed-slider"
