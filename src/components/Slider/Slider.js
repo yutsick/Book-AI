@@ -14,7 +14,7 @@ const Slider = ({ slides, breakpoints, imageSizes, imageClasses }) => {
     <div>
 
       <button
-        className="swiper-button-prev-arrow absolute left-[-50px] top-1/2 transform -translate-y-1/2 z-10 hidden md:block"
+        className="swiper-button-prev-arrow absolute left-[-70px] top-1/2 transform -translate-y-1/2 z-10 hidden md:block"
         aria-label="Previous Slide"
       >
         <svg width="34" height="28" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@ const Slider = ({ slides, breakpoints, imageSizes, imageClasses }) => {
         </svg>
       </button>
       <button
-        className="swiper-button-next-arrow absolute right-[-50px] top-1/2 transform -translate-y-1/2 z-10 hidden md:block"
+        className="swiper-button-next-arrow absolute right-[-70px] top-1/2 transform -translate-y-1/2 z-10 hidden md:block"
         aria-label="Next Slide"
       >
         <svg width="33" height="28" viewBox="0 0 33 28" fill="none" xmlns="http://www.w3.org/2000/svg">

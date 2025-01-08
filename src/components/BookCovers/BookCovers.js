@@ -37,8 +37,8 @@ const BookCovers = () => {
   const button = coversData?.button;
 
   return coversData ? (
-    <section className="bg-pink text-white py-11 md:pt-[88px] md:pb-14" id='book-covers'>
-      <div className="max-w-[1020px] mx-auto px-4">
+    <section className="bg-pink text-white py-11 md:pt-[76px] md:pb-14" id='book-covers'>
+      <div className="max-w-[940px] mx-auto px-4">
         <div className="flex">
           <div className="w-full">
             <h2 className="text-title text-center">
@@ -52,18 +52,18 @@ const BookCovers = () => {
           </div>
         </div>
 
-        <div className="mt-11 md:mt-6">
-          <h2 className="text-center text-orange font-semibold text-[30px] md:text-[36px]">{slidesTitle}</h2>
+        <div className="mt-6 md:mt-10">
+          <h2 className="text-center text-orange font-semibold text-[30px] leading-[32px]  md:text-[36px]">{slidesTitle}</h2>
         </div>
         <p className="text-gray text-center text-[19px] mt-2 md:mt-0  ">
               {slidesSubTitle}
             </p>
 
         <div className="mx-auto w-fit mt-6 md:mt-8">
-          <div className="grid grid-rows-2 grid-cols-3 gap-x-9 gap-y-6">
+          <div className="grid grid-cols-2 md:grid-rows-2 md:grid-cols-3 gap-x-3 md:gap-x-9 gap-y-3 md:gap-y-6">
             {slides.map((slide) => (
               <div className="" key={slide.id}>
-                <img className='w-full h-full object-cover' src={slide.imageUrl} alt="" />
+                <img className='w-[180px] h-[265px] object-cover' src={slide.imageUrl} alt="" />
               </div>
             )
             )}

@@ -17,13 +17,13 @@ const Hero = () => {
   }, []);
 
   return heroData ? (
-    <section className="flex items-center justify-between px-2 lg:px-0 py-8 md:pb-[72px] bg-white max-w-[910px] mx-auto flex-col md:flex-row gap-2  ">
+    <section className="flex items-center justify-between px-2 lg:px-0 py-8 md:pb-[32px] bg-white max-w-[910px] mx-auto flex-col md:flex-row gap-2  ">
       <div className="md:flex-1 w-full md:w-auto">
-        <h1 className="text-[32px] md:text-[46px] font-bold text-orange leading-[32px] md:leading-[46px] font-roboto md:font-inter">
+        <h1 className="text-[32px] md:text-[46px] font-bold text-orange leading-[32px] md:leading-[52px] font-roboto md:font-inter">
           {heroData.heading}
           <p className='text-[#2B2B2B]'>{heroData.subHeading}</p>
         </h1>
-        <p className="mt-4 text-[18px] text-[#2B2B2B]">
+        <p className="mt-2 text-[18px] text-[#2B2B2B]">
           {heroData.description}
         </p>
         <div className="relative  w-[287px] h-[255px] mx-auto my-7 md:hidden">
@@ -34,7 +34,7 @@ const Hero = () => {
             objectFit='cover'
           />
         </div>
-        <button className="md:mt-8 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white text-lg font-semibold text-[19px] md:text-[23px] rounded-[3px] hover:scale-105 transition gap-1 shadow-heroBtnShadow">
+        <button className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white text-lg font-semibold text-[19px] md:text-[23px] rounded-[3px] hover:scale-105 transition gap-1 shadow-heroBtnShadow">
           <span>{heroData.buttonText}</span>
           <span>
             <svg className='mt-1' width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -18,7 +18,8 @@ export default {
       },
       boxShadow: {
         heroBtnShadow: '0px 0px 2.13px 2.13px #82828275',
-        btnShadow: '0px 1.5px 4.12px 0px #000000E0', 
+        btnShadow: '0px 2.5px 4px 1.9px rgba(128, 128, 128, 0.28)', 
+
         chatShadow: '0px 2px 4px 2px #00000040',
         worksShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.25)'
 

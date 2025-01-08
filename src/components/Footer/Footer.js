@@ -24,17 +24,17 @@ const Footer = () => {
       <div className="max-w-[1260px] px-4 mx-auto flex flex-col  justify-between ">
         {/* Navigation Links */}
         <div className="flex  gap-x-16 px-4 md:px-0">
-          <div className="flex flex-col items-center mt-12 space-y-4 ">
+          <div className="flex flex-col items-center mt-4 space-y-4 ">
             <ul className="space-y-2">
               {footerData.links.map((link, index) => (
                 <React.Fragment key={index}>
                   <li><a href={link.href} className="" >{link.text}</a></li>
 
                 </React.Fragment>
-              ))}S
+              ))}
             </ul>
           </div>
-          <div className="flex flex-col items-center mt-12 space-y-4 ">
+          <div className="flex flex-col items-center mt-4 space-y-4 ">
             <ul className="space-y-2">
               {footerData.footerLinks.map((link, index) => (
                 <React.Fragment key={index}>

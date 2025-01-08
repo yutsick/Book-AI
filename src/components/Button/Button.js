@@ -4,7 +4,7 @@ function Button({text}) {
   return (
     <div>
       <a
-        className='text-orange py-4 md:py-5 px-4 font-bold text-[26px] leading-6 md:text-[30px] flex items-center gap-2 border-[1.5px] border-orange rounded-[3px] shadow-btnShadow w-fit mx-auto button-sec'
+        className='text-orange py-4 md:py-3 px-7 font-semibold text-[23px] leading-6  flex items-center gap-2 border-[1.5px] border-orange rounded-[3px] shadow-btnShadow w-fit mx-auto button-sec'
         href='#'
       >
         {text}
