@@ -26,11 +26,11 @@ body {
 
   @layer utilities {
     .text-title {
-      @apply text-[30px] md:text-[44px] text-orange font-bold mb-6 md:mb-12 leading-[44px];
+      @apply text-[30px] md:text-[44px] text-orange font-bold mb-6 md:mb-[31px] leading-[32px] md:leading-[44px];
     }
 
     .section-py{
-      @apply py-11 md:pt-24 md:pb-16;
+      @apply py-11 md:pt-20 md:pb-[70px];
     }
     .button-sec:hover{
       @apply bg-orange text-white border-orange;

@@ -52,8 +52,8 @@ const BookCovers = () => {
           </div>
         </div>
 
-        <div className="mt-6 md:mt-10">
-          <h2 className="text-center text-orange font-semibold text-[30px] leading-[32px]  md:text-[36px]">{slidesTitle}</h2>
+        <div className="mt-[46px] md:mt-10">
+          <h2 className="text-center text-orange font-semibold text-[26px] leading-[32px]  md:text-[36px]">{slidesTitle}</h2>
         </div>
         <p className="text-gray text-center text-[19px] mt-2 md:mt-0  ">
               {slidesSubTitle}

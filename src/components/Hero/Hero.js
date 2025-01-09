@@ -34,9 +34,9 @@ const Hero = () => {
             objectFit='cover'
           />
         </div>
-        <button className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white text-lg font-semibold text-[19px] md:text-[23px] rounded-[3px] hover:scale-[1.01] transition gap-1 shadow-heroBtnShadow group">
+        <button className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white text-lg font-semibold text-[23px] rounded-[3px] hover:scale-[1.01] transition gap-1 shadow-heroBtnShadow group">
           <span>{heroData.buttonText}</span>
-          <span className='group-hover:translate-x-1.5 group-hover:scale-[0.99] transition'>
+          <span className='group-hover:translate-x-1.5 group-hover:scale-[0.98] transition mb-[2px]'>
             <svg className='mt-1' width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_0_615)">
                 <path fillRule="evenodd" clipRule="evenodd" d="M1.82983 0.670075C2.29032 0.209585 3.03692 0.209585 3.49741 0.670073L9.61156 6.78422C9.83269 7.00535 9.95692 7.30528 9.95692 7.618C9.95692 7.93074 9.83269 8.23067 9.61156 8.4518L3.49741 14.5659C3.03692 15.0265 2.29032 15.0265 1.82983 14.5659C1.36934 14.1054 1.36934 13.3589 1.82983 12.8984L7.11019 7.618L1.82983 2.33765C1.36934 1.87716 1.36934 1.13056 1.82983 0.670075Z" fill="white" />
