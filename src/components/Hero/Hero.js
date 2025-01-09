@@ -34,7 +34,7 @@ const Hero = () => {
             objectFit='cover'
           />
         </div>
-        <button className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white text-lg font-semibold text-[19px] md:text-[23px] rounded-[3px] hover:scale-105 transition gap-1 shadow-heroBtnShadow group">
+        <button className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white text-lg font-semibold text-[19px] md:text-[23px] rounded-[3px] hover:shadow-worksShadow hover:scale-[1.01] transition gap-1 shadow-heroBtnShadow group">
           <span>{heroData.buttonText}</span>
           <span className='group-hover:translate-x-1.5 transition'>
             <svg className='mt-1' width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
