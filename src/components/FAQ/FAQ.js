@@ -25,9 +25,9 @@ function FAQ() {
     }, []);
   return faqData ? (
     <>
-    <div className="bg-pink pt-[37px] pb-[77px] md:pt-[77px] md:pb-[60px] px-4" id='faq'>
+    <div className="bg-pink section-py px-4" id='faq'>
       <h2 className="text-title text-center">{faqData.title}</h2>
-      <div className='mt-6'>
+      <div className=''>
           <Accordion data={faqData.items}/>
       </div>
     </div>

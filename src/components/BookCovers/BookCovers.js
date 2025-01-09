@@ -37,14 +37,14 @@ const BookCovers = () => {
   const button = coversData?.button;
 
   return coversData ? (
-    <section className="bg-pink text-white py-11 md:pt-[76px] md:pb-14" id='book-covers'>
+    <section className="bg-pink text-white section-py" id='book-covers'>
       <div className="max-w-[940px] mx-auto px-4">
         <div className="flex">
           <div className="w-full">
             <h2 className="text-title text-center">
               {title}
             </h2>
-            <p className="text-gray font-medium  text-[19px] mt-2 md:mt-2  "
+            <p className="text-gray font-medium  text-[19px]   "
             dangerouslySetInnerHTML={{ __html: subtitle }} 
             >
            
@@ -71,7 +71,7 @@ const BookCovers = () => {
           </div>
         </div>
 
-        <div className="mt-[34px] md:mt-[52px]">
+        <div className="">
           <Button text={button} />
         </div>
       </div>

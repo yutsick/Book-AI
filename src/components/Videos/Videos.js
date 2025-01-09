@@ -22,17 +22,18 @@ function Videos() {
 
   return video?.slides?.length ? (
     <>
-      <div className='bg-pink py-11 md:pt-20 md:pb-16 relative'>
+      <div className='bg-pink section-py relative'>
         <div className="max-w-[1260px] mx-auto">
           <h2 className="text-title text-center">{video.title}</h2>
-          <div className="h-[340px]">
-            <div  className="relative mx-auto max-w-[90%] md:max-w-[870px]  mt-6 md:mt-8">
+          <div className="h-[336px]">
+            <div  className="relative mx-auto max-w-[90%] md:max-w-[870px]  ">
                 <Slider
                   slides={video.slides}
 
                   breakpoints={{
                     0: { slidesPerView: 1.8, spaceBetween: 10 },
-                    425: { slidesPerView: 2.5, spaceBetween: 15 },
+                    465: { slidesPerView: 2.2, spaceBetween: 15 },
+                    525: { slidesPerView: 2.6, spaceBetween: 15 },
                     625: { slidesPerView: 3.2, spaceBetween: 20 },
                     976: { slidesPerView: 4, spaceBetween: 20 },
                   }}
@@ -44,7 +45,7 @@ function Videos() {
                 />
               </div>
           </div>
-          <div className="mt-4 md:mt-10">
+          <div className="">
             <Button text={video.button} />
           </div>
         </div>

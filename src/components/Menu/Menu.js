@@ -53,7 +53,7 @@ const BurgerMenu = () => {
       ></div>
 
       <div
-        className={`fixed top-0 right-0 h-full max-h-[660px] w-60 md:w-[350px] bg-[#f7f2eb] transition-transform duration-300 ease-in-out z-[200] overflow-scroll ${menuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0 h-full max-h-[660px] w-60 md:w-[350px] bg-[#f7f2eb] transition-transform duration-300 custom-scrollbar ease-in-out z-[200] overflow-auto ${menuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
         <div className="flex justify-between py-3 px-4">
@@ -83,7 +83,7 @@ const BurgerMenu = () => {
           ))}
         </div>
 
-        <div className="my-12 ml-4 flex flex-col gap-3">
+        <div className="mt-9 mb-11 ml-4 flex flex-col items-center gap-[22px]">
           {headerData.footerLinks.map((link, index) => (
             <a key={index} href={link.href} className="text-[#4A4949] text-[11px] md:text-[16px]" style={{ fontFamily: "var(--font-poppins)" }}>{link.text}</a>
           ))}

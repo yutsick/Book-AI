@@ -22,9 +22,9 @@ function HowItWorks() {
   }, []);
   return worksData?.cards?.length ? (
     <div>
-      <div className="w-full max-w-[1260px] mx-auto px-10 py-11 md:px-4 md:pt-20 md:pb-[52px]" id="how-it-works">
+      <div className="w-full max-w-[1260px] mx-auto px-10 section-py" id="how-it-works">
         <h2 className="text-title text-center">{worksData.title}</h2>
-        <div className="mt-[60px] grid grid-cols-1 lg:grid-cols-3 gap-y-[20px] justify-items-center max-w-[1140px] w-full mx-auto md:px-8">
+        <div className="mt-[72px] grid grid-cols-1 lg:grid-cols-3 gap-y-[20px] justify-items-center max-w-[1140px] w-full mx-auto md:px-8">
           {worksData.cards.map((card, index) => (
             <React.Fragment key={index}>
               <WorkCard

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Button({text}) {
   return (
-    <div>
+    <div className='mt-8 md:mt-12'>
       <a
         className='text-orange py-4 md:py-3 px-7 font-semibold text-[23px] leading-6  flex items-center gap-2 border-[1.5px] border-orange rounded-[3px] shadow-btnShadow w-fit mx-auto button-sec group'
         href='#'
