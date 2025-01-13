@@ -59,6 +59,7 @@ const Slider = ({ type, slides, breakpoints, imageSizes, imageClasses }) => {
                   dangerouslySetInnerHTML={{ __html: slide.text }} 
               ></div>
               <video
+              playsInline
                 controls={false}
                 width="100%"
                 height="100%"
@@ -67,7 +68,7 @@ const Slider = ({ type, slides, breakpoints, imageSizes, imageClasses }) => {
                 muted
               >
                 <source src={slide.videoUrl} type="video/mp4" />
-                Ваш браузер не підтримує відео.
+                Your browser doesn't support a video
               </video>
               <div className="text-[#2b2b2b] opacity-[0.88] justify-center text-center h-8 flex items-center font-semibold">{slide.title}</div>
            </div>
