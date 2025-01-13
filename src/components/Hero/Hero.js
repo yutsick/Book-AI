@@ -34,9 +34,12 @@ const Hero = () => {
             objectFit='cover'
           />
         </div>
-        <button className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group ]">
+        <a 
+          className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group ]"
+          href="/create-book"
+        >
      
-          <span className='underline'>{heroData.buttonText}</span>
+          <span>{heroData.buttonText}</span>
           <span className='group-hover:translate-x-1.5 transition'>
             <svg className='mt-[4px]' width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_0_615)">
@@ -51,7 +54,7 @@ const Hero = () => {
             </svg>
 
           </span>
-        </button>
+        </a>
         <div className="mt-4 md:mt-8 text-[#323738] md:text-[17px] text-[13px] font-semibold leading-[17px] justify-center flex items-center gap-1">
           <div className="flex items-center gap-1">
             <span className='italic mt-1'>Rated Excellent</span> 
