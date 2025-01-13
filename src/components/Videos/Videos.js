@@ -25,17 +25,24 @@ function Videos() {
       <div className='bg-pink section-py relative'>
         <div className="max-w-[1260px] mx-auto">
           <h2 className="text-title text-center">{video.title}</h2>
-          <div className="h-[336px]">
+          <div className="h-[460px]">
             <div  className="relative mx-auto max-w-[90%] md:max-w-[870px]  ">
                 <Slider
+                  type='video'
                   slides={video.slides}
 
                   breakpoints={{
-                    0: { slidesPerView: 1.8, spaceBetween: 10 },
-                    465: { slidesPerView: 2.2, spaceBetween: 15 },
-                    525: { slidesPerView: 2.6, spaceBetween: 15 },
-                    625: { slidesPerView: 3.2, spaceBetween: 20 },
-                    976: { slidesPerView: 4, spaceBetween: 20 },
+                    0: { slidesPerView: 1.3, spaceBetween: 10 },
+                    335: { slidesPerView: 1.4, spaceBetween: 10 },
+                    355: { slidesPerView: 1.6, spaceBetween: 10 },
+                    395: { slidesPerView: 1.8, spaceBetween: 10 },
+                    430: { slidesPerView: 2, spaceBetween: 10 },
+                    485: { slidesPerView: 2.2, spaceBetween: 10 },
+                    545: { slidesPerView: 2.4, spaceBetween: 10 },
+                    635: { slidesPerView: 2.7, spaceBetween: 15 },
+                    700: { slidesPerView: 3, spaceBetween: 15 },
+                    768: { slidesPerView: 3.6, spaceBetween: 20 },
+                    900: { slidesPerView: 4, spaceBetween: 20 },
                   }}
                   imageSizes={{
                     width: 186,

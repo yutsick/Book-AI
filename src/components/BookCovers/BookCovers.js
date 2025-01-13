@@ -1,12 +1,10 @@
 
 "use client";
 
-import Image from 'next/image';
+
 
 import config from '../../../config';
 import React, { useState, useEffect } from 'react';
-import Widgets from './Widgets';
-import Slider from '../Slider/Slider';
 import Button from '../Button/Button';
 
 const BookCovers = () => {

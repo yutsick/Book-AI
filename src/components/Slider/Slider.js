@@ -8,13 +8,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 
-const Slider = ({ slides, breakpoints, imageSizes, imageClasses }) => {
+const Slider = ({ type, slides, breakpoints, imageSizes, imageClasses }) => {
 
   return (
     <div>
 
       <button
-        className="swiper-button-prev-arrow absolute left-[-70px] top-1/2 transform -translate-y-1/2 z-10 hidden md:block"
+        className="swiper-button-prev-arrow absolute left-[-70px] top-1/2 transform -translate-y-1/2 z-10 hidden lg:block"
         aria-label="Previous Slide"
       >
         <svg width="34" height="28" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@ const Slider = ({ slides, breakpoints, imageSizes, imageClasses }) => {
         </svg>
       </button>
       <button
-        className="swiper-button-next-arrow absolute right-[-70px] top-1/2 transform -translate-y-1/2 z-10 hidden md:block"
+        className="swiper-button-next-arrow absolute right-[-70px] top-1/2 transform -translate-y-1/2 z-10 hidden lg:block"
         aria-label="Next Slide"
       >
         <svg width="33" height="28" viewBox="0 0 33 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,15 +43,38 @@ const Slider = ({ slides, breakpoints, imageSizes, imageClasses }) => {
         className="w-full h-full"
       >
         {slides.map((slide) => (
-          <SwiperSlide key={slide.id} className="!flex justify-center items-center">
-            <Image
-              src={slide.imageUrl}
-              alt={`Slide ${slide.id}`}
-              width={imageSizes.width}
-              height={imageSizes.height}
-              className={`object-cover ${imageClasses}`}
-            />
-          </SwiperSlide>
+         <SwiperSlide key={slide.id} className="!flex justify-center items-center p-1">
+         {type === "image" ? (
+           <Image
+             src={slide.imageUrl}
+             alt={`Slide ${slide.id}`}
+             width={imageSizes.width}
+             height={imageSizes.height}
+             className={`object-cover ${imageClasses}`}
+           />
+         ) : (
+            <div className="slide flex flex-col shadow-slideShadow bg-[#F6F6F6]">
+            
+              <div className="text-center italic text-[#2b2b2b] opacity-[0.88] font-medium text-[14px] leading-[16px] h-[65px] pt-2 px-5" 
+                  dangerouslySetInnerHTML={{ __html: slide.text }} 
+              ></div>
+              <video
+                controls={false}
+                width="100%"
+                height="100%"
+                autoPlay
+                loop
+                muted
+              >
+                <source src={slide.videoUrl} type="video/mp4" />
+                Ваш браузер не підтримує відео.
+              </video>
+              <div className="text-[#2b2b2b] opacity-[0.88] justify-center text-center h-8 flex items-center font-semibold">{slide.title}</div>
+           </div>
+         )}
+       </SwiperSlide>
+       
+          
         ))}
       </Swiper>
     </div>
