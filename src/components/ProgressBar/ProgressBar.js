@@ -1,19 +1,27 @@
+import React from "react";
+import ProgressStep from "./ProgressStep";
+import styles from "./ProgressBar.module.css";
 
-const ProgressBar = ({ step, totalSteps }) => (
-  <div className="flex items-center justify-between">
-    <div className="flex items-center space-x-2">
-      <div className="h-10 w-10 flex items-center justify-center rounded-full bg-yellow-600 text-white font-bold">
-        {step}
-      </div>
-      <p className="text-lg font-semibold text-gray-700">Author's Name</p>
+const ProgressBar = ({ currentStep, totalSteps, stepsName }) => {
+  const steps = Array.from({ length: totalSteps }, (_, i) => ({
+    number: i + 1,
+    label: stepsName[i], 
+  }));
+
+  return (
+    <div className={styles.progressBar}>
+      {steps.map((step, index) => (
+        <ProgressStep
+          key={step.number}
+          stepNumber={step.number}
+          isActive={step.number === currentStep}
+          isCompleted={step.number < currentStep}
+          isLast={step.number === totalSteps}
+          label={step.label}
+        />
+      ))}
     </div>
-    <div className="flex-1 h-2 bg-gray-200 rounded-full mx-4 relative">
-      <div
-        className="h-2 bg-yellow-600 rounded-full absolute"
-        style={{ width: `${(step / totalSteps) * 100}%` }}
-      ></div>
-    </div>
-  </div>
-);
+  );
+};
 
 export default ProgressBar;

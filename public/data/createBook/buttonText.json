@@ -1,14 +1,30 @@
 [
   {
     "step": 1,
-    "nextText": "Proceed to Genre"
+    "nextText": "Next"
   },
   {
     "step": 2,
-    "nextText": "Proceed to About the Author"
+    "nextText": "This is my genre"
   },
   {
     "step": 3,
-    "nextText": "Finalize Your Book"
+    "nextText": "Next"
+  },
+  {
+    "step": 4,
+    "nextText": "Next"
+  },
+  {
+    "step": 5,
+    "nextText": "Let’s Go with This!"
+  },
+  {
+    "step": 6,
+    "nextText": "Next"
+  },
+  {
+    "step": 7,
+    "nextText": "Next"
   }
 ]

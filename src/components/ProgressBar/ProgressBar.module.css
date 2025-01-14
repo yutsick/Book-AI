@@ -1,0 +1,74 @@
+.progressBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 768px;
+  width: 100%;
+  margin: 32px auto 62px;
+}
+
+.stepContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+}
+
+.step {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  z-index: 1;
+}
+
+.active, .completed {
+  background-color: var(--custom-orange);
+  color: #fff;
+  border: 1px solid #000;
+}
+
+
+
+.inactive {
+  background-color: #f6f0eb;
+  color: var(--custom-orange);
+  border: 1px solid #000;
+}
+
+.line {
+  position: absolute;
+  top: 50%;
+  right: -50%; /* Розташування лінії справа */
+  width: 100%;
+  height: 9px;
+  transform: translateY(-50%);
+  z-index: 0;
+  border: 1.5px var(--custom-orange) solid;
+}
+
+.lineCompleted {
+  background-color: var(--custom-orange);
+}
+
+.lineInactive {
+  background-color: transparent /* Сірий для непройдених кроків */
+}
+
+.label {
+height: 30px;
+  font-size: 14px;
+  line-height: 14px;
+  color: var(--custom-gray);
+  width: 75px;
+  text-align: center;
+  position: absolute;
+  bottom: -35px;
+}

@@ -23,11 +23,9 @@ function StepOne() {
   });
 
   const handleAgeSelectChange = (option) => {
-    console.log("Selected age:", option);
     setSelectedAge(option);
   };
   const handleGenderSelectChange = (option) => {
-    console.log("Selected gender:", option);
     setSelectedGender(option);
   };
 
@@ -35,31 +33,10 @@ function StepOne() {
   return (
     <div>
       <div className="w-full">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="h-10 w-10 flex items-center justify-center rounded-full bg-yellow-600 text-white font-bold">
-              1
-            </div>
-            <p className="text-lg font-semibold text-gray-700">Author's Name</p>
-          </div>
-          <div className="flex-1 h-2 bg-gray-200 rounded-full mx-4 relative">
-            <div
-              className="h-2 bg-yellow-600 rounded-full absolute"
-              style={{ width: "14%" }}
-            ></div>
-          </div>
-          
-        </div>
-
-        
-          <div className="mb-4">
-            <label
-              htmlFor="author-name"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Who will be the book's author?
-            </label>
+          <div className="">
             <CustomInput 
+              title="Who will be the book's author?"
+              description="You can choose your own name, your best friend’s name, or even a family member’s name"
               label="Author's name"
               placeholder="Enter name"
               // onBlurValidation={validateInput}
@@ -71,9 +48,10 @@ function StepOne() {
               htmlFor="author-gender"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              How does the author identify?
+              
             </label>
             <CustomSelect
+              title = "How does the author identify?"
               className="w-full border border-gray-300 rounded-lg p-2"
               options={genderOptions}
               onChange={handleGenderSelectChange}
@@ -86,11 +64,12 @@ function StepOne() {
           <div className="mb-4">
             <label
               htmlFor="author-age"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className=""
             >
-              What is the author's age?
+              
             </label>
             <CustomSelect
+              title="What is the author's age?"
               className="w-full border border-gray-300 rounded-lg p-2"
               options={ageOptions}
               onChange={handleAgeSelectChange}

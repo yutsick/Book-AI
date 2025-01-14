@@ -30,7 +30,7 @@ const MainButton = ({ currentStep, onClick }) => {
 
       {stepData?.nextText && (
         <button
-          className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group"
+          className="md:mt-6 w-full px-4 max-w-[330px] md:min-w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group"
           onClick={onClick}
         >
           <span>{stepData.nextText}</span>

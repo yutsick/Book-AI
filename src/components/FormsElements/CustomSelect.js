@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const CustomSelect = ({ options, onChange, placeholder = "Choose name", afterFocusPlaceholder }) => {
+const CustomSelect = ({ options, onChange, placeholder = "Choose name", afterFocusPlaceholder=null, title=null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const selectRef = useRef(null);
@@ -34,7 +34,9 @@ const CustomSelect = ({ options, onChange, placeholder = "Choose name", afterFoc
   }, []);
 
   return (
-    <div className="relative w-full max-w-sm h-[60px]" ref={selectRef}>
+    <div className="mb-8">
+    <div className="field-title">{title}</div>
+    <div className="relative w-full  h-[60px]" ref={selectRef}>
       
       <label
         className={`absolute top-1 left-0 text-gray-500 text-sm transition-all ${
@@ -53,7 +55,7 @@ const CustomSelect = ({ options, onChange, placeholder = "Choose name", afterFoc
       >
         <span
           className={`${
-            selected ? "text-gray-700" : "text-gray-400"
+            selected ? "text-gray-700" : "text-[#2B2B2B]/80"
           } text-base`}
         >
           {selected ? selected.label : placeholder}
@@ -90,6 +92,7 @@ const CustomSelect = ({ options, onChange, placeholder = "Choose name", afterFoc
           ))}
         </ul>
       )}
+    </div>
     </div>
   );
 };
