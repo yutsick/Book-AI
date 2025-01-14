@@ -1,0 +1,14 @@
+[
+  {
+    "step": 1,
+    "nextText": "Proceed to Genre"
+  },
+  {
+    "step": 2,
+    "nextText": "Proceed to About the Author"
+  },
+  {
+    "step": 3,
+    "nextText": "Finalize Your Book"
+  }
+]
