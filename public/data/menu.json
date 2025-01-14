@@ -1,6 +1,6 @@
 {
   "links": [
-    { "text": "My Orders", "href": "/orders" },
+    { "text": "My Account", "href": "/orders" },
     { "text": "How it works", "href": "#how-it-works" },
     { "text": "Our Highlights", "href": "#highlights" },
     { "text": "Book Covers", "href": "#book-covers" },
