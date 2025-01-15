@@ -23,7 +23,7 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 17px;
   transition: all 0.3s ease-in-out;
   position: relative;
   z-index: 1;
@@ -46,12 +46,14 @@
 .line {
   position: absolute;
   top: 50%;
-  right: -50%; /* Розташування лінії справа */
+  right: -50%;  
   width: 100%;
   height: 9px;
   transform: translateY(-50%);
   z-index: 0;
   border: 1.5px var(--custom-orange) solid;
+  border-left: none;
+  border-right: none;
 }
 
 .lineCompleted {
@@ -59,11 +61,11 @@
 }
 
 .lineInactive {
-  background-color: transparent /* Сірий для непройдених кроків */
+  background-color: transparent 
 }
 
 .label {
-height: 30px;
+  height: 30px;
   font-size: 14px;
   line-height: 14px;
   color: var(--custom-gray);
@@ -71,4 +73,49 @@ height: 30px;
   text-align: center;
   position: absolute;
   bottom: -35px;
+}
+@media (max-width:768px) {
+  .step{
+    width: 29px;
+    height: 29px;
+  }
+  .label{
+    display: none;
+  }
+  .lineBeforeLast {
+    width: 200%; 
+    right: -150%;
+  }
+
+  .stepContainer:last-child{
+    flex: 3;
+  }
+  .progressBar{
+    padding-left: 9%;
+  }
+
+  .active, .completed{
+    border: none;
+  }
+
+  .inactive {
+   background-color: #FFFAE7;
+    border: 1px solid #898989;
+  }
+
+  .stepContainer:last-child .inactive{
+    background-color: #F1DEA9;
+    border:none;
+  }
+  .lineInactive {
+    background-color: #F1DEA9 
+  }
+  .line{
+    border: none;
+  }
+  
+  .progressBar {
+
+    margin: 28px auto 16px;
+  }
 }

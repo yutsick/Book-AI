@@ -26,5 +26,9 @@
   {
     "step": 7,
     "nextText": "Next"
+  },
+  {
+    "step": 8,
+    "nextText": "Next"
   }
 ]

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import config from "../../../config";
 
-const MainButton = ({ currentStep, onClick }) => {
+const MainButton = ({ currentStep, onClick, disabled }) => {
   const { buttonTextUrl } = config;
 
   const [buttonTextData, setButtonTextData] = useState([]);
@@ -30,11 +30,18 @@ const MainButton = ({ currentStep, onClick }) => {
 
       {stepData?.nextText && (
         <button
-          className="md:mt-6 w-full px-4 max-w-[330px] md:min-w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group"
+          className={`md:mt-6 w-full px-4 max-w-[330px] bg-orange text-white md:min-w-[238px] h-[50px] mx-auto flex justify-center items-center font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group 
+          ${disabled
+              ? "opacity-[57%]"
+              : "opacity-100"}`}
+                  
           onClick={onClick}
+          disabled={disabled}
         >
           <span>{stepData.nextText}</span>
-          <span className="group-hover:translate-x-1.5 transition">
+          <span className={`group-hover:translate-x-1.5 ${
+              disabled ? "group-hover:translate-x-0" : ""
+            }`}>
             <svg
               className="mt-[4px]"
               width="18"

@@ -17,6 +17,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
 }
 
 
@@ -68,7 +69,11 @@ body {
       line-height: 34px;
       color: #8F8F8F;
     }
-
+    .small-placeholder::placeholder{
+      font-size: 12px;
+      line-height: 16px;
+      color: #8F8F8F;
+    }
     
   }
   
