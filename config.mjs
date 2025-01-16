@@ -10,6 +10,10 @@ const config = {
   apiBaseUrl: process.env.API_BASE_URL || 'https://api.example.com', 
   dataBaseUrl: process.env.IMAGE_BASE_URL || './data', 
   siteUrl: process.env.SITE_URL || 'http://localhost:3000', 
+  // Create Book
+  heroQuizUrl: './data/createBook/heroQuiz.json',
+  buttonTextUrl: './data/createBook/buttonText.json',
+  createBookStep1: './data/createBook/stepOne.json'
 };
 
 export default config;

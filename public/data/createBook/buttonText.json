@@ -1,0 +1,34 @@
+[
+  {
+    "step": 1,
+    "nextText": "Next"
+  },
+  {
+    "step": 2,
+    "nextText": "This is my genre"
+  },
+  {
+    "step": 3,
+    "nextText": "Next"
+  },
+  {
+    "step": 4,
+    "nextText": "Next"
+  },
+  {
+    "step": 5,
+    "nextText": "Let’s Go with This!"
+  },
+  {
+    "step": 6,
+    "nextText": "Next"
+  },
+  {
+    "step": 7,
+    "nextText": "Next"
+  },
+  {
+    "step": 8,
+    "nextText": "Next"
+  }
+]
