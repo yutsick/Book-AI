@@ -34,16 +34,17 @@ const MainButton = ({ currentStep, onClick, disabled }) => {
           ${disabled
               ? "opacity-[57%]"
               : "opacity-100"}`}
-                  
+
           onClick={onClick}
           disabled={disabled}
         >
           <span>{stepData.nextText}</span>
-          <span className={`group-hover:translate-x-1.5 ${
-              disabled ? "group-hover:translate-x-0" : ""
-            }`}>
+          <span className={`${disabled
+            ? "group-hover:translate-x-0"
+            : "group-hover:translate-x-1 "} 
+            transition duration-300`}>
             <svg
-              className="mt-[4px]"
+              className=""
               width="18"
               height="16"
               viewBox="0 0 18 16"

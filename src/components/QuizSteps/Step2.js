@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RadioButtonList from "@/components/FormsElements/RadioButtonList";
 
-const StepTwo = () => {
+const StepTwo = ({ setProgressStep }) => {
+
+  useEffect(() => {
+    setProgressStep(2);
+  }, [setProgressStep]);
+
   const [selectedGenre, setSelectedGenre] = useState("");
 
   const genreOptions = [
@@ -21,17 +26,19 @@ const StepTwo = () => {
 
 
   return (
-    <div>
-      <div className="w-full mt-2 md:mx-6">
-        <div className="field-title">Choose a Genre</div>
-        <div className="field-desc">Select a genre to guide the tone and direction of your book. This choice will shape the story’s vibe and writing style, ensuring it’s perfectly tailored to your vision</div>
-        <div className="my-8">
-          <RadioButtonList
+    <div className=''>
+      <div className="w-full mt-2">
+        <div className=" md:mx-6">
+          <div className="field-title">Choose a Genre</div>
+          <div className="field-desc">Select a genre to guide the tone and direction of your book. This choice will shape the story’s vibe and writing style, ensuring it’s perfectly tailored to your vision</div>
+          <div className="my-8">
+            <RadioButtonList
 
-            options={genreOptions}
-            selectedValue={selectedGenre}
-            onChange={setSelectedGenre}
-          />
+              options={genreOptions}
+              selectedValue={selectedGenre}
+              onChange={setSelectedGenre}
+            />
+          </div>
         </div>
       </div>
     </div>

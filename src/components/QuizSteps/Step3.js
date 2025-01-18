@@ -4,7 +4,12 @@ import CustomText from "@/components/FormsElements/CustomText";
 
 import ProgressTracker from "@/components/ProgressTracker/ProgressTracker";
 
-function Step3({ setIsButtonDisabled }) {
+function Step3({ setIsButtonDisabled, setProgressStep }) {
+   useEffect(() => {
+      setProgressStep(3); 
+    }, [setProgressStep]);
+
+
   useEffect(() => {
     setIsButtonDisabled(true);
     return () => {
@@ -13,13 +18,13 @@ function Step3({ setIsButtonDisabled }) {
   }, [setIsButtonDisabled]);
 
   const questions = [
-    { value: "1", label: "What is Yaniv's favorite hobby?" },
-    { value: "2", label: "What is the dream of Yaniv?" },
-    { value: "3", label: "How was Yaniv’s childhood?" },
-    { value: "4", label: "Describe the family of Yaniv" },
-    { value: "5", label: "What is Yaniv's biggest achievement?" },
-    { value: "6", label: "What challenges has Yaniv faced?" },
-    { value: "7", label: "What inspires Yaniv?" },
+    { value: "1", label: "What is Yaniv's favorite hobby?", tip: "Add some funny fact that your friend don’t know about you" },
+    { value: "2", label: "What is the dream of Yaniv?", tip: false },
+    { value: "3", label: "How was Yaniv’s childhood?", tip: "Add some funny fact that your friend don’t know about you" },
+    { value: "4", label: "Describe the family of Yaniv", tip: false },
+    { value: "5", label: "What is Yaniv's biggest achievement?", tip: "Add some funny fact that your friend don’t know about you" },
+    { value: "6", label: "What challenges has Yaniv faced?", tip: false },
+    { value: "7", label: "What inspires Yaniv?", tip: "Add some funny fact that your friend don’t know about you" },
   ];
 
   const [selectedQuestions, setSelectedQuestions] = useState([]);
@@ -29,12 +34,12 @@ function Step3({ setIsButtonDisabled }) {
     if (!selectedQuestions.find((q) => q.value === option.value)) {
       setSelectedQuestions((prev) => [...prev, option]);
     }
-    setIsButtonDisabled(false); 
+    // setIsButtonDisabled(false); 
   };
 
   return (
-    <div>
-      <div className="w-full mt-2 md:mx-6">
+    <div className="w-full ">
+      <div className="mt-2 md:mx-6">
         <div className="field-title">We would like to hear who Yaniv is</div>
         <div className="field-desc">
           Answer as many as you like—one is enough to proceed, but three or more
@@ -46,11 +51,13 @@ function Step3({ setIsButtonDisabled }) {
         </div>
 
       
-        {selectedQuestions.map((question, index) => (
+        {selectedQuestions.map(({value, label, tip}, index) => (
           <CustomText
-            key={question.value}
-            label={question.label}
+            setIsButtonDisabled = {setIsButtonDisabled}
+            key={value}
+            label={label}
             placeholder="For example: Yaniv’s favorite hobby is woodworking. He loves spending hours in his small backyard workshop, crafting intricate pieces of furniture and decorative items. For him, it’s a way to unwind and create something tangible with his hands. "
+            tip = {tip}
       
 
           />
