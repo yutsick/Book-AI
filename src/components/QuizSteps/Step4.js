@@ -31,8 +31,8 @@ function Step4({ setIsButtonDisabled,  setProgressStep }) {
           <CustomInput
             title="Stay Connected"
             description="Enter your email to continue crafting your book and save your progress."
-            label="Author's name"
-            placeholder="Enter name"
+            label="Author's email"
+            placeholder="Enter your Email here"
             onChange={handleInputChange}
           />
         </div>

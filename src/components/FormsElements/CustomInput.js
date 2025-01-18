@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CustomInput = ({ placeholder = "Enter text", label = "Field label", title = null, description = null }) => {
+const CustomInput = ({ placeholder = "Enter text", label = "Field label", title = null, description = null, onChange }) => {
   const [value, setValue] = useState("");
   const [focus, setFocus] = useState(false);
   const [localPlaceholder, setLocalPlaceholder] = useState(placeholder);
@@ -11,6 +11,9 @@ const CustomInput = ({ placeholder = "Enter text", label = "Field label", title 
     setValue(newValue);
     newValue.length > 24 ? setTextError(true) : setTextError(false);
 
+    if (onChange) {
+      onChange(newValue);
+    }
   };
 
   const handleFocus = () => {
