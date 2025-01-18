@@ -56,10 +56,11 @@ const MainScreen = () => {
     }
   };
 
+
   const handleFileUpload = async () => {
     goToNextStep();
     if (!file) return;
-    setLoading(true);
+    // setLoading(true);
 
     const formData = new FormData();
     formData.append('image', file);
@@ -71,7 +72,7 @@ const MainScreen = () => {
       });
       const result = await response.json();
 
-      setLoading(false);
+      // setLoading(false);
       if (response.ok) {
         onUploadComplete(result);
         setFile(null);
@@ -80,7 +81,7 @@ const MainScreen = () => {
         setError(result.message || 'Failed to upload image');
       }
     } catch (err) {
-      setLoading(false);
+      // setLoading(false);
       setError(err.message || 'Error uploading image');
     }
   };
@@ -208,7 +209,7 @@ const MainScreen = () => {
             <div className="">
               <Step6
                 setProgressStep={setProgressStep}
-                handleFileChange={handleFileUpload}
+                handleFileChange={handleFileChange}
               />
             </div>
           )}
