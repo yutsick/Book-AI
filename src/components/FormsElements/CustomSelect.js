@@ -9,21 +9,21 @@ const CustomSelect = ({
   title = null,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(null); // Контролює вибір
+  const [selected, setSelected] = useState(null); 
   const selectRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
 
   const handleToggle = () => setIsOpen(!isOpen);
 
   const handleSelect = (option) => {
-    onChange(option); // Викликаємо функцію onChange
+    onChange(option); 
     if (resetOnSelect) {
-      setSelected(null); // Скидаємо вибір
-      setIsFocused(false); // Скидаємо фокус
+      setSelected(null); 
+      setIsFocused(false); 
     } else {
-      setSelected(option); // Установлюємо вибір
+      setSelected(option); 
     }
-    setIsOpen(false); // Закриваємо список
+    setIsOpen(false); 
   };
 
   const handleBlur = () => {
@@ -49,21 +49,21 @@ const CustomSelect = ({
       <div className="field-title">{title}</div>
       <div className="relative w-full h-[60px]" ref={selectRef}>
         <label
-          className={`absolute top-1 left-0 text-gray-500 text-sm transition-all ${
-            isFocused || selected ? "-translate-y-[2px] scale-75 block" : "hidden"
+          className={`absolute top-1 left-2 text-[#8F8F8F] text-[14px] transition-all ${
+            isFocused || selected ? "-translate-y-[2px]  block" : "hidden"
           }`}
         >
           {afterFocusPlaceholder}
         </label>
 
         <div
-          className="h-full bg-white rounded-[3px] py-3 px-4 cursor-pointer flex justify-between items-center mt-4"
+          className="h-full bg-white rounded-[3px] py-3 px-4 cursor-pointer flex justify-between items-center mt-4 "
           onClick={handleToggle}
         >
           <span
             className={`${
               selected ? "text-gray-700" : "text-[#2B2B2B]/80"
-            } text-base`}
+            } text-[17px]`}
           >
             {selected ? selected.label : placeholder}
           </span>
@@ -84,12 +84,12 @@ const CustomSelect = ({
         </div>
 
         {isOpen && (
-          <ul className="absolute left-0 right-0 mt-2 border border-gray-300 bg-white rounded-md shadow-lg z-10 max-h-48 overflow-auto">
+          <ul className="p-2 absolute left-0 right-0 mt-2 border border-gray-300 bg-white rounded-md shadow-lg z-10 max-h-48 overflow-auto">
             {options.map((option) => (
               <li
                 key={option.value}
-                className={`px-4 py-2 cursor-pointer hover:bg-gray-100 ${
-                  selected?.value === option.value ? "bg-gray-100 font-bold" : ""
+                className={`rounded-[3px] px-4 py-2 cursor-pointer hover:bg-[#F1F1F1] ${
+                  selected?.value === option.value ? "text-black bg-[#E4E4E4] font-bold" : ""
                 }`}
                 onClick={() => handleSelect(option)}
               >

@@ -38,7 +38,7 @@
 
 
 .inactive {
-  background-color: #f6f0eb;
+  background-color: #FFFAE7;
   color: var(--custom-orange);
   border: 1px solid #000;
 }
@@ -116,6 +116,6 @@
   
   .progressBar {
 
-    margin: 28px auto 16px;
+    margin: 28px auto;
   }
 }

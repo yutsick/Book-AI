@@ -2,25 +2,23 @@ import React from "react";
 import ProgressStep from "./ProgressStep";
 import styles from "./ProgressBar.module.css";
 
-const ProgressBar = ({ currentStep, totalSteps, stepsName, isMobile }) => {
+const ProgressBar = ({ currentStep, progressStep, totalSteps, stepsName, isMobile }) => {
+  currentStep = isMobile ? currentStep : progressStep ;
   
-  // Генеруємо всі кроки для десктопної версії
   const steps = Array.from({ length: totalSteps + (isMobile ? 1 : 0) }, (_, i) => ({
     number: i + 1,
     label: stepsName[i] || "",
   }));
 
-  // Логіка для мобільної версії
   const transformedSteps = steps.map((step, index) => ({
     ...step,
     number:
       isMobile && (index === 0 || index === steps.length - 1)
-        ? null // Перший і останній кружечок без номера
+        ? null 
         : step.number,
-    isVisible: isMobile ? index === 0 || index === steps.length - 1 || (index + 1) % 2 !== 0 : true, // Ховаємо кружечки тільки для парних кроків
+    isVisible: isMobile ? index === 0 || index === steps.length - 1 || (index + 1) % 2 !== 0 : true, 
   }));
 
-  // Нумерація видимих кружечків для мобільного
   let visibleIndex = 0;
   transformedSteps.forEach((step) => {
     if (step.isVisible && step.number !== null) {
@@ -42,7 +40,7 @@ const ProgressBar = ({ currentStep, totalSteps, stepsName, isMobile }) => {
         isCompleted={index + 1 < currentStep}
         isLast={index === transformedSteps.length - 1}
         isVisible={step.isVisible}
-        isBeforeLast={isMobile && index === transformedSteps.length - 2} // Додаємо клас для передостаннього кроку
+        isBeforeLast={isMobile && index === transformedSteps.length - 2} 
         label={step.label}
       />
       ))}
