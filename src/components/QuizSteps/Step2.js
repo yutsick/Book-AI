@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import RadioButtonList from "@/components/FormsElements/RadioButtonList";
 
-const StepTwo = ({ setProgressStep }) => {
+const StepTwo = ({ setProgressStep, setIsButtonDisabled }) => {
 
   useEffect(() => {
     setProgressStep(2);
   }, [setProgressStep]);
+
+  useEffect(() => {
+    setIsButtonDisabled(true);
+    return () => {
+      setIsButtonDisabled(false);
+    };
+  }, [setIsButtonDisabled]);
 
   const [selectedGenre, setSelectedGenre] = useState("");
 
@@ -33,7 +40,7 @@ const StepTwo = ({ setProgressStep }) => {
           <div className="field-desc">Select a genre to guide the tone and direction of your book. This choice will shape the story’s vibe and writing style, ensuring it’s perfectly tailored to your vision</div>
           <div className="my-8">
             <RadioButtonList
-
+              setIsButtonDisabled={setIsButtonDisabled}
               options={genreOptions}
               selectedValue={selectedGenre}
               onChange={setSelectedGenre}

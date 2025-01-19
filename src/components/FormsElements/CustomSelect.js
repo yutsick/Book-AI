@@ -87,11 +87,15 @@ const CustomSelect = ({
           <ul className="p-2 absolute left-0 right-0 mt-2 border border-gray-300 bg-white rounded-md shadow-lg z-10 max-h-48 overflow-auto">
             {options.map((option) => (
               <li
-                key={option.value}
-                className={`rounded-[3px] px-4 py-2 cursor-pointer hover:bg-[#F1F1F1] ${
-                  selected?.value === option.value ? "text-black bg-[#E4E4E4] font-bold" : ""
-                }`}
-                onClick={() => handleSelect(option)}
+              key={option.value}
+              className={`rounded-[3px] px-4 py-2 cursor-pointer hover:bg-[#F1F1F1] ${
+                option.isDisabled
+                  ? "text-gray-300 opacity-20 cursor-not-allowed hover:bg-transparent"
+                  : selected?.value === option.value
+                  ? "text-black bg-[#E4E4E4] font-bold"
+                  : ""
+              }`}
+              onClick={() => !option.isDisabled && handleSelect(option)}
               >
                 {option.label}
               </li>
