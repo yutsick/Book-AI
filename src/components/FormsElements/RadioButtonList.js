@@ -1,6 +1,8 @@
 import React from "react";
 
-const RadioButtonList = ({ options, selectedValue, onChange, iconPosition = null }) => {
+const RadioButtonList = ({ options, selectedValue, onChange, iconPosition = null, setIsButtonDisabled }) => {
+
+
   return (
     <div className="flex flex-col gap-4">
       {options.map(({ id, name, description, icon }) => (
@@ -12,13 +14,16 @@ const RadioButtonList = ({ options, selectedValue, onChange, iconPosition = null
           <input
             type="radio"
             name="radio-options"
-            value={name}
+            value={id}
             checked={selectedValue === name}
-            onChange={() => onChange(name)}
+            onChange={() => {
+              onChange(name); 
+              setIsButtonDisabled(false)}
+            }
             className="hidden"
           />
           {iconPosition !== 'right' && (
-            <div className="w-[50px]">
+            <div className="w-[60px]">
               <img src={icon} alt="" />
             </div>
           )}

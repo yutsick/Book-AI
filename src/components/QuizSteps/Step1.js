@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CustomSelect from "@/components/FormsElements/CustomSelect";
 import CustomInput from "@/components/FormsElements/CustomInput";
+import CreateBookContext from "@/contexts/CreateBookContext";
 
 
-function StepOne({setProgressStep}) {
+function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}) {
 
-  useEffect(() => {
-    setProgressStep(1);
-  }, [setProgressStep]);
 
+
+  const { authorName } = useContext(CreateBookContext);
   const [selectedAge, setSelectedAge] = useState(null);
   const [selectedGender, setSelectedGender] = useState(null);
 
@@ -21,11 +21,29 @@ function StepOne({setProgressStep}) {
     { value: "5", label: "Prefer Not to Say" },
     { value: "6", label: "Other" }
   ];
-
-  const ageOptions = [...Array(60 - 18 + 1)].map((_, i) => {
-    const value = i + 18;
-    return { value, label: `${value}` };
+  const ageRange = [0,3,7,12,18,24,30,40,55,70];
+  const ageOptions = ageRange.map((el, i) => {
+    const value = i + 1;
+    if (i === ageRange.length - 1) {
+      return { value, label: `${el} +` };
+    }
+    return { value, label: `${el} - ${ageRange[i + 1]}` };
   });
+
+  useEffect(() => {
+    setProgressStep(1);
+  }, [setProgressStep]);
+
+  useEffect(() => {
+    if (authorName) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [authorName, setIsButtonDisabled]);
+
+
+  
 
   const handleAgeSelectChange = (option) => {
     setSelectedAge(option);
@@ -44,6 +62,9 @@ function StepOne({setProgressStep}) {
             description="You can choose your own name, your best friend’s name, or even a family member’s name"
             label="Author's name"
             placeholder="Author's Full Name"
+            setIsButtonDisabled = {setIsButtonDisabled}
+            textError = {textError}
+            setTextError={setTextError}
           // onBlurValidation={validateInput}
           />
         </div>
@@ -74,6 +95,7 @@ function StepOne({setProgressStep}) {
 
           </label>
           <CustomSelect
+          
             title="What is the author's age?"
             className="w-full border border-gray-300 rounded-lg p-2"
             options={ageOptions}

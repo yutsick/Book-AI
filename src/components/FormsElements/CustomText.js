@@ -6,7 +6,9 @@ const FloatingInput = ({
   title = null,
   description = null,
   tip=null,
-  setIsButtonDisabled = true
+  setIsButtonDisabled = true,
+  onDelete,
+  textError
 }) => {
   const [value, setValue] = useState("");
   const [localPlaceholder, setLocalPlaceholder] = useState(placeholder);
@@ -56,13 +58,13 @@ const FloatingInput = ({
       <div className="relative">
     
         
-          <label className={`absolute top-3 left-4    transition-all 
+          <label className={`absolute top-3 left-4  pr-6  transition-all  leading-[16px]
             ${!isFocused && value ? 'text-[#8F8F8F] text-[12px]' : 'text-gray text-[17px] font-medium' }
             `}>
             {label}
           </label>
           { tip && (
-            <div className="mr-4 w-fit absolute bottom-3 left-4 rounded-[5px] min-h-[26px] px-4 flex items-center  text-[13px] bg-[#F9F6EB]">
+            <div className="mr-4 w-fit absolute bottom-3 left-4 rounded-[5px] min-h-[26px] px-4 flex items-center  text-[13px] leading-[13px] py-1 bg-[#F9F6EB]">
               <div className="text-[#232323] min-w-[95px] flex items-center">
                 <span>Pro Advice</span>
                 <span><img src="images/create-book/icon-tip.svg" alt="" /></span>
@@ -73,8 +75,15 @@ const FloatingInput = ({
           )
 
           }
+          <button
+            type="button"
+            className="absolute top-2 right-2"
+            onClick={onDelete}
+          >
+            ✖
+          </button>
 
-        
+            
 
         <textarea 
           ref={textareaRef}
@@ -82,8 +91,8 @@ const FloatingInput = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className= {`"text-[14px] leading-[16px] text-gray placeholder:text-[12px] placeholder:leading-[16px]  rounded-[3px] pt-10 pb-2 px-4 w-full min-h-[125px] resize-none overflow-hidden focus:outline-none 
-            ${tip ? 'pb-16 md:pb-4' : ''}"`}
+          className= {`"text-[14px] leading-[16px] text-gray placeholder:text-[12px] placeholder:leading-[16px]  rounded-[3px] ${textError ? 'md:pt-10 pt-12' : 'pt-10'}  px-4 w-full min-h-[125px] resize-none overflow-hidden focus:outline-none 
+            ${tip ? 'pb-16 md:pb-4' : 'pb-2'}`}
           placeholder={value ? "" : localPlaceholder}
           rows={1} 
         />

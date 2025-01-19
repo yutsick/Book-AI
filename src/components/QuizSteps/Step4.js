@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CustomInput from "@/components/FormsElements/CustomInput";
+import CustomEmail from "@/components/FormsElements/CustomEmail";
 
 function Step4({ setIsButtonDisabled,  setProgressStep }) {
   useEffect(() => {
@@ -13,11 +13,11 @@ function Step4({ setIsButtonDisabled,  setProgressStep }) {
       // };
     }, [setIsButtonDisabled]);
 
-  const [inputValue, setInputValue] = useState("");
+  const [emailValue, setEmailValue] = useState("");
 
-  const handleInputChange = (newValue) => {
+  const handleEmailChange = (newValue) => {
     if (newValue.trim()) { 
-      setInputValue(newValue);
+      setEmailValue(newValue);
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
@@ -28,12 +28,12 @@ function Step4({ setIsButtonDisabled,  setProgressStep }) {
     <div>
       <div className="w-full">
       <div className="mt-2 md:px-6 ">
-          <CustomInput
+          <CustomEmail
             title="Stay Connected"
             description="Enter your email to continue crafting your book and save your progress."
             label="Author's email"
             placeholder="Enter your Email here"
-            onChange={handleInputChange}
+            onChange={handleEmailChange}
           />
         </div>
       </div>
