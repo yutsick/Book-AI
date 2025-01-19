@@ -59,7 +59,7 @@ const FloatingInput = ({
     
         
           <label className={`absolute top-3 left-4  pr-6  transition-all  leading-[16px]
-            ${!isFocused && value ? 'text-[#8F8F8F] text-[12px]' : 'text-gray text-[17px] font-medium' }
+            ${!isFocused && value ? 'text-[#8F8F8F] text-[12px]' : 'text-gray text-[16.5px] font-medium' }
             `}>
             {label}
           </label>
@@ -77,7 +77,7 @@ const FloatingInput = ({
           }
           <button
             type="button"
-            className="absolute top-2 right-2"
+            className="absolute top-2 right-2 text-[#b0b0b0] font-light "
             onClick={onDelete}
           >
             ✖
@@ -91,8 +91,8 @@ const FloatingInput = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className= {`"text-[14px] leading-[16px] text-gray placeholder:text-[12px] placeholder:leading-[16px]  rounded-[3px] ${textError ? 'md:pt-10 pt-12' : 'pt-10'}  px-4 w-full min-h-[125px] resize-none overflow-hidden focus:outline-none 
-            ${tip ? 'pb-16 md:pb-4' : 'pb-2'}`}
+          className= {`"text-[14px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px]  rounded-[3px] ${textError ? 'md:pt-10 pt-12' : 'pt-10'}  px-4 w-full min-h-[125px] resize-none overflow-hidden focus:outline-none 
+            ${tip ? 'pb-16 md:pb-10' : 'pb-2'}`}
           placeholder={value ? "" : localPlaceholder}
           rows={1} 
         />
