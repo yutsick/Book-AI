@@ -8,7 +8,7 @@ const RadioButtonList = ({ options, selectedValue, onChange, iconPosition = null
       {options.map(({ id, name, description, icon }) => (
         <label
           key={id}
-          className={`flex hover:bg-[#D9D9D9] items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] md:hover:bg-[#FBFBFB]  rounded-[3px] cursor-pointer transition ${selectedValue === name ? "bg-[#D9D9D9]" : "bg-white"
+          className={`flex hover:bg-[#D9D9D9] items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px]   rounded-[3px] cursor-pointer transition ${selectedValue === name ? "bg-[#D9D9D9] md:hover:bg-[#D9D9D9] " : "bg-white md:hover:bg-[#FBFBFB]"
             }`}
         >
           <input
