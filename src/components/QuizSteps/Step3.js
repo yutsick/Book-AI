@@ -151,7 +151,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
           Answer as many as you like—one is enough to proceed, but three or more
           is recommended for the best results.
         </div>
-        <div className=" mt-9 mb-2  w-[calc(66%+140px)] text-center ext-[14px] font-medium">Your Answers Quality</div>
+        <div className=" mt-9 mb-2 mx-auto  w-[calc(66%+140px)] text-center ext-[14px] font-medium">Your Answers Quality</div>
         <div className="mb-16">
           <ProgressTracker activeSteps={selectedQuestions.length} />
         </div>
