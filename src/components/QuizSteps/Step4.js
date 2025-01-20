@@ -8,9 +8,6 @@ function Step4({ setIsButtonDisabled,  setProgressStep }) {
 
   useEffect(() => {
       setIsButtonDisabled(true);
-      // return () => {
-      //   setIsButtonDisabled(false);
-      // };
     }, [setIsButtonDisabled]);
 
   const [emailValue, setEmailValue] = useState("");
@@ -31,7 +28,7 @@ function Step4({ setIsButtonDisabled,  setProgressStep }) {
           <CustomEmail
             title="Stay Connected"
             description="Enter your email to continue crafting your book and save your progress."
-            label="Author's email"
+            label="Your Email"
             placeholder="Enter your Email here"
             onChange={handleEmailChange}
           />

@@ -16,10 +16,7 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
   const genderOptions = [
     { value: "1", label: "Male" },
     { value: "2", label: "Female" },
-    { value: "3", label: "Non-Binary" },
-    { value: "4", label: "Transgender" },
-    { value: "5", label: "Prefer Not to Say" },
-    { value: "6", label: "Other" }
+    { value: "3", label: "Non-Binary" }
   ];
   const ageRange = [0,3,7,12,18,24,30,40,55,70];
   const ageOptions = ageRange.map((el, i) => {
@@ -61,7 +58,7 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
             title="Who will be the book's author?"
             description="You can choose your own name, your best friend’s name, or even a family member’s name"
             label="Author's name"
-            placeholder="Author's Full Name"
+            placeholder="Author's full name"
             setIsButtonDisabled = {setIsButtonDisabled}
             textError = {textError}
             setTextError={setTextError}
@@ -81,7 +78,7 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
             className="w-full border border-gray-300 rounded-lg p-2"
             options={genderOptions}
             onChange={handleGenderSelectChange}
-            placeholder="Choose the gender"
+            placeholder="Select an option"
             afterFocusPlaceholder="Author's gender"
           />
 
@@ -100,7 +97,7 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
             className="w-full border border-gray-300 rounded-lg p-2"
             options={ageOptions}
             onChange={handleAgeSelectChange}
-            placeholder="Choose your age"
+            placeholder="Select an option"
             afterFocusPlaceholder="Author's age"
           />
         </div>

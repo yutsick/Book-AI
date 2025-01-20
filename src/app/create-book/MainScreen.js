@@ -1,12 +1,13 @@
 "use client";
 
-import config from '../../../config';
 
-import React, { useState, useEffect, useRef } from "react";
+
+import React, { useState, useEffect } from "react";
 import HeaderQuiz from "@/components/Header/HeaderQuiz";
 import HeroQuiz from "@/components/Hero/HeroQuiz";
 import ProgressBar from "@/components/ProgressBar/ProgressBar";
 import MainButton from "@/components/Button/MainButton";
+
 
 import Step1 from "@/components/QuizSteps/Step1";
 import Step2 from "@/components/QuizSteps/Step2";
@@ -23,14 +24,7 @@ const MainScreen = () => {
   const totalScreens = 9;
   const totalProgressSteps = 7;
 
-  const { createBookStep1 } = config;
-  const [faqData, setFaqData] = useState(null);
-  const [error, setError] = useState(null);
 
-  const block1Ref = useRef(null);
-  const block2Ref = useRef(null);
-
-  const [heroQuizLoaded, setHeroQuizLoaded] = useState(false);
 
   const [currentStep, setCurrentStep] = useState(1);
   const [progressStep, setProgressStep] = useState(1);
@@ -43,7 +37,7 @@ const MainScreen = () => {
     setFile(newFile);
   };
 
-  const stepsName = ["Author's Name ", "Genre", "About the Author", "Book Topic", "Book’s Cover", "Preview", "Checkout"];
+  const stepsName = ["Author ", "Genre", "Details", "Title", "Cover", "Preview", "Checkout"];
   const [isMobile, setIsMobile] = useState(false);
 
 
@@ -109,37 +103,8 @@ const MainScreen = () => {
   }, []);
 
 
-  useEffect(() => {
-    fetch(createBookStep1)
-      .then((response) => response.json())
-      .then((data) => {
 
-        setFaqData(data)
-      })
-      .catch((err) => {
-        console.error('Error fetching step1 data:', err);
-        setError('Failed to load step1 data.');
-      });
-  }, []);
 
-  useEffect(() => {
-    const updateBlock2Width = () => {
-
-      if (block1Ref.current && block2Ref.current) {
-        block2Ref.current.style.width = `${block1Ref.current.offsetWidth}px`;
-      }
-    };
-
-    if (heroQuizLoaded) {
-      updateBlock2Width();
-
-      window.addEventListener("resize", updateBlock2Width);
-
-      return () => {
-        window.removeEventListener("resize", updateBlock2Width);
-      };
-    }
-  }, [heroQuizLoaded]);
 
 
   return (
@@ -147,11 +112,7 @@ const MainScreen = () => {
       <HeaderQuiz />
       {
         currentStep === 1 &&
-        <HeroQuiz
-          block1Ref={block1Ref}
-          block2Ref={block2Ref}
-          setHeroQuizLoaded={setHeroQuizLoaded}
-        />
+        <HeroQuiz />
       }
       <ProgressBar
         progressStep={progressStep}
@@ -176,27 +137,30 @@ const MainScreen = () => {
         <div className="mb-12">
           {currentStep === 1 && (
             <div className="">
-              
-              <Step1 
+
+              <Step1
                 setIsButtonDisabled={setIsButtonDisabled}
-                setProgressStep={setProgressStep} 
-                textError = {textError}
-                setTextError = {setTextError}
+                setProgressStep={setProgressStep}
+                textError={textError}
+                setTextError={setTextError}
               />
             </div>
           )}
           {currentStep === 2 && (
             <div className="">
-              <Step2 
-              setIsButtonDisabled={setIsButtonDisabled}
-              setProgressStep={setProgressStep} 
-              />
+             
+
+                <Step2
+                  setIsButtonDisabled={setIsButtonDisabled}
+                  setProgressStep={setProgressStep}
+                />
+          
             </div>
           )}
           {currentStep === 3 && (
             <div className="">
               <Step3
-                textError = {textError}
+                textError={textError}
                 setIsButtonDisabled={setIsButtonDisabled}
                 setProgressStep={setProgressStep}
               />
@@ -237,16 +201,16 @@ const MainScreen = () => {
         </div>
         {
           currentStep < totalScreens && (
-         
-              <MainButton
-                currentStep={currentStep}
-                onClick={currentStep === 6 ? handleFileUpload : goToNextStep}
-                disabled={isButtonDisabled}
-              />
-          
+
+            <MainButton
+              currentStep={currentStep}
+              onClick={currentStep === 6 ? handleFileUpload : goToNextStep}
+              disabled={isButtonDisabled}
+            />
+
           )
         }
-        
+
 
       </div>
 
