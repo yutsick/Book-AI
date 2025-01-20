@@ -2,17 +2,19 @@ import React, { useState, useRef, useEffect } from "react";
 
 const CustomSelect = ({
   options,
-  onChange,
+  onChange = () => {},
+  value,
   placeholder = "Choose name",
   afterFocusPlaceholder = null,
   resetOnSelect = false,
   title = null,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(null); 
+  const [selected, setSelected] = useState(value || null); 
   const selectRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
 
+  
   const handleToggle = () => setIsOpen(!isOpen);
 
   const handleSelect = (option) => {
@@ -38,6 +40,12 @@ const CustomSelect = ({
       handleBlur();
     }
   };
+
+  useEffect(() => {
+    if (value) {
+      setSelected(value);
+    }
+  }, [value]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
