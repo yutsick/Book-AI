@@ -47,7 +47,7 @@ const RadioButtonList = ({ options, label = null, description = null, selectedVa
             />
             {icon && (
               <div className="w-[60px]">
-                <img src={icon} alt="" />
+                <img src={icon} alt="" className="w-full max-w-[40px]"/>
               </div>
             )}
             <div className="flex justify-between w-full">
