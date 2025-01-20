@@ -35,7 +35,7 @@ const CustomEmail = ({ placeholder = "Enter text", label = "Field label", title 
         {(value || focus) && (
 
           <label
-            className="absolute top-4 left-2 text-[#8F8F8F] text-[14px] transition-all "
+            className="absolute top-4 left-2 text-[#8F8F8F] text-[12.5px] transition-all "
           >
             {label}
           </label>

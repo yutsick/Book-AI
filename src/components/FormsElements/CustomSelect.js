@@ -49,7 +49,7 @@ const CustomSelect = ({
       <div className="field-title">{title}</div>
       <div className="relative w-full h-[60px]" ref={selectRef}>
         <label
-          className={`absolute top-1 left-2 text-[#8F8F8F] text-[14px] transition-all ${
+          className={`absolute top-1 left-2 text-[#8F8F8F] text-[12.5px] transition-all ${
             isFocused || selected ? "-translate-y-[2px]  block" : "hidden"
           }`}
         >

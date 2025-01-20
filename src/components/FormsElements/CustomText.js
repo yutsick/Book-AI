@@ -55,19 +55,19 @@ const FloatingInput = ({
    
       {description && <div className="field-desc">{description}</div>}
 
-      <div className="relative">
+      <div className="relative w-full">
     
         
           <label className={`absolute top-3 left-4  pr-6  transition-all  leading-[16px]
-            ${!isFocused && value ? 'text-[#8F8F8F] text-[12px]' : 'text-gray text-[16.5px] font-medium' }
+            ${!isFocused && value ? 'text-[#8F8F8F] text-[12.5px]' : 'text-gray text-[16.5px] font-medium' }
             `}>
             {label}
           </label>
           { tip && (
-            <div className="mr-4 w-fit absolute bottom-3 left-4 rounded-[5px] min-h-[26px] px-4 flex items-center  text-[13px] leading-[13px] py-1 bg-[#F9F6EB]">
+            <div className=" w-full absolute bottom-3 left-4 rounded-[5px] min-h-[26px] px-4 flex items-center  text-[13px] leading-[13px] py-1 bg-[#F9F6EB] max-w-[calc(100%-32px)]">
               <div className="text-[#232323] md:min-w-[95px] flex items-center">
                 <span className="hidden md:block">Pro Advice</span>
-                <span className="mr-2 md:mr-0"><img src="images/create-book/icon-tip.svg" alt="" /></span>
+                <span className="mr-2 md:mr-0"><img className="min-w-[25px]" src="images/create-book/icon-tip.svg" alt="" /></span>
               </div>
               <span className="text-gray/85">{tip}</span>
               
@@ -91,8 +91,8 @@ const FloatingInput = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className= {`"text-[14px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px]  rounded-[3px] ${textError ? 'md:pt-10 pt-12' : 'pt-10'}  px-4 w-full min-h-[125px] resize-none overflow-hidden focus:outline-none 
-            ${tip ? 'pb-16 md:pb-10' : 'pb-2'}`}
+          className= {`"text-[14px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px]  rounded-[3px] ${textError ? 'md:pt-10 pt-12' : 'pt-10'}  px-4 w-full min-h-[200px] md:min-h-[150px] resize-none overflow-hidden focus:outline-none box-border pb2
+            ${tip ? 'pb-14 md:pb-8 ' : 'pb-2'}`}
           placeholder={value ? "" : localPlaceholder}
           rows={1} 
         />
