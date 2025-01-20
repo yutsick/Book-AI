@@ -165,7 +165,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
             placeholder={
               example
                 ? `For example: ${example}`
-                : null
+                : `Type your answer here`
             }
             tip={tip || null}
             textError={textError}
