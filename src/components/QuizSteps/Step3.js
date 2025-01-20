@@ -152,7 +152,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
           is recommended for the best results.
         </div>
         <div className=" mt-9  w-full text-center ext-[14px] font-medium">Your Answers Quality: </div>
-        <div className="mb-9">
+        <div className="mb-16">
           <ProgressTracker activeSteps={selectedQuestions.length} />
         </div>
 
