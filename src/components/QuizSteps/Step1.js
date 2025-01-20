@@ -8,9 +8,15 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
 
 
 
-  const { authorName } = useContext(CreateBookContext);
-  const [selectedAge, setSelectedAge] = useState(null);
-  const [selectedGender, setSelectedGender] = useState(null);
+  const {     
+    authorName,
+    setAuthorName,
+    selectedAge,
+    setSelectedAge,
+    selectedGender,
+    setSelectedGender,
+   } = useContext(CreateBookContext);
+
 
 
   const genderOptions = [
@@ -39,17 +45,6 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
     }
   }, [authorName, setIsButtonDisabled]);
 
-
-  
-
-  const handleAgeSelectChange = (option) => {
-    setSelectedAge(option);
-  };
-  const handleGenderSelectChange = (option) => {
-    setSelectedGender(option);
-  };
-
-
   return (
     <div>
       <div className="w-full">
@@ -59,6 +54,8 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
             description="You can choose your own name, your best friend’s name, or even a family member’s name"
             label="Author's name"
             placeholder="Author's full name"
+            value={authorName}
+            onChange={setAuthorName}
             setIsButtonDisabled = {setIsButtonDisabled}
             textError = {textError}
             setTextError={setTextError}
@@ -77,7 +74,8 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
             title="How does the author identify?"
             className="w-full border border-gray-300 rounded-lg p-2"
             options={genderOptions}
-            onChange={handleGenderSelectChange}
+            value={selectedGender} // Використовуємо контекст для збереження статі
+            onChange={setSelectedGender} // Оновлюємо контекст
             placeholder="Select an option"
             afterFocusPlaceholder="Author's gender"
           />
@@ -96,7 +94,8 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
             title="What is the author's age?"
             className="w-full border border-gray-300 rounded-lg p-2"
             options={ageOptions}
-            onChange={handleAgeSelectChange}
+            value={selectedAge} // Використовуємо контекст для збереження віку
+            onChange={setSelectedAge} // Оновлюємо контекст
             placeholder="Select an option"
             afterFocusPlaceholder="Author's age"
           />
