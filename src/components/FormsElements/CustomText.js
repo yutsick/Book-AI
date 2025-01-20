@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const FloatingInput = ({
-  placeholder = "Enter text",
+  placeholder = null,
   label = "Field label",
   title = null,
   description = null,
@@ -65,9 +65,9 @@ const FloatingInput = ({
           </label>
           { tip && (
             <div className="mr-4 w-fit absolute bottom-3 left-4 rounded-[5px] min-h-[26px] px-4 flex items-center  text-[13px] leading-[13px] py-1 bg-[#F9F6EB]">
-              <div className="text-[#232323] min-w-[95px] flex items-center">
-                <span>Pro Advice</span>
-                <span><img src="images/create-book/icon-tip.svg" alt="" /></span>
+              <div className="text-[#232323] md:min-w-[95px] flex items-center">
+                <span className="hidden md:block">Pro Advice</span>
+                <span className="mr-2 md:mr-0"><img src="images/create-book/icon-tip.svg" alt="" /></span>
               </div>
               <span className="text-gray/85">{tip}</span>
               

@@ -13,6 +13,7 @@ const config = {
   // Create Book
   heroQuizUrl: './data/createBook/heroQuiz.json',
   buttonTextUrl: './data/createBook/buttonText.json',
+  genresUrl: './data/createBook/genres.json',
   createBookStep1: './data/createBook/stepOne.json'
 };
 

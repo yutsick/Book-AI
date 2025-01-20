@@ -3,7 +3,7 @@
 import config from "../../../config";
 import { useEffect, useState } from "react";
 
-const HeroQuiz = ({ block1Ref, block2Ref, setHeroQuizLoaded }) => {
+const HeroQuiz = ({  }) => {
   const { heroQuizUrl } = config;
   const [heroQuizData, setHeroQuizData] = useState(null);
 
@@ -12,14 +12,14 @@ const HeroQuiz = ({ block1Ref, block2Ref, setHeroQuizLoaded }) => {
       .then((response) => response.json())
       .then((data) => {
         setHeroQuizData(data);
-        setHeroQuizLoaded(true); 
       })
       .catch((error) => {
         console.error("Error fetching Hero Quiz data:", error);
       });
   }, [heroQuizUrl]);
 
-  return heroQuizData ? (
+  return heroQuizData && ( 
+    
     <div
       
       style={{
@@ -35,26 +35,26 @@ const HeroQuiz = ({ block1Ref, block2Ref, setHeroQuizLoaded }) => {
     >
       <div className="max-w-[1200px]">
       <div className="text-center text-[32px] md:text-[46px] leading-[36px] font-bold text-orange mt-3 md:mt-[44px] w-full">
-        Let's Bring Your Story to Life
+        {heroQuizData.title}
       </div>
       <p
         
         className="text-white opacity-[0.88] text-[18px] md:text-[26px] leading-[26px] font-semibold mt-5 md:mt-10 w-full text-start"
       >
-        Answer a few quick questions to start creating your book — it won’t take
-        more than 5 minutes!
+        {heroQuizData.subTitle}
       </p>
-      <p
+   
+        <p
         
         className="text-white opacity-[0.88] text-[18px] font-semibold hidden md:block mt-4 text-start w-full"
       >
-        Simply share your book’s topic, choose a genre, and let our AI bring
-        your ideas to life. You’ll see a complete manuscript tailored to your
-        vision in no time.
+        {heroQuizData.description}
       </p>
+      
+      
       </div>
     </div>
-  ) : null;
+  ) ;
 };
 
 export default HeroQuiz;

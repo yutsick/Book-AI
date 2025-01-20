@@ -1,0 +1,10 @@
+[
+  {"id": "1", "name": "Comedy", "description": "Lighthearted, funny stories to bring smiles and laughter", "icon": "images/create-book/icon-genre9.svg"},
+  {"id": "2", "name": "Romance", "description": "Love stories filled with emotion, connection, and heart", "icon": "images/create-book/icon-genre1.svg"},
+  {"id": "3", "name": "Fantasy", "description": "Magical worlds, heroic quests, and mythical creatures", "icon": "images/create-book/icon-genre5.svg"},
+  {"id": "4", "name": "Mystery", "description": "Whodunits, suspenseful plots, and gripping investigations", "icon": "images/create-book/icon-genre3.svg"},
+  {"id": "5", "name": "Adventure", "description": "For thrilling tales of daring exploits and epic journeys", "icon": "images/create-book/icon-genre2.svg"},
+  {"id": "6", "name": "Memoir", "description": "Personal stories capturing life’s highs, lows, and lessons", "icon": "images/create-book/icon-genre7.svg"},
+  {"id": "7", "name": "Expert Fiction", "description": "Mixing professional knowledge with creative stories.", "icon": "images/create-book/icon-genre12.svg"}
+]
+  
