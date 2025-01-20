@@ -8,7 +8,7 @@ const FloatingInput = ({
   tip = null,
   setIsButtonDisabled = true,
   onDelete,
-  textError
+  textError,
 }) => {
   const [value, setValue] = useState("");
   const [localPlaceholder, setLocalPlaceholder] = useState(placeholder);
@@ -22,45 +22,58 @@ const FloatingInput = ({
   const [placeholderHeight, setPlaceholderHeight] = useState(0);
   const [tipHeight, setTipHeight] = useState(0);
 
-  // Calculate static heights once on mount
   useEffect(() => {
     if (labelRef.current) {
       setLabelHeight(labelRef.current.offsetHeight);
     }
+  }, [label]);
+
+  useEffect(() => {
     if (tipRef.current) {
       setTipHeight(tipRef.current.offsetHeight);
     }
+  }, [tip]);
+
+  useEffect(() => {
     if (placeholderRef.current) {
       setPlaceholderHeight(placeholderRef.current.offsetHeight);
     }
-  }, []);
+  }, [localPlaceholder, value]);
 
   const handleChange = (e) => {
-    setValue(e.target.value);
+    const newValue = e.target.value;
+    setValue(newValue);
+
+  
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto"; 
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; 
+    }
   };
 
   const handleFocus = () => {
-    setLocalPlaceholder('');
+    setLocalPlaceholder("");
     setIsFocused(true);
   };
 
   const handleBlur = () => {
-    if (value !== '') {
+    if (value !== "") {
       setIsButtonDisabled(false);
       setIsFocused(false);
     } else {
       setLocalPlaceholder(placeholder);
       setIsButtonDisabled(true);
-      setValue('');
-      setIsFocused(true);
+      setValue("");
+      if (textareaRef.current) {
+        textareaRef.current.style.height = `${labelHeight + placeholderHeight + tipHeight + 50}px`;
+      }
     }
   };
 
-  // Adjust textarea height dynamically
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight  }px`;
     }
   }, [value]);
 
@@ -77,22 +90,27 @@ const FloatingInput = ({
       <div className="relative w-full">
         <label
           ref={labelRef}
-          className={`absolute top-3 left-4 pr-6 transition-all leading-[16px]
-            ${!isFocused && value ? 'text-[#8F8F8F] text-[12.5px]' : 'text-gray text-[16.5px] font-medium'}
-            `}
+          className={`absolute top-3 left-4 pr-6 transition-all leading-[16px] ${
+            !isFocused && value
+              ? "text-[#8F8F8F] text-[12.5px]"
+              : "text-gray text-[16.5px] font-medium"
+          }`}
         >
           {label}
         </label>
-
         {tip && (
           <div
             ref={tipRef}
-            className="w-full absolute bottom-[18px] left-4 rounded-[5px] min-h-[26px] px-2 md:px-4 flex items-center text-[13px] leading-[13px] py-1 bg-[#F9F6EB] max-w-[calc(100%-32px)]"
+            className="w-full absolute bottom-[25px] left-4 rounded-[5px] min-h-[26px] px-2 md:px-4 flex items-center text-[13px] leading-[13px] py-1 bg-[#F9F6EB] max-w-[calc(100%-32px)]"
           >
             <div className="text-[#232323] md:min-w-[95px] flex items-center">
               <span className="hidden md:block">Pro Advice</span>
               <span className="mr-2 md:mr-0">
-                <img className="min-w-[25px]" src="images/create-book/icon-tip.svg" alt="" />
+                <img
+                  className="min-w-[25px]"
+                  src="images/create-book/icon-tip.svg"
+                  alt=""
+                />
               </span>
             </div>
             <span className="text-gray/85">{tip}</span>
@@ -107,7 +125,6 @@ const FloatingInput = ({
           ✖
         </button>
 
-        {/* Invisible placeholder for height calculation */}
         <div
           ref={placeholderRef}
           className="invisible absolute top-0 left-0 text-[12px] leading-[16px] px-4"
@@ -121,13 +138,14 @@ const FloatingInput = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className={`text-[14px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px] rounded-[3px] px-4 w-full resize-none overflow-hidden focus:outline-none box-border 
-            ${tip ? 'pb-12' : 'pb-2'}`}
+          className={`text-[14px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px] rounded-[3px] px-4 w-full resize-none overflow-hidden focus:outline-none box-border ${
+            tip ? "pb-16" : "pb-4"
+          }`}
           placeholder={value ? "" : localPlaceholder}
           rows={1}
           style={{
-            paddingTop: `${labelHeight + 16}px`,
-            minHeight: `${labelHeight + placeholderHeight + tipHeight + 36}px`,
+            paddingTop: `${labelHeight + 20}px`,
+            minHeight: `${labelHeight + placeholderHeight + tipHeight + 54}px`,
           }}
         />
       </div>
