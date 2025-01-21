@@ -41,9 +41,9 @@ const StepTwo = ({ setProgressStep, setIsButtonDisabled }) => {
           <div className="md:mx-6">
             <div className="field-title">Choose a Genre</div>
             <div className="field-desc">
-              Select a genre to guide the tone and direction of your book. This choice will shape the story’s vibe and writing style, ensuring it’s perfectly tailored to your vision
+            Your book will be funny and satirical, but the genre you choose will shape its direction and atmosphere, creating the perfect stage for humor to shine
             </div>
-            <div className="my-8">
+            <div className="mb-8">
               <RadioButtonList
                 setIsButtonDisabled={setIsButtonDisabled}
                 options={genresData}

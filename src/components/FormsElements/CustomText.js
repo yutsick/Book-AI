@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const FloatingInput = ({
+  value = "", // Приймаємо пропс для зовнішнього значення
+  onChange = () => {}, // Функція для оновлення зовнішнього значення
   placeholder = null,
   label = "Field label",
   title = null,
@@ -10,7 +12,7 @@ const FloatingInput = ({
   onDelete,
   textError,
 }) => {
-  const [value, setValue] = useState("");
+  const [localValue, setLocalValue] = useState(value); // Локальний стейт для керування значенням
   const [localPlaceholder, setLocalPlaceholder] = useState(placeholder);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -18,64 +20,73 @@ const FloatingInput = ({
   const placeholderRef = useRef(null);
   const textareaRef = useRef(null);
   const tipRef = useRef(null);
+
   const [labelHeight, setLabelHeight] = useState(0);
   const [placeholderHeight, setPlaceholderHeight] = useState(0);
   const [tipHeight, setTipHeight] = useState(0);
 
+  // Встановлення висоти label
   useEffect(() => {
     if (labelRef.current) {
       setLabelHeight(labelRef.current.offsetHeight);
     }
   }, [label]);
 
+  // Встановлення висоти tip
   useEffect(() => {
     if (tipRef.current) {
       setTipHeight(tipRef.current.offsetHeight);
     }
   }, [tip]);
 
+  // Встановлення висоти placeholder
   useEffect(() => {
     if (placeholderRef.current) {
       setPlaceholderHeight(placeholderRef.current.offsetHeight);
     }
-  }, [localPlaceholder, value]);
+  }, [localPlaceholder, localValue]);
 
+  // Оновлення локального стейту і передача змін наверх
   const handleChange = (e) => {
     const newValue = e.target.value;
-    setValue(newValue);
+    setLocalValue(newValue); // Оновлюємо локальний стейт
+    onChange(newValue); // Викликаємо функцію для оновлення зовнішнього стейту
 
-  
+    // Автоматичне регулювання висоти textarea
     if (textareaRef.current) {
-      textareaRef.current.style.height = "auto"; 
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; 
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   };
 
+  // Обробка фокусу
   const handleFocus = () => {
     setLocalPlaceholder("");
     setIsFocused(true);
   };
 
+  // Обробка втрати фокусу
   const handleBlur = () => {
-    if (value !== "") {
+    if (localValue !== "") {
       setIsButtonDisabled(false);
       setIsFocused(false);
     } else {
       setLocalPlaceholder(placeholder);
       setIsButtonDisabled(true);
-      setValue("");
+      setLocalValue("");
       if (textareaRef.current) {
         textareaRef.current.style.height = `${labelHeight + placeholderHeight + tipHeight + 50}px`;
       }
     }
   };
 
+  // Регулювання висоти при зміні значення
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight  }px`;
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [value]);
+  }, [localValue]);
 
   return (
     <div className="w-full mb-2">
@@ -88,16 +99,19 @@ const FloatingInput = ({
       {description && <div className="field-desc">{description}</div>}
 
       <div className="relative w-full">
+        {/* Label */}
         <label
           ref={labelRef}
           className={`absolute top-3 left-4 pr-6 transition-all leading-[16px] ${
-            !isFocused && value
+            !isFocused && localValue
               ? "text-[#8F8F8F] text-[12.5px]"
               : "text-gray text-[16.5px] font-medium"
           }`}
         >
           {label}
         </label>
+
+        {/* Tip */}
         {tip && (
           <div
             ref={tipRef}
@@ -117,6 +131,7 @@ const FloatingInput = ({
           </div>
         )}
 
+        {/* Delete Button */}
         <button
           type="button"
           className="absolute top-2 right-2 text-[#b0b0b0] font-light"
@@ -125,6 +140,7 @@ const FloatingInput = ({
           ✖
         </button>
 
+        {/* Placeholder (Invisible для визначення висоти) */}
         <div
           ref={placeholderRef}
           className="invisible absolute top-0 left-0 text-[12px] leading-[16px] px-4"
@@ -132,16 +148,17 @@ const FloatingInput = ({
           {localPlaceholder}
         </div>
 
+        {/* Textarea */}
         <textarea
           ref={textareaRef}
-          value={value}
+          value={localValue}
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           className={`text-[14px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px] rounded-[3px] px-4 w-full resize-none overflow-hidden focus:outline-none box-border ${
             tip ? "pb-16" : "pb-4"
           }`}
-          placeholder={value ? "" : localPlaceholder}
+          placeholder={localValue ? "" : localPlaceholder}
           rows={1}
           style={{
             paddingTop: `${labelHeight + 20}px`,

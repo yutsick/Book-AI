@@ -178,6 +178,7 @@ const MainScreen = () => {
           {currentStep === 5 && (
             <div className="">
               <Step5
+              setIsButtonDisabled={setIsButtonDisabled}
                 setProgressStep={setProgressStep}
               />
             </div>

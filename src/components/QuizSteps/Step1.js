@@ -24,14 +24,14 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
     { value: "2", label: "Female" },
     { value: "3", label: "Non-Binary" }
   ];
-  const ageRange = [0,3,7,12,18,24,30,40,55,70];
-  const ageOptions = ageRange.map((el, i) => {
-    const value = i + 1;
-    if (i === ageRange.length - 1) {
-      return { value, label: `${el} +` };
-    }
-    return { value, label: `${el} - ${ageRange[i + 1]}` };
-  });
+  const ageOptions = ['under 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65 and above'];
+  // const ageOptions = ageRange.map((el, i) => {
+  //   const value = i + 1;
+  //   if (i === ageRange.length - 1) {
+  //     return { value, label: `${el} +` };
+  //   }
+  //   return { value, label: `${el} - ${ageRange[i + 1]}` };
+  // });
 
   useEffect(() => {
     setProgressStep(1);
