@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import GenreContext from "@/contexts/CreateGenreContext";
 
-const RadioButtonList = ({ options, label = null, description = null, selectedValue, onChange, setIsButtonDisabled }) => {
+const RadioButtonList = ({ options, label = null, description = null, selectedValue, onChange, setIsButtonDisabled, iconRight }) => {
   const { selectedGenre, setSelectedGenre } = useContext(GenreContext);
   const [focus, setFocus] = useState(false);
 
@@ -60,6 +60,13 @@ const RadioButtonList = ({ options, label = null, description = null, selectedVa
                 </div>
               </div>
             </div>
+            {iconRight && (
+              <div className="flex flex-col justify-center items-center">
+                <img src={iconRight} alt="" className="w-[28px]"/>
+                <div className="text-center text-black opacity-[71%] text-[12px]">Regenerate</div>
+                
+              </div>
+            )}
           </label>
         ))}
       </div>

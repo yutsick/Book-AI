@@ -6,9 +6,16 @@ const GenreContext = createContext();
 
 export const GenreProvider = ({ children }) => {
   const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState("");
 
   return (
-    <GenreContext.Provider value={{ selectedGenre, setSelectedGenre }}>
+    <GenreContext.Provider value={{ 
+      selectedGenre, 
+      setSelectedGenre,
+      selectedTopic, 
+      setSelectedTopic,
+      
+      }}>
       {children}
     </GenreContext.Provider>
   );

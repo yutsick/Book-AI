@@ -6,19 +6,16 @@ import CreateBookContext from "@/contexts/CreateBookContext";
 import ProgressTracker from "@/components/ProgressTracker/ProgressTracker";
 
 function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
+  // Додаємо доступ до контексту для питань і відповідей
+  const { authorName, questionsAndAnswers, addQuestionAndAnswer, removeQuestion } = useContext(CreateBookContext);
+
   useEffect(() => {
-    setProgressStep(3);
+    setProgressStep(3); // Встановлюємо поточний крок
   }, [setProgressStep]);
 
-
   useEffect(() => {
-    setIsButtonDisabled(true);
-    return () => {
-      setIsButtonDisabled(false);
-    };
-  }, [setIsButtonDisabled]);
-
-  const { authorName } = useContext(CreateBookContext);
+    setIsButtonDisabled(questionsAndAnswers.length === 0); // Активуємо кнопку, якщо є відповіді
+  }, [questionsAndAnswers, setIsButtonDisabled]);
 
   const questions = [
     {
@@ -114,69 +111,53 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
     },
   ];
 
-
-  const [selectedQuestions, setSelectedQuestions] = useState([]);
-
   const handleQuestionSelectChange = (option) => {
-
-    if (!selectedQuestions.find((q) => q.value === option.value)) {
-      setSelectedQuestions((prev) => [...prev, option]);
+    if (!questionsAndAnswers.some((qa) => qa.question === option.label)) {
+      addQuestionAndAnswer(option.label, ""); // Додаємо нове питання з пустою відповіддю
     }
   };
-
-  const handleDelete = (valueToRemove) => {
-    setSelectedQuestions((prev) =>
-      prev.filter((q) => q.value !== valueToRemove)
-    );
-
-
+  
+  const handleDelete = (questionToRemove) => {
+    removeQuestion(questionToRemove); // Видалення питання з контексту
   };
-
+  
+  // Оновлення списку опцій
   const optionsWithDisabled = questions.map((question) => ({
     ...question,
-    isDisabled: selectedQuestions.some((selected) => selected.value === question.value)
+    isDisabled: questionsAndAnswers.some((qa) => qa.question === question.label),
   }));
-
-  useEffect(() => {
-    if (selectedQuestions.length === 0) {
-      setIsButtonDisabled(true);
-    }
-  }, [selectedQuestions]);
+  
 
   return (
     <div className="w-full ">
       <div className="mt-2 md:mx-6">
         <div className="field-title">Tell us about {authorName}</div>
         <div className="field-desc">
-          Answer as many as you like—one is enough to proceed, but three or more
-          is recommended for the best results.
+          Share as much as you can! Each question you answer brings us closer to creating something truly special.
         </div>
-        <div className=" mt-9 mb-2 mx-auto  w-[calc(66%+140px)] text-center ext-[14px] font-medium">Your Answers Quality</div>
+        <div className="mt-9 mb-2 mx-auto w-[calc(66%+140px)] text-center text-[14px] font-medium">
+          Your Answers Quality
+        </div>
         <div className="mb-16">
-          <ProgressTracker activeSteps={selectedQuestions.length} />
+          <ProgressTracker activeSteps={questionsAndAnswers.length} />
         </div>
 
-
-        {selectedQuestions.map(({ value, label, tip, example }) => (
-          <CustomText
-            setIsButtonDisabled={setIsButtonDisabled}
-            key={value}
-            label={label}
-            placeholder={
-              example
-                ? `For example: ${example}`
-                : `Type your answer here`
-            }
-            tip={tip || null}
-            textError={textError}
-            onDelete={() => handleDelete(value)}
-          />
-        ))}
-
+        {questionsAndAnswers.map(({ question, answer }) => (
+  <CustomText
+    setIsButtonDisabled={setIsButtonDisabled}
+    key={question}
+    label={question}
+    placeholder={`Type your answer here...`}
+    value={answer}
+    onChange={(newAnswer) => addQuestionAndAnswer(question, newAnswer)} // Оновлення відповіді
+    tip={questions.find((q) => q.label === question)?.tip || null}
+    textError={textError}
+    onDelete={() => handleDelete(question)} // Видалення питання
+  />
+))}
 
 
         <div className="mb-6 w-full">
-
           <CustomSelect
             resetOnSelect={true}
             className="w-full border border-gray-300 rounded-lg p-2"

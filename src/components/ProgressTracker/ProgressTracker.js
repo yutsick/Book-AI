@@ -19,9 +19,9 @@ const ProgressTracker = ({ activeSteps }) => {
       : null;
 
   return (
-    <div className="relative mx-auto w-[calc(66%+140px)] flex justify-center">
+    <div className="relative mx-auto w-full md:w-[calc(66%+140px)] flex justify-center">
       
-      <div className="  w-2/3 h-4 bg-[#E2E2E2] rounded-md overflow-hidden ">
+      <div className=" w-3/5 md:w-3/4 h-4 bg-[#E2E2E2] rounded-md overflow-hidden ">
         
         <div
           className={`h-full ${fillColor} transition-all duration-300`}
