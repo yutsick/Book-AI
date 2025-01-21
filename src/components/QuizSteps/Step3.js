@@ -138,7 +138,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
         <div className="mt-9 mb-2 mx-auto w-[calc(66%+140px)] text-center text-[14px] font-medium">
           Your Answers Quality
         </div>
-        <div className="mb-16">
+        <div className="mb-9">
           <ProgressTracker activeSteps={questionsAndAnswers.length} />
         </div>
 
