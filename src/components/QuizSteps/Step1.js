@@ -4,18 +4,18 @@ import CustomInput from "@/components/FormsElements/CustomInput";
 import CreateBookContext from "@/contexts/CreateBookContext";
 
 
-function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}) {
+function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError }) {
 
 
 
-  const {     
+  const {
     authorName,
     setAuthorName,
     selectedAge,
     setSelectedAge,
     selectedGender,
     setSelectedGender,
-   } = useContext(CreateBookContext);
+  } = useContext(CreateBookContext);
 
 
 
@@ -24,7 +24,14 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
     { value: "2", label: "Female" },
     { value: "3", label: "Non-Binary" }
   ];
-  const ageOptions = ['under 18', '18-24', '25-34', '35-44', '45-54', '55-64', '65 and above'];
+  const ageOptions = [
+    { value: "1", label: 'under 18' },
+    { value: "2", label: '18-24' },
+    { value: "3", label: '25-34' },
+    { value: "4", label: '35-44' },
+    { value: "5", label: '45-54' },
+    { value: "6", label: '55-64' },
+    { value: "7", label: '65 and above' }];
   // const ageOptions = ageRange.map((el, i) => {
   //   const value = i + 1;
   //   if (i === ageRange.length - 1) {
@@ -56,8 +63,8 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
             placeholder="Author's full name"
             value={authorName}
             onChange={setAuthorName}
-            setIsButtonDisabled = {setIsButtonDisabled}
-            textError = {textError}
+            setIsButtonDisabled={setIsButtonDisabled}
+            textError={textError}
             setTextError={setTextError}
           // onBlurValidation={validateInput}
           />
@@ -90,7 +97,7 @@ function StepOne({setIsButtonDisabled, setProgressStep, textError, setTextError}
 
           </label>
           <CustomSelect
-          
+
             title="What is the author's age?"
             className="w-full border border-gray-300 rounded-lg p-2"
             options={ageOptions}
