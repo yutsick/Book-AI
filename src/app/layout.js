@@ -1,5 +1,6 @@
 import { Inter, Poppins, Roboto } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 
 const interFont = Inter({
   subsets: ["latin"],
@@ -29,7 +30,16 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${interFont.variable} ${robotoFont.variable} ${poppinsFont.variable}`}>
+    <html
+      lang="en"
+      className={`${interFont.variable} ${robotoFont.variable} ${poppinsFont.variable}`}
+    >
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Head>
       <body>{children}</body>
     </html>
   );
