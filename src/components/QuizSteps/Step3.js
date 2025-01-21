@@ -135,7 +135,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
         <div className="field-desc">
           Share as much as you can! Each question you answer brings us closer to creating something truly special.
         </div>
-        <div className="mt-9 mb-2 mx-auto w-[calc(66%+140px)] text-center text-[14px] font-medium">
+        <div className="mt-9 mb-2 mx-auto w-full text-center text-[14px] font-medium">
           Your Answers Quality
         </div>
         <div className="mb-9">
