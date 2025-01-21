@@ -124,7 +124,7 @@ const MainScreen = () => {
 
       {
         currentStep !== 1 && (
-          <div className="flex max-w-[850px] w-full px-4 mx-auto">
+          <div className="flex max-w-[850px] w-full px-4 mx-auto -mt-4">
             <button onClick={goToPreviousStep} className='pointer'>
               <svg width="33" height="27" viewBox="0 0 33 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.536635 12.1992C-0.179063 12.9149 -0.179063 14.0752 0.536635 14.7909L12.1992 26.4535C12.9148 27.1692 14.0752 27.1692 14.7909 26.4535C15.5065 25.7378 15.5065 24.5775 14.7909 23.8618L4.42414 13.4951L14.7909 3.1283C15.5065 2.4127 15.5065 1.2523 14.7909 0.536699C14.0752 -0.179001 12.9148 -0.179001 12.1992 0.536699L0.536635 12.1992ZM32.0703 11.6625L1.83244 11.6625L1.83244 15.3277L32.0703 15.3277L32.0703 11.6625Z" fill="#747474" />
