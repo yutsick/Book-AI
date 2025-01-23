@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import GenreContext from "@/contexts/CreateGenreContext";
 
-const RadioButtonList = ({ options, label = null, description = null, selectedValue, onChange, setIsButtonDisabled, iconRight }) => {
+const RadioButtonList = ({ options, label = null, description = null, selectedValue, onChange, iconRight }) => {
   const { selectedGenre, setSelectedGenre } = useContext(GenreContext);
   const [focus, setFocus] = useState(false);
 
@@ -10,7 +10,7 @@ const RadioButtonList = ({ options, label = null, description = null, selectedVa
     if (onChange) {
       onChange(value); 
     }
-    setIsButtonDisabled(false); 
+    // setIsButtonDisabled(false); 
   };
 
   const handleFocus = () => {

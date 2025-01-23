@@ -6,15 +6,19 @@ import CreateBookContext from "@/contexts/CreateBookContext";
 import ProgressTracker from "@/components/ProgressTracker/ProgressTracker";
 
 function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
-  // Додаємо доступ до контексту для питань і відповідей
+ 
   const { authorName, questionsAndAnswers, addQuestionAndAnswer, removeQuestion } = useContext(CreateBookContext);
 
   useEffect(() => {
-    setProgressStep(3); // Встановлюємо поточний крок
+    setProgressStep(3); 
   }, [setProgressStep]);
 
+   
   useEffect(() => {
-    setIsButtonDisabled(questionsAndAnswers.length === 0); // Активуємо кнопку, якщо є відповіді
+    setIsButtonDisabled(questionsAndAnswers.length === 0); 
+    return () => {
+      setIsButtonDisabled(false);
+    };
   }, [questionsAndAnswers, setIsButtonDisabled]);
 
   const questions = [
@@ -113,12 +117,12 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
 
   const handleQuestionSelectChange = (option) => {
     if (!questionsAndAnswers.some((qa) => qa.question === option.label)) {
-      addQuestionAndAnswer(option.label, ""); // Додаємо нове питання з пустою відповіддю
+      addQuestionAndAnswer(option.label, ""); 
     }
   };
   
   const handleDelete = (questionToRemove) => {
-    removeQuestion(questionToRemove); // Видалення питання з контексту
+    removeQuestion(questionToRemove); 
   };
   
   // Оновлення списку опцій
