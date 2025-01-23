@@ -1,16 +1,22 @@
 import React, { useState, useContext } from "react";
 import GenreContext from "@/contexts/CreateGenreContext";
 
-const RadioButtonList = ({ options, label = null, description = null, selectedValue, onChange, setIsButtonDisabled, iconRight }) => {
-  const { selectedGenre, setSelectedGenre } = useContext(GenreContext);
+const RadioButtonList = ({ options, label = null, description = null, selectedValue, onChange, setIsButtonDisabled = null, iconRight, type = 'genre' }) => {
+  const { selectedGenre, 
+    setSelectedGenre,
+    selectedTopic, 
+    setSelectedTopic } = useContext(GenreContext);
+  
+
   const [focus, setFocus] = useState(false);
 
   const handleChange = (value) => {
-    setSelectedGenre(value); 
+    setSelectedGenre(value)
+    type == 'genre' ? setSelectedGenre(value) : setSelectedTopic(value); 
     if (onChange) {
       onChange(value); 
     }
-    setIsButtonDisabled(false); 
+    setIsButtonDisabled && setIsButtonDisabled(false); 
   };
 
   const handleFocus = () => {

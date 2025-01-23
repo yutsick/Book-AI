@@ -38,6 +38,7 @@ function Step5({setProgressStep, setIsButtonDisabled}) {
             selectedValue={selectedTopic}
             // onChange={setSelectedTopic}
             setIsButtonDisabled={setIsButtonDisabled}
+            type = 'topic'
           />
         </div>
       </div>

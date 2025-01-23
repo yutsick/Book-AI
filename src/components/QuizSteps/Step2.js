@@ -4,13 +4,13 @@ import config from "../../../config";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
 
 
-const StepTwo = ({ setProgressStep, setIsButtonDisabled }) => {
+const StepTwo = ({ setProgressStep}) => {
   
  
   const { genresUrl } = config;
   const [genresData, setGenresData] = useState(null);
 
-  const { selectedGenre } = useContext(CreateGenreContext); 
+  const { selectedGenre, setSelectedGenre } = useContext(CreateGenreContext); 
 
   useEffect(() => {
     fetch(genresUrl)
@@ -27,12 +27,12 @@ const StepTwo = ({ setProgressStep, setIsButtonDisabled }) => {
     setProgressStep(2);
   }, [setProgressStep]);
 
-  useEffect(() => {
-    setIsButtonDisabled(!selectedGenre);
-    return () => {
-      setIsButtonDisabled(false);
-    };
-  }, [setIsButtonDisabled, selectedGenre]);
+  // useEffect(() => {
+  //   setIsButtonDisabled(!selectedGenre);
+  //   return () => {
+  //     setIsButtonDisabled(false);
+  //   };
+  // }, [setIsButtonDisabled, selectedGenre]);
 
   return (
     genresData && (
@@ -45,10 +45,10 @@ const StepTwo = ({ setProgressStep, setIsButtonDisabled }) => {
             </div>
             <div className="mb-8 mt-[25px]">
               <RadioButtonList
-                setIsButtonDisabled={setIsButtonDisabled}
+                // setIsButtonDisabled={setIsButtonDisabled}
                 options={genresData}
                 selectedValue={selectedGenre} 
-                // onChange={setSelectedGenre} 
+                onChange={setSelectedGenre} 
               />
             </div>
           </div>
