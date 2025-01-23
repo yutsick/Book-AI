@@ -1,13 +1,13 @@
 {
   "title": "We allow Anyone to own his own unique book",
   "slides": [
-    { "id": 1, "videoUrl": "/videos/Odelia.mov", "text":"“Book Tailor made my dream of becoming an author <b>a reality<b>”", "title": "Ashley, Arizona" },
-    { "id": 2, "videoUrl": "/videos/Shira.mov", "text":"“The process was <b>so easy</b>, and the results were incredible!”", "title": "Rachel, NY" },
-    { "id": 3, "videoUrl": "/videos/Taylor.mov", "text":"“I can’t believe I’m holding <b>my own book!</b>”", "title": "Emily, California" },
-    { "id": 4, "videoUrl": "/videos/Margaret.mp4", "text":"“Unbelievably easy, and the results? <b>Stunning</b>”", "title": "Olivia, Florida" },
-    { "id": 5, "videoUrl": "/videos/Odelia.mov", "text":"“Book Tailor made my dream of becoming an author <b>a reality<b>”", "title": "Ashley, Arizona" },
-    { "id": 6, "videoUrl": "/videos/Shira.mov", "text":"“The process was <b>so easy</b>, and the results were incredible!”", "title": "Rachel, NY" },
-    { "id": 7, "videoUrl": "/videos/Taylor.mov", "text":"“I can’t believe I’m holding <b>my own book!</b>”", "title": "Emily, California" },
+    { "id": 1, "videoUrl": "/videos/Odelia.mov", "text":"“Book Tailor made my dream of becoming an author <b>a reality<b>”", "title": "Olivia, Arizona" },
+    { "id": 2, "videoUrl": "/videos/Shira.mov", "text":"“The process was <b>so easy</b>, and the results were incredible!”", "title": "Samantha, NY" },
+    { "id": 3, "videoUrl": "/videos/Taylor.mov", "text":"“I can’t believe I’m holding <b>my own book!</b>”", "title": "Taylor, California" },
+    { "id": 4, "videoUrl": "/videos/Margaret.mp4", "text":"“Unbelievably easy, and the results? <b>Stunning</b>”", "title": "Margaret, Florida" },
+    { "id": 5, "videoUrl": "/videos/Odelia.mov", "text":"“Book Tailor made my dream of becoming an author <b>a reality<b>”", "title": "Margaret, Arizona" },
+    { "id": 6, "videoUrl": "/videos/Shira.mov", "text":"“The process was <b>so easy</b>, and the results were incredible!”", "title": "Samantha, NY" },
+    { "id": 7, "videoUrl": "/videos/Taylor.mov", "text":"“I can’t believe I’m holding <b>my own book!</b>”", "title": "Taylor, California" },
     { "id": 8, "videoUrl": "/videos/Margaret.mp4", "text":"“Unbelievably easy, and the results? <b>Stunning</b>”", "title": "Olivia, Florida" }
   ],
   "button": "Get Started"
