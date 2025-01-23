@@ -1,8 +1,8 @@
 {
   "title":"How It Works?",
   "cards":[
-    {"title": "Tell Us More", "description": "Answer a few questions about the “author”. The more details, the juicier the answers,the funnier the book!", "imageUrl": "/images/works1.png"},
-    {"title": "Pick your vibe", "description": "Choose a title from our AI's comedy goldmine and cool cover designs.", "imageUrl": "/images/works2.png"},
-    {"title": "Get the Goods ", "description": "Sit back and relax while we create a 240-page of AI comedy book and deliver it to your doorstep.", "imageUrl": "/images/works3.png"}
+    {"title": "Tell Us More", "description": "Introduce us to the book's author by answering personalized questions. The more detailed your answers, the funnier the book will be!", "imageUrl": "/images/works1.png"},
+    {"title": "Pick your vibe", "description": "Choose a theme and title from our AI's top suggestions, then pick a cover design to complete your book.", "imageUrl": "/images/works2.png"},
+    {"title": "Get the Goods ", "description": "Sit back and relax while we create a full AI-generated comedy book and deliver it straight to your doorstep.", "imageUrl": "/images/works3.png"}
   ]
 }

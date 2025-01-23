@@ -1,14 +1,15 @@
 {
-  "title": "We allow Anyone to own his own unique book",
+  "title": "A Unique Book, A Lasting Impact",
   "slides": [
-    { "id": 1, "videoUrl": "/videos/Odelia.mov", "text":"“Book Tailor made my dream of becoming an author <b>a reality<b>”", "title": "Olivia, Arizona" },
-    { "id": 2, "videoUrl": "/videos/Shira.mov", "text":"“The process was <b>so easy</b>, and the results were incredible!”", "title": "Samantha, NY" },
-    { "id": 3, "videoUrl": "/videos/Taylor.mov", "text":"“I can’t believe I’m holding <b>my own book!</b>”", "title": "Taylor, California" },
-    { "id": 4, "videoUrl": "/videos/Margaret.mp4", "text":"“Unbelievably easy, and the results? <b>Stunning</b>”", "title": "Margaret, Florida" },
-    { "id": 5, "videoUrl": "/videos/Odelia.mov", "text":"“Book Tailor made my dream of becoming an author <b>a reality<b>”", "title": "Margaret, Arizona" },
-    { "id": 6, "videoUrl": "/videos/Shira.mov", "text":"“The process was <b>so easy</b>, and the results were incredible!”", "title": "Samantha, NY" },
-    { "id": 7, "videoUrl": "/videos/Taylor.mov", "text":"“I can’t believe I’m holding <b>my own book!</b>”", "title": "Taylor, California" },
-    { "id": 8, "videoUrl": "/videos/Margaret.mp4", "text":"“Unbelievably easy, and the results? <b>Stunning</b>”", "title": "Olivia, Florida" }
+    { "id": 1, "videoUrl": "/videos/Odelia.mov", "text":"“My boss couldn’t believe she was reading <b>a real book about herself</b>”", "title": "Olivia, Arizona" },
+    { "id": 2, "videoUrl": "/videos/Shira.mov", "text":"“My girlfriend <b>couldn’t stop laughing</b> while reading the book”", "title": "Samantha, NY" },
+    { "id": 3, "videoUrl": "/videos/Taylor.mov", "text":"“Earned the \"perfect husband\" title when she realized <b>the book was about her!</b>”", "title": "Taylor, California" },
+    { "id": 4, "videoUrl": "/videos/Margaret.mp4", "text":"“Creating the book was effortless, and <b>the result was stunning!</b>”", "title": "Margaret, Florida" },
+    { "id": 5, "videoUrl": "/videos/Odelia.mov", "text":"“My boss couldn’t believe she was reading <b>a real book about herself</b>”", "title": "Olivia, Arizona" },
+    { "id": 6, "videoUrl": "/videos/Shira.mov", "text":"“My girlfriend <b>couldn’t stop laughing</b> while reading the book”", "title": "Samantha, NY" },
+    { "id": 7, "videoUrl": "/videos/Taylor.mov", "text":"“Earned the \"perfect husband\" title when she realized <b>the book was about her!</b>”", "title": "Taylor, California" },
+    { "id": 8, "videoUrl": "/videos/Margaret.mp4", "text":"“Creating the book was effortless, and <b>the result was stunning!</b>”", "title": "Margaret, Florida" }
+
   ],
   "button": "Get Started"
 }

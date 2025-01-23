@@ -57,17 +57,16 @@ const BookCovers = () => {
               {slidesSubTitle}
             </p>
 
-        <div className="mx-auto w-fit mt-6 md:mt-8">
-          <div className="grid grid-cols-2 md:grid-rows-2 md:grid-cols-3 gap-x-3 md:gap-x-9 gap-y-3 md:gap-y-6">
-            {slides.map((slide) => (
-              <div className="" key={slide.id}>
-                <img className='w-[180px] h-[265px] object-cover' src={slide.imageUrl} alt="" />
-              </div>
-            )
-            )}
-        
-          </div>
-        </div>
+            <div className="mx-auto w-full mt-6 md:mt-8 overflow-x-scroll">
+  <div className="grid grid-rows-2 grid-cols-[repeat(4,180px)] gap-x-3 md:gap-x-9 gap-y-3 md:gap-y-6">
+    {slides.map((slide) => (
+      <div className="w-fit" key={slide.id}>
+        <img className="w-[180px] h-[265px] object-cover" src={slide.imageUrl} alt="" />
+      </div>
+    ))}
+  </div>
+</div>
+
 
         <div className="">
           <Button text={button} />
