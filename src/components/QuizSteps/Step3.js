@@ -15,7 +15,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
 
    
   useEffect(() => {
-    setIsButtonDisabled(questionsAndAnswers.length === 0); 
+    setIsButtonDisabled(questionsAndAnswers.filter(el=>el.answer.length !== 0).length === 0); 
     return () => {
       setIsButtonDisabled(false);
     };
@@ -125,7 +125,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
     removeQuestion(questionToRemove); 
   };
   
-  // Оновлення списку опцій
+
   const optionsWithDisabled = questions.map((question) => ({
     ...question,
     isDisabled: questionsAndAnswers.some((qa) => qa.question === question.label),
@@ -147,18 +147,18 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
         </div>
 
         {questionsAndAnswers.map(({ question, answer }) => (
-  <CustomText
-    setIsButtonDisabled={setIsButtonDisabled}
-    key={question}
-    label={question}
-    placeholder={`Type your answer here...`}
-    value={answer}
-    onChange={(newAnswer) => addQuestionAndAnswer(question, newAnswer)} // Оновлення відповіді
-    tip={questions.find((q) => q.label === question)?.tip || null}
-    textError={textError}
-    onDelete={() => handleDelete(question)} // Видалення питання
-  />
-))}
+          <CustomText
+            setIsButtonDisabled={setIsButtonDisabled}
+            key={question}
+            label={question}
+            placeholder={`Type your answer here...`}
+            value={answer}
+            onChange={(newAnswer) => addQuestionAndAnswer(question, newAnswer)} 
+            tip={questions.find((q) => q.label === question)?.tip || null}
+            textError={textError}
+            onDelete={() => handleDelete(question)} 
+          />
+        ))}
 
 
         <div className="mb-6 w-full">

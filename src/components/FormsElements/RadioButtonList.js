@@ -11,7 +11,7 @@ const RadioButtonList = ({ options, label = null, description = null, selectedVa
   const [focus, setFocus] = useState(false);
 
   const handleChange = (value) => {
-    setSelectedGenre(value)
+    // setSelectedGenre(value)
     type == 'genre' ? setSelectedGenre(value) : setSelectedTopic(value); 
     if (onChange) {
       onChange(value); 
@@ -38,14 +38,14 @@ const RadioButtonList = ({ options, label = null, description = null, selectedVa
           <label
             key={id}
             className={`flex hover:bg-[#D9D9D9] items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] rounded-[3px] cursor-pointer transition ${
-              selectedGenre === name ? "bg-[#D9D9D9]" : "bg-white"
+              selectedGenre === name  || selectedTopic === name  ? "bg-[#D9D9D9]" : "bg-white"
             }`}
           >
             <input
               type="radio"
               name="radio-options"
               value={id}
-              checked={selectedGenre === name}
+              checked = {selectedTopic === name}
               onChange={() => handleChange(name)}
               onFocus={handleFocus}
               onBlur={handleBlur}
@@ -58,9 +58,9 @@ const RadioButtonList = ({ options, label = null, description = null, selectedVa
             )}
             <div className="flex justify-between w-full">
               <div>
-                <div className={`font-bold text-base ${selectedGenre === name ? "text-black" : "text-gray"}`}>{name}</div>
+                <div className={`font-bold text-base ${selectedGenre === name || selectedTopic === name ? "text-black" : "text-gray"}`}>{name}</div>
                 <div className={`text-[14px] md:text-[15px] leading-[18px] md:leading-[28px] font-medium ${
-                  selectedGenre === name ? "opacity-[0.79] text-gray" : "opacity-[0.49] text-black"
+                  selectedGenre === name  || selectedTopic === name ? "opacity-[0.79] text-gray" : "opacity-[0.49] text-black"
                 }`}>
                   {description}
                 </div>

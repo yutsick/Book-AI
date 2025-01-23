@@ -14,12 +14,12 @@ export const CreateBookProvider = ({ children }) => {
     setQuestionsAndAnswers((prev) => {
       const existingIndex = prev.findIndex((qa) => qa.question === question);
       if (existingIndex !== -1) {
-        // Якщо питання вже існує, оновлюємо відповідь
+
         const updated = [...prev];
         updated[existingIndex] = { ...updated[existingIndex], answer };
         return updated;
       }
-      // Якщо питання нове, додаємо його
+
       return [...prev, { question, answer }];
     });
   };

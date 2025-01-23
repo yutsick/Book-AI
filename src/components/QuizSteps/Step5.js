@@ -5,7 +5,7 @@ import RadioButtonList from "@/components/FormsElements/RadioButtonList";
 
 function Step5({setProgressStep, setIsButtonDisabled}) {
 
-  const { selectedTopic } = useContext(CreateGenreContext); 
+  const { selectedTopic, setSelectedTopic } = useContext(CreateGenreContext); 
   useEffect(() => {
       setProgressStep(4); 
     }, [setProgressStep]);
@@ -36,7 +36,7 @@ function Step5({setProgressStep, setIsButtonDisabled}) {
             iconRight="images/create-book/icon-regenerate.svg"
             options={topicOptions}
             selectedValue={selectedTopic}
-            // onChange={setSelectedTopic}
+            onChange={setSelectedTopic}
             setIsButtonDisabled={setIsButtonDisabled}
             type = 'topic'
           />
