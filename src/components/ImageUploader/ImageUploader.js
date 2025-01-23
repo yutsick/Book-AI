@@ -59,7 +59,7 @@ const ImageUploader = ({ onFileChange }) => {
         {preview ? (
           <img src={preview} alt="Preview" className="w-full h-full object-cover" />
         ) : (
-          '📷'
+          <img src="images/create-book/icon-camera.png" alt="icon camera" className="" width="32px"/>
         )}
       </div>
       <div className="text-sm text-gray-600">
