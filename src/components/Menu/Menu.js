@@ -53,7 +53,7 @@ const BurgerMenu = () => {
       ></div>
 
       <div
-        className={`fixed top-0 right-0 h-full max-h-[660px] w-60 md:w-[350px] bg-[#f7f2eb] transition-transform duration-300 custom-scrollbar ease-in-out z-[200] overflow-auto ${menuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0 h-full max-h-[730px] w-60 md:w-[350px] bg-[#f7f2eb] transition-transform duration-300 custom-scrollbar ease-in-out z-[200] overflow-auto ${menuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
       >
         <div className="flex justify-between py-3 px-4">
