@@ -40,7 +40,7 @@ const RadioButtonList = ({ options, label = null, description = null, setIsButto
           <label
             key={id} 
             className={`flex  items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] rounded-[3px] cursor-pointer transition ${
-              selectedGenre === name  || selectedTopic === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9]" : "bg-white hover:bg-[#FBFBFB]"
+              selectedGenre === name  || selectedTopic === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9]" : "bg-white hover:bg-[#E8E8E8]"
             }`}
           >
             <input

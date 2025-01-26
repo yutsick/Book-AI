@@ -1,28 +1,28 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import CustomEmail from "@/components/FormsElements/CustomEmail";
 import CreateBookContext from "@/contexts/CreateBookContext";
 
-
 function Step4({ setIsButtonDisabled, setProgressStep }) {
   const { authorEmail, setAuthorEmail } = useContext(CreateBookContext);
+  const [isValidEmail, setIsValidEmail] = useState(false); 
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
 
   useEffect(() => {
     setProgressStep(3);
   }, [setProgressStep]);
 
   useEffect(() => {
-    if (authorEmail) {
-      setIsButtonDisabled(false);
-    } else {
-      setIsButtonDisabled(true);
-    }
+ 
+    const isValid = emailRegex.test(authorEmail || "");
+    setIsValidEmail(isValid);
+    setIsButtonDisabled(!isValid); 
   }, [authorEmail, setIsButtonDisabled]);
-
 
   return (
     <div>
       <div className="w-full">
-        <div className="mt-2 md:px-6 ">
+        <div className="mt-2 md:px-6">
           <CustomEmail
             title="Stay Connected"
             description="Enter your email to continue crafting your book and save your progress."
@@ -34,7 +34,7 @@ function Step4({ setIsButtonDisabled, setProgressStep }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Step4
+export default Step4;

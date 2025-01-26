@@ -1,47 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const CustomEmail = ({ placeholder = "Enter text", label = "Field label", title = null, description = null, onChange, value }) => {
-
+const CustomEmail = ({
+  placeholder = "Enter text",
+  label = "Field label",
+  title = null,
+  description = null,
+  onChange,
+  onValidityChange, // Пропс для передачі валідності
+  value,
+}) => {
   const [focus, setFocus] = useState(false);
   const [localPlaceholder, setLocalPlaceholder] = useState(placeholder);
+  const [isValid, setIsValid] = useState(false); // Стан валідності email
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Регулярний вираз для перевірки email
+
+  useEffect(() => {
+    if (onValidityChange) {
+      onValidityChange(isValid); // Передаємо стан валідності до батьківського компонента
+    }
+  }, [isValid, onValidityChange]);
 
   const handleChange = (e) => {
     const newValue = e.target.value;
-   
+
     if (onChange) {
       onChange(newValue);
     }
+
+    // Оновлення валідності email
+    setIsValid(emailRegex.test(newValue));
   };
 
   const handleFocus = () => {
     setFocus(true);
-    setLocalPlaceholder('');
+    setLocalPlaceholder("");
   };
+
   const handleBlur = () => {
     setFocus(false);
     setLocalPlaceholder(placeholder);
-
   };
 
   return (
-    <div className="w-full mb-8 ">
+    <div className="w-full mb-8">
       <div className="flex items-center space-x-2">
         <p className="field-title">{title}</p>
       </div>
       <div className="field-desc">{description}</div>
-      <div className="relative ">
+      <div className="relative">
         {(value || focus) && (
-
-          <label
-            className="absolute top-4 left-2 text-[#8F8F8F] text-[12.5px] transition-all "
-          >
+          <label className="absolute top-4 left-2 text-[#8F8F8F] text-[12.5px] transition-all">
             {label}
           </label>
         )}
-
-       
-
 
         <input
           type="text"
@@ -49,9 +61,13 @@ const CustomEmail = ({ placeholder = "Enter text", label = "Field label", title 
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className="mt-[14px] rounded-[3px] py-2 px-4 w-full h-[60px] focus:outline-none text-[17px]"
+          className={`mt-[14px] rounded-[3px] py-2 px-4 w-full h-[60px] focus:outline-none text-[17px] ${
+            !isValid && value ? "border-red-500" : "border-gray-300"
+          }`}
           placeholder={value ? "" : localPlaceholder}
         />
+
+
       </div>
     </div>
   );

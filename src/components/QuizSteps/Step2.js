@@ -39,7 +39,7 @@ const StepTwo = ({ setProgressStep}) => {
       <div className="">
         <div className="w-full mt-2">
           <div className="md:mx-6">
-            <div className="field-title">Choose a Genre</div>
+            <div className="field-title">Pick a Vibe</div>
             <div className="field-desc">
             Your book will be funny and satirical, but the genre you choose will shape its direction and atmosphere, creating the perfect stage for humor to shine
             </div>

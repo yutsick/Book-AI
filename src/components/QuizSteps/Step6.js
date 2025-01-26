@@ -3,31 +3,40 @@ import CreateBookContext from "@/contexts/CreateBookContext";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import { validateImage } from "@/utils/imageValidation";
 
-const Step6 = ({ setProgressStep }) => {
+const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   const { authorImage, setAuthorImage, authorName, error, setError } = useContext(CreateBookContext);
   const [preview, setPreview] = useState(null);
 
+
+
   useEffect(() => {
-    setProgressStep(4); // Встановлення кроку
+    setProgressStep(4);
   }, [setProgressStep]);
 
   useEffect(() => {
     if (authorImage) {
-      setPreview(URL.createObjectURL(authorImage)); // Попередній перегляд для збереженого зображення
+      setPreview(URL.createObjectURL(authorImage));
     }
   }, [authorImage]);
 
+  useEffect(() => {
+    setIsButtonDisabled(!authorImage);
+    return () => {
+      setIsButtonDisabled(false);
+    };
+  }, [setIsButtonDisabled, authorImage]);
+
   const handleFileChange = async (file) => {
-    setPreview(URL.createObjectURL(file)); // Завжди оновлюємо попередній перегляд
-    setAuthorImage(file); // Завжди зберігаємо зображення в контексті
+    setPreview(URL.createObjectURL(file));
+    setAuthorImage(file);
 
     const validationResult = await validateImage(file);
     if (!validationResult.valid) {
-      setError(validationResult.error); // Показуємо помилку, якщо валідація не пройшла
+      setError(validationResult.error);
       return;
     }
 
-    setError(null); // Очищення помилки, якщо файл валідний
+    setError(null);
   };
 
   return (
@@ -44,7 +53,7 @@ const Step6 = ({ setProgressStep }) => {
           <ImageUploader onFileChange={handleFileChange} preview={preview} />
         </div>
 
-        {/* Відображення помилки з контексту */}
+
         {error && (
           <div className="flex items-center gap-2 w-full justify-center mt-2">
             <div className="icon">
