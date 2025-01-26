@@ -55,7 +55,7 @@ const Slider = ({ type, slides, breakpoints, imageSizes, imageClasses }) => {
          ) : (
             <div className="slide flex flex-col shadow-slideShadow bg-[#F6F6F6]">
             
-              <div className="text-center italic text-[#2b2b2b] opacity-[0.88] font-medium text-[14px] leading-[16px] h-[65px] pt-2 px-5" 
+              <div className={`text-center italic text-[#2b2b2b] opacity-[0.88] font-medium ${slide.font ? `text-[${slide.font}px]` : 'text-[14px]'} leading-[16px] h-[65px] pt-2 px-2`} 
                   dangerouslySetInnerHTML={{ __html: slide.text }} 
               ></div>
               <video
