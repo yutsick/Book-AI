@@ -1,8 +1,8 @@
 {
   "title": "Book Covers",
-  "subtitle": "Our book covers are designed to captivate and reflect the essence of your story. Whether you choose the classic elegance of a <b>hardcover</b> or the lightweight flexibility of a <b>paperback</b>, each option is crafted with care to meet your needs. The hardcover provides a durable, premium feel—perfect for showcasing your book on a shelf or as a gift. The paperback offers a more portable and affordable option, ideal for on-the-go reading and sharing with friends.",
-  "slidesTitle": "Explore a Few of Our Stunning Cover Designs:",
-  "slidesSubTitle": "These six examples are just a glimpse—more options await during the creation process",
+  "subtitle": "Choose between <b>hardcover</b> for durability and elegance, or <b>paperback</b> for portability and affordability. Explore our stunning cover designs:",
+  "slidesTitle": null,
+  "slidesSubTitle": null,
   "slides":[
     {"id": 1, "imageUrl": "/images/cover2.png"},
     {"id": 2, "imageUrl": "/images/cover3.png"},

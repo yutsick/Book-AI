@@ -43,9 +43,9 @@ const BookCovers = () => {
               {title}
             </h2>
             <p className="text-gray font-medium  text-[19px]   "
-            dangerouslySetInnerHTML={{ __html: subtitle }} 
+              dangerouslySetInnerHTML={{ __html: subtitle }}
             >
-           
+
             </p>
           </div>
         </div>
@@ -54,18 +54,18 @@ const BookCovers = () => {
           <h2 className="text-center text-orange font-semibold text-[26px] leading-[32px]  md:text-[36px]">{slidesTitle}</h2>
         </div>
         <p className="text-gray text-center text-[19px] mt-2 md:mt-0  ">
-              {slidesSubTitle}
-            </p>
+          {slidesSubTitle}
+        </p>
 
-            <div className="mx-auto w-full mt-6 md:mt-8 overflow-x-scroll">
-  <div className="grid grid-rows-2 grid-cols-[repeat(4,180px)] gap-x-3 md:gap-x-9 gap-y-3 md:gap-y-6">
-    {slides.map((slide) => (
-      <div className="w-fit" key={slide.id}>
-        <img className="w-[180px] h-[265px] object-cover" src={slide.imageUrl} alt="" />
-      </div>
-    ))}
-  </div>
-</div>
+        <div className="mx-auto w-full mt-6 md:mt-8 overflow-x-scroll no-scrollbar">
+          <div className="grid grid-rows-2 grid-cols-[repeat(4,155px)] md:grid-cols-[repeat(4,180px)] gap-x-3 md:gap-x-9 gap-y-3 md:gap-y-6 865:justify-center">
+            {slides.map((slide) => (
+              <div className="w-full" key={slide.id}>
+                <img className="w-full h-[235px] md:w-[180px] md:h-[265px] object-cover" src={slide.imageUrl} alt="" />
+              </div>
+            ))}
+          </div>
+        </div>
 
 
         <div className="">

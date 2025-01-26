@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        '865': '865px', 
+      },
       colors:{
         orange: '#EAAC00',
         pink: 'rgba(175, 131, 0, 0.08)',
@@ -29,6 +32,16 @@ export default {
     },
   },
   plugins: [
-   
+    function ({ addUtilities }) {
+      addUtilities({
+        '.no-scrollbar': {
+          'scrollbar-width': 'none', /* Firefox */
+          '-ms-overflow-style': 'none', /* IE 10+ */
+        },
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none', /* Chrome, Safari, Edge */
+        },
+      });
+    },
   ],
 };
