@@ -187,7 +187,7 @@ const MainScreen = () => {
             <div className="">
               <Step6
                 setProgressStep={setProgressStep}
-                handleFileChange={handleFileChange}
+                // handleFileChange={handleFileChange}
               />
             </div>
           )}

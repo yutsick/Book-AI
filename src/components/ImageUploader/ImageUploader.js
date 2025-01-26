@@ -1,78 +1,36 @@
-import React, { useState } from 'react';
-
-
-const ImageUploader = ({ onFileChange }) => {
-  const [preview, setPreview] = useState(null);
-  const [error, setError] = useState(null);
-
+const ImageUploader = ({ onFileChange, preview }) => {
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      setPreview(URL.createObjectURL(selectedFile));
-      setError(null);
-      onFileChange(selectedFile);
+      onFileChange(selectedFile); 
     }
   };
 
   const handleDrop = (e) => {
-    e.preventDefault();
-    document.querySelectorAll('.dragging').forEach(el => el.classList.remove('dragging'));
+    e.preventDefault(); 
     const droppedFile = e.dataTransfer.files[0];
     if (droppedFile) {
-      setPreview(URL.createObjectURL(droppedFile));
-      setError(null);
-      onFileChange(droppedFile);
-    }
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    
-    if (e.currentTarget === document.querySelector('#photo') && !e.target.classList.contains("dragging")) {
-      e.target.classList.add("dragging");
-    }
-  };
-
-  const handleDragLeave = (e) => {
-    e.stopPropagation();
-    if (e.currentTarget === e.target) {
-      e.target.classList.remove('dragging');
-    }
-  };
-  
-  const handleDragEnd = (e) => {
-    e.stopPropagation();
-    if (e.currentTarget === e.target) {
-      e.target.classList.remove('dragging');
+      onFileChange(droppedFile); 
     }
   };
 
   return (
-    <label id="photo"
-      className="w-[215px] h-[250px] border-2 p-4 border-dashed border-[#898989] rounded-md flex flex-col justify-center items-center text-center bg-white cursor-pointer transition-[300]"
+    <label
+      className="w-[215px] h-[250px] border-2 border-dashed border-[#898989] rounded-md flex flex-col justify-center items-center text-center bg-white cursor-pointer transition-[300]"
       onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDragEnd={handleDragEnd}
+      onDragOver={(e) => e.preventDefault()}
     >
-      <div className="text-lg mb-2">
+      <div className={` ${preview ? 'h-[220px]' : 'h-auto'} w-full flex justify-center items-center p-2`}>
         {preview ? (
           <img src={preview} alt="Preview" className="w-full h-full object-cover" />
         ) : (
-          <img src="images/create-book/icon-camera.png" alt="icon camera" className="" width="32px"/>
+          <img src="images/create-book/icon-camera.png" alt="icon camera" className="opacity-50" width="32px" />
         )}
       </div>
-      <div className="text-sm text-gray-600">
-        {preview ? 'Change image' : 'Drop your image here or browse'}
+      <div className="text-[15px] text-black/50">
+        {preview ? "Change image" : "Drop your image here or browse"}
       </div>
-     
-        <input
-          type="file"
-          className="sr-only"
-          onChange={handleFileChange}
-        />
-     
-      {error && <div className="text-red-600 mt-2">{error}</div>}
+      <input type="file" className="sr-only" onChange={handleFileChange} />
     </label>
   );
 };

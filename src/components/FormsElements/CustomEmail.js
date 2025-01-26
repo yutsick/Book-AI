@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
-const CustomEmail = ({ placeholder = "Enter text", label = "Field label", title = null, description = null, onChange }) => {
-  const [value, setValue] = useState("");
+const CustomEmail = ({ placeholder = "Enter text", label = "Field label", title = null, description = null, onChange, value }) => {
+
   const [focus, setFocus] = useState(false);
   const [localPlaceholder, setLocalPlaceholder] = useState(placeholder);
 
 
   const handleChange = (e) => {
     const newValue = e.target.value;
-    setValue(newValue);
    
     if (onChange) {
       onChange(newValue);

@@ -48,7 +48,6 @@ const StepTwo = ({ setProgressStep}) => {
                 // setIsButtonDisabled={setIsButtonDisabled}
                 options={genresData}
                 selectedValue={selectedGenre} 
-                onChange={setSelectedGenre} 
               />
             </div>
           </div>

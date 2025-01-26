@@ -9,6 +9,9 @@ export const CreateBookProvider = ({ children }) => {
   const [selectedAge, setSelectedAge] = useState(null);
   const [selectedGender, setSelectedGender] = useState(null);
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState([]);
+  const [authorEmail, setAuthorEmail] = useState(null);
+  const [authorImage, setAuthorImage] = useState("");
+  const [error, setError] = useState(null);
 
   const addQuestionAndAnswer = (question, answer) => {
     setQuestionsAndAnswers((prev) => {
@@ -45,6 +48,12 @@ export const CreateBookProvider = ({ children }) => {
         questionsAndAnswers,
         addQuestionAndAnswer,
         removeQuestion,
+        authorEmail,
+        setAuthorEmail,
+        authorImage, 
+        setAuthorImage,
+        error, 
+        setError, 
       }}
     >
       {children}

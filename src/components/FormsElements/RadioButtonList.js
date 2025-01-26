@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import GenreContext from "@/contexts/CreateGenreContext";
 
-const RadioButtonList = ({ options, label = null, description = null, selectedValue, onChange, setIsButtonDisabled = null, iconRight, type = 'genre' }) => {
+const RadioButtonList = ({ options, label = null, description = null, setIsButtonDisabled = null, iconRight, type = 'genre' }) => {
   const { selectedGenre, 
     setSelectedGenre,
     selectedTopic, 
@@ -11,11 +11,13 @@ const RadioButtonList = ({ options, label = null, description = null, selectedVa
   const [focus, setFocus] = useState(false);
 
   const handleChange = (value) => {
-    // setSelectedGenre(value)
-    type == 'genre' ? setSelectedGenre(value) : setSelectedTopic(value); 
-    if (onChange) {
-      onChange(value); 
+    if (type == 'genre') {
+      selectedGenre === value ? setSelectedGenre('') : setSelectedGenre(value)
+    } else {
+      setSelectedTopic(value)
+
     }
+   
     setIsButtonDisabled && setIsButtonDisabled(false); 
   };
 
@@ -36,9 +38,9 @@ const RadioButtonList = ({ options, label = null, description = null, selectedVa
       <div className="flex flex-col gap-4 mt-4">
         {options.map(({ id, name, description, icon }) => (
           <label
-            key={id}
-            className={`flex hover:bg-[#D9D9D9] items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] rounded-[3px] cursor-pointer transition ${
-              selectedGenre === name  || selectedTopic === name  ? "bg-[#D9D9D9]" : "bg-white"
+            key={id} 
+            className={`flex  items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] rounded-[3px] cursor-pointer transition ${
+              selectedGenre === name  || selectedTopic === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9]" : "bg-white hover:bg-[#FBFBFB]"
             }`}
           >
             <input
@@ -67,8 +69,8 @@ const RadioButtonList = ({ options, label = null, description = null, selectedVa
               </div>
             </div>
             {iconRight && (
-              <div className="flex flex-col justify-center items-center">
-                <img src={iconRight} alt="" className="w-[28px]"/>
+              <div className="flex flex-col justify-center items-center w-[80] ml-4">
+                <img src={iconRight} alt="" className="w-[36px]"/>
                 <div className="text-center text-black opacity-[71%] text-[12px]">Regenerate</div>
                 
               </div>

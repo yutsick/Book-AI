@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import CustomEmail from "@/components/FormsElements/CustomEmail";
+import CreateBookContext from "@/contexts/CreateBookContext";
 
-function Step4({ setIsButtonDisabled,  setProgressStep }) {
+
+function Step4({ setIsButtonDisabled, setProgressStep }) {
+  const { authorEmail, setAuthorEmail } = useContext(CreateBookContext);
+
   useEffect(() => {
-    setProgressStep(3); 
+    setProgressStep(3);
   }, [setProgressStep]);
 
   useEffect(() => {
-      setIsButtonDisabled(true);
-    }, [setIsButtonDisabled]);
-
-  const [emailValue, setEmailValue] = useState("");
-
-  const handleEmailChange = (newValue) => {
-    if (newValue.trim()) { 
-      setEmailValue(newValue);
+    if (authorEmail) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
-  };
+  }, [authorEmail, setIsButtonDisabled]);
+
 
   return (
     <div>
       <div className="w-full">
-      <div className="mt-2 md:px-6 ">
+        <div className="mt-2 md:px-6 ">
           <CustomEmail
             title="Stay Connected"
             description="Enter your email to continue crafting your book and save your progress."
             label="Your Email"
             placeholder="Enter your Email here"
-            onChange={handleEmailChange}
+            onChange={setAuthorEmail}
+            value={authorEmail || ""}
           />
         </div>
       </div>
