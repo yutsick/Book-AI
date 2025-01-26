@@ -30,7 +30,7 @@ const BurgerMenu = () => {
 
   return (
     <>
-      <button className="cursor-pointer hidden md:block mr-9" onClick={toggleMenu} aria-label="Toggle menu">
+      <button className="cursor-pointer hidden md:block " onClick={toggleMenu} aria-label="Toggle menu">
         <svg width="30" height="23" viewBox="0 0 30 23" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line y1="1.5" x2="30" y2="1.5" stroke="black" strokeWidth="3" />
           <line y1="11.5" x2="30" y2="11.5" stroke="black" strokeWidth="3" />
