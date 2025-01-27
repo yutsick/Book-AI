@@ -40,9 +40,12 @@ const FloatingInput = ({
   }, [localPlaceholder, localValue]);
 
   const handleChange = (e) => {
+
     const newValue = e.target.value;
-    setLocalValue(newValue);
-    onChange(newValue);
+   
+      setLocalValue(newValue);
+      onChange(newValue);
+    
 
     adjustTextareaHeight();
   };
