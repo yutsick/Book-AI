@@ -8,11 +8,11 @@ const FloatingInput = ({
   title = null,
   description = null,
   tip = null,
-  setIsButtonDisabled = true,
+  setIsButtonDisabled = () => {},
   onDelete,
   textError,
 }) => {
-  const [localValue, setLocalValue] = useState(value);
+  const [localValue, setLocalValue] = useState(value.trim());
   const [localPlaceholder, setLocalPlaceholder] = useState(placeholder);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -40,14 +40,11 @@ const FloatingInput = ({
   }, [localPlaceholder, localValue]);
 
   const handleChange = (e) => {
-
-    const newValue = e.target.value;
-   
-      setLocalValue(newValue);
-      onChange(newValue);
-    
-
+    const newValue = e.target.value.trim();
+    setLocalValue(newValue);
+    onChange(newValue);
     adjustTextareaHeight();
+    setIsButtonDisabled(!newValue); // Деактивація кнопки для пустих значень
   };
 
   const handleFocus = () => {
@@ -56,15 +53,14 @@ const FloatingInput = ({
   };
 
   const handleBlur = () => {
-    if (localValue !== "") {
-      setIsButtonDisabled(false);
-    } else {
+    if (!localValue.trim()) {
       setLocalPlaceholder(placeholder);
-      setIsButtonDisabled(true);
-      setLocalValue("");
-      adjustTextareaHeight(true);
+      setLocalValue(""); // Очищення значення, якщо воно порожнє
+      onChange(""); // Очищення значення в батьківському компоненті
     }
     setIsFocused(false);
+    adjustTextareaHeight(true);
+    setIsButtonDisabled(!localValue.trim()); // Деактивація кнопки
   };
 
   const adjustTextareaHeight = (reset = false) => {
@@ -145,14 +141,13 @@ const FloatingInput = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className={`text-[16px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px] rounded-[3px] px-4 w-full resize-none overflow-hidden focus:outline-none box-border `}
+          className="text-[16px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px] rounded-[3px] px-4 w-full resize-none overflow-hidden focus:outline-none box-border"
           placeholder={localValue ? "" : localPlaceholder}
           rows={1}
           style={{
             paddingTop: `${labelHeight + 20}px`,
             minHeight: `${
               labelHeight + placeholderHeight + (tip ? tipHeight + 54 : 54)
-              
             }px`,
             paddingBottom: tip ? `${tipHeight + 32}px` : "32px",
           }}
