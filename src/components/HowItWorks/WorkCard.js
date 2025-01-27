@@ -19,11 +19,11 @@ function WorkCard({ card, stepNumber }) {
           </div>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 h-[208px]">
           <img
             src={imageUrl}
             alt="Step Illustration"
-            className="w-full rounded-br-[3px] rounded-bl-[3px] h-[208px]"
+            className="w-full rounded-br-[3px] rounded-bl-[3px] h-full object-cover"
           />
         </div>
       </div>
