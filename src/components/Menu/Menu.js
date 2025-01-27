@@ -83,7 +83,7 @@ const BurgerMenu = () => {
           ))}
         </div>
 
-        <div className="mt-9 mb-11 ml-4 flex flex-col items-center gap-[22px]">
+        <div className="mt-9 mb-11 mx-4 flex flex-col items-center gap-[22px]">
           {headerData.footerLinks.map((link, index) => (
             <a key={index} href={link.href} className="text-[#4A4949] text-[11px] md:text-[16px]" style={{ fontFamily: "var(--font-poppins)" }}>{link.text}</a>
           ))}

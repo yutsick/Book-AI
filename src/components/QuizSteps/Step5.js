@@ -20,10 +20,10 @@ function Step5({setProgressStep, setIsButtonDisabled}) {
    
     
     const topicOptions = [
-      { "id": "1", "name": "The Great Cheese Heist", "description": "A thrilling tale of mice, mischief, and an unforgettable mission"},
-      { "id": "2", "name": "Lost in the Sauce", "description": "How one chef turned a culinary disaster into a five-star success"},
-      { "id": "3", "name": "Dancing Through the Storm", "description": "A story of resilience, rhythm, and finding hope in the darkest of times"},
-      { "id": "4", "name": "Dancing Through the Storm part2", "description": "A story of resilience, rhythm, and finding hope in the darkest of times"  },
+      { "id": "1", "name": "Surfing Through Life's Waves", "description": "A Fitness Trainer's Guide To Riding The Ups And Downs"},
+      { "id": "2", "name": "Football Fever Dreams", "description": "Rantings Of A Trainer Obsessed With Goals And Snack Foods"},
+      { "id": "3", "name": "Game Over: My Family Edition", "description": "Leveling Up With Peter, Jessica, And The Ultimate Boss: Maria"},
+      { "id": "4", "name": "Boston and the Art of Surfing", "description": "Why I Pick Waves Over Traffic Any Day"  },
     ]
     
   return (

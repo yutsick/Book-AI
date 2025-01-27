@@ -13,6 +13,7 @@ import Step4 from "@/components/QuizSteps/Step4";
 import Step5 from "@/components/QuizSteps/Step5";
 import Step6 from "@/components/QuizSteps/Step6";
 import Step7 from "@/components/QuizSteps/Step7";
+import Step8 from "@/components/QuizSteps/Step8";
 
 const MainScreen = () => {
   const totalScreens = 9;
@@ -178,7 +179,15 @@ const MainScreen = () => {
               setIsButtonDisabled={setIsButtonDisabled}
             />
           )}
-          {currentStep === 7 && <Step7 setProgressStep={setProgressStep} />}
+          {currentStep === 7 && 
+            <Step7 
+              setProgressStep={setProgressStep} 
+          />}
+          {currentStep === 8 && 
+            <Step8 
+              setProgressStep={setProgressStep} 
+          />}
+
         </div>
         {currentStep < totalScreens && (
           <MainButton
