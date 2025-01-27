@@ -29,17 +29,17 @@ const HeroQuiz = ({  }) => {
       `,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        backgroundPosition: "center 93%",
+        backgroundPosition: "center 82%",
       }}
-      className="flex flex-col items-center justify-center  w-full md:mt-4 mt-2  pb-[70px] md:pb-[145px] px-4"
+      className="flex flex-col items-center justify-center  w-full md:mt-4 mt-2  pb-[70px] md:pb-[110px] px-4"
     >
       <div className="max-w-[1200px]">
-      <div className="text-center text-[32px] md:text-[46px] leading-[36px] font-bold text-orange mt-3 md:mt-[44px] w-full">
+      <div className="text-center text-[32px] md:text-[46px] leading-[36px] font-bold text-orange mt-3 md:mt-[20px] w-full">
         {heroQuizData.title}
       </div>
       <p
         
-        className="text-white  text-[22px] font-semibold mt-5 md:mt-10 w-full text-center leading-[29px] max-w-[720px]"
+        className="text-white  text-[22px] font-semibold mt-5 md:mt-10 w-full md:text-center leading-[29px] max-w-[720px]"
       >
         {heroQuizData.subTitle}
       </p>
