@@ -5,7 +5,7 @@ import RadioButtonList from "@/components/FormsElements/RadioButtonList";
 
 function Step5({setProgressStep, setIsButtonDisabled}) {
 
-  const { selectedTopic, setSelectedTopic } = useContext(CreateGenreContext); 
+  const { selectedTopic, setSelectedTopic, setSelectedSubTopic } = useContext(CreateGenreContext); 
   useEffect(() => {
       setProgressStep(4); 
     }, [setProgressStep]);
@@ -25,7 +25,11 @@ function Step5({setProgressStep, setIsButtonDisabled}) {
       { "id": "3", "name": "Game Over: My Family Edition", "description": "Leveling Up With Peter, Jessica, And The Ultimate Boss: Maria"},
       { "id": "4", "name": "Boston and the Art of Surfing", "description": "Why I Pick Waves Over Traffic Any Day"  },
     ]
-    
+    const handleTopicChange = (value, description) => {
+      setSelectedTopic(value);
+      setSelectedSubTopic(description); // Оновлюємо опис при виборі теми
+    };
+
   return (
     <div>
       <div className="w-full mt-2 md:px-6">
@@ -36,7 +40,7 @@ function Step5({setProgressStep, setIsButtonDisabled}) {
             iconRight="images/create-book/icon-regenerate.svg"
             options={topicOptions}
             selectedValue={selectedTopic}
-            onChange={setSelectedTopic}
+            onChange={(value) => handleTopicChange(value, topicOptions.find(opt => opt.name === value)?.description)}
             setIsButtonDisabled={setIsButtonDisabled}
             type = 'topic'
           />

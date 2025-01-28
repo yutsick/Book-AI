@@ -18,6 +18,7 @@ export default {
       fontFamily: {
         roboto: ['var(--font-roboto)', 'sans-serif'], 
         inter: ['var(--font-inter)', 'sans-serif'], 
+        anton: ['var(--font-anton)', 'sans-serif'], 
       },
       boxShadow: {
         heroBtnShadow: '0px 0px 2.13px 2.13px #82828275',

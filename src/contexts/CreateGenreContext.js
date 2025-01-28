@@ -7,6 +7,7 @@ const GenreContext = createContext();
 export const GenreProvider = ({ children }) => {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedSubTopic, setSelectedSubTopic] = useState("");
 
   return (
     <GenreContext.Provider value={{ 
@@ -14,6 +15,8 @@ export const GenreProvider = ({ children }) => {
       setSelectedGenre,
       selectedTopic, 
       setSelectedTopic,
+      selectedSubTopic, 
+      setSelectedSubTopic,
       
       }}>
       {children}

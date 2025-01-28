@@ -32,4 +32,4 @@ const CoverSlider = ({ selectedCover }) => {
   );
 };
 
-export default CoverSlider;
+// export default CoverSlider;

@@ -1,7 +1,15 @@
 import React, { useState, useContext } from "react";
 import GenreContext from "@/contexts/CreateGenreContext";
 
-const RadioButtonList = ({ options, label = null, description = null, setIsButtonDisabled = null, iconRight, type = 'genre' }) => {
+const RadioButtonList = ({ 
+  options, 
+  label = null, 
+  description = null, 
+  setIsButtonDisabled = null, 
+  iconRight, 
+  type = 'genre' ,
+  onChange
+}) => {
   const { selectedGenre, 
     setSelectedGenre,
     selectedTopic, 
@@ -14,7 +22,8 @@ const RadioButtonList = ({ options, label = null, description = null, setIsButto
     if (type == 'genre') {
       selectedGenre === value ? setSelectedGenre('') : setSelectedGenre(value)
     } else {
-      setSelectedTopic(value)
+      setSelectedTopic(value);
+      onChange(value, description); 
 
     }
    
