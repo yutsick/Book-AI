@@ -1,8 +1,8 @@
 import html2canvas from "html2canvas";
 import { createRoot } from "react-dom/client";
-import CoverTemplate2 from "@/components/CoversGenerator/CoverTemplate2";
+import CoverTemplate5 from "@/components/CoversGenerator/CoverTemplate5";
 
-export const generateTemplate2Covers = async (contextData, template) => {
+export const generateTemplate5Covers = async (contextData, template) => {
   const hiddenContainer = document.createElement("div");
   hiddenContainer.style.position = "absolute";
   hiddenContainer.style.width = "431px";
@@ -22,8 +22,8 @@ export const generateTemplate2Covers = async (contextData, template) => {
           } else {
             img.onload = resolve;
             img.onerror = (err) => {
-              console.error("Error loading image22:", err, img.src);
-              reject(err);  // Покажемо деталі помилки завантаження
+              console.error("Error loading image:", err, img.src);
+              reject(err);  
             };
           }
         })
@@ -36,12 +36,12 @@ export const generateTemplate2Covers = async (contextData, template) => {
   const createAndRender = async (type) => {
     // Створюємо обгортку для компонента
     const wrapper = document.createElement("div");
+    wrapper.style.backgroundColor = "#F9F6EB";
     hiddenContainer.appendChild(wrapper);
   
     // Рендеримо компонент у wrapper
     const root = createRoot(wrapper);
-    wrapper.style.backgroundColor = "#F9F6EB";
-    root.render(<CoverTemplate2 type={type} data={contextData} />);
+    root.render(<CoverTemplate5 type={type} data={contextData} />);
   
     // Чекаємо, поки React завершить рендеринг
     await new Promise((resolve) => setTimeout(resolve, 100));

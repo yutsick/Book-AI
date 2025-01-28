@@ -1,4 +1,4 @@
-import { Inter, Poppins, Roboto, Anton } from "next/font/google";
+import { Inter, Poppins, Roboto, Anton, Caveat, Pacifico, Montserrat} from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 
@@ -29,6 +29,27 @@ const antonFont = Anton({
   weight: ["400"],
 });
 
+const caveatFont = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
+const pacificoFont = Pacifico({
+  subsets: ["latin"],
+  variable: "--font-pacifico",
+  display: "swap",
+  weight: ["400"],
+});
+
+const montserratFont = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata = {
   title: "Book Tailor",
   description: "An AI-powered platform designed to help users effortlessly create personalized, full-length books.",
@@ -39,7 +60,15 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${interFont.variable} ${robotoFont.variable} ${poppinsFont.variable} ${antonFont.variable}`}
+      className={`
+        ${interFont.variable} 
+        ${robotoFont.variable} 
+        ${poppinsFont.variable} 
+        ${antonFont.variable} 
+        ${caveatFont.variable}
+        ${pacificoFont.variable}
+        ${montserratFont.variable}
+      `}
     >
       <Head>
         <meta

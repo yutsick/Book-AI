@@ -34,22 +34,22 @@ export const generateTemplate1Covers = async (contextData, template) => {
   
 
   const createAndRender = async (type) => {
-    // Створюємо обгортку для компонента
+
     const wrapper = document.createElement("div");
+    wrapper.style.backgroundColor = "#F9F6EB";
     hiddenContainer.appendChild(wrapper);
   
-    // Рендеримо компонент у wrapper
+
     const root = createRoot(wrapper);
     root.render(<CoverTemplate1 type={type} data={contextData} />);
   
-    // Чекаємо, поки React завершить рендеринг
+
     await new Promise((resolve) => setTimeout(resolve, 100));
   
-    // Чекаємо, поки зображення в компоненті завантажаться
+   
     await waitForImages(wrapper);
 
 
-    // Повертаємо готовий DOM-елемент
     return wrapper;
   };
   
@@ -65,7 +65,7 @@ export const generateTemplate1Covers = async (contextData, template) => {
       return await html2canvas(element, {
         allowTaint: true,
         useCORS: true,
-        // scale: 2,
+        scale: 10,
         logging: true,
       }).then((canvas) => canvas.toDataURL("image/png"));
     };

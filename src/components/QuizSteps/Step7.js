@@ -69,7 +69,7 @@ const Step7 = ({ setProgressStep }) => {
   };
 
   return (
-    <div className="w-full mt-4 md:px-6 flex justify-between">
+    <div className="w-full mt-4 md:px-2 flex justify-between">
       
 
       {/* Слайдер */}
@@ -81,17 +81,17 @@ const Step7 = ({ setProgressStep }) => {
         )}
       </div>
       {/* Список прев'юшок */}
-      <div className="flex flex-col space-y-4 pr-6">
+      <div className="flex md:max-w-[180px] md:grid grid-cols-2 grid-rows-4 md:gap-2">
         {allCovers.map((cover, index) => (
-          <img
-            key={index}
-            src={cover.frontCover}
-            alt={`Preview Template ${index + 1}`}
-            className={`w-20 h-auto cursor-pointer border ${
-              selectedCover === cover ? "border-blue-500" : "border-gray-300"
-            }`}
-            onClick={() => handlePreviewClick(index)}
-          />
+          <div className="max-h-[130px]" key={index}>
+            <img
+              
+              src={cover.frontCover}
+              alt={`Preview Template ${index + 1}`}
+              className={`w-full h-auto cursor-pointer `}
+              onClick={() => handlePreviewClick(index)}
+            />
+          </div>
         ))}
       </div>
     </div>
