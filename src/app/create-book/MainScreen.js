@@ -14,6 +14,7 @@ import Step5 from "@/components/QuizSteps/Step5";
 import Step6 from "@/components/QuizSteps/Step6";
 import Step7 from "@/components/QuizSteps/Step7";
 import Step8 from "@/components/QuizSteps/Step8";
+import Step9 from "@/components/QuizSteps/Step9";
 
 const MainScreen = () => {
   const totalScreens = 9;
@@ -185,6 +186,10 @@ const MainScreen = () => {
           />}
           {currentStep === 8 && 
             <Step8 
+              setProgressStep={setProgressStep} 
+          />}
+          {currentStep === 9 && 
+            <Step9 
               setProgressStep={setProgressStep} 
           />}
 

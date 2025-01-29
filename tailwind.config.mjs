@@ -7,6 +7,12 @@ export default {
   ],
   theme: {
     extend: {
+      transformStyle: {
+        "3d": "preserve-3d",
+      },
+      translate: {
+        z: "var(--spineWidth)",
+      },
       screens: {
         '865': '865px', 
       },

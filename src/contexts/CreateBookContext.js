@@ -5,7 +5,7 @@ import { createContext, useState } from "react";
 const CreateBookContext = createContext();
 
 export const CreateBookProvider = ({ children }) => {
-  const [authorName, setAuthorName] = useState(""); 
+  const [authorName, setAuthorName] = useState("");
   const [selectedAge, setSelectedAge] = useState(null);
   const [selectedGender, setSelectedGender] = useState(null);
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState([]);
@@ -35,8 +35,16 @@ export const CreateBookProvider = ({ children }) => {
     );
   };
 
+  const [selectedTemplate, setSelectedTemplate] = useState({
+    templateId: null,
+    front: "",
+    back: "",
+    spine: "",
+  });
+
+
   return (
-    <CreateBookContext.Provider 
+    <CreateBookContext.Provider
       value={{
         authorName,
         setAuthorName,
@@ -49,14 +57,16 @@ export const CreateBookProvider = ({ children }) => {
         removeQuestion,
         authorEmail,
         setAuthorEmail,
-        authorImage, 
+        authorImage,
         setAuthorImage,
-        croppedImage, 
+        croppedImage,
         setCroppedImage,
-        processedAuthorImage, 
+        processedAuthorImage,
         setProcessedAuthorImage,
-        error, 
-        setError, 
+        error,
+        setError,
+        selectedTemplate,
+        setSelectedTemplate,
       }}
     >
       {children}

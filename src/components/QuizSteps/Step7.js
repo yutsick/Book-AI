@@ -17,7 +17,16 @@ const previewTemplates = [
 ];
 
 const Step7 = ({ setProgressStep }) => {
-  const { authorName, authorImage, setAuthorImage, processedAuthorImage, croppedImage, setCroppedImage } = useContext(CreateBookContext);
+  const { 
+    authorName, 
+    authorImage, 
+    processedAuthorImage, 
+    croppedImage, 
+    setCroppedImage, 
+    selectedTemplate, 
+    setSelectedTemplate 
+  } = useContext(CreateBookContext);
+
   const { selectedTopic, selectedSubTopic } = useContext(CreateGenreContext);
 
   const [selectedCover, setSelectedCover] = useState(null);
@@ -29,29 +38,56 @@ const Step7 = ({ setProgressStep }) => {
   useEffect(() => {
     setProgressStep(5);
     fetchGeneratedCover(1);
-  }, [authorName, selectedTopic, selectedSubTopic, authorImage, processedAuthorImage, croppedImage]);
+  }, [authorName, 
+    selectedTopic, 
+    selectedSubTopic, 
+    authorImage, 
+    processedAuthorImage, 
+    croppedImage]);
 
   const fetchGeneratedCover = async (templateId) => {
-    if (!authorImage) {
-      console.error("❌ authorImage is missing!");
-      return;
-    }
+  if (!authorImage) {
+    console.error("❌ authorImage is missing!");
+    return;
+  }
+  
+  // 🔥 Якщо шаблон вже є, не генеруємо заново
+  // if (selectedTemplate?.templateId === templateId) {
+  //   setSelectedCover(selectedTemplate);
+  //   return;
+  // }
+ 
+  setLoading(true);
+  try {
+    const contextData = { 
+      authorName, 
+      selectedTopic, 
+      selectedSubTopic, 
+      authorImage, 
+      processedAuthorImage, 
+      croppedImage 
+    };
 
-    setLoading(true);
-    try {
+    const cover = await generateCoverById(contextData, templateId);
+    setSelectedCover(cover);
+
+    // 🔥 Зберігаємо шаблон в контекст
+    setSelectedTemplate({
+      templateId,
+      front: cover.frontCover, 
+      back: cover.backCover, 
+      spine: cover.spineCover
+    });
+
+    if (!isRendered) setIsRendered(true);
+  } catch (error) {
+    console.error("❌ Error generating cover:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
 
-      const contextData = { authorName, selectedTopic, selectedSubTopic, authorImage, processedAuthorImage, croppedImage };
-      const cover = await generateCoverById(contextData, templateId);
-      setSelectedCover(cover);
-
-      if (!isRendered) setIsRendered(true);
-    } catch (error) {
-      console.error("❌ Error generating cover:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
     if (authorImage && authorImage instanceof File) {
       const reader = new FileReader();
