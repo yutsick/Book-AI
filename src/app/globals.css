@@ -8,6 +8,26 @@
   font-family: var(--font-inter), sans-serif;
 }
 
+@font-face {
+  font-family: 'Degular';
+  src: url('/fonts/Degular-Regular.woff2') format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Degular';
+  src: url('/fonts/Degular-Semibold.woff2') format('otf');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Degular';
+  src: url('/fonts/Degular-Bold.woff2') format('otf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
 
 html{
   scroll-behavior: smooth;

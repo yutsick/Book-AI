@@ -21,6 +21,7 @@ export default {
         caveat: ['var(--font-caveat)', 'sans-serif'], 
         pacifico: ['var(--font-pacifico)', 'sans-serif'], 
         montserrat: ['var(--font-montserrat)', 'sans-serif'], 
+        degular: ['Degular', 'sans-serif']
       
       },
       boxShadow: {

@@ -1,38 +1,37 @@
-import { generateTemplate1Covers } from "./coverGenerators/template1Helper";
-import { generateTemplate2Covers } from "./coverGenerators/template2Helper";
-import { generateTemplate3Covers } from "./coverGenerators/template3Helper";
-import { generateTemplate4Covers } from "./coverGenerators/template4Helper";
-import { generateTemplate5Covers } from "./coverGenerators/template5Helper";
-import { generateTemplate6Covers } from "./coverGenerators/template6Helper";
-import { generateTemplate7Covers } from "./coverGenerators/template7Helper";
-import { generateTemplate8Covers } from "./coverGenerators/template8Helper";
-// import { generateTemplate2Covers } from "./coverGenerators/template2Helper";
-// Додайте решту темплейтів
-// import { generateTemplate8Covers } from "./coverGenerators/template8Helper";
+import { generateTemplateCovers } from "./generateTemplateHelper";
+import CoverTemplate1 from "@/components/CoversGenerator/CoverTemplate1";
+import CoverTemplate2 from "@/components/CoversGenerator/CoverTemplate2";
+import CoverTemplate3 from "@/components/CoversGenerator/CoverTemplate3";
+import CoverTemplate4 from "@/components/CoversGenerator/CoverTemplate4";
+import CoverTemplate5 from "@/components/CoversGenerator/CoverTemplate5";
+import CoverTemplate6 from "@/components/CoversGenerator/CoverTemplate6";
+import CoverTemplate7 from "@/components/CoversGenerator/CoverTemplate7";
+import CoverTemplate8 from "@/components/CoversGenerator/CoverTemplate8";
 
-export const generateAllCovers = async (contextData) => {
-  
-  const templates = [
-    generateTemplate1Covers,
-    generateTemplate2Covers,
-    generateTemplate3Covers,
-    generateTemplate4Covers,
-    generateTemplate5Covers,
-    generateTemplate6Covers,
-    generateTemplate7Covers,
-    generateTemplate8Covers,
-    // Додайте решту функцій
-    // generateTemplate8Covers,
-  ];
+// Масив темплейтів
+const templates = {
+  1: CoverTemplate1,
+  2: CoverTemplate2,
+  3: CoverTemplate3,
+  4: CoverTemplate4,
+  5: CoverTemplate5,
+  6: CoverTemplate6,
+  7: CoverTemplate7,
+  8: CoverTemplate8,
+};
 
-  const allCovers = [];
+/**
+ * Генерує обкладинку для конкретного шаблону за його ID.
+ * @param {Object} contextData - Дані для обкладинки
+ * @param {number} templateId - ID шаблону (1-8)
+ * @returns {Promise<Object>} - Об'єкт з front, spine та back обкладинками
+ */
+export const generateCoverById = async (contextData, templateId = 1) => {
+  const CoverComponent = templates[templateId];
 
-  for (const generateCovers of templates) {
-
-
-    const covers = await generateCovers(contextData);
-    allCovers.push(covers);
+  if (!CoverComponent) {
+    throw new Error(`Template with ID ${templateId} does not exist.`);
   }
 
-  return allCovers;
+  return await generateTemplateCovers(contextData, CoverComponent);
 };
