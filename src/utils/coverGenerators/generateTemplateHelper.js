@@ -1,4 +1,5 @@
-import html2canvas from "html2canvas";
+// import html2canvas from "html2canvas";
+import domtoimage from "dom-to-image";
 import { createRoot } from "react-dom/client";
 import { createPortal } from "react-dom";
 
@@ -14,19 +15,21 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
     const waitForImages = async (element) => {
       const images = element.querySelectorAll("img");
+
+
       const promises = Array.from(images).map(
         (img) =>
           new Promise((resolve, reject) => {
             if (img.complete) {
-   
+
               resolve();
             } else {
               img.onload = () => {
-             
+
                 resolve();
               };
               img.onerror = (err) => {
-         
+
                 reject(err);
               };
             }
@@ -50,11 +53,11 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         );
 
 
-      
+
 
         setTimeout(async () => {
           await waitForImages(wrapper);
-    
+
           resolve(wrapper);
         }, 500);
       });
@@ -71,18 +74,44 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       clone.style.zIndex = "-9999";
       document.body.appendChild(clone);
 
-      return await html2canvas(clone, {
-        allowTaint: true,
-        useCORS: true,
-        scale: 2,
-        logging: true,
-        backgroundColor: null, // Фікс для прозорого фону
-        removeContainer: true, // Запобігає подвійним DOM-елементам
-      }).then((canvas) => {
-        document.body.removeChild(clone);
-   
-        return canvas.toDataURL("image/png");
-      });
+      // return await html2canvas(clone, {
+      //   allowTaint: true,
+      //   useCORS: true,
+      //   scale: 2,
+      //   logging: true,
+      //   backgroundColor: null, 
+      //   removeContainer: true, 
+
+      // }).then((canvas) => {
+      //   document.body.removeChild(clone);
+
+      //   return canvas.toDataURL("image/png");
+      // });
+
+
+      return await domtoimage.toPng(clone, {
+        quality: 1, // Найвища якість
+        bgcolor: "transparent", // Прозорий фон
+        width: clone.offsetWidth * 2, // Збільшення роздільної здатності
+        height: clone.offsetHeight * 2,
+        style: {
+          transform: "scale(2)", // Масштабування для якості
+          transformOrigin: "top left",
+          width: `${clone.offsetWidth * 2}px`, // Встановлення правильних розмірів
+          height: `${clone.offsetHeight * 2}px`,
+        },
+      })
+        .then((dataUrl) => {
+          document.body.removeChild(clone);
+          return dataUrl;
+        })
+        .catch((error) => {
+          console.error("❌ Помилка рендеру:", error);
+          document.body.removeChild(clone);
+          return null;
+        });
+
+
     };
 
     (async () => {

@@ -84,11 +84,11 @@ const CoverTemplate8 = ({ type, data }) => {
 
           <div className="flex text-black items-center h-[57px] w-[648px]  px-20 bg-white justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] gap-16">
 
-            <div className="flex  flex-col justify-center items-center text-[22px] italic pb-6">
+            <div className="flex  flex-col justify-center items-center text-[22px] italic ">
               <div>{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="flex font-black flex-col justify-center items-center text-[17px]  font-inter h-full  pb-4">
+            <div className="flex font-black flex-col justify-center items-center text-[17px]  font-inter h-full  ">
               <div>{authorName || "Default Author"}</div>
             </div>
           </div>

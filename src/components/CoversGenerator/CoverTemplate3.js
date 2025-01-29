@@ -15,9 +15,9 @@ const CoverTemplate3 = ({ type, data }) => {
           style={{ backgroundImage: "url('/images/create-book/bg/bg3.png')" }}
         >
           {/* Heading */}
-          <div className=" flex flex-col gap-4 max-w-[260px] mx-auto">
+          <div className=" flex flex-col gap-4 max-w-[260px] mx-auto ">
           <div>
-            <div className="text-[44px] leading-[44px] font-bold t text-center mt-6]">
+            <div className="text-[44px] leading-[44px] font-bold t text-center mt-6 -rotate-1">
               {selectedTopic || "Default Topic"}
             </div>
           </div>
@@ -48,7 +48,7 @@ const CoverTemplate3 = ({ type, data }) => {
                 <img src="images/create-book/bg/pag2.png" alt="" />
               </div>
             
-            <div className="pb-5 text-[28px]  bg-white h-[46px] w-full flex items-center justify-center shadow rotate-[2deg] ">
+            <div className="pb-2 text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] ">
               {authorName || "Default Author"}
             </div>
           </div>
@@ -73,13 +73,13 @@ const CoverTemplate3 = ({ type, data }) => {
           >
             <div className=" flex items-center justify-center gap-16 text-[18px] absolute font-bold font-caveat flex-1 text-[#000082]">
 
-              <div className="text-[44px] leading-[22px] pb-8">
+              <div className="text-[44px] leading-[22px] pb-2">
                 {selectedTopic || "Default Topic"}
               </div>
 
 
 
-              <div className="text-[28px]  pb-4">
+              <div className="text-[28px]  pb-2">
                 {authorName || "Default Author"}
               </div>
             </div>

@@ -10,19 +10,31 @@
 
 @font-face {
   font-family: 'Degular';
-  src: url('/fonts/Degular-Regular.woff2') format('otf');
+  src: url('/fonts/Degular-Regular.otf') format('otf');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Degular';
-  src: url('/fonts/Degular-Semibold.woff2') format('otf');
+  src: url('/fonts/Degular-Semibold.otf') format('otf');
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: 'Degular';
-  src: url('/fonts/Degular-Bold.woff2') format('otf');
+  src: url('/fonts/Degular-Bold.otf') format('otf');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Georgia';
+  src: url('/fonts/georgia.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Georgia';
+  src: url('/fonts/georgiab.ttf') format('ttf');
   font-weight: 700;
   font-style: normal;
 }
@@ -111,3 +123,6 @@ textarea {
   -webkit-appearance: none; 
 }
   
+.shadow {
+  filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
+}

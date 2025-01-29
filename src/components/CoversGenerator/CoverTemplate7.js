@@ -43,7 +43,7 @@ const CoverTemplate7 = ({ type, data }) => {
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="w-[278px] h-[302px] rounded-full object-cover block object-top mx-auto"
+              className="w-[278px] h-[302px] rounded-full object-cover block object-top mx-auto border border-[#000082] bg-white"
             />
             <div className="font-montserrat mb-5 mt-6 text-[26px] text-center font-semibold">
               {authorName || "Default Author"}
@@ -70,13 +70,13 @@ const CoverTemplate7 = ({ type, data }) => {
             <img src="/images/create-book/bg/wave-blue-spine.png" alt="" className="h-[57px] "/>
             <div className=" flex items-center justify-between text-[18px] font-medoum font-montserrat flex-1">
 
-              <div className="pb-4 font-montserrat ">
+              <div className=" font-montserrat ">
                 {selectedTopic || "Default Topic"}
               </div>
 
 
 
-              <div className="font-montserrat   pb-4">
+              <div className="font-montserrat   ">
                 {authorName || "Default Author"}
               </div>
             </div>

@@ -11,31 +11,39 @@ const CoverTemplate1 = ({ type, data }) => {
     <>
       {type === "front" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-anton"
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-anton "
           style={{ backgroundImage: "url('/images/create-book/bg/bg1-front.png')" }}
         >
           {/* Heading */}
-          <div className=" flex flex-col gap-4 max-w-[260px] mx-auto font-anton">
+          <div className=" flex flex-col gap-4 max-w-[360px] mx-auto">
           <div>
-            <div className="text-[32px] leading-[36px] font-bold text-[#F96E47] text-center mt-[56px]">
+            <div className="tracking-[2px] text-[32px] leading-[36px] font-bold text-[#F96E47] text-center mt-4 uppercase">
               {selectedTopic || "Default Topic"}
             </div>
           </div>
 
           {/* Subheading */}
           <div>
-            <div className="text-[20px] font-semibold text-center text-white font-anton">
+            <div className="uppercase tracking-[2px] text-[20px] font-semibold text-center text-white font-anton">
               {selectedSubTopic || "Default Sub Topic"}
             </div>
           </div>
           </div>
           {/* Image with Text */}
-          <div className="flex flex-col w-full flex-1 justify-end">
-            <img
+          <div className="flex flex-col w-full flex-1 justify-end"
+          style={{
+            backgroundImage:`url(${authorImageSrc})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center"
+          }}
+          
+          >
+            {/* <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="w-full max-h-[370px] object-cover block"
-            />
+              className=" max-h-[340px] object-contain block"
+            /> */}
             <div className="pb-5 text-[28px]  bg-white h-[80px] w-full flex items-center justify-center  text-[#14465F] font-anton">
               {authorName || "Default Author"}
             </div>

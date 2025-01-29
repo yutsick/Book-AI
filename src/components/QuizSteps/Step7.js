@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { generateCoverById } from "@/utils/coverGeneratorHelper";
+import { generateCoverById } from "@/utils/coverGenerators/coverGeneratorHelper";
 import CoverSlider from "../CoverSlider/CoverSlider";
 import CreateBookContext from "@/contexts/CreateBookContext";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
