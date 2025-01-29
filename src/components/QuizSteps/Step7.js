@@ -103,14 +103,14 @@ const Step7 = ({ setProgressStep }) => {
       
     </div>
      {/* 🔥 Кнопка відкриття редактора під слайдером */}
-     <div className="flex justify-center">
+     {isRendered && (<div className="flex justify-center">
      <button
       className="mt-4 text-15px[] bg-[#EAAC0026] text-black shadow-md py-2 px-4 border rounded-[3px] border-black"
       onClick={() => setIsCropperOpen(true)}
     >
       Adjust the Image
     </button>
-    </div>
+    </div>)}
    </>
   );
 };
