@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const CoverTemplate2 = ({ type, data }) => {
-  const { authorName, selectedTopic, authorImage, selectedSubTopic } = data;
+  const { authorName, selectedTopic, authorImage, selectedSubTopic, processedAuthorImage } = data;
 
   // Перетворення `File` на URL, якщо потрібно
   const authorImageSrc =
@@ -50,7 +50,8 @@ const CoverTemplate2 = ({ type, data }) => {
           {/* Heading */}
           <div className="w-full relative h-[433px]">
             <img
-              src={authorImageSrc}
+              // src={authorImageSrc}
+              src={processedAuthorImage}
               alt={authorName || "Default Author"}
               className="w-full h-full object-cover block"
             />
@@ -97,12 +98,12 @@ const CoverTemplate2 = ({ type, data }) => {
       {/* Spine */}
       {type === "spine" && (
         <div className="h-[648px] flex justify-center relative">
-          <div className="flex items-center h-[57px] w-[648px] gap-10 pl-2  bg-black justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
-            <div className="text-white flex flex-col justify-center text-[18px] font-anton">
+          <div className="flex items-center h-[57px] w-[648px] gap-10 pl-2  bg-black justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular fot-black">
+            <div className="text-white flex flex-col justify-center text-[18px] font-black font-degular">
               <div>{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="text-white flex flex-col justify-center items-end text-[18px] font-anton h-full w-[215px] bg-[#BB2621] p-2 ">
+            <div className="text-white flex flex-col justify-center items-end text-[18px] font-degular h-full w-[215px] bg-[#BB2621] p-2 ">
               <div>{authorName || "Default Author"}</div>
             </div>
           </div>

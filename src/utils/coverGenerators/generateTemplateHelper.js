@@ -92,6 +92,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       return await domtoimage.toPng(clone, {
         quality: 1, // Найвища якість
         bgcolor: "transparent", // Прозорий фон
+        useCORS: true,
         width: clone.offsetWidth * 2, // Збільшення роздільної здатності
         height: clone.offsetHeight * 2,
         style: {

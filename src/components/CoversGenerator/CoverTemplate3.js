@@ -1,11 +1,10 @@
 import React from "react";
 
 const CoverTemplate3 = ({ type, data }) => {
-  const { authorName, selectedTopic, authorImage, selectedSubTopic } = data;
-
+  const { authorName, selectedTopic, selectedSubTopic, croppedImage } = data;
   // Перетворення `File` на URL, якщо потрібно
   const authorImageSrc =
-    authorImage instanceof File ? URL.createObjectURL(authorImage) : authorImage;
+    croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
   return (
     <>
@@ -15,7 +14,7 @@ const CoverTemplate3 = ({ type, data }) => {
           style={{ backgroundImage: "url('/images/create-book/bg/bg3.png')" }}
         >
           {/* Heading */}
-          <div className=" flex flex-col gap-4 max-w-[260px] mx-auto ">
+          <div className=" flex flex-col gap-4 max-w-[75%] mx-auto ">
           <div>
             <div className="text-[44px] leading-[44px] font-bold t text-center mt-6 -rotate-1">
               {selectedTopic || "Default Topic"}
