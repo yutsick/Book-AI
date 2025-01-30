@@ -2,7 +2,7 @@
 import React from "react";
 
 const CoverTemplate6 = ({ type, data }) => {
-  const { authorName, selectedTopic, authorImage, selectedSubTopic } = data;
+  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
 
   // Перетворення `File` на URL, якщо потрібно
   const authorImageSrc =

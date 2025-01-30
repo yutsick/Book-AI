@@ -74,20 +74,6 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       clone.style.zIndex = "-9999";
       document.body.appendChild(clone);
 
-      // return await html2canvas(clone, {
-      //   allowTaint: true,
-      //   useCORS: true,
-      //   scale: 2,
-      //   logging: true,
-      //   backgroundColor: null, 
-      //   removeContainer: true, 
-
-      // }).then((canvas) => {
-      //   document.body.removeChild(clone);
-
-      //   return canvas.toDataURL("image/png");
-      // });
-
 
       return await domtoimage.toPng(clone, {
         quality: 1, // Найвища якість

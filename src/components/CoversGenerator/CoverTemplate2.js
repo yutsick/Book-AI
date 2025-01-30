@@ -5,7 +5,7 @@ const CoverTemplate2 = ({ type, data }) => {
 
 // Перетворення `File` на URL, якщо потрібно
 const authorImageSrc =
-processedAuthorImage instanceof File ? URL.createObjectURL(processedAuthorImage) : processedAuthorImage;
+    croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
   // Референси для елементів
   const titleRef = useRef(null);

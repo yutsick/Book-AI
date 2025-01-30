@@ -30,7 +30,7 @@ const CoverTemplate3 = ({ type, data }) => {
           </div>
           {/* Image with Text */}
           <div className="flex flex-col w-full flex-1 relative mt-10">
-           <div className=" max-w-[300px] mx-auto shadow rotate-[-2deg] border-[3px] border-white">
+           <div className=" max-w-[300px] mx-auto shadow rotate-[-2deg] border-[3px] border-white bg-black">
 
            
             <img

@@ -1,18 +1,52 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const CoverTemplate8 = ({ type, data }) => {
-  const { authorName, selectedTopic, authorImage, selectedSubTopic } = data;
+  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
 
-  // Перетворення `File` на URL, якщо потрібно
+ 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
+
+    const titleRef = useRef(null);
+      const subTitleRef = useRef(null);
+    
+      // Стани для шрифтів
+      const [titleFontSize, setTitleFontSize] = useState(27);
+      const [subTitleFontSize, setSubTitleFontSize] = useState(20);
+    
+      useEffect(() => {
+        // Розрахунок шрифту для заголовка
+        const calculateFontSize = (elementRef, maxFontSize, maxHeight) => {
+          const element = elementRef.current;
+          if (!element) return maxFontSize;
+    
+          // Початковий розмір
+          let fontSize = maxFontSize;
+          element.style.fontSize = `${fontSize}px`;
+    
+          // Зменшувати розмір шрифту, поки текст не вміститься
+          while (element.scrollHeight > maxHeight && fontSize > 10) {
+            fontSize -= 1;
+            element.style.fontSize = `${fontSize}px`;
+          }
+    
+          return fontSize;
+        };
+    
+        // Встановлення розміру для заголовка та підзаголовка
+        const newTitleFontSize = calculateFontSize(titleRef, 27, 80); 
+        const newSubTitleFontSize = calculateFontSize(subTitleRef, 20, 50); 
+    
+        setTitleFontSize(newTitleFontSize);
+        setSubTitleFontSize(newSubTitleFontSize);
+      }, [selectedTopic, selectedSubTopic]);
 
   return (
     <>
       {/* Front Cover */}
       {type === "front" && (
         <div className="relative w-[431px] h-[648px] bg-[#747778] mx-auto flex flex-col items-center justify-between "
-
+        style={{ backgroundImage: "url('/images/create-book/bg/bg8.png')" }}
         >
           {/* Heading */}
           <div className="w-full  h-full">
@@ -31,21 +65,36 @@ const CoverTemplate8 = ({ type, data }) => {
             <div className="text-left text-[20px] h-full flex flex-col justify-between w-full">
 
 
-              <div className=" max-w-[300px] w-full pb-[90px]"
-                style={{
-                  backgroundImage: "url('/images/create-book/bg/title8.png')",
-                  backgroundRepeat: "no-repeat"
-                }}
+              <div className=" max-w-[300px] w-full pb-[70px] relative"
+                // style={{
+                //   backgroundImage: "url('/images/create-book/bg/title8.png')",
+                //   backgroundRepeat: "no-repeat",
+                //   backgroundSize: "contain",
+                // }}
               >
-                <div className=" max-w-[280px] mx-auto mt-5 ml-[52px]">
+                <img src="/images/create-book/bg/title8.png" alt="" />
+                <div className=" max-w-[260px] font-degular absolute top-10 left-10">
                   {/* Title */}
-                  <div className="text-[20px] font-bold max-w-[200px]">
+                  <div 
+                  className=" font-bold max-w-[200px]"
+                  ref={titleRef}
+                  style={{
+                    fontSize: `${titleFontSize}px`,
+                    lineHeight: `${titleFontSize}px`,
+                  }}
+                  >
                     {selectedTopic || "Default Topic"}
                   </div>
 
                   {/* Subheading */}
 
-                  <div className="text-[16px]  font-roboto max-w-[200px]">
+                  <div 
+                  ref={subTitleRef}
+                  style={{
+                    fontSize: `${subTitleFontSize}px`,
+                  }}
+                  className=" font-roboto max-w-[200px]"
+                  >
                     {selectedSubTopic || "Default Sub Topic"}
                   </div>
 
@@ -55,7 +104,9 @@ const CoverTemplate8 = ({ type, data }) => {
               <div className="h-[80px] flex items-center justify-center font-bold "
                 style={{
                   backgroundImage: "url('/images/create-book/bg/author8.png')",
-                  backgroundRepeat: "no-repeat"
+                  backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                  backgroundPosition: "center"
                 }}
               >
 

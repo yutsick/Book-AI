@@ -16,7 +16,7 @@ const previewTemplates = [
   { id: 8, src: "images/create-book/previews/front8.png", alt: "Template 8" },
 ];
 
-const Step7 = ({ setProgressStep }) => {
+const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   const { 
     authorName, 
     authorImage, 
@@ -30,7 +30,7 @@ const Step7 = ({ setProgressStep }) => {
   const { selectedTopic, selectedSubTopic } = useContext(CreateGenreContext);
 
   const [selectedCover, setSelectedCover] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Початковий лоадінг
   const [isRendered, setIsRendered] = useState(false);
   const [isCropperOpen, setIsCropperOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
@@ -39,14 +39,19 @@ const Step7 = ({ setProgressStep }) => {
     setProgressStep(5);
   }, [setProgressStep]);
 
-  // ✅ Якщо `croppedImage` змінилося — оновлюємо шаблон
+  // ✅ Чекаємо, поки `croppedImage` з'явиться, перед викликом `fetchGeneratedCover`
   useEffect(() => {
     if (croppedImage) {
-      console.log("🔄 Cropped image updated! Reloading cover...");
-      setSelectedTemplate(null); // Очистка попереднього темплейту
-      fetchGeneratedCover(1); // Генеруємо новий шаблон
+      fetchGeneratedCover(1);
     }
   }, [croppedImage]);
+
+  useEffect(() => {
+    setIsButtonDisabled(!croppedImage || loading);
+    return () => {
+      setIsButtonDisabled(false);
+    };
+  }, [setIsButtonDisabled, croppedImage, loading]);
 
   const fetchGeneratedCover = async (templateId) => {
     if (!croppedImage) {
@@ -75,7 +80,7 @@ const Step7 = ({ setProgressStep }) => {
         spine: cover.spineCover
       });
 
-      setIsRendered(true);
+      if (!isRendered) setIsRendered(true);
     } catch (error) {
       console.error("❌ Error generating cover:", error);
     } finally {
@@ -90,7 +95,7 @@ const Step7 = ({ setProgressStep }) => {
       reader.onload = () => setImageSrc(reader.result);
       reader.readAsDataURL(croppedImage);
     } else {
-      setImageSrc(croppedImage);
+      setImageSrc(croppedImage); // Якщо це вже URL
     }
   }, [croppedImage]);
 
@@ -99,7 +104,7 @@ const Step7 = ({ setProgressStep }) => {
       <div className="w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
         {/* Slider */}
         <div className="max-w-[425px] relative">
-          {loading ? <p>Loading...</p> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
+          {loading ?  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50 ml-[50%]"></div> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
         </div>
 
         {/* Previews list */}
@@ -130,8 +135,6 @@ const Step7 = ({ setProgressStep }) => {
           />
         )}
       </div>
-
-
 
       {/* Button for the modal */}
       {isRendered && (

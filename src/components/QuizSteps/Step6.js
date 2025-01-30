@@ -29,7 +29,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   }, [authorImage]);
 
   useEffect(() => {
-    setIsButtonDisabled(!croppedImage); // 🔥 Вимикаємо кнопку, поки немає обробленого зображення
+    setIsButtonDisabled(!croppedImage); 
     return () => {
       setIsButtonDisabled(false);
     };
@@ -38,13 +38,13 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   const handleFileChange = async (file) => {
     setPreview(URL.createObjectURL(file));
     setAuthorImage(file);
-    setCroppedImage(null); // 🔥 Очищаємо старий `croppedImage`
-    setIsProcessing(true); // 🔥 Вмикаємо лоадер
+    setCroppedImage(null); 
+    setIsProcessing(true); 
   
-    // 🔥 Валідація, але дозволяємо продовжити процес
+
     const validationResult = await validateImage(file);
     if (!validationResult.valid) {
-      setError(validationResult.error); // ❌ Відображаємо помилку, але не зупиняємо процес
+      setError(validationResult.error); 
     } else {
       setError(null);
     }
@@ -66,7 +66,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       const processedUrl = data.data.processed_url;
       setProcessedAuthorImage(processedUrl);
   
-      // 🔥 Завантажуємо оброблене зображення
+    
       const imageResponse = await fetch(processedUrl);
       if (!imageResponse.ok) {
         throw new Error("Error fetching processed image");
@@ -101,7 +101,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
 
         {isProcessing && (
           <div className="flex justify-center items-center mt-4">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500 border-opacity-50"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
             <span className="ml-2 text-gray-600">Processing image...</span>
           </div>
         )}
