@@ -91,10 +91,11 @@
   }
 
   .stepContainer:last-child{
-    flex: 3;
+    /* flex: 3; */
   }
   .progressBar{
-    padding-left: 9%;
+    width: 75%;
+    /* padding-left: 9%; */
   }
 
   .active, .completed{

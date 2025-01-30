@@ -26,15 +26,15 @@ function Step8({ setProgressStep }) {
       <div className="text-[30px] font-bold text-center text-orange">
         Your Book
       </div>
-      <div className="flex items-center  justify-center gap-12 mt-6">
-        {/* 🔥 Виводимо картинку, якщо вона є */}
+      <div className="flex items-center  justify-center gap-4 flex-1 md:gap-12 mt-6">
+       
         {selectedTemplate?.front ? (
 
           <div
             className="relative"
             style={{
               width: "195px",
-              height: "293px",
+              height: "243px",
               "--bookWidth": "195px",
               "--bookHeight": "293px",
               "--spineWidth": "27px",
@@ -51,7 +51,7 @@ function Step8({ setProgressStep }) {
                 transformStyle: ' preserve-3d'
               }}
             >
-              {/* Передня обкладинка */}
+              {/* Front page */}
               <img
                 className=""
                 style={{ 
@@ -63,13 +63,12 @@ function Step8({ setProgressStep }) {
                 alt="Book Cover"
               />
 
-              {/* Сторінки */}
+              {/* Pages */}
               <div
                 className="absolute z-1 bg-white"
                 style={{
                   width: "var(--spineWidth)",
                   height: "100%",
-                  // transform: "rotateY(90deg) translateZ(calc(var(--bookWidth) - 2px))",
                   transformOrigin: "left",
                   transform: "rotateY(60deg)",
                   borderTop: "1px solid rgba(0, 0, 0, 0.08)",
@@ -87,12 +86,11 @@ function Step8({ setProgressStep }) {
                 ></div>
               </div>
 
-              {/* Корінець */}
+              {/* Back */}
               <div
                 className="absolute z-4 mt-1"
                 style={{
                   width: "8px",
-                  // height: "100%",
                   transform: "",
                   transformOrigin: "",
                   right: '-25px',
@@ -114,20 +112,14 @@ function Step8({ setProgressStep }) {
           </div>
 
 
-
-          // <img 
-          //   src={selectedTemplate.front} 
-          //   alt="Book Cover" 
-          //   className="mt-4 w-[300px] h-auto rounded-lg shadow-lg"
-          // />
         ) : (
           <p className="text-gray-500 mt-4">No cover selected</p>
         )}
-        <div className="flex flex-col text-center">
-          <div className="text-[#2B2B2B] text-[24px] font-bold">
+        <div className="flex flex-col text-center text-[18px]  w-2/3 md:w-auto">
+          <div className="text-[#2B2B2B] md:text-[24px] font-bold">
             {selectedTopic}
           </div>
-          <div className="text-[#2B2B2B] text-[22px] font-bold">
+          <div className="text-[#2B2B2B] md:text-[22px] font-bold">
             by <span className='italic'>{authorName}</span>
           </div>
         </div>

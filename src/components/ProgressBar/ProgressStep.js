@@ -6,7 +6,7 @@ const ProgressStep = ({ stepNumber, isActive, isCompleted, isLast, isVisible, la
     <div className={styles.stepContainer}>
      
       <div
-        className={`${styles.step} ${
+        className={` ${styles.step} ${
           isActive ? styles.active : isCompleted ? styles.completed : styles.inactive
         }`}
         style={{ visibility: isVisible ? "visible" : "hidden"}} 
@@ -19,7 +19,7 @@ const ProgressStep = ({ stepNumber, isActive, isCompleted, isLast, isVisible, la
         <div
           className={`${styles.line} ${
             isCompleted ? styles.lineCompleted : styles.lineInactive
-          } ${isBeforeLast ? styles.lineBeforeLast : ""}`} 
+          } ${""}`} 
         />
       )}
 

@@ -5,7 +5,7 @@ import styles from "./ProgressBar.module.css";
 const ProgressBar = ({ currentStep, progressStep, totalSteps, stepsName, isMobile }) => {
   currentStep = isMobile ? currentStep : progressStep ;
   
-  const steps = Array.from({ length: totalSteps + (isMobile ? 1 : 0) }, (_, i) => ({
+  const steps = Array.from({ length: totalSteps + (isMobile ? 2 : 0) }, (_, i) => ({
     number: i + 1,
     label: stepsName[i] || "",
   }));
