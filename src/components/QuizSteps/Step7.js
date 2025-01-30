@@ -30,7 +30,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   const { selectedTopic, selectedSubTopic } = useContext(CreateGenreContext);
 
   const [selectedCover, setSelectedCover] = useState(null);
-  const [loading, setLoading] = useState(true); // Початковий лоадінг
+  const [loading, setLoading] = useState(true); 
   const [isRendered, setIsRendered] = useState(false);
   const [isCropperOpen, setIsCropperOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
@@ -39,7 +39,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
     setProgressStep(5);
   }, [setProgressStep]);
 
-  // ✅ Чекаємо, поки `croppedImage` з'явиться, перед викликом `fetchGeneratedCover`
+
   useEffect(() => {
     if (croppedImage) {
       fetchGeneratedCover(selectedTemplate.templateId || 1);
@@ -88,14 +88,14 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
     }
   };
 
-  // ✅ Конвертуємо `croppedImage` у Base64 для `ImageCropperModal`
+
   useEffect(() => {
     if (croppedImage && croppedImage instanceof File) {
       const reader = new FileReader();
       reader.onload = () => setImageSrc(reader.result);
       reader.readAsDataURL(croppedImage);
     } else {
-      setImageSrc(croppedImage); // Якщо це вже URL
+      setImageSrc(croppedImage); 
     }
   }, []);
 
@@ -104,7 +104,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
     <>
       <div className=" w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
         {/* Slider */}
-        <div className="max-w-[425px] relative h-[650px]">
+        <div className="max-w-[425px] relative h-[550px] md:h-[650px]">
           {loading ? <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50 ml-[50%]"></div> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
         </div>
 
