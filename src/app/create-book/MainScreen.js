@@ -96,7 +96,8 @@ const MainScreen = () => {
       if (e.key === "Enter" && !isButtonDisabled) {
         if (currentStep === 6) {
           handleFileUpload();
-        } else {
+        } else if(currentStep !== 3){
+
           goToNextStep();
         }
       }
