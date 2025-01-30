@@ -6,7 +6,7 @@ const CoverTemplate7 = ({ type, data }) => {
 
   // Перетворення `File` на URL, якщо потрібно
   const authorImageSrc =
-    authorImage instanceof File ? URL.createObjectURL(authorImage) : authorImage;
+    croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
   return (
     <>

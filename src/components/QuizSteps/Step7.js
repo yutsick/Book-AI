@@ -30,124 +30,121 @@ const Step7 = ({ setProgressStep }) => {
   const { selectedTopic, selectedSubTopic } = useContext(CreateGenreContext);
 
   const [selectedCover, setSelectedCover] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isRendered, setIsRendered] = useState(false);
   const [isCropperOpen, setIsCropperOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
 
   useEffect(() => {
     setProgressStep(5);
-    fetchGeneratedCover(1);
-  }, [authorName, 
-    selectedTopic, 
-    selectedSubTopic, 
-    authorImage, 
-    processedAuthorImage, 
-    croppedImage]);
+  }, [setProgressStep]);
+
+  // ✅ Якщо `croppedImage` змінилося — оновлюємо шаблон
+  useEffect(() => {
+    if (croppedImage) {
+      console.log("🔄 Cropped image updated! Reloading cover...");
+      setSelectedTemplate(null); // Очистка попереднього темплейту
+      fetchGeneratedCover(1); // Генеруємо новий шаблон
+    }
+  }, [croppedImage]);
 
   const fetchGeneratedCover = async (templateId) => {
-  if (!authorImage) {
-    console.error("❌ authorImage is missing!");
-    return;
-  }
-  
-  // 🔥 Якщо шаблон вже є, не генеруємо заново
-  // if (selectedTemplate?.templateId === templateId) {
-  //   setSelectedCover(selectedTemplate);
-  //   return;
-  // }
- 
-  setLoading(true);
-  try {
-    const contextData = { 
-      authorName, 
-      selectedTopic, 
-      selectedSubTopic, 
-      authorImage, 
-      processedAuthorImage, 
-      croppedImage 
-    };
+    if (!croppedImage) {
+      console.warn("⚠️ Waiting for `croppedImage`...");
+      return;
+    }
 
-    const cover = await generateCoverById(contextData, templateId);
-    setSelectedCover(cover);
+    setLoading(true);
+    try {
+      const contextData = { 
+        authorName, 
+        selectedTopic, 
+        selectedSubTopic, 
+        authorImage, 
+        processedAuthorImage, 
+        croppedImage 
+      };
 
-    // 🔥 Зберігаємо шаблон в контекст
-    setSelectedTemplate({
-      templateId,
-      front: cover.frontCover, 
-      back: cover.backCover, 
-      spine: cover.spineCover
-    });
+      const cover = await generateCoverById(contextData, templateId);
+      setSelectedCover(cover);
 
-    if (!isRendered) setIsRendered(true);
-  } catch (error) {
-    console.error("❌ Error generating cover:", error);
-  } finally {
-    setLoading(false);
-  }
-};
+      setSelectedTemplate({
+        templateId,
+        front: cover.frontCover, 
+        back: cover.backCover, 
+        spine: cover.spineCover
+      });
 
+      setIsRendered(true);
+    } catch (error) {
+      console.error("❌ Error generating cover:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  // ✅ Конвертуємо `croppedImage` у Base64 для `ImageCropperModal`
   useEffect(() => {
-    if (authorImage && authorImage instanceof File) {
+    if (croppedImage && croppedImage instanceof File) {
       const reader = new FileReader();
       reader.onload = () => setImageSrc(reader.result);
-      reader.readAsDataURL(authorImage);
+      reader.readAsDataURL(croppedImage);
     } else {
-      setImageSrc(authorImage); // Якщо вже URL, не конвертуємо
+      setImageSrc(croppedImage);
     }
-  }, [authorImage]);
+  }, [croppedImage]);
 
-  
   return (
     <>
-    <div className="w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
-      {/* Слайдер */}
-      <div className="max-w-[425px] relative">
-        {loading ? <p>Loading...</p> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
-        
-       
+      <div className="w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
+        {/* Slider */}
+        <div className="max-w-[425px] relative">
+          {loading ? <p>Loading...</p> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
+        </div>
+
+        {/* Previews list */}
+        {isRendered && (
+          <div className="flex md:max-w-[180px] md:grid grid-cols-2 grid-rows-4 md:gap-2 md:h-[640px]">
+            {previewTemplates.map((preview) => (
+              <div className="max-h-[130px]" key={preview.id}>
+                <img
+                  src={preview.src}
+                  alt={preview.alt}
+                  className="w-full h-auto cursor-pointer"
+                  onClick={() => fetchGeneratedCover(preview.id)}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Modal crop window */}
+        {isCropperOpen && imageSrc && (
+          <ImageCropperModal
+            imageSrc={imageSrc}
+            onClose={() => setIsCropperOpen(false)}
+            onSave={(newCroppedImage) => {
+              setCroppedImage(newCroppedImage);
+              setIsCropperOpen(false);
+            }}
+          />
+        )}
       </div>
 
-      {/* Список прев'юшок */}
+
+
+      {/* Button for the modal */}
       {isRendered && (
-        <div className="flex md:max-w-[180px] md:grid grid-cols-2 grid-rows-4 md:gap-2 md:h-[640px]">
-          {previewTemplates.map((preview) => (
-            <div className="max-h-[130px]" key={preview.id}>
-              <img
-                src={preview.src}
-                alt={preview.alt}
-                className="w-full h-auto cursor-pointer"
-                onClick={() => fetchGeneratedCover(preview.id)}
-              />
-            </div>
-          ))}
+        <div className="flex justify-center max-w-[425px] pl-2">
+          <button
+            className="mt-4 text-15px[] bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[150px] flex items-center justify-center border rounded-[3px] border-black"
+            onClick={() => setIsCropperOpen(true)}
+          >
+            Adjust the Image
+          </button>
         </div>
       )}
-
-      {/* 🔥 Модальне вікно для обрізки */}
-      {isCropperOpen && imageSrc && (
-      <ImageCropperModal
-      imageSrc={authorImage} // Оригінальне зображення
-      onClose={() => setIsCropperOpen(false)}
-      onSave={(newCroppedImage) => {
-        setCroppedImage(newCroppedImage); // Зберігаємо обрізане зображення
-        setIsCropperOpen(false);
-      }}
-    />
-    )}
-      
-    </div>
-     {/* 🔥 Кнопка відкриття редактора під слайдером */}
-     {isRendered && (<div className="flex justify-center">
-     <button
-      className="mt-4 text-15px[] bg-[#EAAC0026] text-black shadow-md py-2 px-4 border rounded-[3px] border-black"
-      onClick={() => setIsCropperOpen(true)}
-    >
-      Adjust the Image
-    </button>
-    </div>)}
-   </>
+    </>
   );
 };
 

@@ -4,7 +4,7 @@ import getCroppedImg from "@/utils/cropImage";
 
 const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(1.5);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [imageURL, setImageURL] = useState(null);
@@ -13,14 +13,14 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
     if (!imageSrc) return;
 
     if (imageSrc instanceof File) {
-      // ✅ Використовуємо `URL.createObjectURL(file)` для створення blob URL
+      // Blob url creating
       const blobURL = URL.createObjectURL(imageSrc);
       setImageURL(blobURL);
 
-      // Очистка URL при розмонтуванні компонента
+      // Clear URL after unmounting
       return () => URL.revokeObjectURL(blobURL);
     } else {
-      setImageURL(imageSrc); // Якщо вже URL або base64
+      setImageURL(imageSrc); // If URL or base64 exists
     }
   }, [imageSrc]);
 
@@ -58,9 +58,11 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
         {isImageLoaded ? (
           <div className="relative w-[250px] h-[250px] bg-gray-200">
             <Cropper
-              image={imageURL} // ✅ Використовуємо об'єктний URL
+              image={imageURL}
               crop={crop}
               zoom={zoom}
+              minZoom={0.8}
+              maxZoom={3}
               aspect={1}
               onCropChange={setCrop}
               onZoomChange={setZoom}
@@ -70,13 +72,30 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
         ) : (
           <p className="text-gray-500">Loading image...</p>
         )}
+        <div className="flex items-center gap-2 mt-4">
+          <label htmlFor="zoom-slider" className="text-sm text-gray-500">
+            Zoom:
+          </label>
+          <input
+            id="zoom-slider"
+            type="range"
+            min={0.8}
+            max={3}
+            step={0.01}
+            value={zoom}
+            onChange={(e) => setZoom(Number(e.target.value))}
+            className="w-full h-1 bg-zinc-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-orange accent-orange
+               [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-orange
+               [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:hover:scale-110"
+          />
+        </div>
 
         <div className="mt-4 flex gap-4">
-          <button className="bg-gray-500 text-white py-2 px-4 rounded-md" onClick={onClose}>
+          <button className="bg-black/30 text-gray py-2 px-4 rounded-md" onClick={onClose}>
             Cancel
           </button>
           <button
-            className="bg-blue-500 text-white py-2 px-4 rounded-md"
+            className="bg-orange text-white py-2 px-4 rounded-md"
             onClick={handleCropSave}
             disabled={!isImageLoaded}
           >

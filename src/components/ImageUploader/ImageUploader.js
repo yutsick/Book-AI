@@ -2,15 +2,15 @@ const ImageUploader = ({ onFileChange, preview }) => {
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
-      onFileChange(selectedFile); 
+      onFileChange(selectedFile);
     }
   };
 
   const handleDrop = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];
     if (droppedFile) {
-      onFileChange(droppedFile); 
+      onFileChange(droppedFile);
     }
   };
 
@@ -20,7 +20,7 @@ const ImageUploader = ({ onFileChange, preview }) => {
       onDrop={handleDrop}
       onDragOver={(e) => e.preventDefault()}
     >
-      <div className={` ${preview ? 'h-[220px]' : 'h-auto'} w-full flex justify-center items-center p-2`}>
+      <div className={`${preview ? "h-[220px]" : "h-auto"} w-full flex justify-center items-center p-2`}>
         {preview ? (
           <img src={preview} alt="Preview" className="w-full h-full object-cover" />
         ) : (

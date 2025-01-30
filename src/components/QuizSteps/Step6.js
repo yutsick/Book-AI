@@ -13,10 +13,10 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
     authorName, 
     error, 
     setError 
-  } =
-    useContext(CreateBookContext);
+  } = useContext(CreateBookContext);
 
   const [preview, setPreview] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false); // 🔥 Лоадер
 
   useEffect(() => {
     setProgressStep(4);
@@ -29,45 +29,63 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   }, [authorImage]);
 
   useEffect(() => {
-    setIsButtonDisabled(!authorImage);
+    setIsButtonDisabled(!croppedImage); // 🔥 Вимикаємо кнопку, поки немає обробленого зображення
     return () => {
       setIsButtonDisabled(false);
     };
-  }, [setIsButtonDisabled, authorImage]);
+  }, [setIsButtonDisabled, croppedImage]);
 
   const handleFileChange = async (file) => {
     setPreview(URL.createObjectURL(file));
-    setAuthorImage(file); // 🔥 Зберігаємо оригінальне зображення
-    setCroppedImage(file); // 🔥 Ініціалізуємо croppedImage = authorImage
+    setAuthorImage(file);
+    setCroppedImage(null); // 🔥 Очищаємо старий `croppedImage`
+    setIsProcessing(true); // 🔥 Вмикаємо лоадер
+  
+    // 🔥 Валідація, але дозволяємо продовжити процес
     const validationResult = await validateImage(file);
     if (!validationResult.valid) {
-      setError(validationResult.error);
-      return;
+      setError(validationResult.error); // ❌ Відображаємо помилку, але не зупиняємо процес
+    } else {
+      setError(null);
     }
-
-    setError(null);
-
-    // 🔥 Викликаємо API для видалення фону
+  
     try {
       const formData = new FormData();
       formData.append("image", file);
-
-      const response = await fetch("https://booktailor.com/api/remove-background", {
+  
+      const response = await fetch("https://api.booktailor.com/remove-background", {
         method: "POST",
         body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error("Error removing background");
       }
-
+  
       const data = await response.json();
-      setProcessedAuthorImage(data.data.processed_url); // 🔥 Зберігаємо зображення без фону
-
+      const processedUrl = data.data.processed_url;
+      setProcessedAuthorImage(processedUrl);
+  
+      // 🔥 Завантажуємо оброблене зображення
+      const imageResponse = await fetch(processedUrl);
+      if (!imageResponse.ok) {
+        throw new Error("Error fetching processed image");
+      }
+  
+      const imageBlob = await imageResponse.blob();
+      const imageFile = new File([imageBlob], "processed-image.png", { type: "image/png" });
+  
+      console.log("✅ Processed Image:", imageFile);
+      setCroppedImage(imageFile); // 🔥 Зберігаємо в контекст
+  
     } catch (error) {
       console.error("❌ Error processing image:", error);
+      setError("Failed to process the image.");
+    } finally {
+      setIsProcessing(false); // 🔥 Вимикаємо лоадер
     }
   };
+  
 
   return (
     <div>
@@ -80,6 +98,13 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
         <div className="w-full flex justify-center mt-5">
           <ImageUploader onFileChange={handleFileChange} preview={preview} />
         </div>
+
+        {isProcessing && (
+          <div className="flex justify-center items-center mt-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500 border-opacity-50"></div>
+            <span className="ml-2 text-gray-600">Processing image...</span>
+          </div>
+        )}
 
         {error && (
           <div className="flex items-center gap-2 w-full justify-center mt-2">

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const CoverTemplate2 = ({ type, data }) => {
-  const { authorName, selectedTopic, authorImage, selectedSubTopic, processedAuthorImage } = data;
+  const { authorName, selectedTopic, authorImage, selectedSubTopic,croppedImage, processedAuthorImage } = data;
 
-  // Перетворення `File` на URL, якщо потрібно
-  const authorImageSrc =
-    authorImage instanceof File ? URL.createObjectURL(authorImage) : authorImage;
+// Перетворення `File` на URL, якщо потрібно
+const authorImageSrc =
+processedAuthorImage instanceof File ? URL.createObjectURL(processedAuthorImage) : processedAuthorImage;
 
   // Референси для елементів
   const titleRef = useRef(null);
@@ -51,7 +51,7 @@ const CoverTemplate2 = ({ type, data }) => {
           <div className="w-full relative h-[433px]">
             <img
               // src={authorImageSrc}
-              src={processedAuthorImage}
+              src={authorImageSrc}
               alt={authorName || "Default Author"}
               className="w-full h-full object-cover block"
             />

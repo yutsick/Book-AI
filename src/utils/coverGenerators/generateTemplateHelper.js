@@ -46,7 +46,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         wrapper.style.height = "648px";
         hiddenContainer.appendChild(wrapper);
 
-        console.log(`📦 Rendering ${type} with contextData:`, contextData);
+        // console.log(`📦 Rendering ${type} with contextData:`, contextData);
         const root = createRoot(wrapper);
         root.render(
           createPortal(<CoverComponent type={type} data={contextData} />, wrapper)
