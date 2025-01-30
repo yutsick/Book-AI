@@ -12,7 +12,8 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
     setProcessedAuthorImage, 
     authorName, 
     error, 
-    setError 
+    setError,
+    setSelectedTemplate 
   } = useContext(CreateBookContext);
 
   const [preview, setPreview] = useState(null);
@@ -77,12 +78,13 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   
       console.log("✅ Processed Image:", imageFile);
       setCroppedImage(imageFile); // 🔥 Зберігаємо в контекст
-  
+      
     } catch (error) {
       console.error("❌ Error processing image:", error);
       setError("Failed to process the image.");
     } finally {
-      setIsProcessing(false); // 🔥 Вимикаємо лоадер
+      setIsProcessing(false); 
+      setSelectedTemplate({});// 🔥 Вимикаємо лоадер
     }
   };
   

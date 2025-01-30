@@ -15,7 +15,7 @@ const CoverTemplate1 = ({ type, data }) => {
           style={{ backgroundImage: "url('/images/create-book/bg/bg1-front.png')" }}
         >
           {/* Heading */}
-          <div className=" flex flex-col gap-4 max-w-[360px] mx-auto">
+          <div className=" flex mt-10 flex-col gap-4 max-w-[360px] mx-auto">
           <div>
             <div className="tracking-[2px] text-[32px] leading-[36px] font-bold text-[#F96E47] text-center mt-4 uppercase">
               {selectedTopic || "Default Topic"}

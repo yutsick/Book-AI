@@ -40,11 +40,11 @@ const FloatingInput = ({
   }, [localPlaceholder, localValue]);
 
   const handleChange = (e) => {
-    const newValue = e.target.value.trim();
+    const newValue = e.target.value;
     setLocalValue(newValue);
     onChange(newValue);
     adjustTextareaHeight();
-    setIsButtonDisabled(!newValue); // Деактивація кнопки для пустих значень
+    setIsButtonDisabled(!newValue); 
   };
 
   const handleFocus = () => {
@@ -55,12 +55,11 @@ const FloatingInput = ({
   const handleBlur = () => {
     if (!localValue.trim()) {
       setLocalPlaceholder(placeholder);
-      setLocalValue(""); // Очищення значення, якщо воно порожнє
-      onChange(""); // Очищення значення в батьківському компоненті
+      setLocalValue(""); 
+      onChange(""); 
     }
     setIsFocused(false);
-    adjustTextareaHeight(true);
-    setIsButtonDisabled(!localValue.trim()); // Деактивація кнопки
+    setIsButtonDisabled(!localValue.trim()); 
   };
 
   const adjustTextareaHeight = (reset = false) => {

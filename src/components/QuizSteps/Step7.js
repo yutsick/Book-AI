@@ -17,14 +17,14 @@ const previewTemplates = [
 ];
 
 const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
-  const { 
-    authorName, 
-    authorImage, 
-    processedAuthorImage, 
-    croppedImage, 
-    setCroppedImage, 
-    selectedTemplate, 
-    setSelectedTemplate 
+  const {
+    authorName,
+    authorImage,
+    processedAuthorImage,
+    croppedImage,
+    setCroppedImage,
+    selectedTemplate,
+    setSelectedTemplate
   } = useContext(CreateBookContext);
 
   const { selectedTopic, selectedSubTopic } = useContext(CreateGenreContext);
@@ -42,7 +42,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   // ✅ Чекаємо, поки `croppedImage` з'явиться, перед викликом `fetchGeneratedCover`
   useEffect(() => {
     if (croppedImage) {
-      fetchGeneratedCover(1);
+      fetchGeneratedCover(selectedTemplate.templateId || 1);
     }
   }, [croppedImage]);
 
@@ -61,13 +61,13 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
 
     setLoading(true);
     try {
-      const contextData = { 
-        authorName, 
-        selectedTopic, 
-        selectedSubTopic, 
-        authorImage, 
-        processedAuthorImage, 
-        croppedImage 
+      const contextData = {
+        authorName,
+        selectedTopic,
+        selectedSubTopic,
+        authorImage,
+        processedAuthorImage,
+        croppedImage
       };
 
       const cover = await generateCoverById(contextData, templateId);
@@ -75,8 +75,8 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
 
       setSelectedTemplate({
         templateId,
-        front: cover.frontCover, 
-        back: cover.backCover, 
+        front: cover.frontCover,
+        back: cover.backCover,
         spine: cover.spineCover
       });
 
@@ -97,21 +97,23 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
     } else {
       setImageSrc(croppedImage); // Якщо це вже URL
     }
-  }, [croppedImage]);
+  }, []);
+
 
   return (
     <>
-      <div className="w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
+      <div className=" w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
         {/* Slider */}
-        <div className="max-w-[425px] relative">
-          {loading ?  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50 ml-[50%]"></div> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
+        <div className="max-w-[425px] relative h-[650px]">
+          {loading ? <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50 ml-[50%]"></div> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
         </div>
 
         {/* Previews list */}
         {isRendered && (
-          <div className="flex md:max-w-[180px] md:grid grid-cols-2 grid-rows-4 md:gap-2 md:h-[640px]">
+          <div className="flex md:grid grid-cols-2 grid-rows-4 gap-2 w-full md:w-auto 
+           h-[130px] md:h-auto overflow-x-auto md:overflow-visible whitespace-nowrap">
             {previewTemplates.map((preview) => (
-              <div className="max-h-[130px]" key={preview.id}>
+              <div className="w-[90px]   flex-shrink-0  h-[130px]" key={preview.id}>
                 <img
                   src={preview.src}
                   alt={preview.alt}
@@ -121,12 +123,14 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
               </div>
             ))}
           </div>
+
         )}
 
         {/* Modal crop window */}
         {isCropperOpen && imageSrc && (
           <ImageCropperModal
             imageSrc={imageSrc}
+            // imageSrc={processedAuthorImage}
             onClose={() => setIsCropperOpen(false)}
             onSave={(newCroppedImage) => {
               setCroppedImage(newCroppedImage);
@@ -138,9 +142,9 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
 
       {/* Button for the modal */}
       {isRendered && (
-        <div className="flex justify-center max-w-[425px] pl-2">
+        <div className="flex justify-center md:max-w-[425px] md:pl-2">
           <button
-            className="mt-4 text-15px[] bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[150px] flex items-center justify-center border rounded-[3px] border-black"
+            className="mt-8 md:mt-4 text-15px[] bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[150px] flex items-center justify-center border rounded-[3px] border-black"
             onClick={() => setIsCropperOpen(true)}
           >
             Adjust the Image
