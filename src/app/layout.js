@@ -1,4 +1,4 @@
-import { Inter, Poppins, Roboto, Anton, Caveat, Pacifico, Montserrat} from "next/font/google";
+import { Inter, Poppins, Roboto, Anton, Caveat, Pacifico, Montserrat, Reenie_Beanie} from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 
@@ -50,6 +50,13 @@ const montserratFont = Montserrat({
   weight: ["400", "500", "600", "700"],
 });
 
+const reenieBeanieFont = Reenie_Beanie({
+  subsets: ["latin"],
+  variable: "--font-reenie",
+  display: "swap",
+  weight: ["400"],
+});
+
 export const metadata = {
   title: "Book Tailor",
   description: "An AI-powered platform designed to help users effortlessly create personalized, full-length books.",
@@ -68,6 +75,7 @@ export default function RootLayout({ children }) {
         ${caveatFont.variable}
         ${pacificoFont.variable}
         ${montserratFont.variable}
+        ${reenieBeanieFont.variable}
       `}
     >
       <Head>

@@ -26,15 +26,15 @@ const CoverTemplate5 = ({ type, data }) => {
 
 
 
-            <div className="text-left text-[20px] h-full flex flex-col justify-between">
+            <div className="text-left h-full flex flex-col justify-between">
             
               <div className="">
 
-                <div className="font-black font-degular">{authorName || "Default Author"}</div>
+                <div className="font-black text-[30px] font-degular">{authorName || "Default Author"}</div>
               </div>
               <div className="">
                 {/* Title */}
-                <div className="text-[40px] leading-[40px] font-georgia  italic">
+                <div className="text-[40px] leading-[40px]  font-georgia  italic">
                   {selectedTopic || "Default Topic"}
                 </div>
 
@@ -68,11 +68,11 @@ const CoverTemplate5 = ({ type, data }) => {
 
           <div className="flex text-white items-center h-[57px] w-[648px]  pl-2 bg-[#747778] justify-center absolute rotate-90 origin-top-left left-[calc(50%+28px)] gap-16">
 
-            <div className="flex  flex-col justify-center items-center text-[18px] italic ">
+            <div className="flex font-georgia flex-col justify-center items-center text-[19px] italic ">
               <div>{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="flex font-black flex-col justify-center items-center text-[18px]  font-inter h-full  ">
+            <div className="flex font-black flex-col justify-center items-center text-[18px]  font-degular h-full  ">
               <div>{authorName || "Default Author"}</div>
             </div>
           </div>

@@ -13,14 +13,11 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
     if (!imageSrc) return;
 
     if (imageSrc instanceof File) {
-      // Blob url creating
       const blobURL = URL.createObjectURL(imageSrc);
       setImageURL(blobURL);
-
-      // Clear URL after unmounting
       return () => URL.revokeObjectURL(blobURL);
     } else {
-      setImageURL(imageSrc); // If URL or base64 exists
+      setImageURL(imageSrc);
     }
   }, [imageSrc]);
 
@@ -61,17 +58,20 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
               image={imageURL}
               crop={crop}
               zoom={zoom}
-              minZoom={0.8}
+              minZoom={1} // Виправлено: мінімальний zoom 1
               maxZoom={3}
               aspect={1}
               onCropChange={setCrop}
-              onZoomChange={setZoom}
+              onZoomChange={(z) => setZoom(Math.max(1, z))} // Виправлено: уникаємо зменшення нижче 1
               onCropComplete={onCropComplete}
+              objectFit="cover"
+              restrictPosition={false}
             />
           </div>
         ) : (
           <p className="text-gray-500">Loading image...</p>
         )}
+
         <div className="flex items-center gap-2 mt-4">
           <label htmlFor="zoom-slider" className="text-sm text-gray-500">
             Zoom:
@@ -79,14 +79,12 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
           <input
             id="zoom-slider"
             type="range"
-            min={0.8}
+            min={1} // Мінімальне значення 1
             max={3}
             step={0.01}
             value={zoom}
-            onChange={(e) => setZoom(Number(e.target.value))}
-            className="w-full h-1 bg-zinc-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-orange accent-orange
-               [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-orange
-               [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:hover:scale-110"
+            onChange={(e) => setZoom(Math.max(1, Number(e.target.value)))}
+            className="w-full h-1 bg-zinc-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-orange accent-orange"
           />
         </div>
 

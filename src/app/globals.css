@@ -10,20 +10,32 @@
 
 @font-face {
   font-family: 'Degular';
-  src: url('/fonts/Degular-Regular.otf') format('otf');
-  font-weight: normal;
+  src: url('/fonts/DegularText-Regular.otf') format('opentype');
+  font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: 'Degular';
-  src: url('/fonts/Degular-Semibold.otf') format('otf');
+  src: url('/fonts/DegularText-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Degular';
+  src: url('/fonts/DegularText-Semibold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
 }
 @font-face {
   font-family: 'Degular';
-  src: url('/fonts/Degular-Bold.otf') format('otf');
+  src: url('/fonts/DegularText-Bold.otf') format('opentype');
   font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Degular';
+  src: url('/fonts/DegularText-Black.otf') format('opentype');
+  font-weight: 800;
   font-style: normal;
 }
 @font-face {

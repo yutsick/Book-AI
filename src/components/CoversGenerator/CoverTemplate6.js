@@ -27,7 +27,7 @@ const CoverTemplate6 = ({ type, data }) => {
 
             {/* Subheading */}
             <div>
-              <div className="text-[18px] text-[#FA423B]  text-center ">
+              <div className="text-[18px] text-[#FA423B] font-semibold text-center ">
                 {selectedSubTopic || "Default Sub Topic"}
               </div>
             </div>
@@ -68,15 +68,15 @@ const CoverTemplate6 = ({ type, data }) => {
           <div
             className="p-2 bg-[#000082] text-white  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-10  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
             <img src="/images/create-book/bg/wave-red-spine.png" alt="" className="h-[57px] "/>
-            <div className=" flex items-center justify-between text-[18px] font-medoum font-montserrat flex-1">
+            <div className=" flex items-center justify-between text-[18px] font-semibold font-montserrat flex-1">
 
-              <div className=" font-montserrat ">
+              <div className=" font-montserrat text-[18px] leading-[20px]">
                 {selectedTopic || "Default Topic"}
               </div>
 
 
 
-              <div className="font-montserrat   ">
+              <div className="font-montserrat text-[17px] leading-[17px] ">
                 {authorName || "Default Author"}
               </div>
             </div>

@@ -79,13 +79,16 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         quality: 1, // Найвища якість
         bgcolor: "transparent", // Прозорий фон
         useCORS: true,
-        width: clone.offsetWidth * 2, // Збільшення роздільної здатності
-        height: clone.offsetHeight * 2,
+        width: clone.offsetWidth * 4, // Збільшення роздільної здатності
+        height: clone.offsetHeight * 4,
         style: {
-          transform: "scale(2)", // Масштабування для якості
+          transform: "scale(4)", // Масштабування для якості
           transformOrigin: "top left",
-          width: `${clone.offsetWidth * 2}px`, // Встановлення правильних розмірів
-          height: `${clone.offsetHeight * 2}px`,
+          width: `${clone.offsetWidth * 4}px`, // Встановлення правильних розмірів
+          height: `${clone.offsetHeight * 4}px`,
+          textRendering: "geometricPrecision",
+          // WebkitFontSmoothing: "antialiased",
+          // MozOsxFontSmoothing: "grayscale",
         },
       })
         .then((dataUrl) => {

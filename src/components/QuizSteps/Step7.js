@@ -104,13 +104,13 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
     <>
       <div className=" w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
         {/* Slider */}
-        <div className="max-w-[425px] relative h-[550px] md:h-[650px]">
-          {loading ? <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50 ml-[50%]"></div> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
+        <div className="max-w-[425px] w-full flex justify-center items-center relative h-[420px] md:h-[650px]">
+          {loading ? <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
         </div>
 
         {/* Previews list */}
         {isRendered && (
-          <div className="flex md:grid grid-cols-2 grid-rows-4 gap-2 w-full md:w-auto 
+          <div className="mt-4 md:mt-0 flex md:grid grid-cols-2 grid-rows-4 gap-2 w-full md:w-auto 
            h-[130px] md:h-auto overflow-x-auto md:overflow-visible whitespace-nowrap">
             {previewTemplates.map((preview) => (
               <div className="w-[90px]   flex-shrink-0  h-[130px]" key={preview.id}>
@@ -130,7 +130,6 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
         {isCropperOpen && imageSrc && (
           <ImageCropperModal
             imageSrc={imageSrc}
-            // imageSrc={processedAuthorImage}
             onClose={() => setIsCropperOpen(false)}
             onSave={(newCroppedImage) => {
               setCroppedImage(newCroppedImage);

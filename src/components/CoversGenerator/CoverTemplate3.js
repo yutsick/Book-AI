@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const CoverTemplate3 = ({ type, data }) => {
   const { authorName, selectedTopic, selectedSubTopic, croppedImage } = data;
-  // Перетворення `File` на URL, якщо потрібно
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
+
+    const spineTitleRef = useRef(null);
+
+    const [spineTitleFontSize, setSpineTitleFontSize] = useState(36);
+
+    useEffect(() => {
+    
+        const calculateFontSize = (elementRef, maxFontSize, maxHeight) => {
+          const element = elementRef.current;
+          if (!element) return maxFontSize;
+    
+        
+          let fontSize = maxFontSize;
+          element.style.fontSize = `${fontSize}px`;
+    
+         
+          while (element.scrollHeight > maxHeight && fontSize > 28) {
+            fontSize -= 1;
+            element.style.fontSize = `${fontSize}px`;
+          }
+    
+          return fontSize;
+        };
+    
+       
+    //  ref, minFontSize, maxHeight 
+        const newSpineTitleFontSize = calculateFontSize(spineTitleRef, 40, 48); 
+    
+ 
+        setSpineTitleFontSize(newSpineTitleFontSize);
+      }, [selectedTopic, selectedSubTopic]);
+
+    
 
   return (
     <>
@@ -36,7 +68,7 @@ const CoverTemplate3 = ({ type, data }) => {
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="  w-full h-full object-cover block  "
+              className="  w-full h-full object-cover block  relative"
             />
             </div>
              
@@ -47,7 +79,7 @@ const CoverTemplate3 = ({ type, data }) => {
                 <img src="images/create-book/bg/pag2.png" alt="" />
               </div>
             
-            <div className="pb-2 text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] ">
+            <div className="font-reenie pb-2 text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px]">
               {authorName || "Default Author"}
             </div>
           </div>
@@ -72,13 +104,20 @@ const CoverTemplate3 = ({ type, data }) => {
           >
             <div className=" flex items-center justify-center gap-16 text-[18px] absolute font-bold font-caveat flex-1 text-[#000082]">
 
-              <div className="text-[44px] leading-[22px] pb-2">
+              <div 
+              className="font-medium flex-1 pb-2 pl-2"
+              ref={spineTitleRef}
+              style={{
+                fontSize: `${spineTitleFontSize}px`,
+                lineHeight: `${spineTitleFontSize}px`,
+              }}
+              >
                 {selectedTopic || "Default Topic"}
               </div>
 
 
 
-              <div className="text-[28px]  pb-2">
+              <div className=" text-[28px] w-[215px] font-medium te leading-[28px] pb-2 font-reenie">
                 {authorName || "Default Author"}
               </div>
             </div>

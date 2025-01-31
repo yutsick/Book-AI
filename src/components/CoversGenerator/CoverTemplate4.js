@@ -3,7 +3,6 @@ import React from "react";
 const CoverTemplate4 = ({ type, data }) => {
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
 
-  // Перетворення `File` на URL, якщо потрібно
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
@@ -22,7 +21,7 @@ const CoverTemplate4 = ({ type, data }) => {
 
           </div>
 
-          <div className="flex flex-col justify-center items-center gap-4 bg-[#F0EADE] px-8 text-center flex-1 font-pacifico">
+          <div className="flex flex-col pt-6 pb-8  items-center gap-4 bg-[#F0EADE] px-8 text-center flex-1 font-pacifico">
             {/* Title */}
             <div className="text-[40px] leading-[40px]  text-[#0D453A]">
               {selectedTopic || "Default Topic"}
@@ -30,13 +29,13 @@ const CoverTemplate4 = ({ type, data }) => {
 
             {/* Subheading */}
             <div>
-              <div className="text-[20px] font-medium font-roboto text-[#F96E47]">
+              <div className="text-[20px] font-medium font-degular text-[#F96E47]">
                 {selectedSubTopic || "Default Sub Topic"}
               </div>
             </div>
 
 
-            <div className=" text-[#0D453A] text-center text-[20px] font-black font-inter">
+            <div className=" text-[#0D453A] flex flex-col gap-3 items-center justify-center text-[20px] font-black font-degular">
               <img src="images/create-book/bg/wave-black.png" alt="" />
               <div className="">{authorName || "Default Author"}</div>
 
@@ -60,13 +59,13 @@ const CoverTemplate4 = ({ type, data }) => {
 
         <div className="h-[648px] flex justify-center relative">
 
-          <div className="flex text-[#0D453A] items-center h-[57px] w-[648px] gap-10 pl-2 bg-[#FFA3BC] justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
+          <div className="flex text-[#0D453A] items-center h-[57px] w-[648px] gap-10 pl-2 bg-[#FFA3BC] justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] text-[23px]">
 
-            <div className="flex flex-1 flex-col justify-center items-center text-[18px] font-pacifico pb-4">
+            <div className="flex flex-1 flex-col justify-center items-center  font-pacifico pb-2">
               <div>{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="flex font-black flex-col justify-center items-center text-[18px]  font-inter h-full w-[243px] bg-[#F0EADE] p-2 pb-4">
+            <div className="flex font-black flex-col justify-center items-center ]  font-degular h-full w-[243px] bg-[#F0EADE] p-2 pb-3">
               <div>{authorName || "Default Author"}</div>
             </div>
           </div>

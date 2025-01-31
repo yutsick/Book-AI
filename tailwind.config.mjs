@@ -32,6 +32,7 @@ export default {
         pacifico: ['var(--font-pacifico)', 'sans-serif'], 
         montserrat: ['var(--font-montserrat)', 'sans-serif'], 
         anton: ['var(--font-anton)', 'sans-serif'], 
+        reenie: ['var(--font-reenie)', 'cursive'],
         degular: ['Degular', 'sans-serif'],
         georgia: ['Georgia', 'sans-serif'],
         
