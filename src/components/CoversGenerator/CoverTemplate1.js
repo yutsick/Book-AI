@@ -38,7 +38,7 @@ const CoverTemplate1 = ({ type, data }) => {
               alt={authorName || "Default Author"}
               className=" max-h-[340px] object-contain block"
             />
-            <div className="pb-5 text-[28px]  bg-white h-[80px] w-full flex items-center justify-center  text-[#14465F] font-anton">
+            <div className=" text-[28px]  bg-white h-[80px] w-full flex items-center justify-center  text-[#14465F] font-anton">
               {authorName || "Default Author"}
             </div>
           </div>
