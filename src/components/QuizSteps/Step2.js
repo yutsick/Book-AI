@@ -27,13 +27,6 @@ const StepTwo = ({ setProgressStep}) => {
     setProgressStep(2);
   }, [setProgressStep]);
 
-  // useEffect(() => {
-  //   setIsButtonDisabled(!selectedGenre);
-  //   return () => {
-  //     setIsButtonDisabled(false);
-  //   };
-  // }, [setIsButtonDisabled, selectedGenre]);
-
   return (
     genresData && (
       <div className="">
@@ -45,7 +38,7 @@ const StepTwo = ({ setProgressStep}) => {
             </div>
             <div className="mb-8 mt-[25px]">
               <RadioButtonList
-                // setIsButtonDisabled={setIsButtonDisabled}
+                
                 options={genresData}
                 selectedValue={selectedGenre} 
               />

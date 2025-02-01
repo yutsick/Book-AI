@@ -125,7 +125,6 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
     removeQuestion(questionToRemove); 
   };
   
-
   const optionsWithDisabled = questions.map((question) => ({
     ...question,
     isDisabled: questionsAndAnswers.some((qa) => qa.question === question.label),

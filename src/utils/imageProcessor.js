@@ -13,7 +13,7 @@ export const processAuthorImage = async (imageFile) => {
     }
 
     const data = await response.json();
-    return data.data.processed_url; // URL обробленого зображення
+    return data.data.processed_url; 
   } catch (error) {
     console.error("Error processing author image:", error);
     throw error;

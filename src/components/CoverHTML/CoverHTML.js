@@ -12,7 +12,7 @@ const CoverHTML = ({ topic, subtitle, authorName, authorImage }) => {
         fontFamily: "'Comic Sans MS', sans-serif",
       }}
     >
-      {/* Лінії блокнота */}
+    
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}>
         {[...Array(15)].map((_, i) => (
           <div
@@ -28,7 +28,7 @@ const CoverHTML = ({ topic, subtitle, authorName, authorImage }) => {
         ))}
       </div>
 
-      {/* Тема книги */}
+    
       <h1
         style={{
           textAlign: "center",
@@ -40,7 +40,7 @@ const CoverHTML = ({ topic, subtitle, authorName, authorImage }) => {
         {topic || "Default Title"}
       </h1>
 
-      {/* Підзаголовок */}
+    
       <p
         style={{
           textAlign: "center",
@@ -53,7 +53,7 @@ const CoverHTML = ({ topic, subtitle, authorName, authorImage }) => {
         {subtitle || "Default Subtitle"}
       </p>
 
-      {/* Зображення автора */}
+    
       <div
         style={{
           position: "absolute",

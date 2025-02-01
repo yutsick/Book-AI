@@ -32,13 +32,6 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
     { value: "5", label: '45-54' },
     { value: "6", label: '55-64' },
     { value: "7", label: '65 and above' }];
-  // const ageOptions = ageRange.map((el, i) => {
-  //   const value = i + 1;
-  //   if (i === ageRange.length - 1) {
-  //     return { value, label: `${el} +` };
-  //   }
-  //   return { value, label: `${el} - ${ageRange[i + 1]}` };
-  // });
 
   useEffect(() => {
     setProgressStep(1);
@@ -66,7 +59,6 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
             setIsButtonDisabled={setIsButtonDisabled}
             textError={textError}
             setTextError={setTextError}
-          // onBlurValidation={validateInput}
           />
         </div>
 
@@ -81,8 +73,8 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
             title="How does the author identify?"
             className="w-full border border-gray-300 rounded-lg p-2"
             options={genderOptions}
-            value={selectedGender} // Використовуємо контекст для збереження статі
-            onChange={setSelectedGender} // Оновлюємо контекст
+            value={selectedGender} 
+            onChange={setSelectedGender} 
             placeholder="Select an option"
             afterFocusPlaceholder="Author's gender"
           />
@@ -101,8 +93,8 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
             title="What is the author's age?"
             className="w-full border border-gray-300 rounded-lg p-2"
             options={ageOptions}
-            value={selectedAge} // Використовуємо контекст для збереження віку
-            onChange={setSelectedAge} // Оновлюємо контекст
+            value={selectedAge} 
+            onChange={setSelectedAge} 
             placeholder="Select an option"
             afterFocusPlaceholder="Author's age"
           />

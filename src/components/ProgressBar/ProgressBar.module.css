@@ -35,10 +35,6 @@
   
 }
 
-
-
-
-
 .inactive {
   background-color: #FFFAE7;
   color: var(--custom-orange);
@@ -90,12 +86,8 @@
     right: -150%;
   }
 
-  .stepContainer:last-child{
-    /* flex: 3; */
-  }
   .progressBar{
     width: 75%;
-    /* padding-left: 9%; */
   }
 
   .active, .completed{

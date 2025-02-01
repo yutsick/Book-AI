@@ -4,7 +4,7 @@ const getCroppedImg = async (imageSrc, pixelCrop) => {
     const ctx = canvas.getContext("2d");
 
     const image = new Image();
-    image.src = imageSrc; // Використовуємо `imageSrc` напряму
+    image.src = imageSrc; 
     image.onload = () => {
       canvas.width = pixelCrop.width;
       canvas.height = pixelCrop.height;
@@ -22,7 +22,7 @@ const getCroppedImg = async (imageSrc, pixelCrop) => {
       );
 
       canvas.toBlob((blob) => {
-        resolve(URL.createObjectURL(blob)); // Повертаємо обрізане зображення
+        resolve(URL.createObjectURL(blob)); 
       }, "image/png");
     };
   });

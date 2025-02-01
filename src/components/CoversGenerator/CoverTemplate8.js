@@ -10,21 +10,20 @@ const CoverTemplate8 = ({ type, data }) => {
   const titleRef = useRef(null);
   const subTitleRef = useRef(null);
 
-  // Стани для шрифтів
   const [titleFontSize, setTitleFontSize] = useState(27);
   const [subTitleFontSize, setSubTitleFontSize] = useState(20);
 
   useEffect(() => {
-    // Розрахунок шрифту для заголовка
+
     const calculateFontSize = (elementRef, maxFontSize, maxHeight) => {
       const element = elementRef.current;
       if (!element) return maxFontSize;
 
-      // Початковий розмір
+ 
       let fontSize = maxFontSize;
       element.style.fontSize = `${fontSize}px`;
 
-      // Зменшувати розмір шрифту, поки текст не вміститься
+
       while (element.scrollHeight > maxHeight && fontSize > 10) {
         fontSize -= 1;
         element.style.fontSize = `${fontSize}px`;
@@ -33,9 +32,9 @@ const CoverTemplate8 = ({ type, data }) => {
       return fontSize;
     };
 
-    // Встановлення розміру для заголовка та підзаголовка
+
     const newTitleFontSize = calculateFontSize(titleRef, 27, 80);
-    const newSubTitleFontSize = calculateFontSize(subTitleRef, 20, 60);
+    const newSubTitleFontSize = calculateFontSize(subTitleRef, 20, 65);
 
     setTitleFontSize(newTitleFontSize);
     setSubTitleFontSize(newSubTitleFontSize);

@@ -5,18 +5,10 @@ const ProgressTracker = ({ activeSteps }) => {
   const stepColors = ["bg-[#D9C031]", "bg-[#C19828]", "bg-[#6ABB63]", "bg-[#35860A]"]; 
   const stepLabels = [" "," ","Good", "Excellent"]; 
 
-  
   const progressWidth = `${(activeSteps / totalSteps) * 100}%`;
-
 
   const fillColor =
     stepColors[Math.min(activeSteps - 1, stepColors.length - 1)] || "bg-[#E2E2E2]";
-
- 
-  // const label =
-  //   activeSteps >= 3
-  //     ? stepLabels[Math.min(activeSteps - 3, stepLabels.length - 1)]
-  //     : null;
   
   const label = stepLabels[activeSteps - 1 ] || " ";
   return (

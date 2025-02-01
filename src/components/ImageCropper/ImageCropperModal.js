@@ -58,11 +58,11 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
               image={imageURL}
               crop={crop}
               zoom={zoom}
-              minZoom={1} // Виправлено: мінімальний zoom 1
+              minZoom={1} 
               maxZoom={3}
               aspect={1}
               onCropChange={setCrop}
-              onZoomChange={(z) => setZoom(Math.max(1, z))} // Виправлено: уникаємо зменшення нижче 1
+              onZoomChange={(z) => setZoom(Math.max(1, z))} 
               onCropComplete={onCropComplete}
               objectFit="cover"
               restrictPosition={false}
@@ -79,7 +79,7 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
           <input
             id="zoom-slider"
             type="range"
-            min={1} // Мінімальне значення 1
+            min={1} 
             max={3}
             step={0.01}
             value={zoom}

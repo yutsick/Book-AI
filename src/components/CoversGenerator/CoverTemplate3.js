@@ -79,7 +79,7 @@ const CoverTemplate3 = ({ type, data }) => {
                 <img src="images/create-book/bg/pag2.png" alt="" />
               </div>
             
-            <div className="font-reenie pb-2 text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px]">
+            <div className="font-reenie  text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px]">
               {authorName || "Default Author"}
             </div>
           </div>

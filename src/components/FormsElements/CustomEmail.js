@@ -6,18 +6,18 @@ const CustomEmail = ({
   title = null,
   description = null,
   onChange,
-  onValidityChange, // Пропс для передачі валідності
+  onValidityChange, 
   value,
 }) => {
   const [focus, setFocus] = useState(false);
   const [localPlaceholder, setLocalPlaceholder] = useState(placeholder);
-  const [isValid, setIsValid] = useState(false); // Стан валідності email
+  const [isValid, setIsValid] = useState(false); 
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Регулярний вираз для перевірки email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
 
   useEffect(() => {
     if (onValidityChange) {
-      onValidityChange(isValid); // Передаємо стан валідності до батьківського компонента
+      onValidityChange(isValid); 
     }
   }, [isValid, onValidityChange]);
 
@@ -28,7 +28,7 @@ const CustomEmail = ({
       onChange(newValue);
     }
 
-    // Оновлення валідності email
+
     setIsValid(emailRegex.test(newValue));
   };
 

@@ -27,7 +27,7 @@ function Step5({setProgressStep, setIsButtonDisabled}) {
     ]
     const handleTopicChange = (value, description) => {
       setSelectedTopic(value);
-      setSelectedSubTopic(description); // Оновлюємо опис при виборі теми
+      setSelectedSubTopic(description); 
     };
 
   return (

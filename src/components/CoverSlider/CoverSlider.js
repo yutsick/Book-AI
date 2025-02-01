@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const CoverSlider = ({ selectedCover }) => {
-  if (!selectedCover) return <p>No cover available</p>; // 🔥 Додаємо перевірку
+  if (!selectedCover) return <p>No cover available</p>; 
 
   return (
     <>

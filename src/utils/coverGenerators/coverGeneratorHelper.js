@@ -8,7 +8,6 @@ import CoverTemplate6 from "@/components/CoversGenerator/CoverTemplate6";
 import CoverTemplate7 from "@/components/CoversGenerator/CoverTemplate7";
 import CoverTemplate8 from "@/components/CoversGenerator/CoverTemplate8";
 
-// Масив темплейтів
 const templates = {
   1: CoverTemplate1,
   2: CoverTemplate2,
@@ -20,12 +19,6 @@ const templates = {
   8: CoverTemplate8,
 };
 
-/**
- * Генерує обкладинку для конкретного шаблону за його ID.
- * @param {Object} contextData - Дані для обкладинки
- * @param {number} templateId - ID шаблону (1-8)
- * @returns {Promise<Object>} - Об'єкт з front, spine та back обкладинками
- */
 export const generateCoverById = async (contextData, templateId = 1) => {
   const CoverComponent = templates[templateId];
 

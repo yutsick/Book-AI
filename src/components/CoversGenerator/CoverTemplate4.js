@@ -29,7 +29,7 @@ const CoverTemplate4 = ({ type, data }) => {
 
             {/* Subheading */}
             <div>
-              <div className="text-[20px] font-medium font-degular text-[#F96E47]">
+              <div className="text-[20px] leading-[24px] font-medium font-degular text-[#F96E47]">
                 {selectedSubTopic || "Default Sub Topic"}
               </div>
             </div>
