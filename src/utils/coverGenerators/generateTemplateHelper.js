@@ -59,7 +59,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
           await waitForImages(wrapper);
 
           resolve(wrapper);
-        }, 1500);
+        }, 500);
       });
     };
 
@@ -77,7 +77,6 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         quality: 1, 
         bgcolor: "transparent", 
         useCORS: true,
-        imagePlaceholder: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
         width: clone.offsetWidth * 4, 
         height: clone.offsetHeight * 4,
         style: {
