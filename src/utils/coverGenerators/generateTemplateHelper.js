@@ -120,7 +120,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       } catch (error) {
         reject(error);
       } finally {
-        document.body.removeChild(hiddenContainer);
+        // document.body.removeChild(hiddenContainer);
       }
     })();
   });
