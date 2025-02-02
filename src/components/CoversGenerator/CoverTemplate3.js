@@ -62,13 +62,13 @@ const CoverTemplate3 = ({ type, data }) => {
           </div>
           {/* Image with Text */}
           <div className="flex flex-col w-full flex-1 relative mt-10">
-           <div className="absolute left-[65px] w-[300px] h-[360px] mx-auto shadow rotate-[-2deg] border-[3px] border-white bg-black">
+           <div className=" w-[300px] h-[360px] mx-auto shadow rotate-[-2deg] border-[3px] border-white bg-black">
 
            
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="  w-full h-full object-cover block  relative"
+              className="  w-[300px] h-[360px] object-cover block  relative"
             />
             </div>
              
@@ -79,7 +79,7 @@ const CoverTemplate3 = ({ type, data }) => {
                 <img src="images/create-book/bg/pag2.png" alt="" />
               </div>
             
-            <div className="relative top-[360px] font-reenie  text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px]">
+            <div className="font-reenie  text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px]">
               {authorName || "Default Author"}
             </div>
           </div>
