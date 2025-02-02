@@ -77,7 +77,6 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         quality: 1, 
         bgcolor: "transparent", 
         useCORS: true,
-        cacheBust: true,
         width: clone.offsetWidth * 4, 
         height: clone.offsetHeight * 4,
         style: {
