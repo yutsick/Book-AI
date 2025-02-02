@@ -1,5 +1,5 @@
 // import html2canvas from "html2canvas";
-import domtoimage from "dom-to-image-more";
+import domtoimage from "dom-to-image";
 import { createRoot } from "react-dom/client";
 import { createPortal } from "react-dom";
 
