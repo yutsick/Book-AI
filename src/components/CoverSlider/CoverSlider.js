@@ -13,7 +13,7 @@ const CoverSlider = ({ selectedCover }) => {
     
     <div className="">
       <button
-        className="swiper-button-prev-arrow absolute left-8 md:left-[-40px] top-1/2 transform md:-translate-y-1/2  z-10 "
+        className="swiper-button-prev-arrow absolute left-4 md:left-[-40px] top-1/2 transform md:-translate-y-1/2  z-10 "
         aria-label="Previous Slide"
       >
         <svg width="34" height="28" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +21,7 @@ const CoverSlider = ({ selectedCover }) => {
         </svg>
       </button>
       <button
-        className="swiper-button-next-arrow absolute right-8 md:right-[-40px] top-1/2 transform md:-translate-y-1/2 z-10 "
+        className="swiper-button-next-arrow absolute right-4 md:right-[-40px] top-1/2 transform md:-translate-y-1/2 z-10 "
         aria-label="Next Slide"
       >
         <svg width="33" height="28" viewBox="0 0 33 28" fill="none" xmlns="http://www.w3.org/2000/svg">
