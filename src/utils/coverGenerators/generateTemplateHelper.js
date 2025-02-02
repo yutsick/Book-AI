@@ -77,6 +77,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         quality: 1, 
         bgcolor: "transparent", 
         useCORS: true,
+        cacheBust: true,
         width: clone.offsetWidth * 4, 
         height: clone.offsetHeight * 4,
         style: {
@@ -94,7 +95,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
           return dataUrl;
         })
         .catch((error) => {
-          console.error("❌ Помилка рендеру:", error);
+          console.error("❌ Rendering error:", error);
           document.body.removeChild(clone);
           return null;
         });
