@@ -16,20 +16,16 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
     const waitForImages = async (element) => {
       const images = element.querySelectorAll("img");
 
-
       const promises = Array.from(images).map(
         (img) =>
           new Promise((resolve, reject) => {
             if (img.complete) {
-
               resolve();
             } else {
               img.onload = () => {
-
                 resolve();
               };
               img.onerror = (err) => {
-
                 reject(err);
               };
             }
@@ -46,7 +42,6 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         wrapper.style.height = "648px";
         hiddenContainer.appendChild(wrapper);
 
-        // console.log(`📦 Rendering ${type} with contextData:`, contextData);
         const root = createRoot(wrapper);
         root.render(
           createPortal(<CoverComponent type={type} data={contextData} />, wrapper)
