@@ -1,5 +1,5 @@
 // import html2canvas from "html2canvas";
-import domtoimage from "dom-to-image";
+import domtoimage from "dom-to-image-more";
 import { createRoot } from "react-dom/client";
 import { createPortal } from "react-dom";
 
@@ -65,8 +65,6 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
     const generateImage = async (element, type) => {
 
-
-      // Створюємо клон, щоб html2canvas бачив реальний DOM
       const clone = element.cloneNode(true);
       clone.style.position = "absolute";
       clone.style.left = "0px";
@@ -76,15 +74,15 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
 
       return await domtoimage.toPng(clone, {
-        quality: 1, // Найвища якість
-        bgcolor: "transparent", // Прозорий фон
+        quality: 1, 
+        bgcolor: "transparent", 
         useCORS: true,
-        width: clone.offsetWidth * 4, // Збільшення роздільної здатності
+        width: clone.offsetWidth * 4, 
         height: clone.offsetHeight * 4,
         style: {
-          transform: "scale(4)", // Масштабування для якості
+          transform: "scale(4)", 
           transformOrigin: "top left",
-          width: `${clone.offsetWidth * 4}px`, // Встановлення правильних розмірів
+          width: `${clone.offsetWidth * 4}px`, 
           height: `${clone.offsetHeight * 4}px`,
           textRendering: "geometricPrecision",
           // WebkitFontSmoothing: "antialiased",
