@@ -19,14 +19,14 @@ const CoverTemplate7 = ({ type, data }) => {
           <div className=" flex flex-col gap-4 max-w-[340px] mx-auto ">
             <div>
              
-              <div className="text-[24px] leading-[28px] font-bold  text-center mt-4 font-montserrat">
+              <div className="text-[24px] leading-[28px] font-semibold  text-center mt-4 font-montserrat">
                 {selectedTopic || "Default Topic"}
               </div>
             </div>
 
             {/* Subheading */}
             <div>
-              <div className="text-[18px] text-white font-semibold text-center ">
+              <div className="text-[18px] text-white font-medium text-center ">
                 {selectedSubTopic || "Default Sub Topic"}
               </div>
             </div>
@@ -65,7 +65,7 @@ const CoverTemplate7 = ({ type, data }) => {
 
         <div className="h-[648px] flex justify-center relative">
           <div
-            className="p-2 bg-[#FA423B] text-white  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-10  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
+            className="px-5 py-2 bg-[#FA423B] text-[#000082]  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-10  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
             <img src="/images/create-book/bg/wave-blue-spine.png" alt="" className="h-[57px] "/>
             <div className=" flex items-center justify-between text-[18px] font-semibold font-montserrat flex-1">
 

@@ -19,7 +19,7 @@ const CoverTemplate8 = ({ type, data }) => {
       const element = elementRef.current;
       if (!element) return maxFontSize;
 
- 
+
       let fontSize = maxFontSize;
       element.style.fontSize = `${fontSize}px`;
 
@@ -49,71 +49,71 @@ const CoverTemplate8 = ({ type, data }) => {
             style={{ backgroundImage: "url('/images/create-book/bg/bg8.png')" }}
           >
             {/* Heading */}
-            <div className="w-full  h-full">
+            <div className="w-full h-full flex items-end">
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-full object-cover block"
+                className="w-full h-full max-h-[400px] object-cover block"
               />
 
             </div>
-
-            <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4  px-8 text-center flex-1  text-black  pt-14 pb-11">
-
-
-
-              <div className="text-left text-[20px] h-full flex flex-col justify-between w-full">
-
-
-                <div className=" max-w-[300px] w-full pb-[70px] relative"
-         
-                >
-                  <img src="/images/create-book/bg/title8.png" alt="" />
-                  <div className=" max-w-[260px] font-degular absolute top-10 left-10">
-                    {/* Title */}
-                    <div
-                      className=" font-black max-w-[200px]"
-                      ref={titleRef}
-                      style={{
-                        fontSize: `${titleFontSize}px`,
-                        lineHeight: `${titleFontSize}px`,
-                      }}
-                    >
-                      {selectedTopic || "Default Topic"}
-                    </div>
-
-                    {/* Subheading */}
-
-                    <div
-                      ref={subTitleRef}
-                      style={{
-                        fontSize: `${subTitleFontSize}px`,
-                        lineHeight: `${titleFontSize*0.8}px`,
-                      }}
-                      className="mt-1 font-degular font-semibold max-w-[200px]"
-                    >
-                      {selectedSubTopic || "Default Sub Topic"}
-                    </div>
-
-                  </div>
-                </div>
-
-                <div className="h-[80px] flex items-center justify-center font-bold "
-                  style={{
-                    backgroundImage: "url('/images/create-book/bg/author8.png')",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                    backgroundPosition: "center"
-                  }}
-                >
-
-                  <div className="text-black rotate-[-2deg] font-degular mt-4 font-bold text-[26px]">{authorName || "Default Author"}</div>
-                </div>
-
-              </div>
-            </div>
-
           </div>
+          <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4  px-8 text-center flex-1  text-black  pt-8 pb-11">
+
+
+
+            <div className="text-left text-[20px] h-full flex flex-col justify-between w-full">
+
+
+              <div className=" max-w-[300px] w-full pb-[70px] relative"
+
+              >
+                <img src="/images/create-book/bg/title8.png" alt="" />
+                <div className=" max-w-[260px] font-degular absolute top-10 left-10">
+                  {/* Title */}
+                  <div
+                    className=" font-black max-w-[200px]"
+                    ref={titleRef}
+                    style={{
+                      fontSize: `${titleFontSize}px`,
+                      lineHeight: `${titleFontSize}px`,
+                    }}
+                  >
+                    {selectedTopic || "Default Topic"}
+                  </div>
+
+                  {/* Subheading */}
+
+                  <div
+                    ref={subTitleRef}
+                    style={{
+                      fontSize: `${subTitleFontSize}px`,
+                      lineHeight: `${titleFontSize * 0.7}px`,
+                    }}
+                    className="mt-1 font-degular font-semibold max-w-[200px]"
+                  >
+                    {selectedSubTopic || "Default Sub Topic"}
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="h-[80px] flex items-center justify-center font-bold "
+                style={{
+                  backgroundImage: "url('/images/create-book/bg/author8.png')",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "contain",
+                  backgroundPosition: "center"
+                }}
+              >
+
+                <div className="text-black rotate-[-2deg] font-degular mt-4 font-bold text-[26px]">{authorName || "Default Author"}</div>
+              </div>
+
+            </div>
+          </div>
+
+
         </div>
       )}
 
@@ -137,7 +137,7 @@ const CoverTemplate8 = ({ type, data }) => {
               <div>{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="flex flex-col justify-center items-center text-[17px]   h-full  ">
+            <div className="flex flex-col justify-center items-center text-[20px]   h-full  ">
               <div>{authorName || "Default Author"}</div>
             </div>
           </div>

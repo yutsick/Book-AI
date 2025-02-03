@@ -30,7 +30,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   const { selectedTopic, selectedSubTopic } = useContext(CreateGenreContext);
 
   const [selectedCover, setSelectedCover] = useState(null);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [isRendered, setIsRendered] = useState(false);
   const [isCropperOpen, setIsCropperOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
@@ -95,7 +95,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
       reader.onload = () => setImageSrc(reader.result);
       reader.readAsDataURL(croppedImage);
     } else {
-      setImageSrc(croppedImage); 
+      setImageSrc(croppedImage);
     }
   }, []);
 
@@ -143,10 +143,14 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
       {isRendered && (
         <div className="flex justify-center md:max-w-[425px] md:pl-2">
           <button
-            className="mt-8 md:mt-4 text-15px[] bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[150px] flex items-center justify-center border rounded-[3px] border-black"
+            className="mt-8 md:mt-4 text-[15px] font-semibold bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[170px] flex items-center justify-center border rounded-[3px] border-[#878787] cursor-pointer"
             onClick={() => setIsCropperOpen(true)}
           >
             Adjust the Image
+            <span className="ml-2">
+              <img src="images/icon-image-adjustment.svg" alt="" />
+
+            </span>
           </button>
         </div>
       )}
