@@ -131,7 +131,21 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       //   }
       // });
 
-      const dataUrl = await htmlToImage.toPng(clone)
+      // const dataUrl = await htmlToImage.toPng(clone)
+      const dataUrl = await htmlToImage.toPng(clone, {
+        backgroundColor: null, // Прозорий фон (якщо потрібно)
+        // cacheBust: true, // Запобігає кешуванню (важливо для мобільних)
+        pixelRatio: Math.max(2, window.devicePixelRatio * 2), // Збільшення деталізації (мінімум 2х)
+        width: clone.offsetWidth * 2, // Подвоєна ширина для чіткішого зображення
+        height: clone.offsetHeight * 2, // Подвоєна висота для чіткішого зображення
+        style: {
+          transform: "scale(2)", // Додатковий масштаб для чіткості
+          transformOrigin: "top left",
+          width: `${clone.offsetWidth}px`,
+          height: `${clone.offsetHeight}px`,
+        },
+      });
+      
       
        
 
