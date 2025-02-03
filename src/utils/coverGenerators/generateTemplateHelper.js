@@ -132,19 +132,24 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       // });
 
       // const dataUrl = await htmlToImage.toPng(clone)
-      const dataUrl = await htmlToImage.toSvg(clone, {
-        backgroundColor: null, // Прозорий фон (якщо потрібно)
-        // cacheBust: true, // Запобігає кешуванню (важливо для мобільних)
-        pixelRatio: Math.max(2, window.devicePixelRatio * 2), // Збільшення деталізації (мінімум 2х)
-        width: clone.offsetWidth * 2, // Подвоєна ширина для чіткішого зображення
-        height: clone.offsetHeight * 2, // Подвоєна висота для чіткішого зображення
+      const scaleFactor = 2; // Масштаб у 2 рази
+
+      const blob = await htmlToImage.toBlob(clone, {
+        backgroundColor: null,
+        pixelRatio: Math.max(2, window.devicePixelRatio * scaleFactor), // Подвоєна якість
+        width: clone.offsetWidth * scaleFactor, // Подвоєна ширина
+        height: clone.offsetHeight * scaleFactor, // Подвоєна висота
         style: {
-          transform: "scale(2)", // Додатковий масштаб для чіткості
+          transform: `scale(${scaleFactor})`, // Масштабування
           transformOrigin: "top left",
           width: `${clone.offsetWidth}px`,
           height: `${clone.offsetHeight}px`,
         },
       });
+      
+      
+      const dataUrl = URL.createObjectURL(blob); // Це точно працює на iOS
+      
       
       
        
