@@ -46,43 +46,37 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       });
     };
 
+
     const generateImage = async (element) => {
       try {
         const scaleFactor = 2; // Масштаб у 2 рази
-
-        const blob = await htmlToImage.toBlob(element, {
-          backgroundColor: "white", // ✅ Уникнення проблем з прозорістю на iOS
-          pixelRatio: Math.max(2, window.devicePixelRatio * scaleFactor), // ✅ Висока якість
-          width: element.offsetWidth * scaleFactor, // ✅ Подвоєна ширина
-          height: element.offsetHeight * scaleFactor, // ✅ Подвоєна висота
-          // cacheBust: true, // ✅ Запобігання кешуванню
-          style: {
-            transform: `scale(${scaleFactor})`,
-            transformOrigin: "top left",
-            width: `${element.offsetWidth}px`,
-            height: `${element.offsetHeight}px`,
-          },
+    
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+    
+        // Встановлюємо розміри з подвоєним масштабом
+        canvas.width = element.offsetWidth * scaleFactor;
+        canvas.height = element.offsetHeight * scaleFactor;
+    
+        const dataUrl = await htmlToImage.toCanvas(element, {
+          backgroundColor: "white", // Запобігає проблемам з прозорістю на iOS
+          pixelRatio: scaleFactor, // Висока якість
+          width: canvas.width, 
+          height: canvas.height,
         });
-
-        // ✅ Перетворення `Blob` у Base64 для iOS
-        const dataUrl = await blobToBase64(blob);
-
-        return dataUrl;
+    
+        ctx.drawImage(dataUrl, 0, 0); // Малюємо зображення на Canvas
+        return canvas.toDataURL("image/png"); // Отримуємо Base64 PNG
       } catch (error) {
         console.error("❌ html-to-image rendering error:", error);
         return null;
       }
     };
+    
+    
 
     // ✅ Функція конвертації Blob → Base64
-    const blobToBase64 = (blob) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      });
-    };
+   
 
     (async () => {
       try {
