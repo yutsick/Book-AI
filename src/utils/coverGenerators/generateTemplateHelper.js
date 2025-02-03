@@ -1,4 +1,4 @@
-import * as htmlToImage from 'html-to-image';
+import { domToPng } from 'modern-screenshot';
 import { createRoot } from "react-dom/client";
 import { createPortal } from "react-dom";
 
@@ -37,7 +37,9 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         hiddenContainer.appendChild(wrapper);
 
         const root = createRoot(wrapper);
-        root.render(createPortal(<CoverComponent type={type} data={contextData} />, wrapper));
+        root.render(
+          createPortal(<CoverComponent type={type} data={contextData} />, wrapper)
+        );
 
         setTimeout(async () => {
           await waitForImages(wrapper);
@@ -46,37 +48,22 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       });
     };
 
-
     const generateImage = async (element) => {
       try {
-        const scaleFactor = 2; // Масштаб у 2 рази
-    
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-    
-        // Встановлюємо розміри з подвоєним масштабом
-        canvas.width = element.offsetWidth * scaleFactor;
-        canvas.height = element.offsetHeight * scaleFactor;
-    
-        const dataUrl = await htmlToImage.toCanvas(element, {
-          backgroundColor: "white", // Запобігає проблемам з прозорістю на iOS
-          pixelRatio: scaleFactor, // Висока якість
-          width: canvas.width, 
-          height: canvas.height,
+        const dataUrl = await domToPng(element, {
+          scale: 2, // Висока якість
+          backgroundColor: "white", // Уникаємо проблем із прозорістю
+          cacheBust: false, // Уникнення проблем із кешуванням
+          useBlob: false, // Дозволяє отримати Base64 напряму
+          useCORS: true, // Підтримка зображень з інших доменів
         });
-    
-        ctx.drawImage(dataUrl, 0, 0); // Малюємо зображення на Canvas
-        return canvas.toDataURL("image/png"); // Отримуємо Base64 PNG
+
+        return dataUrl;
       } catch (error) {
-        console.error("❌ html-to-image rendering error:", error);
+        console.error("❌ modern-screenshot rendering error:", error);
         return null;
       }
     };
-    
-    
-
-    // ✅ Функція конвертації Blob → Base64
-   
 
     (async () => {
       try {
