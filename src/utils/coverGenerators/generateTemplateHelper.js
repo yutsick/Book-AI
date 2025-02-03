@@ -1,6 +1,8 @@
 // import html2canvas from "html2canvas";
 // import domtoimage from "dom-to-image";
-import html2canvas from "@wtto00/html2canvas";
+// import html2canvas from "@wtto00/html2canvas";
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 
 import { createRoot } from "react-dom/client";
@@ -62,36 +64,51 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       });
     };
 
-    const fixObjectFit = (container) => {
-      container.querySelectorAll("img").forEach(img => {
-          const style = getComputedStyle(img);
-          if (style.objectFit === "contain" || style.objectFit === "cover") {
-              // ✅ Створюємо div замість img
-              const wrapper = document.createElement("div");
-              wrapper.style.width = img.width + "px";
-              wrapper.style.height = img.height + "px";
-              wrapper.style.backgroundImage = `url("${img.src}")`;
-              wrapper.style.backgroundSize = style.objectFit; // "contain" або "cover"
-              wrapper.style.backgroundPosition = "center 98%"; // 🔹 Запобігає білим полосам
-              wrapper.style.backgroundRepeat = "no-repeat";
-              wrapper.style.display = "inline-block";
-              wrapper.style.overflow = "hidden"; // 🔹 Уникає межових артефактів
-              wrapper.style.borderRadius = "0.1px"; // 🔹 Хак для виправлення артефактів
-  
-              // ✅ Замінюємо img на div
-              img.replaceWith(wrapper);
-          }
-      });
-  };
-  
+
+
+  // const generateImage = async (element, type) => {
+  //   // ✅ Клонуємо елемент, щоб уникнути змін у DOM
+  //   const clone = element.cloneNode(true);
+  //   clone.style.position = "absolute";
+  //   clone.style.left = "0px";
+  //   clone.style.top = "0px";
+  //   clone.style.zIndex = "-9999";
+  //   document.body.appendChild(clone);
+
  
 
+  //   try {
+        
+  //     const canvas = await html2canvas(clone, {
+  //       backgroundColor: null,
+  //       useCORS: true,
+  //       scale: 2,
+  //       logging: false,
+  //       allowTaint: false,
+  //       imageSmoothingEnabled: false,
+  //       style: {
+  //           width: `${clone.offsetWidth}px`, // 🔹 Фіксуємо оригінальні розміри
+  //           height: `${clone.offsetHeight}px`
+  //       }
+  //   });
+
+  //       const dataUrl = canvas.toDataURL("image/png");
+
+  //       // ✅ Видаляємо клонований елемент
+  //       document.body.removeChild(clone);
+
+  //       return dataUrl;
+  //   } catch (error) {
+  //       console.error("❌ html2canvas rendering error:", error);
+  //       document.body.removeChild(clone);
+  //       return null;
+  //   }
+  // };
 
 
-   
 
-const generateImage = async (element, type) => {
-    // ✅ Клонуємо елемент, щоб уникнути змін у DOM
+
+  const generateImage = async (element, type) => {
     const clone = element.cloneNode(true);
     clone.style.position = "absolute";
     clone.style.left = "0px";
@@ -99,73 +116,36 @@ const generateImage = async (element, type) => {
     clone.style.zIndex = "-9999";
     document.body.appendChild(clone);
 
- 
-
     try {
-        
-      const canvas = await html2canvas(clone, {
-        backgroundColor: null,
-        useCORS: true,
-        scale: 2,
-        logging: false,
-        allowTaint: false,
-        imageSmoothingEnabled: false,
-        style: {
-            width: `${clone.offsetWidth}px`, // 🔹 Фіксуємо оригінальні розміри
-            height: `${clone.offsetHeight}px`
-        }
-    });
 
-        const dataUrl = canvas.toDataURL("image/png");
+      // const canvas = await html2canvas(clone, {
+      //   backgroundColor: null,
+      //   useCORS: true,
+      //   scale: 2,
+      //   logging: false,
+      //   allowTaint: false,
+      //   imageSmoothingEnabled: false,
+      //   style: {
+      //     width: ${clone.offsetWidth}px,
+      //     height: ${clone.offsetHeight}px
+      //   }
+      // });
 
-        // ✅ Видаляємо клонований елемент
-        document.body.removeChild(clone);
-
-        return dataUrl;
-    } catch (error) {
-        console.error("❌ html2canvas rendering error:", error);
-        document.body.removeChild(clone);
-        return null;
-    }
-};
-
-
-
-
-    // const generateImage = async (element, type) => {
+      const dataUrl = await htmlToImage.toPng(clone)
       
-    //     const clone = element.cloneNode(true);
-    //     clone.style.position = "absolute";
-    //     clone.style.left = "0px";
-    //     clone.style.top = "0px";
-    //     clone.style.zIndex = "-9999";
-    //     document.body.appendChild(clone);
-    
-    //     try {
-           
-    //         const canvas = await html2canvas(clone, {
-    //             backgroundColor: null, 
-    //             useCORS: true, 
-    //             scale: 4, 
-    //             logging: false, 
-    //             allowTaint: false, 
-    //             imageSmoothingEnabled: false,
-    //             width: clone.offsetWidth, 
-    //             height: clone.offsetHeight
-    //         });
-    
-    //         const dataUrl = canvas.toDataURL(type === "jpeg" ? "image/jpeg" : "image/png", 1.0);
-    
-    //         document.body.removeChild(clone);
-    
-    //         return dataUrl;
-    //     } catch (error) {
-    //         console.error("❌ html2canvas rendering error:", error);
-    //         document.body.removeChild(clone);
-    //         return null;
-    //     }
-    // };
-    
+       
+
+      // const dataUrl = canvas.toDataURL("image/png");
+
+      document.body.removeChild(clone);
+
+      return dataUrl;
+    } catch (error) {
+      console.error("❌ html2canvas rendering error:", error);
+      document.body.removeChild(clone);
+      return null;
+    }
+  };
     // const generateImage = async (element, type) => {
 
     //   const clone = element.cloneNode(true);
