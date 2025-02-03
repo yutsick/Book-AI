@@ -72,10 +72,10 @@ const CoverTemplate3 = ({ type, data }) => {
             />
             </div>
              
-              <div className="absolute top-[-10px] left-10">
+              <div className="absolute top-[-10px] left-10 w-[85px]">
                 <img src="images/create-book/bg/pag1.png" alt="" />
               </div>
-              <div className="absolute top-[-45px] right-10">
+              <div className="absolute top-[-45px] right-10 w-[115px]">
                 <img src="images/create-book/bg/pag2.png" alt="" />
               </div>
             
@@ -102,10 +102,10 @@ const CoverTemplate3 = ({ type, data }) => {
             className="p-2  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-10  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]"
             style={{ backgroundImage: "url('/images/create-book/bg/bg3-spine.png')" }}
           >
-            <div className="w-full flex items-center justify-center gap-16 text-[18px] absolute font-bold font-caveat flex-1 text-[#000082]">
+            <div className="w-full flex items-center justify-center gap-16 ] absolute font-bold font-caveat flex-1 text-[#000082]">
 
               <div 
-              className="font-bold flex-1 pb-2 pl-2"
+              className="font-bold flex-1 text-center pb-2 pl-2"
               ref={spineTitleRef}
               style={{
                 fontSize: `${spineTitleFontSize}px`,
@@ -117,7 +117,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
 
 
-              <div className=" text-[28px] w-[215px] font-medium leading-[28px]  font-reenie">
+              <div className=" text-[34px] w-[215px] font-medium leading-[28px]  font-reenie">
                 {authorName || "Default Author"}
               </div>
             </div>

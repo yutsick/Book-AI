@@ -16,12 +16,12 @@ const CoverTemplate5 = ({ type, data }) => {
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="w-full h-full object-cover block"
+              className="w-full h-full object-cover block grayscale"
             />
 
           </div>
 
-          <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4  px-8 text-center flex-1  text-white  pt-14 pb-11">
+          <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4  px-8 text-center flex-1  text-white  pt-12 pb-11">
 
 
 
@@ -39,7 +39,7 @@ const CoverTemplate5 = ({ type, data }) => {
 
                 {/* Subheading */}
                 <div>
-                  <div className="text-[20px] font-medium font-degular mt-4">
+                  <div className="text-[20px] leading-[20px] font-medium font-degular mt-4">
                     {selectedSubTopic || "Default Sub Topic"}
                   </div>
                 </div>
@@ -57,7 +57,7 @@ const CoverTemplate5 = ({ type, data }) => {
           className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
 
         >
-          <img src="images/create-book/bg/bg4-back.png" alt="Back Cover" />
+          <img src="images/create-book/bg/bg5-back.png" alt="Back Cover" />
         </div>
       )}
 
@@ -65,13 +65,13 @@ const CoverTemplate5 = ({ type, data }) => {
 
         <div className="h-[648px] flex justify-center relative">
 
-          <div className="flex text-white items-center h-[57px] w-[648px]  pl-2 bg-[#747778] justify-center absolute rotate-90 origin-top-left left-[calc(50%+28px)] gap-16">
+          <div className="flex text-white items-center h-[57px] w-[648px] pb-1 pl-6 bg-[#747778] justify-center absolute rotate-90 origin-top-left left-[calc(50%+28px)] ">
 
-            <div className="flex font-georgia flex-col justify-center items-center text-[19px] italic ">
+            <div className="flex font-georgia flex-1 flex-col justify-center  text-[24px] italic ">
               <div>{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="flex font-black flex-col justify-center items-center text-[18px]  font-degular h-full  ">
+            <div className="flex font-black flex-col  justify-center items-center text-[16px] w-[215px] font-degular h-full  ">
               <div>{authorName || "Default Author"}</div>
             </div>
           </div>

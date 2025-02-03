@@ -14,10 +14,10 @@ const TableOfContents = ({ contents }) => {
             <div className="flex items-end justify-between w-full">
               <div className="relative overflow-hidden flex-1">
             
-                <span className="text-[15px] text-black/75 break-words pr-2 relative after:content-['............................................................................................................................................................................................................'] after:text-[#7D7A78] after:ml-1 after:absolute after:whitespace-nowrap after:overflow-hidden "> {item.title}</span>
+                <div className="text-[15px] leading-[19px] text-black/75 break-words pr-2 relative after:content-['............................................................................................................................................................................................................'] after:text-[#7D7A78] after:ml-1 after:absolute after:whitespace-nowrap after:overflow-hidden "> {item.title}</div>
                
               </div>
-              <span className="flex-shrink-0 text-[#7D7A78] text-[15px] ml-2 w-[50px]">
+              <span className="flex-shrink-0 text-[#7D7A78] text-[15px] text-right w-[30px]">
                 {item.page}
               </span>
             </div>

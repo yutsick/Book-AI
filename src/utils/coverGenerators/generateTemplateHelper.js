@@ -51,11 +51,10 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
     const generateImage = async (element) => {
       try {
         const dataUrl = await domToPng(element, {
-          scale: 2, // Висока якість
-          backgroundColor: "white", // Уникаємо проблем із прозорістю
-          cacheBust: false, // Уникнення проблем із кешуванням
-          useBlob: false, // Дозволяє отримати Base64 напряму
-          useCORS: true, // Підтримка зображень з інших доменів
+          scale: 4, 
+          cacheBust: false, 
+          useBlob: false, 
+          useCORS: true, 
         });
 
         return dataUrl;
@@ -81,7 +80,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       } catch (error) {
         reject(error);
       } finally {
-        document.body.removeChild(hiddenContainer);
+        // document.body/.removeChild(hiddenContainer);
       }
     })();
   });
