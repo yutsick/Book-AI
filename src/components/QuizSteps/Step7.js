@@ -104,7 +104,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
     <>
       <div className=" w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
         {/* Slider */}
-        <div className="max-w-[425px] w-full flex justify-center items-center relative h-[420px] md:h-[650px]">
+        <div className="max-w-[431px] w-full flex justify-center items-center relative h-[420px] md:h-[648px]">
           {loading ? <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
         </div>
 

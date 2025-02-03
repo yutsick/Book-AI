@@ -58,7 +58,7 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
               image={imageURL}
               crop={crop}
               zoom={zoom}
-              minZoom={1} 
+              minZoom={0.6} 
               maxZoom={3}
               aspect={1}
               onCropChange={setCrop}
@@ -79,11 +79,11 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
           <input
             id="zoom-slider"
             type="range"
-            min={1} 
+            min={0.6} 
             max={3}
             step={0.01}
             value={zoom}
-            onChange={(e) => setZoom(Math.max(1, Number(e.target.value)))}
+            onChange={(e) => setZoom(Math.max(0.6, Number(e.target.value)))}
             className="w-full h-1 bg-zinc-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-orange accent-orange"
           />
         </div>

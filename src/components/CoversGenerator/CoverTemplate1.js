@@ -38,7 +38,7 @@ const CoverTemplate1 = ({ type, data }) => {
               alt={authorName || "Default Author"}
               className=" max-h-[340px] object-contain block"
             />
-            <div className=" text-[28px]  bg-white h-[80px] w-full flex items-center justify-center  text-[#14465F] font-anton">
+            <div className=" text-[28px] pb-8  bg-white h-[80px] w-full flex items-center justify-center  text-[#14465F] font-anton">
               {authorName || "Default Author"}
             </div>
           </div>
@@ -58,7 +58,7 @@ const CoverTemplate1 = ({ type, data }) => {
 
         <div className="h-[648px] flex justify-center relative">
           <div
-            className="px-14  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-10  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]"
+            className="px-14 pb-4 h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-10  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]"
             style={{ backgroundImage: "url('/images/create-book/bg/bg1-spine.png')" }}
           >
             <div className="text-white flex items-center justify-between text-[18px] leading-[22px] tracking-[0.01em] font-anton flex-1">

@@ -79,7 +79,7 @@ const CoverTemplate3 = ({ type, data }) => {
                 <img src="images/create-book/bg/pag2.png" alt="" />
               </div>
             
-            <div className="font-reenie  text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px]">
+            <div className="font-reenie pb-8 text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px]">
               {authorName || "Default Author"}
             </div>
           </div>
@@ -105,7 +105,7 @@ const CoverTemplate3 = ({ type, data }) => {
             <div className=" flex items-center justify-center gap-16 text-[18px] absolute font-bold font-caveat flex-1 text-[#000082]">
 
               <div 
-              className="font-medium flex-1 pb-2 pl-2"
+              className="font-medium flex-1 pb-8 pl-2"
               ref={spineTitleRef}
               style={{
                 fontSize: `${spineTitleFontSize}px`,
@@ -117,7 +117,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
 
 
-              <div className=" text-[28px] w-[215px] font-medium te leading-[28px] pb-2 font-reenie">
+              <div className=" text-[28px] w-[215px] font-medium te leading-[28px] pb-8 font-reenie">
                 {authorName || "Default Author"}
               </div>
             </div>

@@ -21,7 +21,7 @@ const CoverTemplate4 = ({ type, data }) => {
 
           </div>
 
-          <div className="flex flex-col pt-6 pb-8  items-center gap-4 bg-[#F0EADE] px-8 text-center flex-1 font-pacifico">
+          <div className="flex flex-col  pb-8  items-center gap-4 bg-[#F0EADE] px-8 text-center flex-1 font-pacifico">
             {/* Title */}
             <div className="text-[40px] leading-[40px]  text-[#0D453A]">
               {selectedTopic || "Default Topic"}
@@ -35,7 +35,7 @@ const CoverTemplate4 = ({ type, data }) => {
             </div>
 
 
-            <div className=" text-[#0D453A] flex flex-col gap-3 items-center justify-center text-[20px] font-black font-degular">
+            <div className=" text-[#0D453A] mt-4 flex flex-col items-center justify-center text-[20px] font-black font-degular">
               <img src="images/create-book/bg/wave-black.png" alt="" />
               <div className="">{authorName || "Default Author"}</div>
 
@@ -61,11 +61,11 @@ const CoverTemplate4 = ({ type, data }) => {
 
           <div className="flex text-[#0D453A] items-center h-[57px] w-[648px] gap-10 pl-2 bg-[#FFA3BC] justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] text-[23px]">
 
-            <div className="flex flex-1 flex-col justify-center items-center  font-pacifico pb-2">
+            <div className="flex flex-1 flex-col justify-center items-center  font-pacifico pb-6">
               <div>{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="flex font-black flex-col justify-center items-center ]  font-degular h-full w-[243px] bg-[#F0EADE] p-2 pb-3">
+            <div className="flex font-black flex-col justify-center items-center ]  font-degular h-full w-[243px] bg-[#F0EADE] p-2 pb-8">
               <div>{authorName || "Default Author"}</div>
             </div>
           </div>

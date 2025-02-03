@@ -96,9 +96,9 @@ const authorImageSrc =
       {type === "spine" && (
         <div className="h-[648px] flex justify-center relative">
           <div className="flex items-center h-[57px] w-[648px] gap-10 pl-2  bg-black justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular font-black">
-            <div className="text-white flex flex-col justify-center items-center text-[36px] font-black leading-[28px] font-degular">
+            <div className="text-white  flex flex-col justify-center items-center text-[36px] font-black leading-[28px] font-degular">
               <div
-              className="pb-1 pl-2"
+              className="mb-8 pl-2"
                 ref={spineTitleRef}
                 style={{
                   fontSize: `${spineTitleFontSize}px`,
@@ -107,7 +107,7 @@ const authorImageSrc =
               >{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="text-white flex flex-col justify-center items-start text-[20px] font-degular h-full w-[215px] bg-[#BB2621] px-4 ">
+            <div className="text-white pb-6 flex flex-col justify-center items-start text-[20px] font-degular h-full w-[215px] bg-[#BB2621] px-4 ">
               <div>{authorName || "Default Author"}</div>
             </div>
           </div>
