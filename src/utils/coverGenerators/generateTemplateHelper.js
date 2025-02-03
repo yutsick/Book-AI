@@ -132,7 +132,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       // });
 
       // const dataUrl = await htmlToImage.toPng(clone)
-      const dataUrl = await htmlToImage.toPng(clone, {
+      const dataUrl = await htmlToImage.toSvg(clone, {
         backgroundColor: null, // Прозорий фон (якщо потрібно)
         // cacheBust: true, // Запобігає кешуванню (важливо для мобільних)
         pixelRatio: Math.max(2, window.devicePixelRatio * 2), // Збільшення деталізації (мінімум 2х)
