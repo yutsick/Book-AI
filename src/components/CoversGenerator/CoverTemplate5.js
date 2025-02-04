@@ -10,13 +10,16 @@ const CoverTemplate5 = ({ type, data }) => {
     <>
       {/* Front Cover */}
       {type === "front" && (
-        <div className="relative w-[431px] h-[648px] bg-[#747778] mx-auto flex flex-col items-center justify-between ">
+        <div className="relative w-[431px] h-[648px] bg-[#747778] mx-auto flex flex-col items-center justify-between " 
+        data-disable-grayscale 
+        style={{ filter: "grayscale(100%)" }}>
+          
           {/* Heading */}
           <div className="w-full  h-full">
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="w-full h-full object-cover block grayscale"
+              className="w-full h-full object-cover block "
             />
 
           </div>
