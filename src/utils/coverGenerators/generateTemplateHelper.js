@@ -5,11 +5,22 @@ import { createPortal } from "react-dom";
 export const generateTemplateCovers = async (contextData, CoverComponent) => {
   return new Promise((resolve, reject) => {
     const hiddenContainer = document.createElement("div");
-    hiddenContainer.style.position = "absolute";
-    hiddenContainer.style.width = "431px";
-    hiddenContainer.style.height = "648px";
-    hiddenContainer.style.top = "-9999px";
-    hiddenContainer.style.left = "-9999px";
+
+
+    hiddenContainer.style.position = "fixed";  // Замість `absolute`
+hiddenContainer.style.top = "0"; 
+hiddenContainer.style.left = "0";
+hiddenContainer.style.opacity = "0.01";    // Мінімальна прозорість
+hiddenContainer.style.pointerEvents = "none"; // Не взаємодіє з мишею/тачем
+hiddenContainer.style.zIndex = "-1";       // Прихований, але рендериться
+
+    // hiddenContainer.style.position = "absolute";
+    // hiddenContainer.style.width = "431px";
+    // hiddenContainer.style.height = "648px";
+    // hiddenContainer.style.top = "-9999px";
+    // hiddenContainer.style.left = "-9999px";
+
+
     document.body.appendChild(hiddenContainer);
 
     const waitForImages = async (element) => {
@@ -56,7 +67,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
         const root = createRoot(wrapper);
         root.render(
-          createPortal(<CoverComponent type={type} data={contextData} />, wrapper)
+          createPortal(<CoverComponent key={type + Date.now()}  type={type} data={contextData} />, wrapper)
         );
 
         setTimeout(async () => {
@@ -65,23 +76,12 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         }, 1200);
       });
     };
-    const disableLazyLoading = (element) => {
-      const images = element.querySelectorAll("img");
-      images.forEach((img) => {
-        img.loading = "eager";  // Примусовий рендер без Lazy Loading
-        img.decoding = "sync";  // Синхронне декодування
-        if (!img.complete) {
-          img.src = img.src;  // Примусове оновлення src (деякі браузери можуть "пропускати" рендер)
-        }
-      });
-    };
+
     
     const generateImage = async (element, attempt = 1) => {
       try {
         const restoreGrayscale = fixGrayscaleBeforeScreenshot(element); 
 
-        disableLazyLoading(wrapper);
-      await waitForImages(wrapper);
 
 
         const dataUrl = await domToPng(element, {
