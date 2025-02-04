@@ -36,23 +36,115 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
     };
   }, [setIsButtonDisabled, croppedImage]);
 
-  const handleFileChange = async (file) => {
-    setPreview(URL.createObjectURL(file));
-    setAuthorImage(file);
-    setCroppedImage(null); 
-    setIsProcessing(true); 
+  // const handleFileChange = async (file) => {
+  //   setPreview(URL.createObjectURL(file));
+  //   setAuthorImage(file);
+  //   setCroppedImage(null); 
+  //   setIsProcessing(true); 
   
 
-    const validationResult = await validateImage(file);
+  //   const validationResult = await validateImage(file);
+  //   if (!validationResult.valid) {
+  //     setError(validationResult.error); 
+  //   } else {
+  //     setError(null);
+  //   }
+  
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("image", file);
+  
+  //     const response = await fetch("https://api.booktailor.com/remove-background", {
+  //       method: "POST",
+  //       body: formData,
+  //     });
+  
+  //     if (!response.ok) {
+  //       throw new Error("Error removing background");
+  //     }
+  
+  //     const data = await response.json();
+  //     const processedUrl = data.data.processed_url;
+  //     setProcessedAuthorImage(processedUrl);
+  
+    
+  //     const imageResponse = await fetch(processedUrl);
+  //     if (!imageResponse.ok) {
+  //       throw new Error("Error fetching processed image");
+  //     }
+  
+  //     const imageBlob = await imageResponse.blob();
+  //     const imageFile = new File([imageBlob], "processed-image.png", { type: "image/png" });
+  
+  //     console.log("✅ Processed Image:", imageFile);
+  //     setCroppedImage(imageFile); 
+      
+  //   } catch (error) {
+  //     console.error("❌ Error processing image:", error);
+  //     setError("Failed to process the image.");
+  //   } finally {
+  //     setIsProcessing(false); 
+  //     setSelectedTemplate({});
+  //   }
+  // };
+  
+  const resizeImage = async (file, maxWidth, maxHeight) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      img.onload = () => {
+        let { width, height } = img;
+  
+        // Визначаємо коефіцієнт масштабу
+        let scaleFactor = Math.min(maxWidth / width, maxHeight / height, 1);
+  
+        if (scaleFactor < 1) {
+          width = Math.round(width * scaleFactor);
+          height = Math.round(height * scaleFactor);
+        }
+  
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d", { alpha: true }); // ✅ Прозорість увімкнена
+        canvas.width = width;
+        canvas.height = height;
+  
+        ctx.drawImage(img, 0, 0, width, height);
+  
+        // 🔥 Використовуємо PNG, але зменшуємо якість (компресія)
+        canvas.toBlob((blob) => {
+          const resizedFile = new File([blob], "resized-image.png", { type: "image/png" });
+          resolve(resizedFile);
+        }, "image/png", 0.8); // ✅ Компресія PNG для меншого розміру
+      };
+    });
+  };
+  
+  
+  
+
+  
+  const handleFileChange = async (file) => {
+    setPreview(URL.createObjectURL(file));
+  
+    // ✅ Зберігаємо оригінальне зображення (для друку)
+    setAuthorImage(file);
+  
+    // ✅ Масштабуємо копію перед надсиланням
+    const resizedFile = await resizeImage(file, 431 * 1.5, 648 * 1.5);
+  
+    setCroppedImage(null);
+    setIsProcessing(true);
+  
+    const validationResult = await validateImage(resizedFile);
     if (!validationResult.valid) {
-      setError(validationResult.error); 
+      setError(validationResult.error);
     } else {
       setError(null);
     }
   
     try {
       const formData = new FormData();
-      formData.append("image", file);
+      formData.append("image", resizedFile);
   
       const response = await fetch("https://api.booktailor.com/remove-background", {
         method: "POST",
@@ -67,7 +159,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       const processedUrl = data.data.processed_url;
       setProcessedAuthorImage(processedUrl);
   
-    
+      // ✅ Завантажуємо оброблене зображення
       const imageResponse = await fetch(processedUrl);
       if (!imageResponse.ok) {
         throw new Error("Error fetching processed image");
@@ -76,17 +168,22 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       const imageBlob = await imageResponse.blob();
       const imageFile = new File([imageBlob], "processed-image.png", { type: "image/png" });
   
-      console.log("✅ Processed Image:", imageFile);
-      setCroppedImage(imageFile); 
-      
+      console.log("✅ Processed Image (before resizing):", imageFile);
+  
+      // ✅ Масштабуємо `croppedImage`, щоб воно було не більше 431x648 * 4
+      const scaledImageFile = await resizeImage(imageFile, 431 * 4, 648 * 4);
+  
+      console.log("✅ Scaled Processed Image:", scaledImageFile);
+      setCroppedImage(scaledImageFile);
     } catch (error) {
       console.error("❌ Error processing image:", error);
       setError("Failed to process the image.");
     } finally {
-      setIsProcessing(false); 
+      setIsProcessing(false);
       setSelectedTemplate({});
     }
   };
+  
   
 
   return (
