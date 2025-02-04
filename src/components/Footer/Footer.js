@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import config from '../../../config';
+import Link from "next/link";
 
 const Footer = () => {
   const { menuUrl } = config;
@@ -28,8 +29,11 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerData.links.map((link, index) => (
                 <React.Fragment key={index}>
-                  <li><a href={link.href} className="" >{link.text}</a></li>
-
+                  <li>
+                    <Link href={link.href} className="">
+                      {link.text}
+                    </Link>
+                  </li>
                 </React.Fragment>
               ))}
             </ul>
@@ -38,7 +42,11 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerData.footerLinks.map((link, index) => (
                 <React.Fragment key={index}>
-                  <li><a href={link.href} className="" >{link.text}</a></li>
+                  <li>
+                    <Link href={link.href} className="">
+                      {link.text}
+                    </Link>
+                  </li>
                 </React.Fragment>
               ))}
             </ul>
@@ -57,15 +65,20 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-end w-full mt-1">
 
           <div className="mt-4 md:mt-0 hidden md:block">
-            <a href="/" className="brand-logo h-[40px] md:h-[67px] w-[97px] md:w-[312px] border-b ">
+
+
+            <Link
+              href="/"
+              className="brand-logo h-[40px] md:h-[67px] w-[97px] md:w-[312px] border-b"
+            >
               <Image
                 src="/images/main-logo.svg"
                 width={109}
                 height={37}
                 alt="Book Tailor Logo"
-                className=''
               />
-            </a>
+            </Link>
+
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import config from '../../../config';
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from "next/link";
 
 const BurgerMenu = () => {
   const { menuUrl } = config;
@@ -77,7 +78,14 @@ const BurgerMenu = () => {
         <div className="flex flex-col items-center mt-12 space-y-4">
           {headerData.links.map((link, index) => (
             <React.Fragment key={index}>
-              <a href={link.href} className="text-[17px] md:text-[20px] font-bold text-gray" style={{ fontFamily: "var(--font-)" }} onClick={toggleMenu}>{link.text}</a>
+              <Link
+                href={link.href}
+                className="text-[17px] md:text-[20px] font-bold text-gray"
+                style={{ fontFamily: "var(--font-)" }}
+                onClick={toggleMenu}
+              >
+                {link.text}
+              </Link>
               <hr className="w-[95px] md:w-[117px] border-t border-[#6F6F6F]" />
             </React.Fragment>
           ))}
