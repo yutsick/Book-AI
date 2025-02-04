@@ -1,4 +1,4 @@
-import { domToPng } from 'modern-screenshot';
+import { domToPng } from "modern-screenshot";
 import { createRoot } from "react-dom/client";
 import { createPortal } from "react-dom";
 
@@ -28,6 +28,26 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       await Promise.all(promises);
     };
 
+    const fixGrayscaleBeforeScreenshot = (element) => {
+      if (element.classList.contains("CoverTemplate5")) {
+        const grayscaleElements = element.querySelectorAll("[data-disable-grayscale]");
+
+        // ✅ Вимикаємо grayscale перед рендером
+        grayscaleElements.forEach((el) => {
+          el.dataset.originalFilter = el.style.filter; // Зберігаємо оригінальний стиль
+          el.style.filter = "none";
+        });
+
+        return () => {
+          // ✅ Повертаємо grayscale після рендеру
+          grayscaleElements.forEach((el) => {
+            el.style.filter = el.dataset.originalFilter || "grayscale(100%)";
+          });
+        };
+      }
+      return () => {}; // Порожня функція, якщо не CoverTemplate5
+    };
+
     const createAndRender = async (type) => {
       return new Promise((resolve) => {
         const wrapper = document.createElement("div");
@@ -50,12 +70,16 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
     const generateImage = async (element) => {
       try {
+        const restoreGrayscale = fixGrayscaleBeforeScreenshot(element); // ⬅️ Вимикаємо grayscale перед рендером
+
         const dataUrl = await domToPng(element, {
-          scale: 4, 
-          cacheBust: false, 
-          useBlob: false, 
-          useCORS: true, 
+          scale: 4,
+          cacheBust: false,
+          useBlob: false,
+          useCORS: true,
         });
+
+        restoreGrayscale(); // ⬅️ Повертаємо grayscale після рендеру
 
         return dataUrl;
       } catch (error) {
@@ -80,7 +104,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       } catch (error) {
         reject(error);
       } finally {
-        // document.body/.removeChild(hiddenContainer);
+        document.body.removeChild(hiddenContainer);
       }
     })();
   });
