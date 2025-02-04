@@ -46,25 +46,44 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       return () => {}; 
     };
 
-    const createAndRender = async (type) => {
+    const waitForRender = async (element, timeout = 2000) => {
       return new Promise((resolve) => {
+        const observer = new MutationObserver(() => {
+          if (element.innerHTML.trim().length > 0) {
+            observer.disconnect();
+            resolve();
+          }
+        });
+    
+        observer.observe(element, { childList: true, subtree: true });
+    
+        setTimeout(() => {
+          observer.disconnect();
+          resolve();
+        }, timeout);
+      });
+    };
+    
+    const createAndRender = async (type) => {
+      return new Promise(async (resolve) => {
         const wrapper = document.createElement("div");
         wrapper.style.backgroundColor = "#F9F6EB";
         wrapper.style.width = "431px";
         wrapper.style.height = "648px";
         hiddenContainer.appendChild(wrapper);
-
+    
         const root = createRoot(wrapper);
         root.render(
           createPortal(<CoverComponent type={type} data={contextData} />, wrapper)
         );
-
-        setTimeout(async () => {
-          await waitForImages(wrapper);
-          resolve(wrapper);
-        }, 1200);
+    
+        await waitForRender(wrapper); // ✅ Чекаємо повного рендерингу
+        await waitForImages(wrapper); // ✅ Додаємо перевірку завантаження картинок
+    
+        resolve(wrapper);
       });
     };
+    
 
     const generateImage = async (element, attempt = 1) => {
       try {
