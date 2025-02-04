@@ -46,48 +46,59 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       return () => {}; 
     };
 
-    const waitForRender = async (element, timeout = 2000) => {
-      return new Promise((resolve) => {
-        const observer = new MutationObserver(() => {
-          if (element.innerHTML.trim().length > 0) {
-            observer.disconnect();
-            resolve();
-          }
-        });
-    
-        observer.observe(element, { childList: true, subtree: true });
-    
-        setTimeout(() => {
-          observer.disconnect();
-          resolve();
-        }, timeout);
-      });
-    };
-    
     const createAndRender = async (type) => {
-      return new Promise(async (resolve) => {
+      return new Promise((resolve) => {
         const wrapper = document.createElement("div");
         wrapper.style.backgroundColor = "#F9F6EB";
         wrapper.style.width = "431px";
         wrapper.style.height = "648px";
         hiddenContainer.appendChild(wrapper);
-    
+
         const root = createRoot(wrapper);
         root.render(
           createPortal(<CoverComponent type={type} data={contextData} />, wrapper)
         );
-    
-        await waitForRender(wrapper); // ✅ Чекаємо повного рендерингу
-        await waitForImages(wrapper); // ✅ Додаємо перевірку завантаження картинок
-    
-        resolve(wrapper);
+
+        setTimeout(async () => {
+          await waitForImages(wrapper);
+          resolve(wrapper);
+        }, 1200);
+      });
+    };
+    const disableLazyLoading = (element) => {
+      const images = element.querySelectorAll("img");
+      images.forEach((img) => {
+        img.loading = "eager";  // Примусовий рендер без Lazy Loading
+        img.decoding = "sync";  // Синхронне декодування
+        if (!img.complete) {
+          img.src = img.src;  // Примусове оновлення src (деякі браузери можуть "пропускати" рендер)
+        }
       });
     };
     
-
+    const forceLoadImages = async (element) => {
+      const images = element.querySelectorAll("img");
+      for (const img of images) {
+        if (!img.complete || img.naturalWidth === 0) {
+          console.warn(`🔄 Force reloading image: ${img.src}`);
+          img.src = img.src;  // Примусове оновлення
+          await new Promise((resolve) => setTimeout(resolve, 100)); // Невелика затримка для безпеки
+        }
+      }
+    };
+    
+   
+  
+    
+    
     const generateImage = async (element, attempt = 1) => {
       try {
         const restoreGrayscale = fixGrayscaleBeforeScreenshot(element); 
+
+        disableLazyLoading(wrapper);
+      
+        await waitForImages(wrapper);
+        await forceLoadImages(wrapper);
 
         const dataUrl = await domToPng(element, {
           scale: 4,
