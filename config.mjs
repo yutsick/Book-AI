@@ -14,7 +14,9 @@ const config = {
   heroQuizUrl: './data/createBook/heroQuiz.json',
   buttonTextUrl: './data/createBook/buttonText.json',
   genresUrl: './data/createBook/genres.json',
-  createBookStep1: './data/createBook/stepOne.json'
+  createBookStep1: './data/createBook/stepOne.json',
+  // About Us
+  aboutUsUrl: '/data/about-us/aboutUs.json'
 };
 
 export default config;
