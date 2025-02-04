@@ -52,7 +52,7 @@ const CoverTemplate4 = ({ type, data }) => {
       {/* Back Cover */}
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-[#F0EADE]"
 
         >
           <img src={`${isMobile ? 
