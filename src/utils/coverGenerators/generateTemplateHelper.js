@@ -32,20 +32,18 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       if (element.classList.contains("CoverTemplate5")) {
         const grayscaleElements = element.querySelectorAll("[data-disable-grayscale]");
 
-        // ✅ Вимикаємо grayscale перед рендером
         grayscaleElements.forEach((el) => {
-          el.dataset.originalFilter = el.style.filter; // Зберігаємо оригінальний стиль
+          el.dataset.originalFilter = el.style.filter; 
           el.style.filter = "none";
         });
 
         return () => {
-          // ✅ Повертаємо grayscale після рендеру
           grayscaleElements.forEach((el) => {
             el.style.filter = el.dataset.originalFilter || "grayscale(100%)";
           });
         };
       }
-      return () => {}; // Порожня функція, якщо не CoverTemplate5
+      return () => {}; 
     };
 
     const createAndRender = async (type) => {
@@ -64,13 +62,13 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         setTimeout(async () => {
           await waitForImages(wrapper);
           resolve(wrapper);
-        }, 500);
+        }, 1200);
       });
     };
 
-    const generateImage = async (element) => {
+    const generateImage = async (element, attempt = 1) => {
       try {
-        const restoreGrayscale = fixGrayscaleBeforeScreenshot(element); // ⬅️ Вимикаємо grayscale перед рендером
+        const restoreGrayscale = fixGrayscaleBeforeScreenshot(element); 
 
         const dataUrl = await domToPng(element, {
           scale: 4,
@@ -79,11 +77,18 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
           useCORS: true,
         });
 
-        restoreGrayscale(); // ⬅️ Повертаємо grayscale після рендеру
+        restoreGrayscale(); 
 
         return dataUrl;
       } catch (error) {
-        console.error("❌ modern-screenshot rendering error:", error);
+        
+        console.error(`❌ Cover rendering error (attempt ${attempt}):`, error);
+
+        if (attempt < 3) { 
+          console.warn(`🔄 Retrying screenshot (attempt ${attempt + 1})...`);
+          return generateImage(element, attempt + 1);
+        }
+
         return null;
       }
     };

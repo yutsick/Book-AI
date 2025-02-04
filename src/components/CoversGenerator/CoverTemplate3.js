@@ -117,7 +117,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
 
 
-              <div className=" text-[34px] w-[215px] font-medium leading-[28px]  font-reenie">
+              <div className=" text-[34px] w-[200px] font-medium leading-[28px]  font-reenie">
                 {authorName || "Default Author"}
               </div>
             </div>

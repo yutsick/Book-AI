@@ -49,7 +49,7 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
         >
           ✖
         </button>
-
+ 
         <h2 className="text-lg font-semibold mb-3">Adjust Your Image</h2>
 
         {isImageLoaded ? (

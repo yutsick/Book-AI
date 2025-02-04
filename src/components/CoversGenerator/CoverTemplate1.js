@@ -16,7 +16,7 @@ const CoverTemplate1 = ({ type, data }) => {
           {/* Heading */}
           <div className=" flex mt-8 flex-col gap-4 max-w-[360px] mx-auto">
             <div>
-              <div className="tracking-[0.01em] text-[32px] leading-[36px]  text-[#F96E47] text-center mt-4 uppercase">
+              <div className="tracking-[0.01em] text-[33px] leading-[36px]  text-[#F96E47] text-center mt-4 uppercase">
                 {selectedTopic || "Default Topic"}
               </div>
             </div>
