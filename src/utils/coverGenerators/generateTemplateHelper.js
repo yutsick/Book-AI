@@ -81,7 +81,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
         return dataUrl;
       } catch (error) {
-        
+
         console.error(`❌ Cover rendering error (attempt ${attempt}):`, error);
 
         if (attempt < 3) { 
@@ -109,7 +109,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       } catch (error) {
         reject(error);
       } finally {
-        document.body.removeChild(hiddenContainer);
+        // document.body.removeChild(hiddenContainer);
       }
     })();
   });
