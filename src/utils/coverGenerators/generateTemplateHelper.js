@@ -1,4 +1,4 @@
-import { domToPng } from "modern-screenshot";
+import { domToPng, domToBlob } from "modern-screenshot";
 import { createRoot } from "react-dom/client";
 import { createPortal } from "react-dom";
 
@@ -84,16 +84,24 @@ hiddenContainer.style.zIndex = "-1";       // Прихований, але ре�
 
 
 
-        const dataUrl = await domToPng(element, {
+        const blob = await domToBlob(element, {
           scale: 4,
           cacheBust: false,
           useBlob: false,
           useCORS: true,
         });
+        // const dataUrl = await domToPng(element, {
+        //   scale: 4,
+        //   cacheBust: false,
+        //   useBlob: false,
+        //   useCORS: true,
+        // });
+       
 
         restoreGrayscale(); 
 
-        return dataUrl;
+        return blob ? URL.createObjectURL(blob) : null; // 🔥 Blob URL
+        // return dataUrl;
       } catch (error) {
 
         console.error(`❌ Cover rendering error (attempt ${attempt}):`, error);
