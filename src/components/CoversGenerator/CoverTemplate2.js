@@ -97,7 +97,7 @@ const authorImageSrc =
       )}
 
       {type === "back" && (
-        <div className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat">
+        <div className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-black">
           <img src={`${isMobile ? 
             "/images/create-book/bg/bgwhite-back-mob.png " : 
             "/images/create-book/bg/bg2-back.png"}`} 
