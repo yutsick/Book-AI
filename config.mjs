@@ -16,7 +16,8 @@ const config = {
   genresUrl: './data/createBook/genres.json',
   createBookStep1: './data/createBook/stepOne.json',
   // About Us
-  aboutUsUrl: '/data/about-us/aboutUs.json'
+  aboutUsUrl: '/data/about-us/aboutUs.json',
+  storyUrl: '/data/about-us/story.json'
 };
 
 export default config;

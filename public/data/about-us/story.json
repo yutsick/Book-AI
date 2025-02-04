@@ -1,0 +1,41 @@
+{
+    "title": "The Story of Book Tailor",
+    "backgroundUrl": "/images/about-us/roadmap.png",
+    "cards": [
+        {
+            "title": "The Beginning of an Idea",
+            "description": "It all started with a simple realization: everyone has a story worth telling, but traditional publishing often makes the process intimidating, expensive, and time-consuming. We envisioned a platform where anyone could create a professionally crafted book, regardless of their experience.",
+            "imageUrl": "/images/about-us/icon1.png",
+            "alt": "Lamp",
+            "cardColor": "#F5F1E7"
+        },
+        {
+            "title": "Building the Dream Team",
+            "description": "To bring this vision to life, we assembled a team of writers, technologists, and creative thinkers. With expertise in publishing, design, and artificial intelligence, we combined our skills to develop a tool that empowers individuals to share their stories with the world.",
+            "imageUrl": "/images/about-us/icon2.png",
+            "alt": "Team",
+            "cardColor": "#E0DCCF"
+        },
+        {
+            "title": "Developing the Platform",
+            "description": "We designed an intuitive platform powered by cutting-edge AI technology. This innovation allows users to turn their ideas into reality with ease—from generating personalized content to designing stunning book covers.",
+            "imageUrl": "/images/about-us/icon3.png",
+            "alt": "Ai",
+            "cardColor": "#E4D8B7"
+        },
+        {
+            "title": "Empowering Storytellers",
+            "description": "Book Tailor isn’t just a tool; it’s a way to democratize storytelling. By providing an accessible, user-friendly experience, we enable anyone to craft a book that’s uniquely theirs, whether it’s a novel, a memoir, or a professional guide.",
+            "imageUrl": "/images/about-us/icon4.png",
+            "alt": "Book",
+            "cardColor": "#E7D195"
+        },
+        {
+            "title": "Shaping the Future",
+            "description": "Today, Book Tailor continues to grow, helping thousands of people bring their ideas to life. From aspiring authors to professionals, our users span every walk of life. We’re committed to making book creation a journey that inspires, empowers, and connects.",
+            "imageUrl": "/images/about-us/icon5.png",
+            "alt": "Hand with people",
+            "cardColor": "#EEC85FDB"
+        }
+    ]
+}

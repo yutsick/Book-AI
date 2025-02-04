@@ -14,53 +14,53 @@ export default {
         z: "var(--spineWidth)",
       },
       screens: {
-        '865': '865px', 
+        '865': '865px',
       },
-      colors:{
+      colors: {
         orange: '#EAAC00',
         pink: 'rgba(175, 131, 0, 0.08)',
         gray: {
-          DEFAULT: '#2B2B2B', 
-          300: '#2B2B2B',     
-          500: '#1E1E1E',     
+          DEFAULT: '#2B2B2B',
+          300: '#2B2B2B',
+          500: '#1E1E1E',
         },
       },
       fontFamily: {
-        roboto: ['var(--font-roboto)', 'sans-serif'], 
-        inter: ['var(--font-inter)', 'sans-serif'], 
-        caveat: ['var(--font-caveat)', 'sans-serif'], 
-        pacifico: ['var(--font-pacifico)', 'sans-serif'], 
-        montserrat: ['var(--font-montserrat)', 'sans-serif'], 
-        anton: ['var(--font-anton)', 'sans-serif'], 
+        roboto: ['var(--font-roboto)', 'sans-serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        caveat: ['var(--font-caveat)', 'sans-serif'],
+        pacifico: ['var(--font-pacifico)', 'sans-serif'],
+        montserrat: ['var(--font-montserrat)', 'sans-serif'],
+        anton: ['var(--font-anton)', 'sans-serif'],
         reenie: ['var(--font-reenie)', 'cursive'],
         degular: ['Degular', 'sans-serif'],
         georgia: ['Georgia', 'sans-serif'],
-        
-      
+
+
       },
       boxShadow: {
         heroBtnShadow: '0px 0px 2.13px 2.13px #82828275',
-        btnShadow: '0px 2.5px 4px 1.9px rgba(128, 128, 128, 0.28)', 
-        slideShadow:'0px 0px 4px 0px #00000040',
+        btnShadow: '0px 2.5px 4px 1.9px rgba(128, 128, 128, 0.28)',
+        slideShadow: '0px 0px 4px 0px #00000040',
 
         chatShadow: '0px 2px 4px 2px #00000040',
-        worksShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.25)'
+        worksShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.25)',
 
-
-      },
-    },
+        storyCardShadow: '0px 1px 25px rgba(40, 44, 47, 0.15)'
   },
-  plugins: [
-    function ({ addUtilities }) {
-      addUtilities({
-        '.no-scrollbar': {
-          'scrollbar-width': 'none', /* Firefox */
-          '-ms-overflow-style': 'none', /* IE 10+ */
-        },
-        '.no-scrollbar::-webkit-scrollbar': {
-          display: 'none', /* Chrome, Safari, Edge */
-        },
-      });
-    },
-  ],
+},
+  },
+plugins: [
+  function ({ addUtilities }) {
+    addUtilities({
+      '.no-scrollbar': {
+        'scrollbar-width': 'none', /* Firefox */
+        '-ms-overflow-style': 'none', /* IE 10+ */
+      },
+      '.no-scrollbar::-webkit-scrollbar': {
+        display: 'none', /* Chrome, Safari, Edge */
+      },
+    });
+  },
+],
 };
