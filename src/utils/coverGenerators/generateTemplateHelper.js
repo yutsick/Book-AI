@@ -8,11 +8,11 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
 
     hiddenContainer.style.position = "fixed";  
-hiddenContainer.style.top = "0"; 
-hiddenContainer.style.left = "0";
-hiddenContainer.style.opacity = "0.01";   
-hiddenContainer.style.pointerEvents = "none"; 
-hiddenContainer.style.zIndex = "-1";       
+    hiddenContainer.style.top = "0"; 
+    hiddenContainer.style.left = "0";
+    hiddenContainer.style.opacity = "0.01";   
+    hiddenContainer.style.pointerEvents = "none"; 
+    hiddenContainer.style.zIndex = "-1";       
 
     // hiddenContainer.style.position = "absolute";
     // hiddenContainer.style.width = "431px";

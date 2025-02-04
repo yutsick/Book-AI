@@ -9,6 +9,10 @@ const CoverTemplate3 = ({ type, data }) => {
 
     const [spineTitleFontSize, setSpineTitleFontSize] = useState(36);
 
+    const isMobile = () => {
+      return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    };
+
     useEffect(() => {
     
         const calculateFontSize = (elementRef, maxFontSize, maxHeight) => {
@@ -91,7 +95,10 @@ const CoverTemplate3 = ({ type, data }) => {
           className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/images/create-book/bg/bg3.png')" }}
         >
-          <img src="images/create-book/bg/bg3-back.png" alt="" />
+          <img src={`${isMobile ? 
+            "/images/create-book/bg/bg3-back-mob.png " : 
+            "/images/create-book/bg/bg3-back.png"}`} 
+            alt="Back Cover" />
         </div>
       )}
 

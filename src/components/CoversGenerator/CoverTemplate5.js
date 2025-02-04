@@ -6,6 +6,10 @@ const CoverTemplate5 = ({ type, data }) => {
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
+    const isMobile = () => {
+      return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    };
+
   return (
     <>
       {/* Front Cover */}
@@ -60,7 +64,10 @@ const CoverTemplate5 = ({ type, data }) => {
           className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
 
         >
-          <img src="images/create-book/bg/bg5-back.png" alt="Back Cover" />
+          <img src={`${isMobile ? 
+            "/images/create-book/bg/bgwhite-back-mob.png " : 
+            "/images/create-book/bg/bg5-back.png"}`} 
+            alt="Back Cover" />
         </div>
       )}
 

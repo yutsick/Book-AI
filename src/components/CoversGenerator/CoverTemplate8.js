@@ -13,6 +13,10 @@ const CoverTemplate8 = ({ type, data }) => {
   const [titleFontSize, setTitleFontSize] = useState(27);
   const [subTitleFontSize, setSubTitleFontSize] = useState(20);
 
+  const isMobile = () => {
+    return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  };
+
   useEffect(() => {
 
     const calculateFontSize = (elementRef, maxFontSize, maxHeight) => {
@@ -123,7 +127,10 @@ const CoverTemplate8 = ({ type, data }) => {
           className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-white"
 
         >
-          <img src="images/create-book/bg/bg8-back.png" alt="Back Cover" />
+          <img src={`${isMobile ? 
+            "/images/create-book/bg/bgblack-back-mob.png " : 
+            "/images/create-book/bg/bg8-back.png"}`} 
+            alt="Back Cover" />
         </div>
       )}
 
