@@ -74,7 +74,7 @@ const CoverTemplate5 = ({ type, data }) => {
               <div>{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="flex font-black flex-col  justify-center items-center text-[16px] w-[215px] font-degular h-full  ">
+            <div className="flex font-black flex-col  justify-center items-center text-[21px] w-[215px] font-degular h-full  ">
               <div>{authorName || "Default Author"}</div>
             </div>
           </div>

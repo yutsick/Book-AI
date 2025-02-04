@@ -143,7 +143,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
       {isRendered && (
         <div className="flex justify-center md:max-w-[425px] md:pl-2">
           <button
-            className="mt-8 md:mt-4 text-[15px] font-semibold bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[170px] flex items-center justify-center border rounded-[3px] border-[#878787] cursor-pointer"
+            className="mt-8 md:mt-4 text-[14px] font-medium bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[170px] flex items-center justify-center border rounded-[3px] border-[#878787] cursor-pointer"
             onClick={() => setIsCropperOpen(true)}
           >
             Adjust the Image
