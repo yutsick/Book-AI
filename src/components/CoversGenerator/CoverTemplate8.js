@@ -44,7 +44,7 @@ const CoverTemplate8 = ({ type, data }) => {
     <>
       {/* Front Cover */}
       {type === "front" && (
-        <div className="w-[431px] h-[648px] bg-white p-3 mx-auto ">
+        <div className="w-[431px] h-[648px] bg-white p-3 mx-auto relative">
           <div className="relative h-full w-full  flex flex-col items-center justify-between "
             style={{ backgroundImage: "url('/images/create-book/bg/bg8.png')" }}
           >
@@ -107,7 +107,7 @@ const CoverTemplate8 = ({ type, data }) => {
                 }}
               >
 
-                <div className="text-black rotate-[-2deg] font-degular mt-4 font-bold text-[26px]">{authorName || "Default Author"}</div>
+                <div className="whitespace-nowrap text-black rotate-[-2deg] font-degular mt-4 font-bold text-[26px]">{authorName || "Default Author"}</div>
               </div>
 
             </div>
@@ -134,11 +134,11 @@ const CoverTemplate8 = ({ type, data }) => {
           <div className="flex text-black font-black  items-center h-[57px] w-[648px]  px-4 bg-white justify-center absolute rotate-90 origin-top-left left-[calc(50%+28px)] gap-16 font-degular">
 
             <div className="flex pb-1 flex-col justify-center items-center text-[28px] leading-[28px] tracking-[0.01em] h-full">
-              <div>{selectedTopic || "Default Topic"}</div>
+              <div className="whitespace-nowrap">{selectedTopic || "Default Topic"}</div>
             </div>
 
             <div className="flex flex-col justify-center items-center text-[20px]   h-full  ">
-              <div>{authorName || "Default Author"}</div>
+              <div className="whitespace-nowrap">{authorName || "Default Author"}</div>
             </div>
           </div>
         </div>

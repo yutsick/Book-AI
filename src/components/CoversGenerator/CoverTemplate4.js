@@ -61,12 +61,12 @@ const CoverTemplate4 = ({ type, data }) => {
 
           <div className="flex text-[#0D453A] items-center h-[57px] w-[648px] gap-2  pl-2 bg-[#FFA3BC] justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] text-[23px]">
 
-            <div className="flex flex-1 flex-col justify-center items-center pb-2 font-pacifico ">
-              <div>{selectedTopic || "Default Topic"}</div>
+            <div className="whitespace-nowrap flex flex-1 flex-col justify-center items-center pb-2 font-pacifico ">
+              <div className="whitespace-nowrap">{selectedTopic || "Default Topic"}</div>
             </div>
 
             <div className="flex font-black flex-col justify-center items-center ]  font-degular h-full w-[243px] bg-[#F0EADE] p-2 ">
-              <div>{authorName || "Default Author"}</div>
+              <div className="whitespace-nowrap">{authorName || "Default Author"}</div>
             </div>
           </div>
         </div>

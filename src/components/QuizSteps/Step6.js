@@ -4,21 +4,23 @@ import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import { validateImage } from "@/utils/imageValidation";
 
 const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
-  const { 
-    authorImage, 
-    setAuthorImage, 
-    croppedImage, 
+  const {
+    authorImage,
+    setAuthorImage,
+    croppedImage,
     setCroppedImage,
-    setProcessedAuthorImage, 
-    authorName, 
-    error, 
+    setProcessedAuthorImage,
+    authorName,
+    error,
     setError,
-    setSelectedTemplate 
+    setSelectedTemplate
   } = useContext(CreateBookContext);
 
   const [preview, setPreview] = useState(null);
-  const [isProcessing, setIsProcessing] = useState(false); 
-
+  const [isProcessing, setIsProcessing] = useState(false);
+  const isMobile = () => {
+    return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  };
   useEffect(() => {
     setProgressStep(4);
   }, [setProgressStep]);
@@ -30,7 +32,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   }, [authorImage]);
 
   useEffect(() => {
-    setIsButtonDisabled(!croppedImage); 
+    setIsButtonDisabled(!croppedImage);
     return () => {
       setIsButtonDisabled(false);
     };
@@ -41,7 +43,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   //   setAuthorImage(file);
   //   setCroppedImage(null); 
   //   setIsProcessing(true); 
-  
+
 
   //   const validationResult = await validateImage(file);
   //   if (!validationResult.valid) {
@@ -49,36 +51,36 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   //   } else {
   //     setError(null);
   //   }
-  
+
   //   try {
   //     const formData = new FormData();
   //     formData.append("image", file);
-  
+
   //     const response = await fetch("https://api.booktailor.com/remove-background", {
   //       method: "POST",
   //       body: formData,
   //     });
-  
+
   //     if (!response.ok) {
   //       throw new Error("Error removing background");
   //     }
-  
+
   //     const data = await response.json();
   //     const processedUrl = data.data.processed_url;
   //     setProcessedAuthorImage(processedUrl);
-  
-    
+
+
   //     const imageResponse = await fetch(processedUrl);
   //     if (!imageResponse.ok) {
   //       throw new Error("Error fetching processed image");
   //     }
-  
+
   //     const imageBlob = await imageResponse.blob();
   //     const imageFile = new File([imageBlob], "processed-image.png", { type: "image/png" });
-  
+
   //     console.log("✅ Processed Image:", imageFile);
   //     setCroppedImage(imageFile); 
-      
+
   //   } catch (error) {
   //     console.error("❌ Error processing image:", error);
   //     setError("Failed to process the image.");
@@ -87,29 +89,29 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   //     setSelectedTemplate({});
   //   }
   // };
-  
+
   const resizeImage = async (file, maxWidth, maxHeight) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = URL.createObjectURL(file);
       img.onload = () => {
         let { width, height } = img;
-  
+
         // Визначаємо коефіцієнт масштабу
         let scaleFactor = Math.min(maxWidth / width, maxHeight / height, 1);
-  
+
         if (scaleFactor < 1) {
           width = Math.round(width * scaleFactor);
           height = Math.round(height * scaleFactor);
         }
-  
+
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d", { alpha: true }); // ✅ Прозорість увімкнена
         canvas.width = width;
         canvas.height = height;
-  
+
         ctx.drawImage(img, 0, 0, width, height);
-  
+
         // 🔥 Використовуємо PNG, але зменшуємо якість (компресія)
         canvas.toBlob((blob) => {
           const resizedFile = new File([blob], "resized-image.png", { type: "image/png" });
@@ -118,63 +120,74 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       };
     });
   };
-  
-  
-  
 
-  
+
+
+
+
   const handleFileChange = async (file) => {
     setPreview(URL.createObjectURL(file));
-  
-    // ✅ Зберігаємо оригінальне зображення (для друку)
+
+
     setAuthorImage(file);
-  
-    // ✅ Масштабуємо копію перед надсиланням
-    const resizedFile = await resizeImage(file, 431 * 1.5, 648 * 1.5);
-  
+
+    let processedFile = file;
+
+
+    if (isMobile()) {
+      console.log("📱 Mobile detected - resizing image...");
+      processedFile = await resizeImage(file, 431 * 1.5, 648 * 1.5);
+    } else {
+      console.log("💻 Desktop detected - using original image.");
+    }
+
     setCroppedImage(null);
     setIsProcessing(true);
-  
-    const validationResult = await validateImage(resizedFile);
+
+    const validationResult = await validateImage(processedFile);
     if (!validationResult.valid) {
       setError(validationResult.error);
     } else {
       setError(null);
     }
-  
+
+   
+
+    
     try {
       const formData = new FormData();
-      formData.append("image", resizedFile);
-  
+      formData.append("image", processedFile);
+
       const response = await fetch("https://api.booktailor.com/remove-background", {
         method: "POST",
         body: formData,
       });
-  
+
       if (!response.ok) {
         throw new Error("Error removing background");
       }
-  
+
       const data = await response.json();
       const processedUrl = data.data.processed_url;
       setProcessedAuthorImage(processedUrl);
-  
-      // ✅ Завантажуємо оброблене зображення
+
       const imageResponse = await fetch(processedUrl);
       if (!imageResponse.ok) {
         throw new Error("Error fetching processed image");
       }
-  
+
       const imageBlob = await imageResponse.blob();
       const imageFile = new File([imageBlob], "processed-image.png", { type: "image/png" });
-  
+
       console.log("✅ Processed Image (before resizing):", imageFile);
-  
-      // ✅ Масштабуємо `croppedImage`, щоб воно було не більше 431x648 * 4
-      const scaledImageFile = await resizeImage(imageFile, 431 * 4, 648 * 4);
-  
-      console.log("✅ Scaled Processed Image:", scaledImageFile);
-      setCroppedImage(scaledImageFile);
+
+      let finalImage = imageFile;
+      if (isMobile()) {
+        finalImage = await resizeImage(imageFile, 431 * 4, 648 * 4);
+      }
+
+      console.log("✅ Final Processed Image:", finalImage);
+      setCroppedImage(finalImage);
     } catch (error) {
       console.error("❌ Error processing image:", error);
       setError("Failed to process the image.");
@@ -183,8 +196,9 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       setSelectedTemplate({});
     }
   };
-  
-  
+
+
+
 
   return (
     <div>

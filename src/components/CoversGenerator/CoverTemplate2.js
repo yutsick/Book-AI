@@ -10,35 +10,40 @@ const authorImageSrc =
   const titleRef = useRef(null);
   const subTitleRef = useRef(null);
   const spineTitleRef = useRef(null);
+  const spineAuthorRef = useRef(null);
 
 
   const [titleFontSize, setTitleFontSize] = useState(50);
   const [subTitleFontSize, setSubTitleFontSize] = useState(20);
   const [spineTitleFontSize, setSpineTitleFontSize] = useState(36);
+  const [spineAuthorFontSize, setSpineAuthorFontSize] = useState(20);
 
   useEffect(() => {
 
-    const calculateFontSize = (elementRef, maxFontSize, maxHeight) => {
+    const calculateFontSize = (elementRef, maxFontSize, maxHeight, maxWidth = null) => {
       const element = elementRef.current;
       if (!element) return maxFontSize;
-
     
       let fontSize = maxFontSize;
       element.style.fontSize = `${fontSize}px`;
-
-     
-      while (element.scrollHeight > maxHeight && fontSize > 10) {
+    
+      while (
+        (element.scrollHeight > maxHeight || (maxWidth && element.scrollWidth > maxWidth)) 
+        && fontSize > 10
+      ) {
         fontSize -= 1;
         element.style.fontSize = `${fontSize}px`;
       }
-
+    
       return fontSize;
     };
+    
 
   //  ref, minFontSize, maxHeight 
     const newTitleFontSize = calculateFontSize(titleRef, 50, 150); 
     const newSubTitleFontSize = calculateFontSize(subTitleRef, 20, 60); 
-    const newSpineTitleFontSize = calculateFontSize(spineTitleRef, 36, 50); 
+    const newSpineTitleFontSize = calculateFontSize(spineTitleRef, 32, 50, 400); 
+    const newSpineAuthorFontSize = calculateFontSize(spineAuthorRef, 20, 50, 170); 
 
     setTitleFontSize(newTitleFontSize);
     setSubTitleFontSize(newSubTitleFontSize);
@@ -98,7 +103,7 @@ const authorImageSrc =
           <div className="flex flex-1 items-center h-[57px] w-[648px] gap-10 pl-2  bg-black justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular font-black">
             <div className="text-white  flex flex-col justify-center items-center text-[36px] font-black leading-[28px] font-degular">
               <div
-              className=" pl-2"
+              className=" pl-2 whitespace-nowrap"
                 ref={spineTitleRef}
                 style={{
                   fontSize: `${spineTitleFontSize}px`,
@@ -107,8 +112,16 @@ const authorImageSrc =
               >{selectedTopic || "Default Topic"}</div>
             </div>
 
-            <div className="text-white  flex flex-col justify-center items-start text-[20px] font-degular h-full w-[215px] bg-[#BB2621] px-4 ">
-              <div>{authorName || "Default Author"}</div>
+            <div className="text-white  flex flex-col justify-center items-start  font-degular h-full w-[215px] bg-[#BB2621] px-4 ">
+              <div 
+              className="whitespace-nowrap"
+                ref = {spineAuthorRef}
+                style={{
+                  fontSize: `${spineAuthorFontSize}px`,
+                  lineHeight: `${spineAuthorFontSize*1.1}px`,
+                }}
+                >
+                {authorName || "Default Author"}</div>
             </div>
           </div>
         </div>

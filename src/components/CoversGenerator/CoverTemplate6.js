@@ -70,13 +70,13 @@ const CoverTemplate6 = ({ type, data }) => {
             <img src="/images/create-book/bg/wave-red-spine.png" alt="" className="h-[57px] "/>
             <div className=" flex items-center justify-between text-[18px] font-semibold font-montserrat flex-1">
 
-              <div className=" font-montserrat text-[18px] leading-[20px]">
+              <div className="whitespace-nowrap font-montserrat text-[18px] leading-[20px]">
                 {selectedTopic || "Default Topic"}
               </div>
 
 
 
-              <div className="font-montserrat text-[17px] leading-[17px] ">
+              <div className="whitespace-nowrap font-montserrat text-[17px] leading-[17px] ">
                 {authorName || "Default Author"}
               </div>
             </div>

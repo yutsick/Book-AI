@@ -1,4 +1,4 @@
-import { domToPng, domToBlob } from "modern-screenshot";
+import { domToBlob } from "modern-screenshot";
 import { createRoot } from "react-dom/client";
 import { createPortal } from "react-dom";
 
@@ -7,12 +7,12 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
     const hiddenContainer = document.createElement("div");
 
 
-    hiddenContainer.style.position = "fixed";  // Замість `absolute`
+    hiddenContainer.style.position = "fixed";  
 hiddenContainer.style.top = "0"; 
 hiddenContainer.style.left = "0";
-hiddenContainer.style.opacity = "0.01";    // Мінімальна прозорість
-hiddenContainer.style.pointerEvents = "none"; // Не взаємодіє з мишею/тачем
-hiddenContainer.style.zIndex = "-1";       // Прихований, але рендериться
+hiddenContainer.style.opacity = "0.01";   
+hiddenContainer.style.pointerEvents = "none"; 
+hiddenContainer.style.zIndex = "-1";       
 
     // hiddenContainer.style.position = "absolute";
     // hiddenContainer.style.width = "431px";
@@ -131,7 +131,7 @@ hiddenContainer.style.zIndex = "-1";       // Прихований, але ре�
       } catch (error) {
         reject(error);
       } finally {
-        // document.body.removeChild(hiddenContainer);
+        document.body.removeChild(hiddenContainer);
       }
     })();
   });

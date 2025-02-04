@@ -62,13 +62,13 @@ const CoverTemplate1 = ({ type, data }) => {
           >
             <div className="text-white flex items-center justify-between text-[18px] leading-[22px] tracking-[0.01em] font-anton flex-1">
 
-              <div className="uppercase">
+              <div className="uppercase whitespace-nowrap">
                 {selectedTopic || "Default Topic"}
               </div>
 
 
 
-              <div className="text-[#14465F] text-[21px] font-anton ">
+              <div className="text-[#14465F] text-[21px] font-anton whitespace-nowrap">
                 {authorName || "Default Author"}
               </div>
             </div>

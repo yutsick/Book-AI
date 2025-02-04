@@ -105,7 +105,7 @@ const CoverTemplate3 = ({ type, data }) => {
             <div className="w-full flex items-center justify-center gap-16 ] absolute font-bold font-caveat flex-1 text-[#000082]">
 
               <div 
-              className="font-bold flex-1 text-center pb-2 pl-2"
+              className="font-bold flex-1 text-center pb-2 pl-2 "
               ref={spineTitleRef}
               style={{
                 fontSize: `${spineTitleFontSize}px`,
@@ -117,7 +117,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
 
 
-              <div className=" text-[34px] w-[200px] font-medium leading-[28px]  font-reenie">
+              <div className=" text-[34px] w-[200px] font-medium leading-[28px] whitespace-nowrap font-reenie">
                 {authorName || "Default Author"}
               </div>
             </div>

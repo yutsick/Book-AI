@@ -71,11 +71,11 @@ const CoverTemplate5 = ({ type, data }) => {
           <div className="flex text-white items-center h-[57px] w-[648px] pb-1 pl-6 bg-[#747778] justify-center absolute rotate-90 origin-top-left left-[calc(50%+28px)] ">
 
             <div className="flex font-georgia flex-1 flex-col justify-center  text-[24px] italic ">
-              <div>{selectedTopic || "Default Topic"}</div>
+              <div className="whitespace-nowrap">{selectedTopic || "Default Topic"}</div>
             </div>
 
             <div className="flex font-black flex-col  justify-center items-center text-[21px] w-[215px] font-degular h-full  ">
-              <div>{authorName || "Default Author"}</div>
+              <div className="whitespace-nowrap">{authorName || "Default Author"}</div>
             </div>
           </div>
         </div>
