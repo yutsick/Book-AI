@@ -76,29 +76,13 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       });
     };
     
-    const forceLoadImages = async (element) => {
-      const images = element.querySelectorAll("img");
-      for (const img of images) {
-        if (!img.complete || img.naturalWidth === 0) {
-          console.warn(`🔄 Force reloading image: ${img.src}`);
-          img.src = img.src;  // Примусове оновлення
-          await new Promise((resolve) => setTimeout(resolve, 100)); // Невелика затримка для безпеки
-        }
-      }
-    };
-    
-   
-  
-    
-    
     const generateImage = async (element, attempt = 1) => {
       try {
         const restoreGrayscale = fixGrayscaleBeforeScreenshot(element); 
 
         disableLazyLoading(wrapper);
-      
-        await waitForImages(wrapper);
-        await forceLoadImages(wrapper);
+      await waitForImages(wrapper);
+
 
         const dataUrl = await domToPng(element, {
           scale: 4,
