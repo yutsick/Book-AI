@@ -54,9 +54,10 @@ const CoverTemplate1 = ({ type, data }) => {
           style={{ backgroundImage: "url('/images/create-book/bg/bg1-back.png')" }}
         >
           <img src={`${isMobile ? 
-            "/images/create-book/bg/bgwhite-back-mob.png " : 
-            "/images/create-book/bg/bg1-back.png"}`} 
-            alt="Back Cover" />
+            "/images/create-book/bg/bg1-back-mob.png " : 
+            "/images/create-book/bg/bg1-back-text.png"}`} 
+            alt="Back Cover" 
+            className="w-full h-full"/>
         </div>
       )}
 
