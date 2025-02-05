@@ -1,5 +1,6 @@
 {
     "heading": "About Us",
     "description": "At Book Tailor, we believe everyone has a story worth telling. Whether it’s a novel you’ve always dreamed of writing, a memoir filled with cherished memories, or a guide to your area of expertise, our mission is to make bringing your ideas to life as seamless and enjoyable as possible.",
-    "imageUrl": "/images/about-us/cover.png"
+    "imageUrl": "/images/about-us/cover.png",
+    "alt": "An attractive man with a booktailor book"
 }

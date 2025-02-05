@@ -11,7 +11,7 @@ function StoryCard({ card, index, isEven }) {
     return (
         <div className={`flex items-center gap-2 md:gap-12  ${isEven ? "flex-col sm:flex-row ml-auto" : "mr-auto justify-start flex-col sm:flex-row-reverse"}`}>
             <div className="">
-                <div style={{ backgroundColor: cardColor }} className="shadow-storyCardShadow p-4 rounded-full flex justify-center items-center h-[70px] w-[70px] md:h-[80px] md:w-[80px] font-bold text-[35px]">
+                <div style={{ backgroundColor: cardColor }} className="text-gray shadow-storyCardShadow p-4 rounded-full flex justify-center items-center h-[70px] w-[70px] md:h-[80px] md:w-[80px] font-bold text-[35px]">
                     {index + 1}
                 </div>
             </div>
@@ -26,8 +26,8 @@ function StoryCard({ card, index, isEven }) {
 
                 <div className="px-[20px] py-[10px]">
                     <div>
-                        <h3 className="text-[18px] md:text-[20px] font-semibold text-gray text-center sm:text-left">{title}</h3>
-                        <p className="font-medium mt-2 text-[16px] text-gray leading-[22px] sm:leading-[27px] text-center sm:text-left">{description}</p>
+                        <h3 className="text-gray text-[18px] md:text-[20px] font-semibold text-center sm:text-left">{title}</h3>
+                        <p className="text-gray mt-2 text-[16px] md:text-[18px] leading-[22px] sm:leading-[27px] text-center sm:text-left">{description}</p>
                     </div>
                 </div>
             </div>

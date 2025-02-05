@@ -17,7 +17,11 @@ const config = {
   createBookStep1: './data/createBook/stepOne.json',
   // About Us
   aboutUsUrl: '/data/about-us/aboutUs.json',
-  storyUrl: '/data/about-us/story.json'
+  storyUrl: '/data/about-us/story.json',
+  whatWeDoUrl: '/data/about-us/whatWeDo.json',
+  chooseUrl: '/data/about-us/choose.json',
+  visionUrl: '/data/about-us/vision.json',
+  joinUsUrl: '/data/about-us/joinUs.json',
 };
 
 export default config;
