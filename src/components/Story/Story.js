@@ -36,8 +36,8 @@ function Story() {
             ></div>
 
             <div className="relative z-10 w-full max-w-[950px] mx-auto px-4 md:px-5 py-10">
-                <h2 className="text-center text-[30px] md:text-[45px] leading-[55px] font-semibold mb-10">{storyData.title}</h2>
-                <div className="grid grid-cols-1 gap-x-[40px] gap-y-[30px] sm:gap-y-[60px] justify-items-center w-full mx-auto">
+                <h2 className="text-gray text-center text-[30px] md:text-[45px] leading-[55px] font-semibold mb-10">{storyData.title}</h2>
+                <div className="grid grid-cols-1 gap-x-[40px] gap-y-[50px] sm:gap-y-[60px] justify-items-center w-full mx-auto">
                     {storyData.cards.map((card, index) => (
                         <StoryCard
                             card={card}

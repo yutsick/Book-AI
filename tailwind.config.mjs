@@ -46,7 +46,9 @@ export default {
         chatShadow: '0px 2px 4px 2px #00000040',
         worksShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.25)',
 
-        storyCardShadow: '0px 1px 25px rgba(40, 44, 47, 0.15)'
+        storyCardShadow: '0px 1px 25px rgba(40, 44, 47, 0.15)',
+        chooseShadow: '0px 0px 11.27px 1px rgba(0, 0, 0, 0.62)'
+
   },
 },
   },
