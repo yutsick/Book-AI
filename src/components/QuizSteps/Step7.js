@@ -13,8 +13,19 @@ const previewTemplates = [
   { id: 5, src: "images/create-book/previews/front5.png", alt: "Template 5" },
   { id: 6, src: "images/create-book/previews/front6.png", alt: "Template 6" },
   { id: 7, src: "images/create-book/previews/front7.png", alt: "Template 7" },
-  { id: 8, src: "images/create-book/previews/front8.png", alt: "Template 8" },
+  { id: 8, src: "images/create-book/previews/front8.png", alt: "Template 8" }
 ];
+
+const cropperData = [
+  {id:1, top:null, bottom:80, left:8, width:431, height:340},
+  {id:2, top:null, bottom:215, left:8, width:431, height:433},
+  {id:3, top:null, bottom:90, left:78, width:300, height:360},
+  {id:4, top:0, bottom:null, left:8, width:431, height:405},
+  {id:5, top:null, bottom:0, left:8, width:431, height:648},
+  {id:6, top:null, bottom:113, left:85, width:278, height:302, radius: true},
+  {id:7, top:null, bottom:113, left:85, width:278, height:302, radius: true},
+  {id:8, top:null, bottom:12, left:20, width:407, height:400} 
+]
 
 const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   const {
@@ -102,7 +113,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
 
   return (
     <>
-      <div className=" w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
+      <div className="relative w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
         {/* Slider */}
         <div className="max-w-[431px] w-full flex justify-center items-center relative h-[420px] md:h-[648px]">
           {loading ? <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div> : selectedCover ? <CoverSlider selectedCover={selectedCover} /> : <p>No cover selected</p>}
@@ -129,6 +140,8 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
         {/* Modal crop window */}
         {isCropperOpen && imageSrc && (
           <ImageCropperModal
+            cropperData={cropperData}
+            templateId={selectedTemplate.templateId}
             imageSrc={imageSrc}
             onClose={() => setIsCropperOpen(false)}
             onSave={(newCroppedImage) => {

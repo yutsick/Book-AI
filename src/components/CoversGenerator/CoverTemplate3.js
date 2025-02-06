@@ -6,39 +6,45 @@ const CoverTemplate3 = ({ type, data }) => {
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
     const spineTitleRef = useRef(null);
+    const spineAuthorRef = useRef(null);
 
     const [spineTitleFontSize, setSpineTitleFontSize] = useState(36);
+    const [spineAuthorFontSize, setSpineAuthorFontSize] = useState(20);
 
     const isMobile = () => {
       return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
     };
 
     useEffect(() => {
+      const calculateFontSize = (elementRef, maxFontSize, maxHeight, maxWidth = null) => {
+        const element = elementRef.current;
+        if (!element) return maxFontSize;
     
-        const calculateFontSize = (elementRef, maxFontSize, maxHeight) => {
-          const element = elementRef.current;
-          if (!element) return maxFontSize;
+        let fontSize = maxFontSize;
+        element.style.fontSize = `${fontSize}px`;
+        element.style.whiteSpace = "nowrap"; // Важливо для перевірки ширини тексту
     
-        
-          let fontSize = maxFontSize;
+        while (
+          (element.scrollHeight > maxHeight || (maxWidth && element.scrollWidth > maxWidth)) 
+          && fontSize > 10
+        ) {
+          fontSize -= 1;
           element.style.fontSize = `${fontSize}px`;
+        }
     
-         
-          while (element.scrollHeight > maxHeight && fontSize > 28) {
-            fontSize -= 1;
-            element.style.fontSize = `${fontSize}px`;
-          }
+        element.style.whiteSpace = ""; // Скидання стилю після обчислення
+        return fontSize;
+      };
     
-          return fontSize;
-        };
+      // Перерахунок розміру шрифта для тайтлу та автора
+      const newSpineTitleFontSize = calculateFontSize(spineTitleRef, 48, 40, 400);
+      const newSpineAuthorFontSize = calculateFontSize(spineAuthorRef, 34, 40, 140);
     
-       
-    //  ref, minFontSize, maxHeight 
-        const newSpineTitleFontSize = calculateFontSize(spineTitleRef, 40, 48); 
+      // Оновлення стану
+      setSpineTitleFontSize(newSpineTitleFontSize);
+      setSpineAuthorFontSize(newSpineAuthorFontSize);
+    }, [selectedTopic, selectedSubTopic]);
     
- 
-        setSpineTitleFontSize(newSpineTitleFontSize);
-      }, [selectedTopic, selectedSubTopic]);
 
     
 
@@ -66,7 +72,7 @@ const CoverTemplate3 = ({ type, data }) => {
           </div>
           {/* Image with Text */}
           <div className="flex flex-col w-full flex-1 relative mt-10">
-           <div className=" w-[300px] h-[360px] mx-auto shadow rotate-[-2deg] border-[3px] border-white bg-black">
+           <div className=" w-[300px] h-[360px] mx-auto shadow rotate-[-2deg] border-[3px] border-white bg-[#C6B360]">
 
            
             <img
@@ -92,9 +98,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/images/create-book/bg/bg3.png')" }}
-        >
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-[#F9F6EB]">
           <img src={`${isMobile ? 
             "/images/create-book/bg/bg3-back-mob.png " : 
             "/images/create-book/bg/bg3-back.png"}`} 
@@ -109,10 +113,10 @@ const CoverTemplate3 = ({ type, data }) => {
             className="p-2  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-10  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]"
             style={{ backgroundImage: "url('/images/create-book/bg/bg3-spine.png')" }}
           >
-            <div className="w-full flex items-center justify-center gap-16 ] absolute font-bold font-caveat flex-1 text-[#000082]">
+            <div className="w-full gap-4 flex items-center justify-between absolute font-bold font-caveat flex-1 text-[#000082]">
 
               <div 
-              className="font-bold flex-1 text-center pb-2 pl-2 "
+              className="whitespace-nowrap font-bold  text-center pb-2 flex-1 "
               ref={spineTitleRef}
               style={{
                 fontSize: `${spineTitleFontSize}px`,
@@ -124,7 +128,13 @@ const CoverTemplate3 = ({ type, data }) => {
 
 
 
-              <div className=" text-[34px] w-[200px] font-medium leading-[28px] whitespace-nowrap font-reenie">
+              <div className="pr-2  font-medium whitespace-nowrap font-reenie"
+                ref={spineAuthorRef}
+                style={{
+                  fontSize: `${spineAuthorFontSize}px`,
+                  lineHeight: `${spineAuthorFontSize}px`,
+                }}
+              >
                 {authorName || "Default Author"}
               </div>
             </div>

@@ -11,9 +11,9 @@ export const CreateBookProvider = ({ children }) => {
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState([]);
   const [authorEmail, setAuthorEmail] = useState(null);
 
-  const [authorImage, setAuthorImage] = useState(""); // Оригінальне зображення
-  const [croppedImage, setCroppedImage] = useState(""); // Обрізане зображення
-  const [processedAuthorImage, setProcessedAuthorImage] = useState(null); // Оброблене (можливо, з фільтрами)
+  const [authorImage, setAuthorImage] = useState(""); 
+  const [croppedImage, setCroppedImage] = useState(""); 
+  const [processedAuthorImage, setProcessedAuthorImage] = useState(null); 
 
   const [error, setError] = useState(null);
 

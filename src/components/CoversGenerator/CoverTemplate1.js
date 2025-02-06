@@ -39,7 +39,7 @@ const CoverTemplate1 = ({ type, data }) => {
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className=" max-h-[340px] object-contain block"
+              className=" max-h-[340px] object-cover block"
             />
             <div className=" text-[28px]   bg-white h-[80px] w-full flex items-center justify-center  text-[#14465F] font-anton">
               {authorName || "Default Author"}
@@ -54,9 +54,10 @@ const CoverTemplate1 = ({ type, data }) => {
           style={{ backgroundImage: "url('/images/create-book/bg/bg1-back.png')" }}
         >
           <img src={`${isMobile ? 
-            "/images/create-book/bg/bgwhite-back-mob.png " : 
-            "/images/create-book/bg/bg1-back.png"}`} 
-            alt="Back Cover" />
+            "/images/create-book/bg/bg1-back-mob.png " : 
+            "/images/create-book/bg/bg1-back-text.png"}`} 
+            alt="Back Cover" 
+            className="w-full h-full"/>
         </div>
       )}
 

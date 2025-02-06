@@ -43,7 +43,7 @@ const authorImageSrc =
     };
     
 
-  //  ref, minFontSize, maxHeight 
+  //  ref, minFontSize, maxHeight, maxWidth 
     const newTitleFontSize = calculateFontSize(titleRef, 50, 150); 
     const newSubTitleFontSize = calculateFontSize(subTitleRef, 20, 60); 
     const newSpineTitleFontSize = calculateFontSize(spineTitleRef, 32, 50, 400); 
@@ -52,6 +52,7 @@ const authorImageSrc =
     setTitleFontSize(newTitleFontSize);
     setSubTitleFontSize(newSubTitleFontSize);
     setSpineTitleFontSize(newSpineTitleFontSize);
+    setSpineAuthorFontSize(newSpineAuthorFontSize);
   }, [selectedTopic, selectedSubTopic]);
 
   return (
