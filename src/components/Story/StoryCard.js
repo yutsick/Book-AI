@@ -16,7 +16,7 @@ function StoryCard({ card, index, isEven }) {
                 </div>
             </div>
             <div style={{ backgroundColor: cardColor }} className={` h-full max-w-[657px] rounded-lg shadow-storyCardShadow relative flex ${isEven ? "sm:flex-row-reverse flex-col" : "sm:flex-row flex-col"}`}>
-                <div className={`flex justify-center items-center  ${isEven ? "mr-0 md:mr-[20px] mt-4 md:mt-0" : "ml-0 md:ml-[20px] mt-4 md:mt-0"}`}>
+                <div className={`flex justify-center items-center  ${isEven ? "mr-0 sm:mr-[20px] mt-4 sm:mt-0" : "ml-0 sm:ml-[20px] mt-4 sm:mt-0"}`}>
                     <img
                         src={imageUrl}
                         alt={altUrl}
