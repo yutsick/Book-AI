@@ -66,72 +66,66 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
     });
   };
 
-
-
-
-
   const handleFileChange = async (file) => {
     setPreview(URL.createObjectURL(file));
-
-
     setAuthorImage(file);
-
     let processedFile = file;
-
-
+  
     if (isMobile()) {
       console.log("📱 Mobile detected - resizing image...");
       processedFile = await resizeImage(file, 431 * 1.5, 648 * 1.5);
     } else {
       console.log("💻 Desktop detected - using original image.");
     }
-
+  
     setCroppedImage(null);
     setIsProcessing(true);
-
+  
+    // 🔹 Виконуємо валідацію
     const validationResult = await validateImage(processedFile);
+  
     if (!validationResult.valid) {
       setError(validationResult.error);
+  
+      // ❌ Якщо це помилка "unsupported_type", зупиняємо подальше виконання
+      if (validationResult.errorType === "unsupported_type") {
+        setIsProcessing(false);
+        return;
+      }
     } else {
       setError(null);
     }
-
-
-
-
+  
     try {
       const formData = new FormData();
       formData.append("image", processedFile);
-
+  
       const response = await fetch("https://api.booktailor.com/remove-background", {
         method: "POST",
         body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error("Error removing background");
       }
-
+  
       const data = await response.json();
       const processedUrl = data.data.processed_url;
       setProcessedAuthorImage(processedUrl);
-
+  
       const imageResponse = await fetch(processedUrl);
       if (!imageResponse.ok) {
         throw new Error("Error fetching processed image");
       }
-
+  
       const imageBlob = await imageResponse.blob();
       const imageFile = new File([imageBlob], "processed-image.png", { type: "image/png" });
-
-      // console.log("✅ Processed Image (before resizing):", imageFile);
-
+  
       let finalImage = imageFile;
       if (isMobile()) {
         finalImage = await resizeImage(imageFile, 431 * 4, 648 * 4);
       }
-
-      // console.log("✅ Final Processed Image:", finalImage);
+  
       setCroppedImage(finalImage);
     } catch (error) {
       console.error("❌ Error processing image:", error);
@@ -141,7 +135,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       setSelectedTemplate({});
     }
   };
-
+  
 
 
 

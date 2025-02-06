@@ -2,13 +2,14 @@ import React, { useState, useCallback, useEffect } from "react";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "@/utils/cropImage";
 
-const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
+const ImageCropperModal = ({ imageSrc, onClose, onSave, cropperData, templateId }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1.5);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [imageURL, setImageURL] = useState(null);
-
+const selectedTemplate  = cropperData.find((item) => item.id === templateId);
+const {top, bottom, left, width, height,  radius} = selectedTemplate;
   useEffect(() => {
     if (!imageSrc) return;
 
@@ -41,19 +42,21 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-5 rounded-md w-[320px] flex flex-col items-center relative">
-        <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-2xl"
-          onClick={onClose}
-        >
-          ✖
-        </button>
- 
-        <h2 className="text-lg font-semibold mb-3">Adjust Your Image</h2>
-
+    <div className="absolute h-full inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div className=" w-full h-full relative">
         {isImageLoaded ? (
-          <div className="relative w-[250px] h-[250px] bg-gray-200">
+          <div
+          className={`absolute  `}
+          style={{
+            ...(top !== null && { top: `${top}px` }),
+            ...(bottom !== null && { bottom: `${bottom}px` }),
+            ...(left !== null && { left: `${left}px` }),
+            ...( { width: `${width}px` }),
+            ...({ height: `${height}px` }),
+          }}
+          
+        >
+        
             <Cropper
               image={imageURL}
               crop={crop}
@@ -64,15 +67,31 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
               onCropChange={setCrop}
               onZoomChange={(z) => setZoom(Math.max(1, z))} 
               onCropComplete={onCropComplete}
-              objectFit="cover"
+              objectFit= "contain"
               restrictPosition={false}
+              cropSize={{ width, height}} 
+              cropShape= {radius ? "round" : "rect"}
+              style={{ 
+                containerStyle: {
+                  borderRadius: radius ? "50%" : "0",
+                }
+               }}
+
             />
           </div>
         ) : (
           <p className="text-gray-500">Loading image...</p>
         )}
-
-        <div className="flex items-center gap-2 mt-4">
+      <div className="flex flex-col bg-white p-4 right-0 absolute w-[250px] h-[200px]">
+      <button
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-2xl"
+          onClick={onClose}
+        >
+          ✖
+        </button>
+      <h2 className="text-lg font-semibold mb-3">Adjust Your Image</h2>
+        <div className="flex items-centerflex-col gap-2 mt-4">
+          
           <label htmlFor="zoom-slider" className="text-sm text-gray-500">
             Zoom:
           </label>
@@ -99,6 +118,7 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave }) => {
           >
             Save
           </button>
+        </div>
         </div>
       </div>
     </div>
