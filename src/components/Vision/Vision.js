@@ -20,21 +20,21 @@ function Vision() {
             });
     }, []);
     return visionData ? (
-        <div className="py-[40px] md:py-[60px] w-full max-w-[1000px] mx-auto p-4">
-            <div className="bg-white md:bg-pink rounded-[10px] grid md:grid-cols-2 gap-4 border-0 md:border-[0.7px]  border-black/10">
-                <div className="flex flex-col items-center justify-start p-4">
-                    <h2 className="text-gray mb-4 text-[30px] md:text-[45px] font-bold">{visionData.title}</h2>
-                    <p className="text-gray text-[16px] md:text-[18px] leading-[23px] md:leading-[27px]">
+        <section className="pt-[40px] md:pt-[50px] w-full max-w-[1000px] mx-auto px-4">
+            <div className="bg-white md:bg-pink rounded-[10px] grid md:grid-cols-2 border-0 md:border-[0.7px]  border-black/10">
+                <div className="p-0 md:p-4 px-0 md:px-4 mb-4 md:mb-0">
+                    <h2 className="text-center text-gray mb-4 text-[30px] md:text-[45px] font-bold">{visionData.title}</h2>
+                    <p className="text-gray text-[16px] leading-[23px] md:leading-[27px]">
                         {visionData.text}
                     </p>
                 </div>
-                <img
-                    src={visionData.imageUrl}
-                    alt={visionData.alt}
-                    className="w-full h-full object-cover"
-                />
+                    <img
+                        src={visionData.imageUrl}
+                        alt={visionData.alt}
+                        className="w-full h-full object-cover"
+                    />
             </div>
-        </div>
+        </section>
     ) : null;
 }
 
