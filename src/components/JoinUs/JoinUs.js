@@ -20,11 +20,11 @@ function JoinUs() {
             });
     }, []);
     return joinUsData ? (
-        <section className="py-[40px] md:py-[50px]">
-            <div className="bg-pink md:bg-white py-4 w-full max-w-[900px] mx-auto">
-                <div className="px-4">
+        <section className="bg-pink md:bg-white pb-[50px] pt-[30px]">
+            <div className="  w-full max-w-[900px] mx-auto">
+                <div className="px-4 py-4 max-w-[540px] md:max-w-[100%] mx-auto">
                     <h2 className="text-[30px] md:text-[45px] font-bold text-center mb-6" >{joinUsData.title}</h2>
-                    <p className="text-gray text-[16px] md:text-[18px] leading-[23px] md:leading-[27px] mb-6" >{joinUsData.text}</p>
+                    <p className="text-gray text-[16px] md:text-[18px] leading-[23px] md:leading-[27px] mb-6 text-center md:text-left" >{joinUsData.text}</p>
                     <a
                         className="md:mt-6 w-full h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group "
                         href="/create-book"

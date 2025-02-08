@@ -21,7 +21,7 @@ function WhatWeDo() {
             });
     }, []);
     return whatWeDoData ? (
-        <section className="relative w-full max-w-[950px] py-[40px] md:py-[50px] mx-auto">
+        <section className="relative w-full max-w-[950px] pt-[50px] pb-[60px] mx-auto">
             <h2 className="text-gray text-[30px] md:text-[45px] text-center font-bold leading-[54px] mb-4">{whatWeDoData.title}</h2>
             <div className="flex flex-col-reverse md:flex-row justify-center items-center gap-6 px-4">
                 <div className="">
