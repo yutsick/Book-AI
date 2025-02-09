@@ -51,7 +51,7 @@ const montserratFont = Montserrat({
 });
 
 const reenieBeanieFont = Reenie_Beanie({
-  subsets: ["latin", "cyrillic"],
+  subsets: ["latin"],
   variable: "--font-reenie",
   display: "swap",
   weight: ["400"],
