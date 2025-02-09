@@ -70,7 +70,7 @@ const CoverTemplate4 = ({ type, data }) => {
         <div className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-[#F0EADE] bg-cover bg-center bg-no-repeat">
           <img
             src={isMobile()
-              ? "/images/create-book/bg/bgblack-back-mob.png"
+              ? "/images/create-book/bg/bg4-back-mob.jpg"
               : "/images/create-book/bg/bg4-back.png"}
             alt="Back Cover"
           />

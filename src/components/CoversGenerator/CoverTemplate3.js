@@ -8,39 +8,45 @@ const CoverTemplate3 = ({ type, data }) => {
 
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-  // 🔹 Елементи для підгонки тексту
   const elements = {
     spineTitle: { ref: useRef(null), maxFontSize: 44, maxWidth: 400 },
-    spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 180, maxHeight: 50 },
-    frontAuthor: { ref: useRef(null), maxFontSize: 28, maxWidth: 320 },
+    spineAuthor: { ref: useRef(null), maxFontSize: 28, maxWidth: 250, maxHeight: 50 },
+    frontAuthor: { ref: useRef(null), maxFontSize: 28, maxWidth: 320, maxHeight: 50 },
   };
 
   const [fontSizes, setFontSizes] = useState({
     spineTitle: 44,
-    spineAuthor: 20,
+    spineAuthor: 28,
     frontAuthor: 28,
   });
 
   useEffect(() => {
     const newFontSizes = {};
-
-    // 🔹 Спочатку підганяємо spineAuthor (за шириною та висотою)
-    if (elements.spineAuthor.ref.current) {
-      let fontSize = adjustFontSizeByWidth(elements.spineAuthor.ref, 20, 180);
-      fontSize = adjustFontSizeByHeight(elements.spineAuthor.ref, fontSize, 50);
-      newFontSizes.spineAuthor = fontSize;
-    }
-
-    // 🔹 Потім підганяємо інші елементи
-    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth }]) => {
-      if (key !== "spineAuthor" && ref.current) {
-        newFontSizes[key] = adjustFontSizeByWidth(ref, maxFontSize, maxWidth);
+  
+    // Спочатку обчислюємо шрифт за висотою
+    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxHeight }]) => {
+      if (ref.current && maxHeight) {
+        newFontSizes[key] = adjustFontSizeByHeight(ref, maxFontSize, maxHeight);
       }
     });
-
+  
+    // Потім коригуємо шрифт за шириною
+    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth }]) => {
+      if (ref.current && maxWidth) {
+        newFontSizes[key] = adjustFontSizeByWidth(
+          ref,
+          newFontSizes[key] || maxFontSize,
+          maxWidth
+        );
+      }
+    });
+  
     setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
   }, [authorName, selectedTopic]);
+  
 
+
+  
   return (
     <>
       {type === "front" && (
@@ -66,11 +72,11 @@ const CoverTemplate3 = ({ type, data }) => {
               />
             </div>
 
-            <div className="font-reenie text-[28px] mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px] px-2">
+            <div className=" mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px] px-2">
               <div
                 ref={elements.frontAuthor.ref}
                 style={{ fontSize: `${fontSizes.frontAuthor}px` }}
-                className="whitespace-nowrap"
+                className="font-reenie"
               >
                 {authorName || "Default Author"}
               </div>
@@ -83,7 +89,7 @@ const CoverTemplate3 = ({ type, data }) => {
         <div className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-[#EEE8D9] bg-cover bg-center bg-no-repeat">
           <img
             src={isMobile()
-              ? "/images/create-book/bg/bg3-back-mob.png"
+              ? "/images/create-book/bg/bg3-back-mob.jpg"
               : "/images/create-book/bg/bg3-back.png"}
             alt="Back Cover"
           />
@@ -98,7 +104,6 @@ const CoverTemplate3 = ({ type, data }) => {
           >
             <div className="w-full flex items-center gap-4 justify-between font-bold font-caveat text-[#000082]">
               
-              {/* 🔹 Підгонка заголовку */}
               <div className="spine-title-container flex-1 flex justify-center">
                 <div
                   ref={elements.spineTitle.ref}
@@ -109,15 +114,13 @@ const CoverTemplate3 = ({ type, data }) => {
                 </div>
               </div>
 
-              {/* 🔹 Підгонка автора (з урахуванням висоти 50px) */}
               <div className="spine-author-container flex justify-end pr-2 w-[180px] text-center">
                 <div
                   ref={elements.spineAuthor.ref}
                   className="font-medium font-reenie break-words"
                   style={{
                     fontSize: `${fontSizes.spineAuthor}px`,
-                    maxWidth: "180px",
-                    maxHeight: "50px",
+
                     lineHeight: "1.2",
                     overflow: "hidden",
                   }}

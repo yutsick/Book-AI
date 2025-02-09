@@ -14,7 +14,7 @@ const CoverTemplate8 = ({ type, data }) => {
     title: { ref: useRef(null), maxFontSize: 27, maxHeight: 80 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
-    spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 220 },
+    spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
   };
 
   const [fontSizes, setFontSizes] = useState({
@@ -22,7 +22,7 @@ const CoverTemplate8 = ({ type, data }) => {
     title: 27,
     subTitle: 20,
     spineTitle: 28,
-    spineAuthor: 20,
+    spineAuthor: 17,
   });
 
   useEffect(() => {
@@ -127,7 +127,7 @@ const CoverTemplate8 = ({ type, data }) => {
         <div className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-white">
           <img
             src={isMobile()
-              ? "/images/create-book/bg/bgblack-back-mob.png"
+              ? "/images/create-book/bg/bg8-back-mob.jpg"
               : "/images/create-book/bg/bg8-back.png"}
             alt="Back Cover"
           />
@@ -149,7 +149,7 @@ const CoverTemplate8 = ({ type, data }) => {
               </div>
             </div>
 
-            <div className="flex flex-col justify-center items-center text-[20px] h-full">
+            <div className="flex flex-col justify-center items-center  h-full">
               <div
                 ref={elements.spineAuthor.ref}
                 className="whitespace-nowrap"
