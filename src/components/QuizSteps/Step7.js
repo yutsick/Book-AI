@@ -87,12 +87,13 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
       setSelectedCover(cover);
 
       setSelectedTemplate((prevTemplate) => ({
-
-
+       
+        ...prevTemplate,
         templateId,
         front: cover.frontCover,
         back: cover.backCover,
         spine: cover.spineCover,
+        
 
       }));
 
@@ -113,43 +114,30 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
       setImageSrc(croppedImage);
     }
   }, []);
-  const handleCropSave = (newCroppedImage, crop, zoom, templateId) => {
+  const handleCropSave = (newCroppedImage, crop, zoom) => {
     setCroppedImage(newCroppedImage);
-
+  
+    console.log("📌 Отримуємо з модалки:", crop, zoom);
+  
     setSelectedTemplate((prevTemplate) => ({
       ...prevTemplate,
-      [templateId]: {
-        ...(prevTemplate[templateId] || {}),
-        crop: crop || { x: 0, y: 0 },
-        zoom: zoom || 1.5,
-      },
+      crop: crop ?? prevTemplate.crop,  
+      zoom: zoom ?? prevTemplate.zoom,  
     }));
-
+  
     setIsCropperOpen(false);
     setIsModalOpen(false);
   };
-
-
+  
+  
+  
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        setIsCropperOpen(false);
-        setIsModalOpen(false);
-      }
-    };
+    console.log("📌 Контекст оновлено:", selectedTemplate);
+  }, [selectedTemplate]);
+  
 
-    if (isCropperOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.addEventListener("touchstart", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-    };
-  }, [isCropperOpen]);
-
-
+ 
+  
   return (
     <>
       <div className="relative w-full mt-4 md:px-2 flex flex-col items-center md:flex-row justify-between">
@@ -177,14 +165,15 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
                 cropperData={cropperData}
                 swiperSize={swiperSize}
                 templateId={selectedTemplate?.templateId}
-                selectedTemplate={selectedTemplate[selectedTemplate?.templateId] || {}}
+                selectedTemplate={selectedTemplate || {}}
+                setSelectedTemplate={setSelectedTemplate}
                 onClose={() => {
 
                   setIsCropperOpen(false);
                   setIsModalOpen(false);
                 }}
                 onSave={(newCroppedImage, crop, zoom) =>
-                  handleCropSave(newCroppedImage, crop, zoom, selectedTemplate?.templateId)
+                  handleCropSave(newCroppedImage, crop, zoom)
                 }
               />
             </>

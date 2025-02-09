@@ -2,9 +2,25 @@ import React, { useState, useCallback, useEffect, useRef } from "react";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "@/utils/cropImage";
 
-const ImageCropperModal = ({ imageSrc, onClose, onSave, cropperData, templateId, swiperSize, modalRef }) => {
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1.5);
+const ImageCropperModal = ({ 
+  imageSrc, 
+  onClose, 
+  onSave, 
+  cropperData, 
+  templateId, 
+  swiperSize, 
+  modalRef, 
+  selectedTemplate, 
+  setSelectedTemplate  
+}) => {
+  const defaultCrop = { x: 0, y: 0 };
+  const defaultZoom = 1.5;
+
+  const savedCrop = selectedTemplate?.crop || defaultCrop;
+  const savedZoom = selectedTemplate?.zoom ?? defaultZoom;
+
+  const [crop, setCrop] = useState(savedCrop);
+  const [zoom, setZoom] = useState(savedZoom);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [imageURL, setImageURL] = useState(null);
@@ -23,8 +39,8 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave, cropperData, templateId,
 
   const { width: swiperWidth, height: swiperHeight } = swiperSize;
 
-  const initialSwiperWidth = 280; 
-  const initialSwiperHeight = 420; 
+  const initialSwiperWidth = 280;
+  const initialSwiperHeight = 420;
 
   useEffect(() => {
     const updateSize = () => {
@@ -68,7 +84,6 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave, cropperData, templateId,
         height: cropHeight !== undefined ? `${cropHeight}px` : undefined,
       };
 
-
   useEffect(() => {
     if (!imageSrc) return;
 
@@ -81,7 +96,6 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave, cropperData, templateId,
     }
   }, [imageSrc]);
 
-
   useEffect(() => {
     if (imageURL) {
       const img = new Image();
@@ -90,6 +104,11 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave, cropperData, templateId,
     }
   }, [imageURL]);
 
+  useEffect(() => {
+    setCrop(savedCrop);
+    setZoom(savedZoom);
+  }, [templateId]);
+
   const onCropComplete = useCallback((_, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
@@ -97,13 +116,15 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave, cropperData, templateId,
   const handleCropSave = async () => {
     if (!croppedAreaPixels || !imageURL) return;
     const croppedImage = await getCroppedImg(imageURL, croppedAreaPixels);
-    onSave(croppedImage);
+  
+    onSave(croppedImage, { ...crop }, zoom);
     onClose();
   };
+  
 
   return (
     <div
-      className="absolute  top-0 flex justify-center items-center z-50"
+      className="absolute top-0 flex justify-center items-center z-50"
       style={{
         width: `${swiperWidth}px`,
         height: "100%",
@@ -120,7 +141,7 @@ const ImageCropperModal = ({ imageSrc, onClose, onSave, cropperData, templateId,
               maxZoom={3}
               aspect={1}
               onCropChange={setCrop}
-              onZoomChange={(z) => setZoom(Math.max(1, z))}
+              onZoomChange={setZoom}
               onCropComplete={onCropComplete}
               objectFit="contain"
               restrictPosition={false}
