@@ -69,6 +69,21 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   const handleFileChange = async (file) => {
     setPreview(URL.createObjectURL(file));
     setAuthorImage(file);
+    
+    // Перевіряємо оригінальний файл перед зміною розміру
+    const validationResult = await validateImage(file);
+  
+    if (!validationResult.valid) {
+      setError(validationResult.error);
+      
+      if (validationResult.errorType === "unsupported_type" || validationResult.errorType === "low_resolution") {
+        setIsProcessing(false);
+        return;
+      }
+    } else {
+      setError(null);
+    }
+  
     let processedFile = file;
   
     if (isMobile()) {
@@ -80,21 +95,6 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   
     setCroppedImage(null);
     setIsProcessing(true);
-  
-    // 🔹 Виконуємо валідацію
-    const validationResult = await validateImage(processedFile);
-  
-    if (!validationResult.valid) {
-      setError(validationResult.error);
-  
-      // ❌ Якщо це помилка "unsupported_type", зупиняємо подальше виконання
-      if (validationResult.errorType === "unsupported_type") {
-        setIsProcessing(false);
-        return;
-      }
-    } else {
-      setError(null);
-    }
   
     try {
       const formData = new FormData();
@@ -136,6 +136,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
     }
   };
   
+  
 
 
 
@@ -160,7 +161,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
 
         {error && (
           <div className="flex items-center gap-2 w-full justify-center mt-2">
-            <div className="text-[#CF8700] text-[16px] leading-[20px] flex gap-4 items-center">
+            <div className="text-[#CF8700] text-[16px] leading-[20px] flex gap-1 items-center">
             <img src="/images/create-book/warning-icon.svg" alt="" />
 
               {error}
