@@ -1,0 +1,18 @@
+{
+    "title": "What Happens Next?",
+    "description": "Here’s a quick overview of the next steps in your book creation journey:",
+    "items": [
+        {
+            "text": "Your book is now being processed and prepared for printing.",
+            "step": "Step"
+        },
+        {
+            "text": "You’ll receive an email when your book is printed and shipped.",
+            "step": "Step"
+        },
+        {
+            "text": "Track your delivery and get ready to enjoy your personalized book!",
+            "step": "Step"
+        }
+    ]
+}

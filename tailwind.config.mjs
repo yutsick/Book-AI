@@ -14,6 +14,7 @@ export default {
         z: "var(--spineWidth)",
       },
       screens: {
+        'xs': '476px',
         '865': '865px',
       },
       colors: {

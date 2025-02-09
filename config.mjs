@@ -7,9 +7,9 @@ const config = {
   faqUrl: './data/faq.json',
   feedUrl: './data/feed.json',
   heroUrl: './data/hero.json',
-  apiBaseUrl: process.env.API_BASE_URL || 'https://api.example.com', 
-  dataBaseUrl: process.env.IMAGE_BASE_URL || './data', 
-  siteUrl: process.env.SITE_URL || 'http://localhost:3000', 
+  apiBaseUrl: process.env.API_BASE_URL || 'https://api.example.com',
+  dataBaseUrl: process.env.IMAGE_BASE_URL || './data',
+  siteUrl: process.env.SITE_URL || 'http://localhost:3000',
   // Create Book
   heroQuizUrl: './data/createBook/heroQuiz.json',
   buttonTextUrl: './data/createBook/buttonText.json',
@@ -22,6 +22,11 @@ const config = {
   chooseUrl: '/data/about-us/choose.json',
   visionUrl: '/data/about-us/vision.json',
   joinUsUrl: '/data/about-us/joinUs.json',
+  //Confirmation
+  orderCompleteUrl: '/data/confirmation/orderComplete.json',
+  whatHappensUrl: '/data/confirmation/whatHappens.json',
+  orderStatusInfoUrl: '/data/confirmation/orderStatusInfo.json',
+  needHelpUrl: '/data/confirmation/needHelp.json',
 };
 
 export default config;
