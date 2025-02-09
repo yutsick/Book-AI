@@ -77,7 +77,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
         const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-
+        await new Promise((resolve) => requestAnimationFrame(resolve));
         const blob = await domToBlob(element, {
           scale: isMobile ? 1 : 4, 
 
@@ -109,13 +109,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       try {
         const frontElement = await createAndRender("front");
         const spineElement = await createAndRender("spine");
-        console.log("🛠️ Spine HTML:", spineElement?.innerHTML);
-console.log("🛠️ Spine Element:", spineElement);
 
-// Якщо spineElement порожній або null, виведемо попередження
-if (!spineElement || !spineElement.innerHTML.trim()) {
-  console.warn("⚠️ WARNING: spineElement не містить HTML! Safari міг його не відрендерити.");
-}
         const backElement = await createAndRender("back");
 
         const covers = {
@@ -128,7 +122,7 @@ if (!spineElement || !spineElement.innerHTML.trim()) {
       } catch (error) {
         reject(error);
       } finally {
-        // document.body.removeChild(hiddenContainer);
+        document.body.removeChild(hiddenContainer);
       }
     })();
   });

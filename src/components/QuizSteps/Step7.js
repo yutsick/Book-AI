@@ -117,8 +117,6 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   const handleCropSave = (newCroppedImage, crop, zoom) => {
     setCroppedImage(newCroppedImage);
   
-    console.log("📌 Отримуємо з модалки:", crop, zoom);
-  
     setSelectedTemplate((prevTemplate) => ({
       ...prevTemplate,
       crop: crop ?? prevTemplate.crop,  
@@ -129,14 +127,6 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
     setIsModalOpen(false);
   };
   
-  
-  
-  useEffect(() => {
-    console.log("📌 Контекст оновлено:", selectedTemplate);
-  }, [selectedTemplate]);
-  
-
- 
   
   return (
     <>
