@@ -5,7 +5,6 @@ export const validateImage = async (file) => {
   const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/tiff"];
   const ERROR_PHRASE = "We recommend using a higher-resolution image for the best cover quality"; 
 
-  // 🔹 Перевірка типу файлу - повертаємо об'єкт із `errorType: "unsupported_type"`
   if (!ALLOWED_TYPES.includes(file.type)) {
     return { valid: false, errorType: "unsupported_type", error: "Unsupported file type. Please upload an image in JPEG, PNG, or TIFF format." };
   }
@@ -22,7 +21,7 @@ export const validateImage = async (file) => {
           const sizeInMB = file.size / (1024 * 1024);
 
           if (width < MIN_WIDTH || height < MIN_HEIGHT) {
-            reject({ errorType: "low_resolution", error: "Your image is smaller than 300x300. Please use a larger image." });
+            reject({ errorType: "low_resolution", error: "Your image is smaller than 300x300. We recommend using a larger image for better cover quality" });
             return;
           }
 

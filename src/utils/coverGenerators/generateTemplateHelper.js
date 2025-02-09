@@ -14,13 +14,6 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
     hiddenContainer.style.pointerEvents = "none"; 
     hiddenContainer.style.zIndex = "-1";       
 
-    // hiddenContainer.style.position = "absolute";
-    // hiddenContainer.style.width = "431px";
-    // hiddenContainer.style.height = "648px";
-    // hiddenContainer.style.top = "-9999px";
-    // hiddenContainer.style.left = "-9999px";
-
-
     document.body.appendChild(hiddenContainer);
 
     const waitForImages = async (element) => {
@@ -90,12 +83,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
           useBlob: false,
           useCORS: true,
         });
-        // const dataUrl = await domToPng(element, {
-        //   scale: 4,
-        //   cacheBust: false,
-        //   useBlob: false,
-        //   useCORS: true,
-        // });
+
        
 
         restoreGrayscale(); 

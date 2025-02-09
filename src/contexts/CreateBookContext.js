@@ -40,7 +40,10 @@ export const CreateBookProvider = ({ children }) => {
     front: "",
     back: "",
     spine: "",
+    crop: { x: 0, y: 0 },  // 🔥 Додаємо `crop` у контекст
+    zoom: 1.5,            // 🔥 Додаємо `zoom` у контекст
   });
+  
 
 
   return (
