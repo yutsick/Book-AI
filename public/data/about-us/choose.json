@@ -1,0 +1,22 @@
+{
+    "title": "Why Choose Us",
+    "backgroundUrl": "/images/about-us/chooseBg.png",
+    "cards": [
+        {
+            "title": "User-Friendly Experience",
+            "description": "User-Friendly Experience: We’ve designed Book Tailor to be intuitive and straightforward. No technical knowledge or writing experience required."
+        },
+        {
+            "title": "Fast and Affordable",
+            "description": "Fast and Affordable: From idea to reality in just minutes, at a fraction of the cost of traditional publishing services."
+        },
+        {
+            "title": "Advanced Technology",
+            "description": "Advanced Technology: Our AI doesn’t just write—it learns from your input to create content that feels personal and authentic."
+        },
+        {
+            "title": "Customization at Your Fingertips",
+            "description": "Customization at Your Fingertips: Unlike cookie-cutter templates, our platform lets you shape every aspect of your book."
+        }
+    ]
+}

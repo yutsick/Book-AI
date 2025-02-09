@@ -9,8 +9,8 @@ const TableOfContents = ({ contents }) => {
       </div>
       <div className="mt-6 space-y-6">
         {contents.map((item, index) => (
-          <div key={index} className="flex flex-col overflow-hidden">
-            <p className="font-medium text-[#2B2B2B] w-[calc(100%-50px)] text-[17px]">{item.chapter}</p>
+          <div key={index} className="flex flex-col gap-1 overflow-hidden">
+            <p className="font-medium text-[#2B2B2B] w-[calc(100%-50px)] text-[17px] leading-[21px]">{item.chapter}</p>
             <div className="flex items-end justify-between w-full">
               <div className="relative overflow-hidden flex-1">
             

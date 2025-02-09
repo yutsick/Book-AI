@@ -1,0 +1,23 @@
+{
+    "title": "What We Do",
+    "description": "We take your ideas and turn them into reality. Book Tailor guides you through every step of the process:",
+    "items": [
+        {
+            "textBold": "Concept Development:",
+            "text": "Answer a few simple questions about your book, and we’ll generate personalized ideas tailored to your vision."
+        },
+        {
+            "textBold": "Content Creation:",
+            "text": "Our advanced AI works with your input to craft a detailed and engaging manuscript that captures your unique voice and perspective."
+        },
+        {
+            "textBold": "Customization:",
+            "text": "From tone and genre to cover design, you have full control over how your book looks and feels."
+        },
+        {
+            "textBold": "Publishing Made Easy:",
+            "text": "We format your book for digital or print, ensuring it’s ready for platforms like Amazon Kindle or as a beautifully printed copy."
+        }
+    ],
+    "imageUrl": "/images/about-us/weDoImg.png"
+}
