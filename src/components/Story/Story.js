@@ -21,7 +21,7 @@ function Story() {
             });
     }, []);
     return storyData ? (
-        <div className="min-h-screen relative">
+        <section className="min-h-screen relative">
             <div
                 className="absolute inset-0 bg-gradient-to-b from-white to-[#F0ECE2]"
             ></div>
@@ -35,7 +35,7 @@ function Story() {
                 className="absolute inset-0 bg-contain bg-center bg-no-repeat hidden md:block"
             ></div>
 
-            <div className="relative z-10 w-full max-w-[950px] mx-auto px-4 md:px-5 py-10">
+            <div className="relative z-10 w-full max-w-[950px] mx-auto px-4 md:px-5 py-[40px] md:py-[50px]">
                 <h2 className="text-gray text-center text-[30px] md:text-[45px] leading-[55px] font-semibold mb-10">{storyData.title}</h2>
                 <div className="grid grid-cols-1 gap-x-[40px] gap-y-[50px] sm:gap-y-[60px] justify-items-center w-full mx-auto">
                     {storyData.cards.map((card, index) => (
@@ -48,7 +48,7 @@ function Story() {
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     ) : null;
 }
 
