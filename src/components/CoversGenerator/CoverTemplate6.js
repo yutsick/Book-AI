@@ -3,19 +3,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
 
 const CoverTemplate6 = ({ type, data }) => {
+
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
 
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
-    const isMobile = () => {
-      return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-    };
+  const isMobile = () => {
+    return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  };
 
 
   const spineAuthorRef = useRef(null);
-  const maxSpineAuthorWidth = 230; 
+  const maxSpineAuthorWidth = 230;
 
   const [spineAuthorFontSize, setSpineAuthorFontSize] = useState(17);
 
@@ -25,19 +27,19 @@ const CoverTemplate6 = ({ type, data }) => {
       setSpineAuthorFontSize(newSize);
     }
   }, [authorName]);
-  
+
   return (
     <>
       {type === "front" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-montserrat bg-[#000082] text-white py-5"> 
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-montserrat bg-[#000082] text-white py-5">
           <div className="">
-          <img src="/images/create-book/bg/wave-red.png" alt="" className="w-full"/>
+            <img src="/images/create-book/bg/wave-red.png" alt="" className="w-full" />
           </div>
           {/* Heading */}
           <div className=" flex flex-col gap-4 max-w-[340px] mx-auto ">
             <div>
-             
+
               <div className="text-[24px] leading-[28px] font-bold  text-center mt-4 font-montserrat">
                 {selectedTopic || "Default Topic"}
               </div>
@@ -66,21 +68,34 @@ const CoverTemplate6 = ({ type, data }) => {
             <div className="font-montserrat mb-5 mt-6 text-[26px] text-center font-semibold">
               {authorName || "Default Author"}
             </div>
-            <img src="/images/create-book/bg/wave-red.png" alt="" className="w-full"/>
+            <img src="/images/create-book/bg/wave-red.png" alt="" className="w-full" />
           </div>
         </div>
       )}
 
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-[#000082]"
-          
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between"
+          style={{
+            backgroundImage: isIOS
+              ? "url('/images/create-book/bg/bg6-back-mob.png')" 
+              : "none",
+            backgroundColor: "#000082", 
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
         >
-         <img src={`${isMobile ? 
-            "/images/create-book/bg/bg6-back-mob.png " : 
-            "/images/create-book/bg/bg6-back.png"}`} 
-            alt="Back Cover" />
+          {!isIOS && (
+            <img
+              src={isMobile()
+                ? "/images/create-book/bg/bg6-back-mob.png"
+                : "/images/create-book/bg/bg6-back.png"}
+              alt="Back Cover"
+            />
+          )}
         </div>
+
       )}
 
       {type === "spine" && (
@@ -88,7 +103,7 @@ const CoverTemplate6 = ({ type, data }) => {
         <div className="h-[648px] flex justify-center relative">
           <div
             className="px-5  py-2 bg-[#000082] text-white  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-4  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
-            <img src="/images/create-book/bg/wave-red-spine.png" alt="" className="h-[57px] "/>
+            <img src="/images/create-book/bg/wave-red-spine.png" alt="" className="h-[57px] " />
             <div className=" flex items-center justify-between text-[18px] font-semibold font-montserrat flex-1">
 
               <div className="whitespace-nowrap font-montserrat text-[18px] leading-[20px]">
@@ -104,7 +119,7 @@ const CoverTemplate6 = ({ type, data }) => {
                 </div>
               </div>
             </div>
-            <img src="/images/create-book/bg/wave-red-spine.png" alt="" className="h-[57px]"/>
+            <img src="/images/create-book/bg/wave-red-spine.png" alt="" className="h-[57px]" />
           </div>
         </div>
       )}

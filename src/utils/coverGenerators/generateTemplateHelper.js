@@ -7,12 +7,13 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
     const hiddenContainer = document.createElement("div");
 
 
-    hiddenContainer.style.position = "fixed";  
-    hiddenContainer.style.top = "0"; 
-    hiddenContainer.style.left = "0";
-    hiddenContainer.style.opacity = "0.01";   
+    hiddenContainer.style.position = "absolute";
+  hiddenContainer.style.top = "-9999px"; 
+  hiddenContainer.style.left = "-9999px";
+
+
     hiddenContainer.style.pointerEvents = "none"; 
-    hiddenContainer.style.zIndex = "-1";       
+     
 
     document.body.appendChild(hiddenContainer);
 
@@ -70,12 +71,47 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
       });
     };
 
+    const waitForRender = (element, timeout = 1000) => {
+      return new Promise((resolve) => {
+        const start = Date.now();
+    
+        const checkRender = () => {
+          const rect = element.getBoundingClientRect();
+          const computedStyle = window.getComputedStyle(element);
+          const isVisible = computedStyle.visibility !== "hidden" && computedStyle.opacity !== "0";
+    
+          if (rect.width > 0 && rect.height > 0 && isVisible) {
+            return resolve();
+          }і
+    
+          if (Date.now() - start > timeout) {
+            console.warn("⏳ Render timeout! Continuing...");
+            return resolve();
+          }
+    
+          requestAnimationFrame(checkRender);
+        };
+    
+        requestAnimationFrame(() => {
+          requestAnimationFrame(checkRender);
+        });
+      });
+    };
     
     const generateImage = async (element, attempt = 1) => {
       try {
         const restoreGrayscale = fixGrayscaleBeforeScreenshot(element); 
 
         const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+        const isIOS = /iPhone|iPad/i.test(navigator.userAgent);
+        if (isIOS) {
+
+          await waitForImages(element); 
+          await waitForRender(element); 
+          await new Promise((resolve) => setTimeout(resolve, 500));  
+        }
+        
+        
 
         await new Promise((resolve) => requestAnimationFrame(resolve));
         const blob = await domToBlob(element, {

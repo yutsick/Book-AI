@@ -3,10 +3,34 @@ import { adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
 import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
 
 const CoverTemplate2 = ({ type, data }) => {
+
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, selectedSubTopic, croppedImage } = data;
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
+
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    if (isIOS && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      const img = new Image();
+      img.src = authorImageSrc;
+      img.crossOrigin = "anonymous";
+
+      img.onload = async () => {
+        if (img.decode) await img.decode();
+
+        requestAnimationFrame(() => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+        });
+      };
+    }
+  }, [isIOS, croppedImage]);
 
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
@@ -28,7 +52,7 @@ const CoverTemplate2 = ({ type, data }) => {
     const newFontSizes = {};
     Object.entries(elements).forEach(([key, { ref, maxFontSize, maxHeight, maxWidth }]) => {
       if (maxWidth) {
-        newFontSizes[key] = adjustFontSizeByWidth(ref, maxFontSize, maxWidth); 
+        newFontSizes[key] = adjustFontSizeByWidth(ref, maxFontSize, maxWidth);
       } else {
         newFontSizes[key] = adjustFontSizeByHeight(ref, maxFontSize, maxHeight);
       }
@@ -37,16 +61,24 @@ const CoverTemplate2 = ({ type, data }) => {
     setFontSizes(newFontSizes);
   }, [selectedTopic, selectedSubTopic, authorName]);
 
+
+
+
+
   return (
     <>
       {type === "front" && (
         <div className="w-[431px] h-[648px] bg-black mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-degular">
           <div className="w-full relative h-[433px]">
-            <img
-              src={authorImageSrc}
-              alt={authorName || "Default Author"}
-              className="w-full h-full object-cover block"
-            />
+            {isIOS ? (
+              <canvas ref={canvasRef} className="w-full h-full object-cover block"></canvas>
+            ) : (
+              <img
+                src={authorImageSrc}
+                alt={authorName || "Default Author"}
+                className="w-full h-full object-cover block"
+              />
+            )}
             <div className="absolute top-[50px] text-[20px] leading-[26px] font-black text-white left-[36px]">
               {authorName || "Default Author"}
             </div>
@@ -73,14 +105,28 @@ const CoverTemplate2 = ({ type, data }) => {
       )}
 
       {type === "back" && (
-        <div className="w-[431px] h-[648px] mx-auto flex items-center justify-between space-y-6 bg-black bg-cover bg-center bg-no-repeat">
-          <img
-            src={isMobile()
-              ? "/images/create-book/bg/bgwhite-back-mob.png"
-              : "/images/create-book/bg/bg2-back.png"}
-            alt="Back Cover"
-          />
+        <div
+          className="w-[431px] h-[648px] mx-auto flex items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: isIOS
+              ? "url('/images/create-book/bg/bgwhite-back-mob.png')" 
+              : "none",
+            backgroundColor: "black", 
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          {!isIOS && (
+            <img
+              src={isMobile()
+                ? "/images/create-book/bg/bgwhite-back-mob.png"
+                : "/images/create-book/bg/bg2-back.png"}
+              alt="Back Cover"
+            />
+          )}
         </div>
+
       )}
 
       {type === "spine" && (
@@ -98,7 +144,7 @@ const CoverTemplate2 = ({ type, data }) => {
               <div
                 ref={elements.spineAuthor.ref}
                 className="whitespace-nowrap"
-                style={{ fontSize: `${fontSizes.spineAuthor}px`, lineHeight: `${fontSizes.spineAuthor *0.9 }px` }}
+                style={{ fontSize: `${fontSizes.spineAuthor}px`, lineHeight: `${fontSizes.spineAuthor * 0.9}px` }}
               >
                 {authorName || "Default Author"}
               </div>

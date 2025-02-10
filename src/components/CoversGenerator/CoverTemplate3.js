@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth, adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
 
 const CoverTemplate3 = ({ type, data }) => {
+
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, selectedSubTopic, croppedImage } = data;
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -85,16 +87,27 @@ const CoverTemplate3 = ({ type, data }) => {
         </div>
       )}
 
-      {type === "back" && (
-        <div className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-[#EEE8D9] bg-cover bg-center bg-no-repeat">
-          <img
-            src={isMobile()
-              ? "/images/create-book/bg/bg3-back-mob.jpg"
-              : "/images/create-book/bg/bg3-back.png"}
-            alt="Back Cover"
-          />
-        </div>
-      )}
+{type === "back" && (
+  <div
+    className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: isIOS
+        ? "url('/images/create-book/bg/bg3-back.png')" 
+        : "none",
+      backgroundColor: "#EEE8D9", 
+    }}
+  >
+    {!isIOS && (
+      <img
+        src={isMobile()
+          ? "/images/create-book/bg/bg3-back-mob.jpg"
+          : "/images/create-book/bg/bg3-back.png"}
+        alt="Back Cover"
+      />
+    )}
+  </div>
+)}
+
 
       {type === "spine" && (
         <div className="h-[648px] flex justify-center relative">
