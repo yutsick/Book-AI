@@ -82,7 +82,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
           scale: isMobile ? 1 : 4, 
 
           cacheBust: false,
-          useBlob: false,
+          useBlob: true,
           useCORS: true,
         });
 

@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'custom-465': '465px',
+      },
       transformStyle: {
         "3d": "preserve-3d",
       },

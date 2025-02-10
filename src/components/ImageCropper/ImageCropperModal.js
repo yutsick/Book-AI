@@ -2,6 +2,23 @@ import React, { useState, useCallback, useEffect, useRef } from "react";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "@/utils/cropImage";
 
+const useScreenWidth = () => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return screenWidth;
+};
+
+
+
+
+
 const ImageCropperModal = ({ 
   imageSrc, 
   onClose, 
@@ -41,6 +58,9 @@ const ImageCropperModal = ({
 
   const initialSwiperWidth = 280;
   const initialSwiperHeight = 420;
+
+  const screenWidth = useScreenWidth();
+const dynamicWidth = screenWidth >= 465 ? 400 : screenWidth - 50;
 
   useEffect(() => {
     const updateSize = () => {
@@ -158,7 +178,8 @@ const ImageCropperModal = ({
           <p className="text-gray-500">Loading image...</p>
         )}
 
-        <div className="flex items-center justify-between px-4 gap-5 bg-white -bottom-14 md:-bottom-6 left-1/2 -translate-x-1/2 absolute w-[280px] md:w-[400px] h-[45px]">
+        <div className={`flex items-center justify-between px-4 gap-5 bg-white -bottom-14 md:-bottom-6 left-1/2 -translate-x-1/2 absolute h-[45px]`}
+        style={{ width: dynamicWidth }}>
           <div className="flex items-center gap-2">
             <label htmlFor="zoom-slider" className="text-[12px] text-gray-500 font-bold">Zoom:</label>
             <input
@@ -168,7 +189,7 @@ const ImageCropperModal = ({
               max={3}
               step={0.01}
               value={zoom}
-              onChange={(e) => setZoom(Math.max(1, Number(e.target.value)))}
+              onChange={(e) => setZoom(Number(e.target.value))}
               className="w-full h-1 bg-zinc-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-orange accent-orange"
             />
           </div>
