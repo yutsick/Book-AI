@@ -103,6 +103,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         const restoreGrayscale = fixGrayscaleBeforeScreenshot(element); 
 
         const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
         const isIOS = /iPhone|iPad/i.test(navigator.userAgent);
         if (isIOS) {
 
@@ -113,7 +114,8 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
         
         
 
-        await new Promise((resolve) => requestAnimationFrame(resolve));
+
+
         const blob = await domToBlob(element, {
           scale: isMobile ? 1 : 4, 
 
@@ -122,14 +124,10 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
           useCORS: true,
         });
 
-       
-
         restoreGrayscale(); 
 
         return blob ? URL.createObjectURL(blob) : null; // 🔥 Blob URL
-        // return dataUrl;
       } catch (error) {
-
         console.error(`❌ Cover rendering error (attempt ${attempt}):`, error);
 
         if (attempt < 3) { 
