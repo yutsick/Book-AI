@@ -14,9 +14,9 @@ export default function About() {
         <Header />
         <AboutUs />
         <Story />
-        <WhatWeDo />
+        {/* <WhatWeDo /> */}
         <Choose />
-        <Vision />
+        {/* <Vision /> */}
         <JoinUs />
         <Footer />
       </main>

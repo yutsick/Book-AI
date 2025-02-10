@@ -20,9 +20,9 @@ function JoinUs() {
             });
     }, []);
     return joinUsData ? (
-        <section className="bg-pink md:bg-white pb-[50px] pt-[30px]">
+        <section className="bg-pink md:bg-white py-[50px]">
             <div className="  w-full max-w-[900px] mx-auto">
-                <div className="px-4 py-4 max-w-[540px] md:max-w-[100%] mx-auto">
+                <div className="px-4 max-w-[540px] md:max-w-[100%] mx-auto">
                     <h2 className="text-[30px] md:text-[45px] font-bold text-center mb-6" >{joinUsData.title}</h2>
                     <p className="text-gray text-[16px] md:text-[18px] leading-[23px] md:leading-[27px] mb-6 text-center md:text-left" >{joinUsData.text}</p>
                     <a

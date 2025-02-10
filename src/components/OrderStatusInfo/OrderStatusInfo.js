@@ -28,38 +28,38 @@ const OrderStatusInfo = () => {
                     {orderStatusInfoData.title}
                 </h2>
 
-                <ul className="flex justify-center flex-wrap items-center md:items-end flex-col md:flex-row gap-x-[35px] gap-y-[30px] md:gap-y-[45px] mt-[40px] mb-[60px]">
+                <ul className="flex justify-center flex-wrap items-center md:items-end gap-x-[9px] sm:gap-x-[25px] gap-y-[35px] md:gap-y-[45px] mt-[40px] mb-[40px] md:mb-[60px] opacity-80">
                     <li>
                         <img
                             src={orderStatusInfoData.processingUrl}
                             alt={orderStatusInfoData.processingAlt}
-                            className=" w-full max-w-[100px] md:max-w-[120px] h-auto mx-auto"
+                            className=" w-full max-w-[50px] sm:max-w-[100px] md:max-w-[120px] h-auto mx-auto"
                         />
-                        <div className="text-[18px] md:text-[23px] font-bold text-[#606061] mt-[15px] text-center" >{orderStatusInfoData.processingText}</div>
+                        <div className="text-[15px] sm:text-[18px] md:text-[23px] font-bold text-[#606061] mt-[15px] text-center" >{orderStatusInfoData.processingText}</div>
                     </li>
-                    <li className="hidden md:block w-full max-w-[100px] h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
+                    <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
                     <li>
                         <img
                             src={orderStatusInfoData.printingUrl}
                             alt={orderStatusInfoData.printingAlt}
-                            className=" w-full max-w-[110px] md:max-w-[130px] h-auto mx-auto"
+                            className=" w-full max-w-[60px] sm:max-w-[110px] md:max-w-[130px] h-auto mx-auto"
                         />
-                        <div className="text-[18px] md:text-[23px] font-bold text-[#606061] mt-[15px] text-center" >{orderStatusInfoData.printingText}</div>
+                        <div className="text-[15px] sm:text-[18px] md:text-[23px] font-bold text-[#606061] mt-[15px] text-center" >{orderStatusInfoData.printingText}</div>
                     </li>
-                    <li className="hidden md:block w-full max-w-[100px] h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
+                    <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
                     <li>
                         <img
                             src={orderStatusInfoData.shippingUrl}
                             alt={orderStatusInfoData.shippingAlt}
-                            className=" w-full max-w-[130px] md:max-w-[150px] h-auto mx-auto"
+                            className=" w-full max-w-[80px] sm:max-w-[130px] md:max-w-[150px] h-auto mx-auto"
                         />
-                        <div className="text-[18px] md:text-[23px] font-bold text-[#606061] text-center" >{orderStatusInfoData.shippingText}</div>
+                        <div className="text-[15px] sm:text-[18px] md:text-[23px] font-bold text-[#606061] text-center" >{orderStatusInfoData.shippingText}</div>
                     </li>
                 </ul>
 
                 <a
-                    className="w-full max-w-[220px] sm:max-w-[355px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[14px] s:text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group ]"
-                    href="/create-book"
+                    className="w-full max-w-[220px] sm:max-w-[355px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[14px] sm:text-[18px] rounded-[3px] gap-1 shadow-heroBtnShadow group ]"
+                    href=""
                 >
 
                     <span className='mb-[2px]'>{orderStatusInfoData.buttonText}</span>

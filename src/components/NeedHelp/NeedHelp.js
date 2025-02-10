@@ -23,7 +23,7 @@ function NeedHelp() {
         <section className="w-full max-w-[840px] py-[40px] md:py-[60px] mx-auto px-[18px]">
             <div className="mb-[60px]" >
                 <h2 className="font-bold text-[20px] md:text-[24px] leading-[26px] mb-[10px] text-gray" >{needHelpData.title}</h2>
-                <p className="text-gray font-medium text-[16px] md:text-[17px] mb-[12px]">{needHelpData.text1}</p>
+                <p className="text-gray font-medium text-[16px] mb-[12px]">{needHelpData.text1}</p>
                 <a
                     className="w-full max-w-[165px] h-[32px] flex justify-center items-center border-[1px] border-gray text-[#464646] font-medium text-[15px] rounded-[3px] gap-1 group ] transition hover:bg-gray hover:text-white"
                     href="#"
@@ -59,7 +59,7 @@ function NeedHelp() {
                 </a>
             </div>
             <div>
-                <p className="text-gray font-medium text-[16px] md:text-[17px] mb-[18px] text-center md:text-start" >{needHelpData.text2}</p>
+                <p className="text-gray font-medium text-[16px] mb-[18px] text-center md:text-start" >{needHelpData.text2}</p>
                 <a
                     className="w-full max-w-[220px] h-[32px] mx-auto flex justify-center items-center border-[1px] border-gray text-[#464646] font-medium text-[15px] rounded-[3px] gap-1 group ] transition hover:bg-gray hover:text-white"
                     href="#"

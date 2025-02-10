@@ -27,6 +27,9 @@ const config = {
   whatHappensUrl: '/data/confirmation/whatHappens.json',
   orderStatusInfoUrl: '/data/confirmation/orderStatusInfo.json',
   needHelpUrl: '/data/confirmation/needHelp.json',
+  //Legal
+  termsUrl: '/data/terms/terms.json',
+  privacyUrl: '/data/privacy/privacy.json',
 };
 
 export default config;
