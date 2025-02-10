@@ -23,14 +23,14 @@ const CoverTemplate3 = ({ type, data }) => {
   useEffect(() => {
     const newFontSizes = {};
   
-    // Спочатку обчислюємо шрифт за висотою
+  
     Object.entries(elements).forEach(([key, { ref, maxFontSize, maxHeight }]) => {
       if (ref.current && maxHeight) {
         newFontSizes[key] = adjustFontSizeByHeight(ref, maxFontSize, maxHeight);
       }
     });
   
-    // Потім коригуємо шрифт за шириною
+ 
     Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth }]) => {
       if (ref.current && maxWidth) {
         newFontSizes[key] = adjustFontSizeByWidth(

@@ -70,7 +70,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
     setPreview(URL.createObjectURL(file));
     setAuthorImage(file);
     
-    // Перевіряємо оригінальний файл перед зміною розміру
+
     const validationResult = await validateImage(file);
   
     if (!validationResult.valid) {

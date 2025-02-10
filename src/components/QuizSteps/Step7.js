@@ -108,12 +108,17 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   useEffect(() => {
     if (croppedImage && croppedImage instanceof File) {
       const reader = new FileReader();
-      reader.onload = () => setImageSrc(reader.result);
+      reader.onload = () => {
+        setImageSrc(""); 
+        setTimeout(() => setImageSrc(reader.result), 10);
+      };
       reader.readAsDataURL(croppedImage);
     } else {
-      setImageSrc(croppedImage);
+      setImageSrc("");
+      setTimeout(() => setImageSrc(croppedImage), 10);
     }
   }, []);
+  
   const handleCropSave = (newCroppedImage, crop, zoom) => {
     setCroppedImage(newCroppedImage);
   
