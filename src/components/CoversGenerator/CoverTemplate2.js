@@ -98,7 +98,7 @@ const CoverTemplate2 = ({ type, data }) => {
               <div
                 ref={elements.spineAuthor.ref}
                 className="whitespace-nowrap"
-                style={{ fontSize: `${fontSizes.spineAuthor}px`, lineHeight: `${fontSizes.spineAuthor * 1.1}px` }}
+                style={{ fontSize: `${fontSizes.spineAuthor}px`, lineHeight: `${fontSizes.spineAuthor *0.9 }px` }}
               >
                 {authorName || "Default Author"}
               </div>
