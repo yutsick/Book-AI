@@ -3,6 +3,30 @@ import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
 
 const CoverTemplate5 = ({ type, data }) => {
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    if (isIOS && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext("2d");
+      const img = new Image();
+      img.src = authorImageSrc;
+      img.crossOrigin = "anonymous";
+
+      img.onload = async () => {
+        if (img.decode) await img.decode();
+
+        requestAnimationFrame(() => {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+        });
+      };
+    }
+  }, [isIOS, croppedImage]);
+
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -10,7 +34,7 @@ const CoverTemplate5 = ({ type, data }) => {
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const spineAuthorRef = useRef(null);
-  const maxSpineAuthorWidth = 215; 
+  const maxSpineAuthorWidth = 215;
   const [spineAuthorFontSize, setSpineAuthorFontSize] = useState(21);
 
   useEffect(() => {
@@ -31,12 +55,17 @@ const CoverTemplate5 = ({ type, data }) => {
         >
           {/* Heading */}
           <div className="w-full h-full">
-            <img
-              src={authorImageSrc}
-              alt={authorName || "Default Author"}
-              className="w-full h-full object-cover block"
-            />
+            {isIOS ? (
+              <canvas ref={canvasRef} className="w-full h-full object-cover block"></canvas>
+            ) : (
+              <img
+                src={authorImageSrc}
+                alt={authorName || "Default Author"}
+                className="w-full h-full object-cover block"
+              />
+            )}
           </div>
+
 
           <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4 px-8 text-center flex-1 text-white pt-12 pb-11">
             <div className="text-left h-full flex flex-col justify-between">
@@ -65,14 +94,28 @@ const CoverTemplate5 = ({ type, data }) => {
 
       {/* Back Cover */}
       {type === "back" && (
-        <div className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-[#A6AAAC] bg-cover bg-center bg-no-repeat">
-          <img
-            src={isMobile()
-              ? "/images/create-book/bg/bgwhite-back-mob.png"
-              : "/images/create-book/bg/bg5-back.png"}
-            alt="Back Cover"
-          />
+        <div
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: isIOS
+              ? "url('/images/create-book/bg/bgwhite-back-mob.png')" 
+              : "none",
+            backgroundColor: "#A6AAAC", 
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          {!isIOS && (
+            <img
+              src={isMobile()
+                ? "/images/create-book/bg/bgwhite-back-mob.png"
+                : "/images/create-book/bg/bg5-back.png"}
+              alt="Back Cover"
+            />
+          )}
         </div>
+
       )}
 
       {/* Spine */}

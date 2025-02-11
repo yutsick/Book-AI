@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth, adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
 
 const CoverTemplate8 = ({ type, data }) => {
+
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, selectedSubTopic, croppedImage } = data;
 
   const authorImageSrc =
@@ -124,14 +126,25 @@ const CoverTemplate8 = ({ type, data }) => {
 
       {/* Back Cover */}
       {type === "back" && (
-        <div className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-white">
+        <div
+        className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-white"
+        style={{
+          backgroundImage: isIOS ? "url('/images/create-book/bg/bg8-back.png')" : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {!isIOS && (
           <img
             src={isMobile()
               ? "/images/create-book/bg/bg8-back-mob.jpg"
               : "/images/create-book/bg/bg8-back.png"}
             alt="Back Cover"
           />
-        </div>
+        )}
+      </div>
+      
       )}
 
       {/* Spine */}

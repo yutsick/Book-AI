@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
 
 const CoverTemplate4 = ({ type, data }) => {
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
 
   const authorImageSrc =
@@ -67,21 +68,32 @@ const CoverTemplate4 = ({ type, data }) => {
 
       {/* Back Cover */}
       {type === "back" && (
-        <div className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-[#F0EADE] bg-cover bg-center bg-no-repeat">
-          <img
-            src={isMobile()
-              ? "/images/create-book/bg/bg4-back-mob.jpg"
-              : "/images/create-book/bg/bg4-back.png"}
-            alt="Back Cover"
-          />
+        <div
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: isIOS
+              ? "url('/images/create-book/bg/bg4-back-mob.jpg')"
+              : "none",
+            backgroundColor: "#F0EADE",
+          }}
+        >
+          {!isIOS && (
+            <img
+              src={isMobile()
+                ? "/images/create-book/bg/bg4-back-mob.jpg"
+                : "/images/create-book/bg/bg4-back.png"}
+              alt="Back Cover"
+            />
+          )}
         </div>
       )}
+
 
       {/* Spine */}
       {type === "spine" && (
         <div className="h-[648px] flex justify-center relative">
           <div className="flex text-[#0D453A] items-center h-[57px] w-[648px] gap-2 pl-2 bg-[#FFA3BC] justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] text-[23px]">
-            
+
             <div className="whitespace-nowrap flex flex-1 flex-col justify-center items-center pb-2 font-pacifico">
               <div
                 ref={elements.spineTitle.ref}
