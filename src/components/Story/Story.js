@@ -21,7 +21,7 @@ function Story() {
             });
     }, []);
     return storyData ? (
-        <section className="min-h-screen relative">
+        <section className="min-h-screen relative overflow-hidden">
             <div
                 className="absolute inset-0 bg-gradient-to-b from-white to-[#F0ECE2]"
             ></div>
@@ -32,7 +32,7 @@ function Story() {
                     backgroundPosition: 'center',
                     backgroundSize: 'contain',
                 }}
-                className="absolute inset-0 bg-contain bg-center bg-no-repeat hidden md:block"
+                className="absolute inset-0 bg-contain bg-center bg-no-repeat bottom-[-90px] hidden md:block"
             ></div>
 
             <div className="relative z-10 w-full max-w-[950px] mx-auto px-4 md:px-5 py-[50px]">
