@@ -42,7 +42,7 @@ const BookCovers = () => {
             <h2 className="text-title text-center">
               {title}
             </h2>
-            <p className="text-gray font-medium  text-[19px] leading-[24px]  "
+            <p className="text-gray text-center font-medium  text-[19px] leading-[24px]  "
               dangerouslySetInnerHTML={{ __html: subtitle }}
             >
 
