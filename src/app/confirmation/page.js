@@ -6,8 +6,6 @@ import OrderStatusInfo from '@/components/OrderStatusInfo/OrderStatusInfo';
 import NeedHelp from '@/components/NeedHelp/NeedHelp';
 
 
-
-
 export default function Confirmation() {
   return (
     <>
