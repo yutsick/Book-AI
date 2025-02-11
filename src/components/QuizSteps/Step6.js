@@ -22,7 +22,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
     return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
   };
   useEffect(() => {
-    setProgressStep(4);
+    setProgressStep(5);
   }, [setProgressStep]);
 
   useEffect(() => {
@@ -143,9 +143,9 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   return (
     <div>
       <div className="w-full mt-2 md:px-6">
-        <div className="field-title">Upload a photo to personalize your book’s cover.</div>
+        <div className="field-title">Upload a photo</div>
         <div className="field-desc">
-          We recommend using a high-quality photo of {authorName.trim()}, either a portrait or a full upper body shot.
+        We’ll feature it on the front cover to make your book feel more personal. For the best results, use a high-quality image of {authorName.trim()} — either a portrait or an upper-body shot
         </div>
 
         <div className="w-full flex justify-center mt-5">
