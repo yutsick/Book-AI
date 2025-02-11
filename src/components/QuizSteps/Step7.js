@@ -17,14 +17,14 @@ const previewTemplates = [
 ];
 
 const cropperData = [
-  { id: 1, top: null, bottom: 70, left: 0, width: 390, height: 340, mobBottom: 50, mobLeft: 0, mobWidth: 280, mobHeight: 250 },
-  { id: 2, top: null, bottom: 193, left: 0, width: 390, height: 395, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 280 },
-  { id: 3, top: null, bottom: 80, left: 65, width: 268, height: 300, mobTop: null, mobBottom: 55, mobLeft: 40, mobWidth: 198, mobHeight: 220 },
-  { id: 4, top: 0, bottom: null, left: 0, width: 390, height: 367, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
-  { id: 5, top: null, bottom: 0, left: 0, width: 390, height: 590, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 420 },
-  { id: 6, top: null, bottom: 103, left: 68, width: 255, height: 272, mobTop: null, mobBottom: 70, mobLeft: 0, mobWidth: 195, mobHeight: 200, radius: true },
-  { id: 7, top: null, bottom: 103, left: 68, width: 255, height: 272, mobTop: null, mobBottom: 70, mobLeft: 0, mobWidth: 190, mobHeight: 200, radius: true },
-  { id: 8, top: null, bottom: 12, left: 12, width: 367, height: 360, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 260 }
+  { id: 1, top: null, bottom: 63, left: 0, width: 350, height: 290, mobTop: 0, mobBottom: 50, mobLeft: 0, mobWidth: 280, mobHeight: 250 },
+  { id: 2, top: null, bottom: 173, left: 0, width: 350, height: 355, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 280 },
+  { id: 3, top: null, bottom: 70, left: 58, width: 242, height: 270, mobTop: null, mobBottom: 55, mobLeft: 40, mobWidth: 198, mobHeight: 220 },
+  { id: 4, top: 0, bottom: null, left: 0, width: 350, height: 330, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
+  { id: 5, top: null, bottom: 0, left: 0, width: 350, height: 527, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 420 },
+  { id: 6, top: null, bottom: 90, left: 60, width: 230, height: 248, mobTop: null, mobBottom: 70, mobLeft: 0, mobWidth: 195, mobHeight: 200, radius: true },
+  { id: 7, top: null, bottom: 90, left: 60, width: 230, height: 248, mobTop: null, mobBottom: 70, mobLeft: 0, mobWidth: 190, mobHeight: 200, radius: true },
+  { id: 8, top: null, bottom: 10, left: 12, width: 327, height: 325, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 260 }
 ]
 const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   const {
@@ -135,7 +135,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   
   return (
     <>
-      <div className="relative w-full mt-4 md:px-2 flex flex-col items-center md:flex-row md:justify-end md:gap-16 ">
+      <div className="relative w-full mt-4 md:px-2 flex flex-col items-center md:flex-row md:justify-end md:gap-24 ">
 
         {isCropperOpen && (
           <div
@@ -148,7 +148,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
         )}
 
         {/* Slider */}
-        <div className="max-w-[390px] w-full flex justify-center items-center relative max-h-[420px] md:max-h-[648px]">
+        <div className="max-w-[350px] w-full flex justify-center items-center relative max-h-[420px] md:max-h-[648px]">
 
           {/* Modal crop window */}
           {isCropperOpen && selectedTemplate.templateId && (
@@ -209,7 +209,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
 
       {/* Button for the modal */}
       {isRendered && (
-        <div className={`flex justify-center md:max-w-[390px] md:ml-[50px] transition-all duration-300 ${isModalOpen ? "mt-8 md:mt-10" : "mt-8 md:mt-4"
+        <div className={`flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-8 md:mt-10" : "mt-8 md:mt-4"
           }`}>
           <button
             className="text-[14px] font-medium bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[170px] flex items-center justify-center border rounded-[3px] border-[#878787] cursor-pointer"
