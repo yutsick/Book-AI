@@ -4,19 +4,19 @@
     "cards": [
         {
             "title": "User-Friendly Experience",
-            "description": "User-Friendly Experience: We’ve designed Book Tailor to be intuitive and straightforward. No technical knowledge or writing experience required."
+            "description": "We’ve designed Book Tailor to be intuitive and straightforward. No technical knowledge or writing experience required."
         },
         {
-            "title": "Fast and Affordable",
-            "description": "Fast and Affordable: From idea to reality in just minutes, at a fraction of the cost of traditional publishing services."
+            "title": "Friendly Support",
+            "description": "Our support team is here to guide you, from book creation to delivery. Use our built-in tool to ensure your answers provide enough details for a well-crafted, humorous book."
         },
         {
-            "title": "Advanced Technology",
-            "description": "Advanced Technology: Our AI doesn’t just write—it learns from your input to create content that feels personal and authentic."
+            "title": "Technology With Individuality",
+            "description": "Our AI seamlessly blends technology with individuality, making customization effortless. Instantly turn ideas into personalized, meaningful gifts with a human touch."
         },
         {
             "title": "Customization at Your Fingertips",
-            "description": "Customization at Your Fingertips: Unlike cookie-cutter templates, our platform lets you shape every aspect of your book."
+            "description": "Our platform lets you shape every aspect of your book. Once you answer a few questions, you'll instantly see how your book will look, including its title and subtitle."
         }
     ]
 }
