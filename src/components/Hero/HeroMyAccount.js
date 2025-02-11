@@ -10,22 +10,23 @@ const heroData = {
 
 const HeroMyAccount = () => {
   return (
-    <div className="bg-[#F9F6EB] p-6 md:p-12 md:max-h-[343px]">
-      <div className="flex flex-col md:flex-row items-center gap-6 max-w-[833px] mx-auto">
-        <div className="w-[251px] h-[251px]">
+    <div className="md:bg-[#F9F6EB] p-3 md:p-12 md:max-h-[343px] text-dark font-inter">
+      <div className="flex flex-col md:flex-row items-center md:items-start md:gap-[58px] max-w-[833px] mx-auto">
+        <h1 className="text-[36px]  md:hidden font-bold ">{heroData.title}</h1>
+        <div className="w-[286px] h-[286px] md:w-[251px] d:h-[251px] mt-4 md:mt-0">
         <img
           src={heroData.image}
           alt="Book with tea"
-          className="w-full h-full"
+          className="w-full h-full rounded-[4px]"
         />
         </div>
 
-        <div className="md:w-2/3 text-center md:text-left">
-          <h1 className="text-2xl md:text-4xl font-bold text-gray-900">{heroData.title}</h1>
-          <h2 className="text-lg md:text-xl font-semibold text-gray-700 mt-2">
+        <div className="md:w-2/3  ">
+          <h1 className="hidden md:block text-[46px] leading-none font-semibold ">{heroData.title}</h1>
+          <h2 className="text-lg md:[18px] font-semibold md:mt-8 mt-2">
             {heroData.subtitle}
           </h2>
-          <p className="text-gray-600 mt-4">{heroData.description}</p>
+          <p className="text-[18px] md:mt-2">{heroData.description}</p>
         </div>
       </div>
     </div>

@@ -28,6 +28,7 @@ export default {
           300: '#2B2B2B',
           500: '#1E1E1E',
         },
+        dark: "#2b2b2b",
       },
       fontFamily: {
         roboto: ['var(--font-roboto)', 'sans-serif'],
