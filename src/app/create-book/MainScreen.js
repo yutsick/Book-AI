@@ -141,7 +141,7 @@ const MainScreen = () => {
       )}
     
       <div className="max-w-[820px] w-full mx-auto px-4 md:px-14">
-        <div className={`${currentStep == 7 ? "mb-6" : "mb-12"}`}>
+        <div className={`${currentStep == 7 ? "mb-10" : "mb-12"}`}>
           {currentStep === 1 && (
             <Step1
               setIsButtonDisabled={setIsButtonDisabled}

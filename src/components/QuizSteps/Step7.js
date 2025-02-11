@@ -135,7 +135,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   
   return (
     <>
-      <div className="relative w-full mt-4 md:px-2 flex flex-col items-center md:flex-row md:justify-end md:gap-24 ">
+      <div className="relative w-full mt-4 md:px-2 flex flex-col items-center md:items-start md:flex-row md:justify-end md:gap-24 ">
 
         {isCropperOpen && (
           <div
@@ -209,7 +209,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
 
       {/* Button for the modal */}
       {isRendered && (
-        <div className={`flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-8 md:mt-10" : "mt-8 md:mt-4"
+        <div className={`flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-8 md:mt-10" : "mt-8 md:-mt-7"
           }`}>
           <button
             className="text-[14px] font-medium bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[170px] flex items-center justify-center border rounded-[3px] border-[#878787] cursor-pointer"
