@@ -24,7 +24,7 @@ const OrderStatusInfo = () => {
             background: "linear-gradient(211.86deg, #E1E0E1 7.41%, rgba(189, 219, 227, 0) 41.47%, #EBC0C4 90.12%), linear-gradient(255.39deg, #CFDEE2 11.92%, rgba(247, 188, 173, 0.87) 41.9%, rgba(189, 219, 227, 0.84) 60.13%)"
         }}>
             <div className="max-w-[1050px] mx-auto py-[40px] md:py-[60px]">
-                <h2 className="text-[16px] sm:text-[20px] md:text-[24px] font-bold text-gray text-center max-w-[540px] md:max-w-[660px] mx-auto">
+                <h2 className="text-[20px] md:text-[24px] font-bold text-gray text-center max-w-[540px] md:max-w-[660px] mx-auto">
                     {orderStatusInfoData.title}
                 </h2>
 
@@ -58,7 +58,7 @@ const OrderStatusInfo = () => {
                 </ul>
 
                 <a
-                    className="w-full max-w-[220px] sm:max-w-[355px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[14px] sm:text-[18px] rounded-[3px] gap-1 shadow-heroBtnShadow group ]"
+                    className="w-full max-w-[260px] sm:max-w-[355px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[16px] sm:text-[18px] rounded-[3px] gap-1 shadow-heroBtnShadow group ]"
                     href=""
                 >
 
