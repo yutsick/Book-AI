@@ -20,10 +20,10 @@ function Step5({setProgressStep, setIsButtonDisabled}) {
    
     
     const topicOptions = [
-      { "id": "1", "name": "Surfing Through Life's Waves", "description": "A Fitness Trainer's Guide To Riding The Ups And Downs"},
-      { "id": "2", "name": "Football Fever Dreams", "description": "Rantings Of A Trainer Obsessed With Goals And Snack Foods"},
-      { "id": "3", "name": "Game Over: My Family Edition", "description": "Leveling Up With Peter, Jessica, And The Ultimate Boss: Maria"},
-      { "id": "4", "name": "Boston and the Art of Surfing", "description": "Why I Pick Waves Over Traffic Any Day"  },
+      { "id": "1", "name": "I Almost Missed a Taylor Swift Concert", "description": "The Untold Truth About Taking Time Off Work"},
+      { "id": "2", "name": "A small savings jar", "description": "My path to the world of big dreams has never been easier or felt farther away"},
+      { "id": "3", "name": "In My Next Life, I'd Like to Be a Shih Tzu", "description": "An Unforgettable Diary About Dogs, Humans, and the Lessons, They Teach Us"},
+      { "id": "4", "name": "It took us 4 years, 3 months & 8 days to finally meet for coffee", "description": "Close friends don’t always need to meet in person"  },
     ]
     const handleTopicChange = (value, description) => {
       setSelectedTopic(value);
