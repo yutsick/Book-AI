@@ -81,22 +81,22 @@ const OrderDetails = () => {
       </div>
 
       <hr className="my-6" />
-      <div class=" w-full">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className=" w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           <div>
-            <h2 class="font-bold text-lg mb-2">Order date</h2>
+            <h2 className="font-bold text-lg mb-2">Order date</h2>
             <p>Jan 5, 2025</p>
-            <h2 class="font-bold text-lg mt-4 mb-2">Status</h2>
+            <h2 className="font-bold text-lg mt-4 mb-2">Status</h2>
             <p>Processing</p>
 
 
-            <div class="text-center md:text-left">
-              <h2 class="font-bold text-lg mb-2">Reorder</h2>
-              <p class="mb-4">
+            <div className="text-center md:text-left">
+              <h2 className="font-bold text-lg mb-2">Reorder</h2>
+              <p className="mb-4">
                 Add more copies to your existing order or create a new order for the same book.
               </p>
-              <button class="py-2 px-4 w-full md:w-auto bg-orange text-white font-bold rounded shadow hover:bg-orange-600">
+              <button className="py-2 px-4 w-full md:w-auto bg-orange text-white font-bold rounded shadow hover:bg-orange-600">
                 Reorder My Book &raquo;
               </button>
             </div>
@@ -104,15 +104,15 @@ const OrderDetails = () => {
 
 
           <div>
-            <h2 class="font-bold text-lg mb-2 flex items-center">
+            <h2 className="font-bold text-lg mb-2 flex items-center">
               Shipment Address
-              <span class="ml-2 cursor-pointer text-gray-500">✏️</span>
+              <span className="ml-2 cursor-pointer text-gray-500">✏️</span>
             </h2>
-            <p class="font-bold">Ashley Brook</p>
+            <p className="font-bold">Ashley Brook</p>
             <p>123 Main Street, New York, NY, 10001</p>
             <p>Standard</p>
             <div>
-              <h2 class="font-bold text-lg mb-4">Delivery Status update</h2>
+              <h2 className="font-bold text-lg mb-4">Delivery Status update</h2>
               <ProgressBar
                 progressStep={1}
                 currentStep={2}
@@ -128,7 +128,7 @@ const OrderDetails = () => {
 
 
 
-        <hr class="my-6" />
+        <hr className="my-6" />
 
 
 
