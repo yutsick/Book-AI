@@ -159,6 +159,15 @@
   .myAccount .line{
     border: solid 0.5px #000
   }
+
+  .myAccount   .label{
+    display: block;
+  }
   
+  .myAccount.progressBar {
+    width: 117%;
+    left: -8.5%;
+    position: relative;
+  }
 
 }
