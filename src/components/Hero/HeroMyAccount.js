@@ -21,7 +21,7 @@ const HeroMyAccount = () => {
         />
         </div>
 
-        <div className="md:w-2/3  ">
+        <div className="flex-1  ">
           <h1 className="hidden md:block text-[46px] leading-none font-semibold ">{heroData.title}</h1>
           <h2 className="text-[21px] md:text-[18px] font-semibold md:mt-8 mt-2">
             {heroData.subtitle}
