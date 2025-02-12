@@ -209,7 +209,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
 
       {/* Button for the modal */}
       {isRendered && (
-        <div className={`flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-8 md:mt-10" : "mt-8 md:-mt-6"
+        <div className={`relative z-20 flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-8 md:mt-2" : "mt-8 md:-mt-6"
           }`}>
           <button
             className="text-[14px] font-medium bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[170px] flex items-center justify-center border rounded-[3px] border-[#878787] cursor-pointer"
