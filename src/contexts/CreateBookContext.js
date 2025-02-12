@@ -10,6 +10,11 @@ export const CreateBookProvider = ({ children }) => {
   const [selectedGender, setSelectedGender] = useState(null);
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState([]);
   const [authorEmail, setAuthorEmail] = useState(null);
+  const [selectedCopies, setSelectedCopies] = useState({ value: 1, label: "1", price: 0 });
+  const [selectedCoverIndex, setSelectedCoverIndex] = useState(0);
+  const [selectedShippingIndex, setSelectedShippingIndex] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const [authorImage, setAuthorImage] = useState(""); // Оригінальне зображення
   const [croppedImage, setCroppedImage] = useState(""); // Обрізане зображення
@@ -67,6 +72,16 @@ export const CreateBookProvider = ({ children }) => {
         setError,
         selectedTemplate,
         setSelectedTemplate,
+        selectedCopies,
+        setSelectedCopies,
+        selectedCoverIndex,
+        setSelectedCoverIndex,
+        selectedShippingIndex,
+        setSelectedShippingIndex, 
+        subtotal, 
+        setSubtotal, 
+        totalPrice, 
+        setTotalPrice
       }}
     >
       {children}
