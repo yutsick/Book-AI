@@ -13,7 +13,7 @@ const HeroMyAccount = () => {
     <div className="md:bg-[#F9F6EB] p-3 md:p-12 md:max-h-[343px] text-dark font-inter">
       <div className="flex flex-col md:flex-row items-center md:items-start md:gap-[58px] max-w-[833px] mx-auto">
         <h1 className="text-[36px]  md:hidden font-bold ">{heroData.title}</h1>
-        <div className="w-[286px] h-[286px] md:w-[251px] d:h-[251px] mt-4 md:mt-0">
+        <div className="w-[251px] h-[251px] md:w-[251px] d:h-[251px] mt-4 md:mt-0">
         <img
           src={heroData.image}
           alt="Book with tea"
@@ -23,7 +23,7 @@ const HeroMyAccount = () => {
 
         <div className="md:w-2/3  ">
           <h1 className="hidden md:block text-[46px] leading-none font-semibold ">{heroData.title}</h1>
-          <h2 className="text-lg md:[18px] font-semibold md:mt-8 mt-2">
+          <h2 className="text-[21px] md:text-[18px] font-semibold md:mt-8 mt-2">
             {heroData.subtitle}
           </h2>
           <p className="text-[18px] md:mt-2">{heroData.description}</p>

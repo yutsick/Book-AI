@@ -30,7 +30,7 @@ const ProgressBar = ({ currentStep, progressStep, totalSteps, stepsName, isMobil
   });
 
   return (
-    <div className={styles.progressBar}>
+    <div className={`${styles.progressBar} ${myAccount ? styles.myAccount : ""}`}>
       {transformedSteps.map((step, index) => (
         <ProgressStep
         isMobile = {isMobile}
