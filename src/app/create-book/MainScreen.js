@@ -15,9 +15,10 @@ import Step6 from "@/components/QuizSteps/Step6";
 import Step7 from "@/components/QuizSteps/Step7";
 import Step8 from "@/components/QuizSteps/Step8";
 import Step9 from "@/components/QuizSteps/Step9";
+import Step10 from "@/components/QuizSteps/Step10";
 
 const MainScreen = () => {
-  const totalScreens = 9;
+  const totalScreens = 10;
   const totalProgressSteps = 7;
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -96,7 +97,7 @@ const MainScreen = () => {
       if (e.key === "Enter" && !isButtonDisabled) {
         if (currentStep === 6) {
           handleFileUpload();
-        } else if(currentStep !== 3){
+        } else if (currentStep !== 3) {
 
           goToNextStep();
         }
@@ -139,7 +140,7 @@ const MainScreen = () => {
           </button>
         </div>
       )}
-    
+
       <div className="max-w-[820px] w-full mx-auto px-4 md:px-14">
         <div className={`${currentStep == 7 ? "mb-10" : "mb-12"}`}>
           {currentStep === 1 && (
@@ -181,19 +182,23 @@ const MainScreen = () => {
               setIsButtonDisabled={setIsButtonDisabled}
             />
           )}
-          {currentStep === 7 && 
-            <Step7 
-              setProgressStep={setProgressStep} 
+          {currentStep === 7 &&
+            <Step7
+              setProgressStep={setProgressStep}
               setIsButtonDisabled={setIsButtonDisabled}
-          />}
-          {currentStep === 8 && 
-            <Step8 
-              setProgressStep={setProgressStep} 
-          />}
-          {currentStep === 9 && 
-            <Step9 
-              setProgressStep={setProgressStep} 
-          />}
+            />}
+          {currentStep === 8 &&
+            <Step8
+              setProgressStep={setProgressStep}
+            />}
+          {currentStep === 9 &&
+            <Step9
+              setProgressStep={setProgressStep}
+            />}
+          {currentStep === 10 &&
+            <Step10
+              setProgressStep={setProgressStep}
+            />}
 
         </div>
         {currentStep < totalScreens && (
@@ -204,7 +209,7 @@ const MainScreen = () => {
           />
         )}
       </div>
-  
+
     </div>
   );
 };
