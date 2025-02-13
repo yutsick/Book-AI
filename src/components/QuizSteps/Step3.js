@@ -131,8 +131,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
     ...question,
     isDisabled: questionsAndAnswers.some((qa) => qa.question === question.label),
   }));
-  
-// 
+   
 
 const weightConfig = {
   "1": { max: 4, levels: [20, 10, 1] },
@@ -158,7 +157,6 @@ const calculateScore = () => {
     if (answer.length > 0) {
       answeredQuestions++;
 
-      // Знайти відповідне `value` питання
       const questionEntry = questions.find(q => q.label === question);
       if (!questionEntry) return;
 
@@ -176,15 +174,12 @@ const calculateScore = () => {
   return { score, answeredQuestions };
 };
 
-
-
 const { score, answeredQuestions } = calculateScore();
 let qualityLevel = "Empty bar";
 if (score >= 15 && answeredQuestions >= 6) qualityLevel = "Excellent";
 else if (score >= 9 && answeredQuestions >= 5) qualityLevel = "Good";
 else if (score >= 5 && answeredQuestions >= 3) qualityLevel = "OK";
 else if (score >= 1 && answeredQuestions >= 1) qualityLevel = "Basic";
-// 
 
   return (
     <div className="w-full ">
