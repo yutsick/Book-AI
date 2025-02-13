@@ -132,6 +132,59 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
     isDisabled: questionsAndAnswers.some((qa) => qa.question === question.label),
   }));
   
+// 
+
+const weightConfig = {
+  "1": { max: 4, levels: [20, 10, 1] },
+  "2": { max: 1, levels: [1] },
+  "3": { max: 4, levels: [10, 5, 1] },
+  "4": { max: 3, levels: [50, 30, 10] },
+  "5": { max: 2, levels: [25, 5] },
+  "6": { max: 2, levels: [5, 1] },
+  "7": { max: 4, levels: [10, 5, 1] },
+  "8": { max: 1, levels: [1] },
+  "9": { max: 1, levels: [1] },
+  "10": { max: 1, levels: [1] },
+  "11": { max: 1, levels: [1] },
+  "12": { max: 2, levels: [15, 5] },
+  "13": { max: 2, levels: [15, 5] }
+};
+
+const calculateScore = () => {
+  let score = 0;
+  let answeredQuestions = 0;
+
+  questionsAndAnswers.forEach(({ question, answer }) => {
+    if (answer.length > 0) {
+      answeredQuestions++;
+
+      // Знайти відповідне `value` питання
+      const questionEntry = questions.find(q => q.label === question);
+      if (!questionEntry) return;
+
+      const weight = weightConfig[questionEntry.value] || { max: 1, levels: [1] };
+
+      for (let i = 0; i < weight.levels.length; i++) {
+        if (answer.split(' ').length > weight.levels[i]) {
+          score += weight.max - i;
+          break;
+        }
+      }
+    }
+  });
+
+  return { score, answeredQuestions };
+};
+
+
+
+const { score, answeredQuestions } = calculateScore();
+let qualityLevel = "Empty bar";
+if (score >= 15 && answeredQuestions >= 6) qualityLevel = "Excellent";
+else if (score >= 9 && answeredQuestions >= 5) qualityLevel = "Good";
+else if (score >= 5 && answeredQuestions >= 3) qualityLevel = "OK";
+else if (score >= 1 && answeredQuestions >= 1) qualityLevel = "Basic";
+// 
 
   return (
     <div className="w-full ">
@@ -144,7 +197,8 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
           Your Answers Quality
         </div>
         <div className="mb-9">
-          <ProgressTracker activeSteps={questionsAndAnswers.length} />
+          {/* <ProgressTracker activeSteps={questionsAndAnswers.length} /> */}
+          <ProgressTracker activeSteps={qualityLevel === "Excellent" ? 4 : qualityLevel === "Good" ? 3 : qualityLevel === "OK" ? 2 : qualityLevel === "Basic" ? 1 : 0} />
         </div>
 
         {questionsAndAnswers.map(({ question, answer }) => (
