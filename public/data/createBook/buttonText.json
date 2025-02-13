@@ -30,5 +30,9 @@
   {
     "step": 8,
     "nextText": "Next"
+  },
+  {
+    "step": 9,
+    "nextText": "Proceed to Payment"
   }
 ]

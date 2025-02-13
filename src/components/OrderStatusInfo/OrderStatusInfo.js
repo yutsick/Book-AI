@@ -28,7 +28,7 @@ const OrderStatusInfo = () => {
                     {orderStatusInfoData.title}
                 </h2>
 
-                <ul className="flex justify-center flex-wrap items-center md:items-end gap-x-[9px] sm:gap-x-[25px] gap-y-[35px] md:gap-y-[45px] mt-[40px] mb-[40px] md:mb-[60px] opacity-80">
+                <ul className="flex justify-center items-end md:items-end gap-x-[9px] sm:gap-x-[25px] gap-y-[35px] md:gap-y-[45px] mt-[40px] mb-[40px] md:mb-[60px] opacity-80">
                     <li>
                         <img
                             src={orderStatusInfoData.processingUrl}

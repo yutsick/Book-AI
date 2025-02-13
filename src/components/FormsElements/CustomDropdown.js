@@ -43,7 +43,7 @@ const CustomDropdown = ({
   }, []);
 
   return (
-    <div className={`mb-8 ${className}`}>
+    <div className={` ${className}`}>
       {title && <div className="field-title">{title}</div>}
       <div className="relative w-[327px] h-[36px]" ref={selectRef}>
         <div
