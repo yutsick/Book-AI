@@ -16,7 +16,7 @@ const LoginPage = () => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const isValidEmail = emailRegex.test(authorEmail.trim());
   const isButtonDisabled = !isValidEmail || authorEmail.trim() === "" || password.trim() === "";
-  
+
 
   return (
     <div className="w-full  ">
@@ -65,13 +65,19 @@ const LoginPage = () => {
 
 
 
-          <Link href="/forgot-password" className="mt-3 md:mt-0 self-center md:self-start text-gray-300/80 text-sm underline hover:text-gray-700 transition">
+          <Link href="/reset-password" className="mt-3 md:-mt-6 self-center md:self-start text-gray-300/80 text-sm underline hover:text-gray-700 transition">
             Forgot your password?
           </Link>
 
         </div>
         <div className="mt-10 md:mt-0">
-          <MainButton text="Log in" disabled={isButtonDisabled} />
+          <Link href="/my-account">
+            <MainButton 
+            text="Log in" 
+            disabled={isButtonDisabled}
+            fontSize="20px" 
+            />
+          </Link>
         </div>
 
       </div>

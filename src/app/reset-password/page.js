@@ -1,5 +1,5 @@
 "use client";
-import SignUpPage from "./SignUpPage";
+import ResetPasswordPage from "./ResetPasswordPage";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
@@ -8,8 +8,8 @@ export default function SignUp() {
    <div>
       
         <Header />
-        <div  className="min-h-screen max-w-[748px] mx-auto flex flex-col items-center pb-36 mt-8">
-          <SignUpPage />
+        <div  className="min-h-screen max-w-[748px] mx-auto flex flex-col items-center justify-between pb-28 mt-8">
+          <ResetPasswordPage />
         </div>
        
         <Footer />
