@@ -17,7 +17,7 @@ const config = {
   createBookStep1: './data/createBook/stepOne.json',
 
   // Contact Us
-  contactUsUrl: './data/contactUs/contactUs.json'
+  contactUsUrl: './data/contactUs/contactUs.json',
 
   // About Us
   aboutUsUrl: '/data/about-us/aboutUs.json',
