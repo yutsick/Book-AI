@@ -8,7 +8,7 @@ export default function SetPassword() {
    <div>
       
         <Header />
-        <div  className="min-h-screen max-w-[748px] mx-auto flex flex-col items-center pb-36 mt-8">
+        <div  className="min-h-screen max-w-[748px] mx-auto flex flex-col items-center px-4 pb-36 mt-8">
           <SetPasswordPage />
         </div>
        
