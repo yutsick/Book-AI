@@ -39,7 +39,7 @@ const MainScreen = () => {
     "Checkout",
   ];
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" }); 
+    window.scrollTo({ top: 0 }); 
   }, [currentStep]);
 
   const goToNextStep = () => {
