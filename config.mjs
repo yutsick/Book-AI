@@ -15,6 +15,10 @@ const config = {
   buttonTextUrl: './data/createBook/buttonText.json',
   genresUrl: './data/createBook/genres.json',
   createBookStep1: './data/createBook/stepOne.json',
+
+  // Contact Us
+  contactUsUrl: './data/contactUs/contactUs.json'
+
   // About Us
   aboutUsUrl: '/data/about-us/aboutUs.json',
   storyUrl: '/data/about-us/story.json',
@@ -30,6 +34,7 @@ const config = {
   //Legal
   termsUrl: '/data/terms/terms.json',
   privacyUrl: '/data/privacy/privacy.json',
+
 };
 
 export default config;

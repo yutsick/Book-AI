@@ -1,0 +1,15 @@
+{
+    "title": "Contact Us",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Author's Full Name",
+    "country": "Country",
+    "countryPlaceholder": "Choose your state from the list",
+    "mail": "Your Mail",
+    "mailPlaceholder": "Enter your mail here",
+    "reason": "What are you contacting us about?",
+    "reasonPlaceholder": "Select an option",
+    "help": "How we can help?",
+    "helpPlaceholder": "Write your message here",
+    "helpNote": "Please include in your message you order number if you have one",
+    "buttonText": "Submit"
+}
