@@ -60,7 +60,7 @@ const ResetPasswordPage = () => {
 
     </div>
     <div className="w-full flex justify-center text-[15px] gap-2 ">
-      <div className="italic text-black">Need help?</div>
+      <div className="italic text-black font-medium">Need help?</div>
       <Link href="contact-us">
             <div className="text-[#006FFF] underline">Contact Support</div>
       </Link>
