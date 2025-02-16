@@ -57,11 +57,11 @@ const SignUpPage = () => {
           <div className="h-[1px] bg-[#D1D1D1] md:min-w-full max-w-[330px] mx-auto"></div>
           <div className="text-center mt-10">
             <p className="text-gray-300 text-[24px]  font-medium font-inter">Already have an account?</p>
-            <Link href="/sign-up">
+ 
             <div className="mt-8">
             <NavButton href="/log-in" text="Log In" />
           </div>
-          </Link>
+       
 
           </div>
         </div>

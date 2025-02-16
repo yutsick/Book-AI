@@ -6,7 +6,7 @@
     { "text": "Book Covers", "href": "#book-covers" },
     { "text": "FAQ", "href": "#faq" },
     { "text": "About Us", "href": "/about-us" },
-    { "text": "Contact Us", "href": "#" }
+    { "text": "Contact Us", "href": "/contact-us" }
   ],
   "footerLinks": [
     { "text": "Terms of Use", "href": "/terms" },
