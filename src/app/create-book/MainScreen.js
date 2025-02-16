@@ -38,6 +38,9 @@ const MainScreen = () => {
     "Preview",
     "Checkout",
   ];
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" }); 
+  }, [currentStep]);
 
   const goToNextStep = () => {
     if (isMobile) {
