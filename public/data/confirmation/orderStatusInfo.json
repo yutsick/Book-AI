@@ -1,0 +1,15 @@
+{
+    "title": "Stay Updated on Your Order!",
+    "backgroundUrl": "/images/confirmation/bgJourney.png",
+    "alt": "The journey of your package: Processing, Printing, Shipping",
+    "buttonText": "Go to Your Account Page",
+    "processingUrl": "/images/confirmation/processing.png",
+    "processingAlt": "Processing",
+    "processingText": "Processing",
+    "printingUrl": "/images/confirmation/printing.png",
+    "printingAlt": "Printing",
+    "printingText": "Printing",
+    "shippingUrl": "/images/confirmation/shipping.png",
+    "shippingAlt": "Shipping",
+    "shippingText": "Shipping"
+}

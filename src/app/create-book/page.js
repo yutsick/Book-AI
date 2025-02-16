@@ -42,7 +42,6 @@ export default function Page() {
     <GenreProvider>
       <CreateBookProvider>
         <MainScreen />
-
       </CreateBookProvider>
     </GenreProvider>
   ) : (

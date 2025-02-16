@@ -10,10 +10,15 @@ export const CreateBookProvider = ({ children }) => {
   const [selectedGender, setSelectedGender] = useState(null);
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState([]);
   const [authorEmail, setAuthorEmail] = useState(null);
+  const [selectedCopies, setSelectedCopies] = useState({ value: 1, label: "1", price: 0 });
+  const [selectedCoverIndex, setSelectedCoverIndex] = useState(0);
+  const [selectedShippingIndex, setSelectedShippingIndex] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const [authorImage, setAuthorImage] = useState(""); // Оригінальне зображення
-  const [croppedImage, setCroppedImage] = useState(""); // Обрізане зображення
-  const [processedAuthorImage, setProcessedAuthorImage] = useState(null); // Оброблене (можливо, з фільтрами)
+  const [authorImage, setAuthorImage] = useState(""); 
+  const [croppedImage, setCroppedImage] = useState(""); 
+  const [processedAuthorImage, setProcessedAuthorImage] = useState(null); 
 
   const [error, setError] = useState(null);
 
@@ -40,7 +45,10 @@ export const CreateBookProvider = ({ children }) => {
     front: "",
     back: "",
     spine: "",
+    crop: { x: 0, y: 0 },  
+    zoom: 1.5,            
   });
+  
 
 
   return (
@@ -67,6 +75,16 @@ export const CreateBookProvider = ({ children }) => {
         setError,
         selectedTemplate,
         setSelectedTemplate,
+        selectedCopies,
+        setSelectedCopies,
+        selectedCoverIndex,
+        setSelectedCoverIndex,
+        selectedShippingIndex,
+        setSelectedShippingIndex, 
+        subtotal, 
+        setSubtotal, 
+        totalPrice, 
+        setTotalPrice
       }}
     >
       {children}

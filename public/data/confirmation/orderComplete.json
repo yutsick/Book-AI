@@ -1,0 +1,9 @@
+{
+    "heading": "Thank You for Your Order!",
+    "description": "We've emailed your receipt, order details, and a link to your account page",
+    "imageUrl": "/images/confirmation/img1.png",
+    "alt": "Yellow lights fly out of the open book",
+    "text": "Your book is now in progress, and we can't wait to bring your story to life",
+    "reactionUrl": "/images/confirmation/reaction.png",
+    "reactionAlt": "A happy smile"
+}

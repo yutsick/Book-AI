@@ -1,0 +1,100 @@
+{
+    "title": "Privacy Policy",
+    "effectiveTitle": "Effective Date",
+    "effectiveText": "This Privacy Policy is effective as of [Insert Date]. At Book Tailor (“we,” “us,” “our”), your privacy is a priority. This policy explains how we collect, use, and protect your information when you use our website and services (collectively, the “Services”).",
+    "sections": [
+        {
+            "title": "Information We Collect",
+            "content": "We collect the following types of information:",
+            "items": [
+                {
+                    "type": "a",
+                    "title": "Information You Provide",
+                    "subItems": [
+                        "Account Information: When you register, we collect your name, email address, and password.",
+                        "Content Information: Any content you upload, create, or modify on our platform.",
+                        "Payment Information: Billing details and payment methods when you make a purchase."
+                    ]
+                },
+                {
+                    "type": "b",
+                    "title": "Automatically Collected Information",
+                    "subItems": [
+                        "Usage Data: Information about how you interact with the platform (e.g., pages visited, features used).",
+                        "Device Information: Details about your device, such as IP address, browser type, and operating system.",
+                        "Cookies: Small data files stored on your device to improve user experience. For details, see our Cookie Policy."
+                    ]
+                },
+                {
+                    "type": "c",
+                    "title": "Third-Party Sources",
+                    "subItems": [
+                        "We may receive information from third-party services, such as payment processors or social media platforms, if you choose to link them to your account."
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "How We Use Your Information",
+            "content": "We use your information to:",
+            "subSections": [
+                "Provide and improve our Services.",
+                "Process transactions and send order confirmations.",
+                "Communicate with you about your account, updates, and promotions.",
+                "Personalize your experience on the platform.",
+                "Ensure security and detect fraudulent activities."
+            ]
+        },
+        {
+            "title": "How We Share Your Information",
+            "content": "We do not sell your personal information. However, we may share your information:",
+            "subSections": [
+                "With Service Providers: Trusted partners who assist in delivering our Services (e.g., hosting, payment processing).",
+                "For Legal Reasons: When required by law or to protect our rights and safety.",
+                "With Your Consent: If you provide explicit permission to share your information."
+            ]
+        },
+        {
+            "title": "Your Choices and Rights",
+            "items": [
+                {
+                    "type": "a",
+                    "title": "Access and Update",
+                    "subItems": [
+                        "You can access and update your personal information through your account settings."
+                    ]
+                },
+                {
+                    "type": "b",
+                    "title": "Opt-Out of Communications",
+                    "subItems": [
+                        "You can unsubscribe from promotional emails using the link provided in each email."
+                    ]
+                },
+                {
+                    "type": "c",
+                    "title": "Delete Your Information",
+                    "subItems": [
+                        "You can request to delete your account and associated information by contacting us at [Insert Contact Email]."
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Data Security",
+            "content": "We implement industry-standard security measures to protect your information from unauthorized access, disclosure, or alteration. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security."
+        },
+        {
+            "title": "Data Retention",
+            "content": "We retain your information for as long as necessary to fulfill the purposes outlined in this policy unless a longer retention period is required by law."
+        },
+        {
+            "title": "Changes to This Policy",
+            "content": "We may update this Privacy Policy from time to time. Changes will be effective upon posting to this page, with the updated date indicated at the top. Continued use of our Services constitutes acceptance of the updated policy."
+        },
+        {
+            "title": "Contact Us",
+            "content": "If you have any questions or concerns about this Privacy Policy, please contact us at [Insert Contact Email]."
+        }
+    ]
+}

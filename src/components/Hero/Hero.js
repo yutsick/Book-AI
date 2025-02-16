@@ -3,6 +3,7 @@
 import config from '../../../config';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import Link from "next/link";
 
 const Hero = () => {
   const { heroUrl } = config;
@@ -13,7 +14,7 @@ const Hero = () => {
       .then((response) => response.json())
       .then((data) => setHeroData(data))
       .catch((error) => console.error('Error fetching Hero data:', error));
-      setError('Error fetching Hero data');
+    setError('Error fetching Hero data');
   }, []);
 
   return heroData ? (
@@ -34,11 +35,11 @@ const Hero = () => {
             objectFit='cover'
           />
         </div>
-        <a 
-          className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group ]"
+        <Link
           href="/create-book"
+          className="md:mt-6 w-full max-w-[330px] md:w-[238px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group"
         >
-     
+
           <span className='mb-[2px]'>{heroData.buttonText}</span>
           <span className='group-hover:translate-x-1.5 transition'>
             <svg className='' width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,29 +55,29 @@ const Hero = () => {
             </svg>
 
           </span>
-        </a>
+        </Link>
         <div className="mt-4 md:mt-8 text-[#323738] md:text-[17px] text-[13px] font-semibold leading-[17px] justify-center flex items-center gap-1">
           <div className="flex items-center gap-1">
-            <span className='italic mt-1'>Rated Excellent</span> 
+            <span className='italic mt-1'>Rated Excellent</span>
             <span className='mt-1'>On</span>
           </div>
           <span>
-          < Image
-          src='/images/trustpilot-logo.svg'
-          alt='Trustpilot Raiting'
-          width={88}
-          height={22}
-          />
+            < Image
+              src='/images/trustpilot-logo.svg'
+              alt='Trustpilot Raiting'
+              width={88}
+              height={22}
+            />
           </span>
           < Image
-          src='/images/trustpilot.svg'
-          alt='Trustpilot Raiting'
-          width={138}
-          height={26}
+            src='/images/trustpilot.svg'
+            alt='Trustpilot Raiting'
+            width={138}
+            height={26}
           />
-            
-         
-          </div>
+
+
+        </div>
       </div>
       <div className="relative md:w-[312px] md:h-[312px] hidden md:block">
         <Image
@@ -86,7 +87,7 @@ const Hero = () => {
           objectFit='cover'
         />
       </div>
-    </section>
+    </section >
   ) : null;
 };
 

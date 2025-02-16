@@ -28,10 +28,21 @@
   position: relative;
   z-index: 1;
 }
+.myAccount .step {
+  width: 19px !important;
+  height: 19px !important;
+}
 
 .active, .completed {
   background-color: var(--custom-orange);
   color: #F6F0EB;
+  
+}
+
+.myAccount .active,
+.myAccount .completed, 
+.myAccount .inactive {
+  border: solid 0.5px #000
   
 }
 
@@ -53,10 +64,25 @@
   border-left: none;
   border-right: none;
 }
-
+.myAccount .line{
+  border: solid 0.5px #000
+}
 .lineCompleted {
   background-color: var(--custom-orange);
+
 }
+.wHalf{
+
+  background: linear-gradient(90deg, var(--custom-orange) 50%, transparent 50%);
+  background-color: transparent; 
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 9px;
+  z-index: 0;
+}
+
+
 
 .lineInactive {
   background-color: transparent 
@@ -72,6 +98,11 @@
   text-align: center;
   position: absolute;
   bottom: -35px;
+}
+
+.myAccount .labelCompleted {
+  color: #2B2B2B;
+  opacity: 1;
 }
 @media (max-width:768px) {
   .step{
@@ -114,4 +145,29 @@
 
     margin: 28px auto;
   }
+}
+@media (max-width:768px) {
+  
+
+  .myAccount.stepContainer:last-child .inactive{
+    background-color: #FFFAE7;
+    border: solid 0.5px #000
+  }
+  .myAccount .lineInactive {
+    background-color: transparent ;
+  }
+  .myAccount .line{
+    border: solid 0.5px #000
+  }
+
+  .myAccount   .label{
+    display: block;
+  }
+  
+  .myAccount.progressBar {
+    width: 117%;
+    left: -8.5%;
+    position: relative;
+  }
+
 }

@@ -1,9 +1,12 @@
 import React from "react";
 import styles from "./ProgressBar.module.css";
+import MyAccount from "@/app/my-account/page";
 
-const ProgressStep = ({ stepNumber, isActive, isCompleted, isLast, isVisible, label, isBeforeLast, isMobile }) => {
+const ProgressStep = ({ stepNumber, isActive, isCompleted, isFirst, isLast, isVisible, label, myAccount, progressStep }) => {
   return (
-    <div className={styles.stepContainer}>
+    <div className={`${styles.stepContainer} ${myAccount ? styles.myAccount : ""}`}>
+
+
      
       <div
         className={` ${styles.step} ${
@@ -11,21 +14,36 @@ const ProgressStep = ({ stepNumber, isActive, isCompleted, isLast, isVisible, la
         }`}
         style={{ visibility: isVisible ? "visible" : "hidden"}} 
       >
-        {stepNumber || ""}
+        {myAccount ? "" : stepNumber || ""}
+        
       </div>
 
 
       {!isLast && (
+       ( myAccount && isFirst && progressStep === 1.5) ? (
+     
+          <div
+            className={`${styles.wHalf} ${styles.line} ${
+              isCompleted ? styles.lineCompleted : styles.lineInactive
+            } ${""}`} 
+          />
+        ) : (
         <div
           className={`${styles.line} ${
             isCompleted ? styles.lineCompleted : styles.lineInactive
           } ${""}`} 
         />
+        )
+
       )}
+      <div
+  className={`${styles.label} ${
+    isActive ? styles.labelActive : isCompleted ? styles.labelCompleted : styles.labelInactive
+  }`}
+>
+  {label}
+</div>
 
-
-   
-      <div className={styles.label}>{label}</div>
     </div>
   );
 };

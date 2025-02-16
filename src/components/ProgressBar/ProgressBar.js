@@ -2,7 +2,7 @@ import React from "react";
 import ProgressStep from "./ProgressStep";
 import styles from "./ProgressBar.module.css";
 
-const ProgressBar = ({ currentStep, progressStep, totalSteps, stepsName, isMobile }) => {
+const ProgressBar = ({ currentStep, progressStep, totalSteps, stepsName, isMobile, myAccount }) => {
   currentStep = isMobile ? currentStep : progressStep ;
   
   const steps = Array.from({ length: totalSteps + (isMobile ? 2 : 0) }, (_, i) => ({
@@ -30,7 +30,7 @@ const ProgressBar = ({ currentStep, progressStep, totalSteps, stepsName, isMobil
   });
 
   return (
-    <div className={styles.progressBar}>
+    <div className={`${styles.progressBar} ${myAccount ? styles.myAccount : ""}`}>
       {transformedSteps.map((step, index) => (
         <ProgressStep
         isMobile = {isMobile}
@@ -39,9 +39,12 @@ const ProgressBar = ({ currentStep, progressStep, totalSteps, stepsName, isMobil
         isActive={index + 1 === currentStep}
         isCompleted={index + 1 < currentStep}
         isLast={index === transformedSteps.length - 1}
+        isFirst={index === 0}
         isVisible={step.isVisible}
         isBeforeLast={isMobile && index === transformedSteps.length - 2} 
         label={step.label}
+        myAccount={myAccount}
+        progressStep={progressStep}
       />
       ))}
     </div>
