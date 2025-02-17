@@ -175,17 +175,16 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
   
         const weight = weightConfig[questionEntry.value] || { levels: [{ words: 1, score: 1 }] };
   
-        let questionScore = 0; // Початковий бал для цього питання
+        let questionScore = 0; 
   
-        // Перевіряємо рівні оцінки, починаючи з найбільшого
         for (let i = 0; i < weight.levels.length; i++) {
           if (wordCount >= weight.levels[i].words) {
-            questionScore = weight.levels[i].score; // Призначаємо бал відповідно до рівня
-            break; // Вийти після першого відповідного рівня
+            questionScore = weight.levels[i].score; 
+            break; 
           }
         }
   
-        score += questionScore; // Додаємо бал цього питання до загального рахунку
+        score += questionScore; 
       }
     });
   
@@ -245,7 +244,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
   
     setScore(newScore);
     setAnsweredQuestions(newAnsweredQuestions);
-    console.log("Score updated:", newScore);
+
   }, [questionsAndAnswers]); 
   
 
