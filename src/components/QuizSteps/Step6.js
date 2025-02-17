@@ -21,7 +21,6 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
 
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-  // 🚀 Завантаження `authorImage` і `croppedImage` з localStorage при оновленні сторінки
   useEffect(() => {
     const savedImage = localStorage.getItem("authorImage");
     if (savedImage) {
