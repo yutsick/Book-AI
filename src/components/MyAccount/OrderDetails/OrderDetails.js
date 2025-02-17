@@ -92,13 +92,13 @@ const OrderDetails = () => {
             <p className="text-[14px] leading-[14px] md:text-base text-dark font-medium">Processing</p>
 
 
-            <div className="text-left mt-6 md:mt-12">
+            <div className="text-left mt-6 md:mt-12 md:max-w-[235px]">
               <h2 className="md:mt-9 mt-6 font-semibold text-base md:text-[18px] text-dark">Need More Copies?</h2>
               <p className="md:mt-2 mb-2 leading-[14px] text-[14px] md:text-base text-dark font-medium md:leading-[18px]">
                 Place a new order if you’d like more copies of your book!
               </p>
-              <button className="flex gap-1 items-center group py-0 px-2 border border-black w-auto bg-orange text-white font-semibold rounded">
-                Reorder My Book <span className="group-hover:translate-x-1 transition">&raquo;</span>
+              <button className="mx-auto flex gap-1 items-center group py-0 px-2 border border-black w-auto bg-orange text-white font-semibold rounded">
+                Reorder <span className="group-hover:translate-x-1 transition">&raquo;</span>
               </button>
 
             </div>
