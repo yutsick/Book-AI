@@ -196,9 +196,9 @@ function Step9({ setProgressStep }) {
             {cover.map((option, index) => (
               <label
                 key={index}
-                className={`rounded-[2px] cursor-pointer transition border-[#6C6C6C] text-[#6C6C6C] border
-                  ${selectedCoverIndex === index ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] text-gray" : "bg-white hover:bg-[#ECEBE9]"}
-                  hover:border-gray`}
+                className={`rounded-[2px] cursor-pointer transition border-[#aaaaaa] text-[#6C6C6C] border
+                  ${selectedCoverIndex === index ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] text-gray border-[1.5px] border-gray" : "bg-white hover:bg-[#ECEBE9] border-[#d6d6d6]"}
+                  `}
                 style={{
                   width: '125px',
                   height: 'auto',
@@ -246,8 +246,8 @@ function Step9({ setProgressStep }) {
           {shipping.map((option, index) => (
             <label
               key={index}
-              className={`rounded-[2px] cursor-pointer transition border-[#6C6C6C] text-[#6C6C6C] border
-                ${selectedShippingIndex === index ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] text-gray border-[1.5px]" : "bg-white hover:bg-[#ECEBE9]"}
+              className={`rounded-[2px] cursor-pointer transition border-[#aaaaaa] text-[#6C6C6C] border
+                ${selectedShippingIndex === index ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] text-gray border-[1.5px] border-gray" : "bg-white hover:bg-[#ECEBE9] border-[#d6d6d6]"}
                 `}
               style={{
                 width: '206px',
