@@ -197,13 +197,12 @@ function Step9({ setProgressStep }) {
               <label
                 key={index}
                 className={`rounded-[2px] cursor-pointer transition border-[#6C6C6C] text-[#6C6C6C] border
-                  ${selectedCoverIndex === index ? 'bg-[#E5E5E5] hover:bg-[#E5E5E5] text-gray border-[1.5px]' : 'bg-white hover:bg-[#eeeeee]'}
+                  ${selectedCoverIndex === index ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] text-gray" : "bg-white hover:bg-[#ECEBE9]"}
                   hover:border-gray`}
                 style={{
                   width: '125px',
                   height: 'auto',
-                  boxShadow: selectedCoverIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
-                }}  
+                }}
               >
                 <input
                   type="radio"
@@ -248,12 +247,11 @@ function Step9({ setProgressStep }) {
             <label
               key={index}
               className={`rounded-[2px] cursor-pointer transition border-[#6C6C6C] text-[#6C6C6C] border
-                ${selectedShippingIndex === index ? 'bg-[#E5E5E5] hover:bg-[#E5E5E5] text-gray border-[1.5px]' : 'bg-white hover:bg-[#eeeeee]'}
-                hover:border-gray`}
+                ${selectedShippingIndex === index ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] text-gray border-[1.5px]" : "bg-white hover:bg-[#ECEBE9]"}
+                `}
               style={{
                 width: '206px',
                 height: 'auto',
-                boxShadow: selectedShippingIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
               }}
             >
               <input
