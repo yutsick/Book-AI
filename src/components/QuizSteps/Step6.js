@@ -18,25 +18,38 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
 
   const [preview, setPreview] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const isMobile = () => {
-    return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-  };
+
+  const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+  // 🚀 Завантаження `authorImage` і `croppedImage` з localStorage при оновленні сторінки
+  useEffect(() => {
+    const savedImage = localStorage.getItem("authorImage");
+    if (savedImage) {
+      setAuthorImage(JSON.parse(savedImage));
+    }
+
+    const savedCroppedImage = localStorage.getItem("croppedImage");
+    if (savedCroppedImage) {
+      setCroppedImage(JSON.parse(savedCroppedImage));
+    }
+  }, [setAuthorImage, setCroppedImage]);
+
   useEffect(() => {
     setProgressStep(5);
   }, [setProgressStep]);
 
   useEffect(() => {
     if (authorImage) {
-      setPreview(URL.createObjectURL(authorImage));
+      setPreview(authorImage.startsWith("data:image") ? authorImage : URL.createObjectURL(authorImage));
     }
   }, [authorImage]);
 
   useEffect(() => {
-    setIsButtonDisabled(!croppedImage);
+    setIsButtonDisabled(isProcessing || !croppedImage);
     return () => {
       setIsButtonDisabled(false);
     };
-  }, [setIsButtonDisabled, croppedImage]);
+  }, [setIsButtonDisabled, croppedImage, isProcessing]);
 
   const resizeImage = async (file, maxWidth, maxHeight) => {
     return new Promise((resolve) => {
@@ -66,67 +79,79 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
     });
   };
 
+  const convertFileToBase64 = (file, callback) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => callback(reader.result);
+    reader.onerror = (error) => console.error("❌ Error converting file:", error);
+  };
+
   const handleFileChange = async (file) => {
+    if (!file) return;
+
     setPreview(URL.createObjectURL(file));
-    setAuthorImage(file);
-    
+    setIsProcessing(true);
+    setCroppedImage(null);
+    setAuthorImage(null);
 
     const validationResult = await validateImage(file);
-  
+
     if (!validationResult.valid) {
       setError(validationResult.error);
-      
-      if (validationResult.errorType === "unsupported_type" || validationResult.errorType === "low_resolution") {
-        setIsProcessing(false);
-        return;
-      }
+      setIsProcessing(false);
+      return;
     } else {
       setError(null);
     }
-  
+
     let processedFile = file;
-  
+
     if (isMobile()) {
       console.log("📱 Mobile detected - resizing image...");
       processedFile = await resizeImage(file, 431 * 1.5, 648 * 1.5);
-    } else {
-      console.log("💻 Desktop detected - using original image.");
     }
-  
-    setCroppedImage(null);
-    setIsProcessing(true);
-  
+
+    convertFileToBase64(file, (base64) => {
+      setAuthorImage(base64);
+      localStorage.setItem("authorImage", JSON.stringify(base64));
+    });
+
     try {
       const formData = new FormData();
       formData.append("image", processedFile);
-  
+
       const response = await fetch("https://api.booktailor.com/remove-background", {
         method: "POST",
         body: formData,
       });
-  
+
       if (!response.ok) {
         throw new Error("Error removing background");
       }
-  
+
       const data = await response.json();
       const processedUrl = data.data.processed_url;
       setProcessedAuthorImage(processedUrl);
-  
+
       const imageResponse = await fetch(processedUrl);
       if (!imageResponse.ok) {
         throw new Error("Error fetching processed image");
       }
-  
+
       const imageBlob = await imageResponse.blob();
       const imageFile = new File([imageBlob], "processed-image.png", { type: "image/png" });
-  
+
       let finalImage = imageFile;
       if (isMobile()) {
         finalImage = await resizeImage(imageFile, 431 * 4, 648 * 4);
       }
-  
-      setCroppedImage(finalImage);
+
+      // Зберігаємо croppedImage для можливості редагування
+      convertFileToBase64(finalImage, (base64) => {
+        setCroppedImage(base64);
+        localStorage.setItem("croppedImage", JSON.stringify(base64));
+      });
+
     } catch (error) {
       console.error("❌ Error processing image:", error);
       setError("Failed to process the image.");
@@ -135,17 +160,13 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       setSelectedTemplate({});
     }
   };
-  
-  
-
-
 
   return (
     <div>
       <div className="w-full mt-2 md:px-6">
         <div className="field-title">Upload a photo</div>
         <div className="field-desc">
-        We’ll feature it on the front cover to make your book feel more personal. For the best results, use a high-quality image of {authorName.trim()} — either a portrait or an upper-body shot
+          We’ll feature it on the front cover to make your book feel more personal. For the best results, use a high-quality image of {authorName.trim()} — either a portrait or an upper-body shot.
         </div>
 
         <div className="w-full flex justify-center mt-5">
@@ -162,8 +183,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
         {error && (
           <div className="flex items-center gap-2 w-full justify-center mt-2">
             <div className="text-[#CF8700] text-[16px] leading-[20px] flex gap-1 items-center">
-            <img src="/images/create-book/warning-icon.svg" alt="" />
-
+              <img src="/images/create-book/warning-icon.svg" alt="" />
               {error}
             </div>
           </div>
