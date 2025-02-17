@@ -21,7 +21,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
 
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-  // 🚀 Завантаження `authorImage` і `croppedImage` з localStorage при оновленні сторінки
+
   useEffect(() => {
     const savedImage = localStorage.getItem("authorImage");
     if (savedImage) {
@@ -96,12 +96,12 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
 
     const validationResult = await validateImage(file);
 
-    if (!validationResult.valid) {
+    if (!validationResult.valid && validationResult.errorType === "unsupported_type") {
       setError(validationResult.error);
       setIsProcessing(false);
       return;
     } else {
-      setError(null);
+      setError(validationResult.error);
     }
 
     let processedFile = file;

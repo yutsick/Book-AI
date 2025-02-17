@@ -5,7 +5,6 @@ import { createContext, useState, useEffect } from "react";
 const CreateBookContext = createContext();
 
 export const CreateBookProvider = ({ children }) => {
-  // 🚀 Функція для отримання збереженого значення
   const getStoredValue = (key, defaultValue = null) => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(key);
@@ -14,7 +13,6 @@ export const CreateBookProvider = ({ children }) => {
     return defaultValue;
   };
 
-  // 🚀 Ініціалізація стану напряму з localStorage
   const [authorName, setAuthorName] = useState(() => getStoredValue("authorName", ""));
   const [selectedAge, setSelectedAge] = useState(() => getStoredValue("selectedAge", null));
   const [selectedGender, setSelectedGender] = useState(() => getStoredValue("selectedGender", null));
@@ -39,7 +37,6 @@ export const CreateBookProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [processedAuthorImage, setProcessedAuthorImage] = useState(null);
 
-  // 🚀 Оновлення localStorage тільки якщо значення валідне
   useEffect(() => {
     if (authorName.trim() !== "") {
       localStorage.setItem("authorName", JSON.stringify(authorName));
@@ -67,7 +64,6 @@ export const CreateBookProvider = ({ children }) => {
     }
   }, [authorName, selectedAge, selectedGender, questionsAndAnswers, authorEmail, authorImage, croppedImage, selectedTemplate]);
 
-  // 🚀 Додавання/оновлення відповіді
   const addQuestionAndAnswer = (question, answer) => {
     setQuestionsAndAnswers((prev) => {
       const existingIndex = prev.findIndex((qa) => qa.question === question);
@@ -80,14 +76,12 @@ export const CreateBookProvider = ({ children }) => {
     });
   };
 
-  // 🚀 Видалення питання
   const removeQuestion = (question) => {
     setQuestionsAndAnswers((prev) =>
       prev.filter((item) => item.question !== question)
     );
   };
 
-  // 🚀 Конвертація зображення у Base64 перед збереженням
   const convertFileToBase64 = (file, callback) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -95,7 +89,7 @@ export const CreateBookProvider = ({ children }) => {
     reader.onerror = (error) => console.error("Error converting file:", error);
   };
 
-  // 🚀 Оновлення зображення (Base64)
+
   const handleImageUpload = (file) => {
     if (!file) return;
     convertFileToBase64(file, (base64) => setAuthorImage(base64));
