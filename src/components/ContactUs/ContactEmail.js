@@ -10,8 +10,8 @@ const ContactEmail = ({
   value,
   width = "100%",
   height = "60px",
-  titleSize = "16px",
-  placeholderSize = "14px", 
+  titleSize = "17px",
+  placeholderSize = "17px", 
   inputClassName = "",
 }) => {
   const [focus, setFocus] = useState(false);
@@ -68,7 +68,7 @@ const ContactEmail = ({
             !isValid && value ? "border-red-500" : "border-gray"
           }`}
           placeholder={value ? "" : localPlaceholder}
-          style={{ height, fontSize: placeholderSize }}
+          style={{ height}}
         />
       </div>
     </div>
