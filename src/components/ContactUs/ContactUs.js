@@ -13,6 +13,7 @@ const ContactUS = () => {
     const [error, setError] = useState(null);
 
     const [authorFullName, setAuthorFullName] = useState("");
+    const [userInquiry, setUserInquiry] = useState("");
     const [options, setOptions] = useState([]);
     const [selectedOption, setSelectedOption] = useState(null);
     const [authorEmail, setAuthorEmail] = useState("");
@@ -33,6 +34,71 @@ const ContactUS = () => {
         { label: 'Feedback & Suggestion' },
     ];
 
+    const states = [
+        "Alabama",
+        "Alaska",
+        "American Samoa",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Commonwealth of the Northern Mariana Islands",
+        "Connecticut",
+        "Delaware",
+        "District of Columbia",
+        "Florida",
+        "Georgia",
+        "Guam",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Puerto Rico",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "United States Virgin Islands",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming"
+    ];
+
+    const stateOptions = states.map((state) => ({
+        value: state,
+        label: state,
+    }));
+
+
     useEffect(() => {
         fetch(contactUsUrl)
             .then((response) => response.json())
@@ -42,60 +108,6 @@ const ContactUS = () => {
                 setError('Error fetching Contact Us data');
             });
     }, []);
-
-    const fetchCountries = async () => {
-        try {
-            const response = await fetch('https://restcountries.com/v3.1/all');
-            const data = await response.json();
-            return data.map(country => ({
-                label: country.name.common,
-                value: country.cca2,
-            }));
-        } catch (error) {
-            console.error('Error fetching countries:', error);
-            setError('Error fetching countries data');
-            return [];
-        }
-    };
-
-    const fetchStates = async () => {
-        try {
-            const response = await fetch(
-                'http://api.geonames.org/childrenJSON?geonameId=6252001&username=anticore0'
-            );
-            const data = await response.json();
-            return data.geonames.map(state => ({
-                label: state.name,
-                value: state.adminCode1,
-            }));
-        } catch (error) {
-            console.error('Error fetching states:', error);
-            setError('Error fetching states data');
-            return [];
-        }
-    };
-
-    useEffect(() => {
-        const loadOptions = async () => {
-            try {
-                const [countries, states] = await Promise.all([
-                    fetchCountries(),
-                    fetchStates()
-                ]);
-                const allOptions = [
-                    ...countries,
-                    ...states.map(state => ({ label: `${state.label} (State)`, value: state.value }))
-                ];
-                setOptions(allOptions);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setError('Error fetching data');
-            }
-        };
-
-        loadOptions();
-    }, []);
-
 
     const handleChange = (selectedOption) => {
         setSelectedOption(selectedOption);
@@ -128,7 +140,7 @@ const ContactUS = () => {
                 <div className="w-full md:w-1/2">
                     <p className="mb-[10px]">{contactUsData.country}</p>
                     <Select
-                        options={options}
+                        options={stateOptions}
                         value={selectedOption}
                         onChange={handleChange}
                         placeholder={contactUsData.countryPlaceholder}
@@ -223,8 +235,8 @@ const ContactUS = () => {
                 <ContactInput
                     placeholder={contactUsData.helpPlaceholder}
                     label=""
-                    value={authorFullName}
-                    onChange={setAuthorFullName}
+                    value={userInquiry}
+                    onChange={setUserInquiry}
                     setIsButtonDisabled={setIsButtonDisabled}
                     height="123px"
                     isTextArea="true"
