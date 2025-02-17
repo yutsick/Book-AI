@@ -51,9 +51,9 @@ function Step10({ setProgressStep }) {
                     <strong>Total Price:</strong> ${totalPrice.toFixed(2)}*
                 </p>
             </div>
-            <div class="relative w-full aspect-[7/4]">
+            <div className="relative w-full aspect-[7/4]">
                 <iframe
-                    class="absolute top-0 left-0 w-full h-full"
+                    className="absolute top-0 left-0 w-full h-full"
                     src="URL_HERE"
                     frameborder="0"
                     allow="payment"
