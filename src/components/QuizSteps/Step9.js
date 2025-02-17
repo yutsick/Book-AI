@@ -79,9 +79,9 @@ function Step9({ setProgressStep }) {
     setTotalPrice(subtotalAndTotalPrice.newTotalPrice);
   }, [subtotalAndTotalPrice, setSubtotal, setTotalPrice]);
 
-      useEffect(() => {
-          setProgressStep(7);
-      }, [setProgressStep]);
+  useEffect(() => {
+    setProgressStep(7);
+  }, [setProgressStep]);
 
   return (
     <div className="pb-[17px]">
@@ -196,14 +196,14 @@ function Step9({ setProgressStep }) {
             {cover.map((option, index) => (
               <label
                 key={index}
-                className={`rounded-[2px] cursor-pointer transition-all duration-200 border
-                  ${selectedCoverIndex === index ? 'border-gray text-gray border-[1.5px] bg-[#E5E5E5]' : 'border-[#6C6C6C] text-[#6C6C6C] border-[1px] bg-[rgba(255,255,255,0.6)]'}
-                  hover:border-gray hover:text-gray`}
+                className={`rounded-[2px] cursor-pointer transition border-[#6C6C6C] text-[#6C6C6C] border
+                  ${selectedCoverIndex === index ? 'bg-[#E5E5E5] hover:bg-[#E5E5E5] text-gray border-[1.5px]' : 'bg-white hover:bg-[#eeeeee]'}
+                  hover:border-gray`}
                 style={{
                   width: '125px',
                   height: 'auto',
                   boxShadow: selectedCoverIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
-                }}
+                }}  
               >
                 <input
                   type="radio"
@@ -247,9 +247,9 @@ function Step9({ setProgressStep }) {
           {shipping.map((option, index) => (
             <label
               key={index}
-              className={`rounded-[2px] cursor-pointer transition-all duration-200 border
-                ${selectedShippingIndex === index ? 'border-gray text-gray border-[1.5px] bg-[#E5E5E5]' : 'border-[#6C6C6C] text-[#6C6C6C] border-[1px] bg-[rgba(255,255,255,0.6)]'}
-                hover:border-gray hover:text-gray`}
+              className={`rounded-[2px] cursor-pointer transition border-[#6C6C6C] text-[#6C6C6C] border
+                ${selectedShippingIndex === index ? 'bg-[#E5E5E5] hover:bg-[#E5E5E5] text-gray border-[1.5px]' : 'bg-white hover:bg-[#eeeeee]'}
+                hover:border-gray`}
               style={{
                 width: '206px',
                 height: 'auto',
