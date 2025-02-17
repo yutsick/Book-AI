@@ -142,50 +142,56 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
 
 
   const weightConfig = {
-    "1": { max: 4, levels: [20, 10, 1] },
-    "2": { max: 1, levels: [1] },
-    "3": { max: 4, levels: [10, 5, 1] },
-    "4": { max: 3, levels: [40, 20, 10] },
-    "5": { max: 2, levels: [30, 15, 5] },
-    "6": { max: 2, levels: [5, 1] },
-    "7": { max: 4, levels: [10, 5, 1] },
-    "8": { max: 1, levels: [1] },
-    "9": { max: 1, levels: [1] },
-    "10": { max: 1, levels: [1] },
-    "11": { max: 1, levels: [1] },
-    "12": { max: 2, levels: [20, 10, 5] },
-    "13": { max: 2, levels: [20, 10, 5] }
+    "1": { levels: [{ words: 20, score: 4 }, { words: 10, score: 3 }, { words: 1, score: 2 }] },
+    "2": { levels: [{ words: 1, score: 1 }] },
+    "3": { levels: [{ words: 10, score: 4 }, { words: 5, score: 3 }, { words: 1, score: 2 }] },
+    "4": { levels: [{ words: 40, score: 3 }, { words: 20, score: 2 }, { words: 10, score: 1 }] },
+    "5": { levels: [{ words: 30, score: 2 }, { words: 15, score: 2 }, { words: 5, score: 1 }] },
+    "6": { levels: [{ words: 5, score: 2 }, { words: 1, score: 1 }] },
+    "7": { levels: [{ words: 10, score: 4 }, { words: 5, score: 3 }, { words: 1, score: 2 }] },
+    "8": { levels: [ { words: 5, score: 2 }, { words: 1, score: 1 }] },
+    "9": { levels: [{ words: 1, score: 1 }] },
+    "10": { levels: [{ words: 1, score: 1 }] },
+    "11": { levels: [{ words: 5, score: 2 }, { words: 1, score: 1 }] },
+    "12": { levels: [{ words: 20, score: 3 }, { words: 10, score: 2 }, { words: 5, score: 1 }] },
+    "13": { levels: [{ words: 20, score: 3 }, { words: 10, score: 2 }, { words: 5, score: 1 }] }
   };
+  
 
   const calculateScore = (answers = []) => {
     let score = 0;
     let answeredQuestions = 0;
-
+  
     answers.forEach(({ question, answer }) => {
       if (!question || !answer) return;
-
+  
       const wordCount = countWords(answer);
-
-
+  
       if (wordCount > 0) {
         answeredQuestions++;
-
+  
         const questionEntry = questions.find(q => q.label === question);
         if (!questionEntry) return;
-
-        const weight = weightConfig[questionEntry.value] || { max: 1, levels: [1] };
-
+  
+        const weight = weightConfig[questionEntry.value] || { levels: [{ words: 1, score: 1 }] };
+  
+        let questionScore = 0; // Початковий бал для цього питання
+  
+        // Перевіряємо рівні оцінки, починаючи з найбільшого
         for (let i = 0; i < weight.levels.length; i++) {
-          if (wordCount >= weight.levels[i]) {
-            score += weight.max - i;
-            break;
+          if (wordCount >= weight.levels[i].words) {
+            questionScore = weight.levels[i].score; // Призначаємо бал відповідно до рівня
+            break; // Вийти після першого відповідного рівня
           }
         }
+  
+        score += questionScore; // Додаємо бал цього питання до загального рахунку
       }
     });
-
+  
     return { score, answeredQuestions };
   };
+  
 
 
 
@@ -239,7 +245,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
   
     setScore(newScore);
     setAnsweredQuestions(newAnsweredQuestions);
-  
+    console.log("Score updated:", newScore);
   }, [questionsAndAnswers]); 
   
 
