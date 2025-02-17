@@ -95,12 +95,12 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
 
     const validationResult = await validateImage(file);
 
-    if (!validationResult.valid) {
+    if (!validationResult.valid && validationResult.errorType === "unsupported_type") {
       setError(validationResult.error);
       setIsProcessing(false);
       return;
     } else {
-      setError(null);
+      setError(validationResult.error);
     }
 
     let processedFile = file;
