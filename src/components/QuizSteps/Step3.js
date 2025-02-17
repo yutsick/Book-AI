@@ -145,16 +145,16 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
     "1": { max: 4, levels: [20, 10, 1] },
     "2": { max: 1, levels: [1] },
     "3": { max: 4, levels: [10, 5, 1] },
-    "4": { max: 3, levels: [50, 30, 10] },
-    "5": { max: 2, levels: [25, 5] },
+    "4": { max: 3, levels: [40, 20, 10] },
+    "5": { max: 2, levels: [30, 15, 5] },
     "6": { max: 2, levels: [5, 1] },
     "7": { max: 4, levels: [10, 5, 1] },
     "8": { max: 1, levels: [1] },
     "9": { max: 1, levels: [1] },
     "10": { max: 1, levels: [1] },
     "11": { max: 1, levels: [1] },
-    "12": { max: 2, levels: [15, 5] },
-    "13": { max: 2, levels: [15, 5] }
+    "12": { max: 2, levels: [20, 10, 5] },
+    "13": { max: 2, levels: [20, 10, 5] }
   };
 
   const calculateScore = (answers = []) => {
@@ -202,7 +202,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
 
 
   let qualityLevel = "Empty bar";
-  if (score >= 15 && answeredQuestions >= 6) qualityLevel = "Excellent";
+  if (score >= 13 && answeredQuestions >= 6) qualityLevel = "Excellent";
   else if (score >= 9 && answeredQuestions >= 5) qualityLevel = "Good";
   else if (score >= 5 && answeredQuestions >= 3) qualityLevel = "OK";
   else if (score >= 1 && answeredQuestions >= 1) qualityLevel = "Basic";
@@ -229,15 +229,19 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
 
 
   useEffect(() => {
-    if (!answers || answers.length === 0) return;
-
-    const { score: newScore, answeredQuestions: newAnsweredQuestions } = calculateScore(answers);
-
+    if (!questionsAndAnswers || questionsAndAnswers.length === 0) {
+      setScore(0);
+      setAnsweredQuestions(0);
+      return;
+    }
+  
+    const { score: newScore, answeredQuestions: newAnsweredQuestions } = calculateScore(questionsAndAnswers);
+  
     setScore(newScore);
     setAnsweredQuestions(newAnsweredQuestions);
-
-    // console.log(`Score: ${newScore}, Answered Questions: ${newAnsweredQuestions}`);
-  }, [answers]);
+  
+  }, [questionsAndAnswers]); 
+  
 
 
 
@@ -245,7 +249,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
     <div className="w-full ">
       <div className="mt-2 md:mx-6">
         <div className="field-title">Tell us about {authorName}</div>
-        <div className="field-desc">
+        <div className="field-desc mt-2">
           Share as much as you can! Each question you answer brings us closer to creating something truly special.
         </div>
         <div className="mt-9 mb-2 mx-auto w-full text-center text-[14px] font-medium">
@@ -279,6 +283,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
             options={optionsWithDisabled}
             onChange={handleQuestionSelectChange}
             placeholder="Choose a question"
+            iconOrange = {true}
           />
         </div>
       </div>

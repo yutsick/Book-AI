@@ -34,10 +34,10 @@ const CustomInput = ({ placeholder = "Enter text", label = "Field label", title 
       </div>
       <div className="field-desc">{description}</div>
       <div className="relative ">
-        {(authorName || focus || value)  && (
+        {(focus || value)  && (
 
           <label
-            className="absolute top-4 left-2 text-[#8F8F8F] text-[12.5px] transition-all "
+            className={`absolute ${ authorName || focus || value ? 'top-[23px]' : 'top-2'} left-2 text-[#8F8F8F] text-[12.5px] transition-all `}
           >
             {label}
           </label>
@@ -54,14 +54,13 @@ const CustomInput = ({ placeholder = "Enter text", label = "Field label", title 
           </div>
         )}
 
-
         <input
           type="text"
           value={authorName}
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className="mt-[14px] rounded-[3px] py-2 px-4 w-full h-[60px] focus:outline-none text-[17px]"
+          className={`mt-[14px] rounded-[3px]  ${ focus || value ? 'pb-[9px] pt-7' : 'pt-2 pb-2'}  px-4 w-full h-[60px] focus:outline-none text-[17px]`}
           placeholder={authorName ? "" : localPlaceholder}
         />
       </div>

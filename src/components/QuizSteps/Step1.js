@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import CustomSelect from "@/components/FormsElements/CustomSelect";
-import CustomInput from "@/components/FormsElements/CustomInput";
+import CustomInput from "@/components/FormsElements/UniversalInput";
 import CreateBookContext from "@/contexts/CreateBookContext";
 
 
@@ -50,6 +50,7 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
       <div className="w-full">
         <div className="">
           <CustomInput
+            type='text'
             title="Who will be the book's author?"
             description="You can choose your own name, your best friend’s name, or even a family member’s name"
             label="Author's name"

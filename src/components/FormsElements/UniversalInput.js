@@ -70,9 +70,12 @@ const CustomInput = ({
 
       <div className="relative">
         {(value || focus) && (
-          <label className="absolute top-4 left-2 text-[#8F8F8F] text-[12.5px] transition-all">
-            {label}
-          </label>
+     
+          <label
+          className={`absolute ${ focus || value ? 'top-[23px]' : 'top-2'} left-2 text-[#8F8F8F] text-[12.5px] transition-all `}
+        >
+          {label}
+        </label>
         )}
 
         {textError && validateLength && type === "text" && (
@@ -91,7 +94,7 @@ const CustomInput = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className={`mt-[14px] rounded-[3px] py-2 px-4 w-full h-[60px] focus:outline-none text-[17px] border-gray-300 ${border ? "border" : ""}`}
+          className={`mt-[14px] rounded-[3px]  ${ focus || value ? 'pb-[9px] pt-7' : 'pt-2 pb-2'} ${border ? "border" : ""} border-gray-300 px-4 w-full h-[60px] focus:outline-none text-[17px]`}
           placeholder={value ? "" : localPlaceholder}
         />
       </div>
