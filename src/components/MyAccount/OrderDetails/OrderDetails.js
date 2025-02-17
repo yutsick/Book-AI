@@ -54,7 +54,7 @@ const OrderDetails = () => {
               alt="Book Cover"
               className="w-16 h-auto md:w-24 max-w-[72px]"
             />
-            <p className="min-w-[50px]">x {orderDetails.orderedItem.quantity}</p>
+            <p className="min-w-[25px]">x {orderDetails.orderedItem.quantity}</p>
             <div className="w-fit text-[14px] md:text-base">
               <p className="font-semibold">{orderDetails.orderedItem.author}</p>
               <p className="italic leading-[18px] font-medium">{orderDetails.orderedItem.title}</p>
