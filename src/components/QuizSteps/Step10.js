@@ -55,7 +55,6 @@ function Step10({ setProgressStep }) {
                 <iframe
                     className="absolute top-0 left-0 w-full h-full"
                     src="URL_HERE"
-                    frameborder="0"
                     allow="payment"
                     title="Payment"
                 ></iframe>
