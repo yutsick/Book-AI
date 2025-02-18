@@ -16,7 +16,9 @@ function Step9({ setProgressStep }) {
     subtotal,
     setSubtotal,
     totalPrice,
-    setTotalPrice
+    setTotalPrice,
+    selectedCover,
+    setSelectedCover
   } = useContext(CreateBookContext);
 
 
@@ -28,7 +30,7 @@ function Step9({ setProgressStep }) {
       cost: 39.00
     },
     {
-      title: 'Paperback',
+      title: 'Hardcover',
       materials: 'Sturdy, Durable & Premium',
       img: '/images/create-book/bg/coverCard2.png',
       cost: 59.00
@@ -83,12 +85,16 @@ function Step9({ setProgressStep }) {
     setProgressStep(7);
   }, [setProgressStep]);
 
+  useEffect(() => {
+    setSelectedCover(cover[selectedCoverIndex]?.title || '');
+  }, [selectedCoverIndex, setSelectedCover]);
+
   return (
     <div className="pb-[17px]">
       <div className="text-[30px] font-bold text-center text-orange mb-[32px]">
         Checkout
       </div>
-      <div className="flex items-center  justify-center gap-4 flex-1 md:gap-12 mt-6 mb-[110px]">
+      <div className="flex items-center  justify-center gap-4 flex-1 md:gap-12 mt-6 mb-[80px] md:mb-[110px]">
 
         {selectedTemplate?.front ? (
 
@@ -196,10 +202,11 @@ function Step9({ setProgressStep }) {
             {cover.map((option, index) => (
               <label
                 key={index}
-                className={`rounded-[2px] cursor-pointer transition border-[#aaaaaa] text-[#6C6C6C] border
-                  ${selectedCoverIndex === index ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] text-gray border-[1.5px] border-gray" : "bg-white hover:bg-[#ECEBE9] border-[#d6d6d6]"}
+                className={`rounded-[3px] cursor-pointer transition border-[#6C6C6C] border-[0.5px] text-[#6C6C6C] border
+                  ${selectedCoverIndex === index ? "bg-[#DCDCDC] hover:bg-[#DCDCDC] text-black border-[1px] shadow-worksShadow border-gray" : "bg-white bg-opacity-60 hover:bg-[#F0F0F0] border-[#bcbcbc]"}
                   `}
                 style={{
+                  borderWidth: selectedCoverIndex === index ? '1px' : '0.5px',
                   width: '125px',
                   height: 'auto',
                 }}
@@ -246,10 +253,11 @@ function Step9({ setProgressStep }) {
           {shipping.map((option, index) => (
             <label
               key={index}
-              className={`rounded-[2px] cursor-pointer transition border-[#aaaaaa] text-[#6C6C6C] border
-                ${selectedShippingIndex === index ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] text-gray border-[1.5px] border-gray" : "bg-white hover:bg-[#ECEBE9] border-[#d6d6d6]"}
+              className={`rounded-[3px] cursor-pointer transition border-[#6C6C6C] border-[0.5px] text-[#6C6C6C] border
+                ${selectedShippingIndex === index ? "bg-[#DCDCDC] hover:bg-[#DCDCDC] text-black border-[1px] shadow-worksShadow border-gray" : "bg-white bg-opacity-60 hover:bg-[#F0F0F0] border-[#bcbcbc]"}
                 `}
               style={{
+                borderWidth: selectedShippingIndex === index ? '1px' : '0.5px',
                 width: '206px',
                 height: 'auto',
               }}
@@ -278,12 +286,12 @@ function Step9({ setProgressStep }) {
       <div className="mt-[30px]">
         <div className="mb-[15px]">
           <h2 className="text-[24px] text-gray font-bold">Order Summary</h2>
-          <p className="text-[16px] text-[#727272] ">Personalize full-length book - Paperback cover</p>
-        </div>
+          <p className="text-[16px] text-[#727272] ">Personalized Full-Length Book – Tailored to Your Story</p>
+        </div>  
         <p>
           <strong>Book Title:</strong> {selectedTopic} <br />
           <strong>Author Name:</strong> {authorName} <br />
-          <strong>Format:</strong> Paperback <br />
+          <strong>Format:</strong> {selectedCover} <br />
           <strong>Page Count:</strong> 240 Pages <br />
           <strong>Quantity:</strong> {selectedCopies?.value} <br />
           <strong>Subtotal:</strong> ${subtotal.toFixed(2)} <br />
