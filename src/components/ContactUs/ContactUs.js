@@ -154,7 +154,7 @@ const ContactUS = () => {
                                 padding: '0.5rem',
                                 borderColor: state.isFocused ? '#2B2B2B' : '#2B2B2B',
                                 boxShadow: state.isFocused ? 'none' : 'none',
-                                fontSize: '14px',
+                                fontSize: '16px',
                                 border: state.isFocused
                                     ? '1px solid #2B2B2B'
                                     : '1px solid #2B2B2B',
@@ -165,17 +165,17 @@ const ContactUS = () => {
                             }),
                             singleValue: (provided) => ({
                                 ...provided,
-                                fontSize: '14px',
+                                fontSize: '17px',
                                 color: '#2B2B2B',
                             }),
                             input: (provided) => ({
                                 ...provided,
-                                fontSize: '14px',
+                                fontSize: '17px',
                                 color: '#2B2B2B',
                             }),
                             placeholder: (provided) => ({
                                 ...provided,
-                                fontSize: '16px',
+                                fontSize: '17px',
                                 color: '#A0A0A0',
                             }),
                             dropdownIndicator: (provided) => ({
@@ -189,7 +189,7 @@ const ContactUS = () => {
                             menu: (provided) => ({
                                 ...provided,
                                 borderRadius: '8px',
-                                fontSize: '14px',
+                                fontSize: '17px',
                                 padding: '0.5rem',
                                 backgroundColor: 'white',
                             }),
@@ -216,7 +216,7 @@ const ContactUS = () => {
                     onChange={setAuthorEmail}
                     onValidityChange={handleValidityChange}
                     height="60px"
-                    placeholderSize="14px"
+                    placeholderSize="16px"
                 />
             </div>
             <div className="mb-[40px]">
