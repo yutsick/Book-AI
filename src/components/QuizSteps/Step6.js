@@ -22,24 +22,14 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   useEffect(() => {
-    const savedImage = localStorage.getItem("authorImage");
-    if (savedImage) {
-      setAuthorImage(JSON.parse(savedImage));
-    }
-
-    const savedCroppedImage = localStorage.getItem("croppedImage");
-    if (savedCroppedImage) {
-      setCroppedImage(JSON.parse(savedCroppedImage));
-    }
-  }, [setAuthorImage, setCroppedImage]);
-
-  useEffect(() => {
     setProgressStep(5);
   }, [setProgressStep]);
 
   useEffect(() => {
-    if (authorImage) {
-      setPreview(authorImage.startsWith("data:image") ? authorImage : URL.createObjectURL(authorImage));
+    if (authorImage && typeof authorImage === "string" && authorImage.startsWith("data:image")) {
+      setPreview(authorImage);
+    } else if (authorImage instanceof File) {
+      setPreview(URL.createObjectURL(authorImage));
     }
   }, [authorImage]);
 
@@ -56,7 +46,6 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       img.src = URL.createObjectURL(file);
       img.onload = () => {
         let { width, height } = img;
-
         let scaleFactor = Math.min(maxWidth / width, maxHeight / height, 1);
 
         if (scaleFactor < 1) {
@@ -78,13 +67,6 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
     });
   };
 
-  const convertFileToBase64 = (file, callback) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => callback(reader.result);
-    reader.onerror = (error) => console.error("❌ Error converting file:", error);
-  };
-
   const handleFileChange = async (file) => {
     if (!file) return;
 
@@ -95,12 +77,14 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
 
     const validationResult = await validateImage(file);
 
-    if (!validationResult.valid && validationResult.errorType === "unsupported_type") {
+    if (!validationResult.valid) {
       setError(validationResult.error);
-      setIsProcessing(false);
-      return;
+      if (validationResult.errorType === "unsupported_type") {
+        setIsProcessing(false);
+        return;
+      }
     } else {
-      setError(validationResult.error);
+      setError(null);
     }
 
     let processedFile = file;
@@ -110,10 +94,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       processedFile = await resizeImage(file, 431 * 1.5, 648 * 1.5);
     }
 
-    convertFileToBase64(file, (base64) => {
-      setAuthorImage(base64);
-      localStorage.setItem("authorImage", JSON.stringify(base64));
-    });
+    setAuthorImage(file);
 
     try {
       const formData = new FormData();
@@ -145,12 +126,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
         finalImage = await resizeImage(imageFile, 431 * 4, 648 * 4);
       }
 
-      // Зберігаємо croppedImage для можливості редагування
-      convertFileToBase64(finalImage, (base64) => {
-        setCroppedImage(base64);
-        localStorage.setItem("croppedImage", JSON.stringify(base64));
-      });
-
+      setCroppedImage(finalImage);
     } catch (error) {
       console.error("❌ Error processing image:", error);
       setError("Failed to process the image.");
