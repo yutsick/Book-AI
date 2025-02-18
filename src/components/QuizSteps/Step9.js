@@ -264,7 +264,7 @@ function Step9({ setProgressStep }) {
                 onChange={() => setSelectedShippingIndex(index)}
                 className="hidden"
               />
-              <div className="text-center flex items-end text-gray">
+              <div className="text-center  flex items-end text-gray">
                 <div className="text-left pl-[8px] pt-[8px] pb-[8px]">
                   <h3 className=" font-semibold text-[17px]">{option.title}</h3>
                   <p className="text-[14px] text-[#6C6C6C] hover:text-[#4b4b4b]">{option.description}</p>
