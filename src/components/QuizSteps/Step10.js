@@ -9,6 +9,7 @@ function Step10({ setProgressStep }) {
         selectedShippingIndex,
         subtotal,
         totalPrice,
+        selectedCover
     } = useContext(CreateBookContext);
 
     const { selectedTopic } = useContext(GenreContext);
@@ -38,12 +39,12 @@ function Step10({ setProgressStep }) {
             <div className="mt-[30px] pb-[65px]">
                 <div className="mb-[15px]">
                     <h2 className="text-[24px] text-gray font-bold text-center">Order Summary</h2>
-                    <p className="text-[16px] text-[#727272] text-center">Personalize full-length book - Paperback cover</p>
+                    <p className="text-[16px] text-[#727272] text-center">Personalized Full-Length Book – Tailored to Your Story</p>
                 </div>
                 <p>
                     <strong>Book Title:</strong> {selectedTopic} <br />
                     <strong>Author Name:</strong> {authorName} <br />
-                    <strong>Format:</strong> Paperback <br />
+                    <strong>Format:</strong> {selectedCover} <br />
                     <strong>Page Count:</strong> 240 Pages <br />
                     <strong>Quantity:</strong> {selectedCopies?.value} <br />
                     <strong>Subtotal:</strong> ${subtotal.toFixed(2)} <br />
@@ -55,7 +56,6 @@ function Step10({ setProgressStep }) {
                 <iframe
                     className="absolute top-0 left-0 w-full h-full"
                     src="URL_HERE"
-                    frameborder="0"
                     allow="payment"
                     title="Payment"
                 ></iframe>
