@@ -48,15 +48,25 @@ const CustomInput = ({
     setLocalPlaceholder("");
   };
 
-  const handleBlur = () => {
-    setFocus(false);
-    setLocalPlaceholder(placeholder);
-    if (validateLength && type === "text" && setIsButtonDisabled && !value) {
+const handleBlur = () => {
+  setFocus(false);
+  setLocalPlaceholder(placeholder);
+
+  if (validateLength && type === "text") {
+    if (!value || value.trim().length === 0 || value.length > maxLength) {
       setIsButtonDisabled(true);
-    } else if (setIsButtonDisabled) {
+    } else {
       setIsButtonDisabled(false);
     }
-  };
+  } else if (!value || value.trim().length === 0) {
+
+    setIsButtonDisabled(true);
+  } else {
+    setIsButtonDisabled(false);
+  }
+};
+
+  
 
   return (
     <div className="w-full mb-8">
@@ -72,7 +82,7 @@ const CustomInput = ({
         {(value || focus) && (
      
           <label
-          className={`absolute ${ focus || value ? 'top-[23px]' : 'top-2'} left-2 text-[#8F8F8F] text-[12.5px] transition-all `}
+          className={`absolute ${ focus || value ? 'top-[23px]' : 'top-2'} left-4 text-[#8F8F8F] text-[12.5px] transition-all `}
         >
           {label}
         </label>

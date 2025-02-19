@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 const CustomSelect = ({
+  type = null,
   options,
   onChange = () => { },
   value,
@@ -58,7 +59,7 @@ const CustomSelect = ({
       <div className="field-title">{title}</div>
       <div className="relative w-full h-[60px]" ref={selectRef}>
         <label
-          className={`absolute top-1 left-2 text-[#8F8F8F] text-[12.5px] transition-all ${isFocused || selected ? "translate-y-[4px]  block" : "hidden"
+          className={`absolute top-1 left-4 text-[#8F8F8F] text-[12.5px] transition-all ${isFocused || selected ? "translate-y-[4px]  block" : "hidden"
             }`}
         >
           {afterFocusPlaceholder}

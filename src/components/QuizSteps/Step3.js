@@ -149,48 +149,48 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
     "5": { levels: [{ words: 30, score: 2 }, { words: 15, score: 2 }, { words: 5, score: 1 }] },
     "6": { levels: [{ words: 5, score: 2 }, { words: 1, score: 1 }] },
     "7": { levels: [{ words: 10, score: 4 }, { words: 5, score: 3 }, { words: 1, score: 2 }] },
-    "8": { levels: [ { words: 5, score: 2 }, { words: 1, score: 1 }] },
+    "8": { levels: [{ words: 5, score: 2 }, { words: 1, score: 1 }] },
     "9": { levels: [{ words: 1, score: 1 }] },
     "10": { levels: [{ words: 1, score: 1 }] },
     "11": { levels: [{ words: 5, score: 2 }, { words: 1, score: 1 }] },
     "12": { levels: [{ words: 20, score: 3 }, { words: 10, score: 2 }, { words: 5, score: 1 }] },
     "13": { levels: [{ words: 20, score: 3 }, { words: 10, score: 2 }, { words: 5, score: 1 }] }
   };
-  
+
 
   const calculateScore = (answers = []) => {
     let score = 0;
     let answeredQuestions = 0;
-  
+
     answers.forEach(({ question, answer }) => {
       if (!question || !answer) return;
-  
+
       const wordCount = countWords(answer);
-  
+
       if (wordCount > 0) {
         answeredQuestions++;
-  
+
         const questionEntry = questions.find(q => q.label === question);
         if (!questionEntry) return;
-  
+
         const weight = weightConfig[questionEntry.value] || { levels: [{ words: 1, score: 1 }] };
-  
-        let questionScore = 0; 
-  
+
+        let questionScore = 0;
+
         for (let i = 0; i < weight.levels.length; i++) {
           if (wordCount >= weight.levels[i].words) {
-            questionScore = weight.levels[i].score; 
-            break; 
+            questionScore = weight.levels[i].score;
+            break;
           }
         }
-  
-        score += questionScore; 
+
+        score += questionScore;
       }
     });
-  
+
     return { score, answeredQuestions };
   };
-  
+
 
 
 
@@ -239,14 +239,14 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
       setAnsweredQuestions(0);
       return;
     }
-  
+
     const { score: newScore, answeredQuestions: newAnsweredQuestions } = calculateScore(questionsAndAnswers);
-  
+
     setScore(newScore);
     setAnsweredQuestions(newAnsweredQuestions);
 
-  }, [questionsAndAnswers]); 
-  
+  }, [questionsAndAnswers]);
+
 
 
 
@@ -257,30 +257,21 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
         <div className="field-desc mt-2">
           Share as much as you can! Each question you answer brings us closer to creating something truly special.
         </div>
-        <div className="mt-9 mb-2 mx-auto w-full text-center text-[14px] font-medium">
-          Your Answers Quality
+        <div className="mt-8">
+          {questionsAndAnswers.map(({ question, answer }) => (
+            <CustomText
+              setIsButtonDisabled={setIsButtonDisabled}
+              key={question}
+              label={question}
+              placeholder="Type your answer here..."
+              value={answer}
+              onChange={(newAnswer) => handleInputChange(question, newAnswer)}
+              tip={questions.find((q) => q.label === question)?.tip || null}
+              textError={textError}
+              onDelete={() => handleDelete(question)}
+            />
+          ))}
         </div>
-        <div className="mb-9">
-          {/* <ProgressTracker activeSteps={questionsAndAnswers.length} /> */}
-          <ProgressTracker activeSteps={qualityLevel === "Excellent" ? 4 : qualityLevel === "Good" ? 3 : qualityLevel === "OK" ? 2 : qualityLevel === "Basic" ? 1 : 0} />
-        </div>
-
-        {questionsAndAnswers.map(({ question, answer }) => (
-          <CustomText
-            setIsButtonDisabled={setIsButtonDisabled}
-            key={question}
-            label={question}
-            placeholder="Type your answer here..."
-            value={answer}
-            onChange={(newAnswer) => handleInputChange(question, newAnswer)}
-            tip={questions.find((q) => q.label === question)?.tip || null}
-            textError={textError}
-            onDelete={() => handleDelete(question)}
-          />
-        ))}
-
-
-
         <div className="mb-6 w-full">
           <CustomSelect
             resetOnSelect={true}
@@ -288,8 +279,15 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
             options={optionsWithDisabled}
             onChange={handleQuestionSelectChange}
             placeholder="Choose a question"
-            iconOrange = {true}
+            iconOrange={true}
           />
+        </div>
+
+        <div className="mt-9 mb-2 mx-auto w-full text-center text-[14px] font-medium">
+        More Answers, Better Story
+        </div>
+        <div className="mb-9">
+          <ProgressTracker activeSteps={qualityLevel === "Excellent" ? 4 : qualityLevel === "Good" ? 3 : qualityLevel === "OK" ? 2 : qualityLevel === "Basic" ? 1 : 0} />
         </div>
       </div>
     </div>

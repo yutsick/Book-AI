@@ -39,9 +39,9 @@ export const CreateBookProvider = ({ children }) => {
   const [processedAuthorImage, setProcessedAuthorImage] = useState(null);
 
   useEffect(() => {
-    if (authorName.trim() !== "") {
+ 
       localStorage.setItem("authorName", JSON.stringify(authorName));
-    }
+    
     if (selectedAge !== null) {
       localStorage.setItem("selectedAge", JSON.stringify(selectedAge));
     }

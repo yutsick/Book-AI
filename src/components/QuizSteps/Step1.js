@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import CustomSelect from "@/components/FormsElements/CustomSelect";
+import CustomSelect from "@/components/FormsElements/AgeSelect";
+import SimpleRadio from "@/components/FormsElements//SimpleRadio";
 import CustomInput from "@/components/FormsElements/UniversalInput";
 import CreateBookContext from "@/contexts/CreateBookContext";
 
@@ -20,9 +21,9 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
 
 
   const genderOptions = [
-    { value: "1", label: "Male" },
-    { value: "2", label: "Female" },
-    { value: "3", label: "Prefer not to say" }
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
+    { value: "prefer_not_say", label: "Prefer not to say" }
   ];
   const ageOptions = [
     { value: "1", label: 'under 18' },
@@ -38,21 +39,23 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
   }, [setProgressStep]);
 
   useEffect(() => {
-    if (authorName) {
-      setIsButtonDisabled(false);
-    } else {
+    if (authorName?.trim().length === 0) {
       setIsButtonDisabled(true);
+    } else {
+      setIsButtonDisabled(false);
     }
   }, [authorName, setIsButtonDisabled]);
+  
 
   return (
     <div>
       <div className="w-full">
         <div className="">
           <CustomInput
+
             type='text'
-            title="Who will be the book's author?"
-            description="You can choose your own name, your best friend’s name, or even a family member’s name"
+            title="Who is this book about?"
+            description="Enter their name, age, and gender—they’ll be the star and the author on the cover! Could be you, a friend, or a family member."
             label="Author's name"
             placeholder="Author's full name"
             value={authorName}
@@ -60,10 +63,11 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
             setIsButtonDisabled={setIsButtonDisabled}
             textError={textError}
             setTextError={setTextError}
+            validateLength = {true}
           />
         </div>
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label
             htmlFor="author-gender"
             className="block text-sm font-medium text-gray-700 mb-2"
@@ -80,26 +84,31 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
             afterFocusPlaceholder="Author's gender"
           />
 
+        </div> */}
+        <div className="flex flex-col md:flex-row mb-4 md:gap-4 gap-8">
+          <div className="">
+            <SimpleRadio options={genderOptions} value={selectedGender} onChange={setSelectedGender} />
+          </div>
+          <div className="  justify-center py-0.5 hidden md:flex">
+            <div className="w-[1px] bg-[#929292]"></div>
+          </div>
+          <div className="flex-1">
+
+            <CustomSelect
+              type='age'
+              title={null}
+              className="w-full border border-gray-300 rounded-lg p-2"
+              options={ageOptions}
+              value={selectedAge}
+              onChange={setSelectedAge}
+              placeholder="Age"
+              afterFocusPlaceholder="Author's age"
+            />
+          </div>
         </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="author-age"
-            className=""
-          >
 
-          </label>
-          <CustomSelect
 
-            title="What is the author's age?"
-            className="w-full border border-gray-300 rounded-lg p-2"
-            options={ageOptions}
-            value={selectedAge} 
-            onChange={setSelectedAge} 
-            placeholder="Select an option"
-            afterFocusPlaceholder="Author's age"
-          />
-        </div>
 
 
 

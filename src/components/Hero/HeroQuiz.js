@@ -39,7 +39,7 @@ const HeroQuiz = ({  }) => {
       </div>
       <p
         
-        className="text-white  text-[22px] font-semibold mt-5 md:mt-10 w-full md:text-center leading-[29px] max-w-[720px]"
+        className="text-white  text-[22px] font-semibold mt-5 md:mt-10 w-full md:text-center leading-[29px] max-w-[720px] hidden md:block"
       >
         {heroQuizData.subTitle}
       </p>
