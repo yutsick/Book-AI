@@ -115,7 +115,7 @@ const MainScreen = () => {
 
   return (
     <div className="min-h-screen bg-[#F9F6EB] flex flex-col items-center pb-36">
-      <HeaderQuiz />
+      {/* <HeaderQuiz /> */}
       {currentStep === 1 && <HeroQuiz />}
       <ProgressBar
         progressStep={progressStep}
