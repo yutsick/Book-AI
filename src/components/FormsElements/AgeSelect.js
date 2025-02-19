@@ -22,6 +22,7 @@ const CustomSelect = ({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      position: "relative",
       cursor: "pointer",
     }),
     placeholder: (base) => ({
@@ -29,6 +30,9 @@ const CustomSelect = ({
       color: "#929292",
       fontSize: "17px",
       textAlign: "center",
+      width: "auto",
+      marginRight: "38px", 
+      
     }),
     singleValue: (base) => ({
       ...base,
@@ -38,15 +42,22 @@ const CustomSelect = ({
       textAlign: "center",
 
     }),
-    dropdownIndicator: (base) => ({
-      ...base,
-      color: "#929292",
-      transition: "0.3s",
-      
-
-    }),
+    dropdownIndicator: (base, state) => {
+      console.log("Current value:", state.selectProps.value);
+      return {
+        ...base,
+        color: "#929292",
+        transition: "0.3s",
+        marginLeft: "8px", 
+        flexShrink: 0, 
+        position: state.selectProps.value.value ?   "static" : "absolute",
+        right: "37%", 
+        // top: "50%",
+        // transform: "translateY(-50%)", 
+      };
+    },
     indicatorSeparator: () => ({
-      display: "none", // Прибираємо розділювач
+      display: "none", 
     }),
     menu: (base) => ({
       ...base,
@@ -80,7 +91,7 @@ const CustomSelect = ({
   return (
     <Select
       options={options}
-      value={value}
+      value={value ? value : placeholder}
       onChange={onChange}
       placeholder={placeholder}
       styles={customStyles}

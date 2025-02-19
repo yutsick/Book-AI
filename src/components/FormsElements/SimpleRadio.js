@@ -18,6 +18,11 @@ const SimpleRadio = ({ options, onChange, value }) => {
             value={option.value}
             checked={value === option.value}
             onChange={() => onChange(option.value)}
+            onClick={() => {
+              if (value === option.value) {
+                onChange(null);
+              }
+            }}
             className="hidden"
           />
           <span

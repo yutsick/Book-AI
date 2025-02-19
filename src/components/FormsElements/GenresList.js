@@ -45,7 +45,7 @@ const RadioButtonList = ({
             <label
               key={id}
               className={`flex flex-col items-center px-2 pt-4 pb-2 cursor-pointer transition  ${
-                selectedGenre === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9]" : "bg-white hover:bg-[#ECEBE9]"
+                selectedGenre === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] border-[0.8px] border-[#000]" : "bg-white hover:bg-[#ECEBE9] border-[0.5px] border-[#888888]"
               }`}
             >
               <input
@@ -54,6 +54,11 @@ const RadioButtonList = ({
                 value={id}
                 checked={selectedGenre === name}
                 onChange={() => handleChange(name)}
+                onClick={() => {
+                  if (selectedGenre === name) {
+                    handleChange('');
+                  }
+                }}
                 className="hidden"
               />
               {icon && <img src={icon} alt={name} className="w-12 h-12 mb-3" />}

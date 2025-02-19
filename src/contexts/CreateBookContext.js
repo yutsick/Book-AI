@@ -43,12 +43,12 @@ export const CreateBookProvider = ({ children }) => {
  
       localStorage.setItem("authorName", JSON.stringify(authorName));
     
-    if (selectedAge !== null) {
+ 
       localStorage.setItem("selectedAge", JSON.stringify(selectedAge));
-    }
-    if (selectedGender !== null) {
+    
+   
       localStorage.setItem("selectedGender", JSON.stringify(selectedGender));
-    }
+    
     if (questionsAndAnswers.length > 0) {
       localStorage.setItem("questionsAndAnswers", JSON.stringify(questionsAndAnswers));
     }

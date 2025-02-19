@@ -14,7 +14,7 @@ const CustomInput = ({
   border = false,
   validateLength = false,
   maxLength = 24,
-  setIsButtonDisabled,
+  setIsButtonDisabled = null,
   textError,
   setTextError
 }) => {

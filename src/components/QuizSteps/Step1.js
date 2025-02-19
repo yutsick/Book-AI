@@ -26,13 +26,16 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
     { value: "prefer_not_say", label: "Prefer not to say" }
   ];
   const ageOptions = [
+    { value: null, label: "Clear selection" },
     { value: "1", label: 'under 18' },
     { value: "2", label: '18-24' },
     { value: "3", label: '25-34' },
     { value: "4", label: '35-44' },
     { value: "5", label: '45-54' },
     { value: "6", label: '55-64' },
-    { value: "7", label: '65 and above' }];
+    { value: "7", label: '65 and above' }
+   
+  ];
 
   useEffect(() => {
     setProgressStep(1);
@@ -100,7 +103,9 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
               className="w-full border border-gray-300 rounded-lg p-2"
               options={ageOptions}
               value={selectedAge}
-              onChange={setSelectedAge}
+              onChange={(newValue) => {
+                setSelectedAge(newValue.value === null || newValue === '' ? null : newValue);
+              }}
               placeholder="Age"
               afterFocusPlaceholder="Author's age"
             />
