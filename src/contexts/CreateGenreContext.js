@@ -21,9 +21,9 @@ export const GenreProvider = ({ children }) => {
 
 
   useEffect(() => {
-    if (selectedGenre.trim() !== "") {
+
       localStorage.setItem("selectedGenre", selectedGenre);
-    }
+    
     if (selectedTopic.trim() !== "") {
       localStorage.setItem("selectedTopic", selectedTopic);
     }

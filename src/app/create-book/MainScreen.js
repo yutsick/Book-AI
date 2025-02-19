@@ -115,7 +115,7 @@ const MainScreen = () => {
 
   return (
     <div className="min-h-screen bg-[#F9F6EB] flex flex-col items-center pb-36">
-      {/* <HeaderQuiz /> */}
+     { currentStep === 1 && <HeaderQuiz />}
       {currentStep === 1 && <HeroQuiz />}
       <ProgressBar
         progressStep={progressStep}
@@ -126,7 +126,7 @@ const MainScreen = () => {
       />
 
       {currentStep !== 1 && (
-        <div className="flex max-w-[850px] w-full px-4 mx-auto -mt-4">
+        <div className="flex max-w-[850px] w-full px-5 mx-auto -mt-4">
           <button onClick={goToPreviousStep} className="pointer">
             <svg
               width="33"
@@ -144,7 +144,7 @@ const MainScreen = () => {
         </div>
       )}
 
-      <div className="max-w-[820px] w-full mx-auto px-4 md:px-14">
+      <div className="max-w-[820px] w-full mx-auto px-5 md:px-14">
         <div className={`${currentStep == 7 ? "mb-10" : "mb-12"}`}>
           {currentStep === 1 && (
             <Step1
