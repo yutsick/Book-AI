@@ -203,7 +203,7 @@ function Step9({ setProgressStep }) {
               <label
                 key={index}
                 className={`rounded-[3px] cursor-pointer transition border-[#6C6C6C] border-[0.5px] text-[#6C6C6C] border
-                  ${selectedCoverIndex === index ? "bg-[#DCDCDC] hover:bg-[#DCDCDC] text-black border-[1px] shadow-worksShadow border-gray" : "bg-white bg-opacity-60 hover:bg-[#F0F0F0] border-[#bcbcbc]"}
+                  ${selectedCoverIndex === index ? "bg-[#DCDCDC] hover:bg-[#DCDCDC] text-black border-[1px] shadow-checkoutCardShadow border-gray" : "bg-white bg-opacity-60 hover:bg-[#F0F0F0] border-[#bcbcbc]"}
                   `}
                 style={{
                   borderWidth: selectedCoverIndex === index ? '1px' : '0.5px',
@@ -254,7 +254,7 @@ function Step9({ setProgressStep }) {
             <label
               key={index}
               className={`rounded-[3px] cursor-pointer transition border-[#6C6C6C] border-[0.5px] text-[#6C6C6C] border
-                ${selectedShippingIndex === index ? "bg-[#DCDCDC] hover:bg-[#DCDCDC] text-black border-[1px] shadow-worksShadow border-gray" : "bg-white bg-opacity-60 hover:bg-[#F0F0F0] border-[#bcbcbc]"}
+                ${selectedShippingIndex === index ? "bg-[#DCDCDC] hover:bg-[#DCDCDC] text-black border-[1px] shadow-checkoutCardShadow border-gray" : "bg-white bg-opacity-60 hover:bg-[#F0F0F0] border-[#bcbcbc]"}
                 `}
               style={{
                 borderWidth: selectedShippingIndex === index ? '1px' : '0.5px',
