@@ -135,7 +135,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   
   return (
     <>
-      <div className={`relative w-full mt-4 md:px-2 flex flex-col items-center md:items-start md:flex-row ${loading && !isRendered ? "md:justify-center" : "md:justify-end"  }  md:gap-24 `}>
+      <div className={`relative w-full mt-4 md:mt-2 md:px-2 flex flex-col items-center md:items-start md:flex-row ${loading && !isRendered ? "md:justify-center" : "md:justify-end"  }  md:gap-24 `}>
 
         {isCropperOpen && (
           <div

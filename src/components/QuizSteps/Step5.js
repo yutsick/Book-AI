@@ -32,7 +32,7 @@ function Step5({setProgressStep, setIsButtonDisabled}) {
 
   return (
     <div>
-      <div className="w-full mt-2 md:px-6">
+      <div className="w-full mt-4 md:mt-2 md:px-6">
         <div className="field-title">Choose a title and tagline that speaks to you</div>
         
         <div className="my-8">

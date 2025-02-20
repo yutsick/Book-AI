@@ -27,7 +27,7 @@ const RadioButtonList = ({
         <p className="text-lg font-semibold">{label}</p>
       </div>
       {description && <p className="text-gray-500 mt-1">{description}</p>}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
         {options.map(({ id, name, description, icon }) => {
           const descRef = useRef(null);
           const [marginTop, setMarginTop] = useState("mt-3"); 
@@ -45,7 +45,7 @@ const RadioButtonList = ({
             <label
               key={id}
               className={`flex flex-col items-center px-3 md:px-[14px] pt-4 pb-2 cursor-pointer transition  ${
-                selectedGenre === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] border-[0.5px] border-[#000]" : "bg-white hover:bg-[#ECEBE9] border-[0.3px] border-[#A6A6A6]"
+                selectedGenre === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] border-[0.5px] border-[#000]" : "bg-white hover:bg-[#ECEBE9] border-[0.3px] border-[#A6A6A6]/50"
               }`}
             >
               <input

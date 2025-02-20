@@ -105,7 +105,7 @@ body {
       @apply text-[#2B2B2B] text-[22px] md:text-[24px] leading-[26px] font-bold;
     }
     .field-desc{
-      @apply text-[#2B2B2B]/80 text-base font-medium mt-[17px] leading-[19px]
+      @apply text-[#2B2B2B]/80 text-base font-medium mt-[9px] leading-[19px]
     }
 
     ::placeholder{
