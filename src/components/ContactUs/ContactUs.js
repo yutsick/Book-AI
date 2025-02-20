@@ -4,7 +4,7 @@ import config from '../../../config';
 import ContactInput from "@/components/ContactUs/ContactInput";
 import ContactSelect from "@/components/ContactUs/ContactSelect";
 import ContactEmail from "@/components/ContactUs/ContactEmail";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Select from 'react-select';
 
 const ContactUS = () => {
@@ -19,8 +19,11 @@ const ContactUS = () => {
     const [authorEmail, setAuthorEmail] = useState("");
     const [isValidEmail, setIsValidEmail] = useState(false);
     const [reason, setReason] = useState(null);
+    const captchaRef = useRef(null);
+    const [captchaToken, setCaptchaToken] = useState(null);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
+    const sitekey = "0x4AAAAAAA9e7EVzQm0KWHEe";
 
     const reasons = [
         { label: 'Order Status & Tracking' },
@@ -118,10 +121,28 @@ const ContactUS = () => {
     };
 
     useEffect(() => {
-        const isFormValid = authorFullName && isValidEmail && selectedOption && reason;
-        setIsButtonDisabled(!isFormValid);
-    }, [authorFullName, isValidEmail, selectedOption, reason]);
+        // Загружаем скрипт для Cloudflare Turnstile
+        const script = document.createElement('script');
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+        script.async = true;
+        script.onload = () => {
+            if (window.turnstile) {
+                window.turnstile.render(captchaRef.current, {
+                    sitekey,
+                    callback: (token) => setCaptchaToken(token),
+                });
+            }
+        };
+        document.body.appendChild(script);
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
 
+    useEffect(() => {
+        const isFormValid = authorFullName && isValidEmail && selectedOption && reason && captchaToken;
+        setIsButtonDisabled(!isFormValid);
+    }, [authorFullName, isValidEmail, selectedOption, reason, captchaToken]);
 
     return contactUsData ? (
         <section className="max-w-[740px] w-full mx-auto px-[20px] py-[60px]">
@@ -242,6 +263,10 @@ const ContactUS = () => {
                     isTextArea="true"
                 />
                 <p className="mb-[10px] text-[14px] text-gray">{contactUsData.helpNote}</p>
+            </div>
+
+            <div className="mb-[40px]">
+                <div ref={captchaRef} className="flex justify-center items-center w-full max-w-xs mx-auto" data-theme="light" ></div>
             </div>
 
             <a
