@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import CustomSelect from "@/components/FormsElements/CustomSelect";
+// import CustomSelect from "@/components/FormsElements/CustomSelect";
+import CustomModalSelect from "@/components/FormsElements/ModalSelect";
 import CustomText from "@/components/FormsElements/CustomText";
 import CreateBookContext from "@/contexts/CreateBookContext";
 
@@ -273,14 +274,22 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
           ))}
         </div>
         <div className=" w-full">
-          <CustomSelect
+        <CustomModalSelect
+          resetOnSelect={true}
+          options={optionsWithDisabled}
+          onChange={handleQuestionSelectChange}
+          placeholder="Choose a question"
+          iconOrange={true}
+        />
+
+          {/* <CustomSelect
             resetOnSelect={true}
             className="w-full border border-gray-300 rounded-lg p-2"
             options={optionsWithDisabled}
             onChange={handleQuestionSelectChange}
             placeholder="Choose a question"
             iconOrange={true}
-          />
+          /> */}
         </div>
 
         <div className="mt-[-10px] mb-2 mx-auto w-full text-center text-[14px] font-medium">
