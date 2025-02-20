@@ -92,8 +92,8 @@ function BookPreview({selectedTemplate, authorName, selectedTopic, goToNextStep}
           <p className="text-gray-500 mt-4">No cover selected</p>
         )}
         <div 
-        className="flex flex-col  text-[18px]  w-2/3 md:w-auto cursor-pointer"
-        onClick={goToNextStep}
+        className={`flex flex-col  text-[18px]  w-2/3 md:w-auto ${goToNextStep ? "cursor-pointer" : ""} `}
+        onClick={goToNextStep ? goToNextStep : undefined}
         >
           <div className="text-[#2B2B2B] md:text-[24px] font-bold">
             {selectedTopic}
