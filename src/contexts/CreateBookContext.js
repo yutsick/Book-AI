@@ -1,26 +1,61 @@
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const CreateBookContext = createContext();
 
 export const CreateBookProvider = ({ children }) => {
-  const [authorName, setAuthorName] = useState("");
-  const [selectedAge, setSelectedAge] = useState(null);
-  const [selectedGender, setSelectedGender] = useState(null);
-  const [questionsAndAnswers, setQuestionsAndAnswers] = useState([]);
-  const [authorEmail, setAuthorEmail] = useState(null);
+  const getStoredValue = (key, defaultValue = null) => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem(key);
+      return saved ? JSON.parse(saved) : defaultValue;
+    }
+    return defaultValue;
+  };
+
+  const [authorName, setAuthorName] = useState(() => getStoredValue("authorName", ""));
+  const [selectedAge, setSelectedAge] = useState(() => getStoredValue("selectedAge", null));
+  const [selectedGender, setSelectedGender] = useState(() => getStoredValue("selectedGender", null));
+  const [questionsAndAnswers, setQuestionsAndAnswers] = useState(() => getStoredValue("questionsAndAnswers", []));
+  const [authorEmail, setAuthorEmail] = useState(() => getStoredValue("authorEmail", null));
+  const [authorImage, setAuthorImage] = useState("");
+  const [croppedImage, setCroppedImage] = useState("");
+  const [selectedTemplate, setSelectedTemplate] = useState({
+    templateId: null,
+    front: "",
+    back: "",
+    spine: "",
+    crop: { x: 0, y: 0 },  
+    zoom: 1.5,            
+  });
+  
+
   const [selectedCopies, setSelectedCopies] = useState({ value: 1, label: "1", price: 0 });
   const [selectedCoverIndex, setSelectedCoverIndex] = useState(0);
+  const [selectedCover, setSelectedCover] = useState(0);
   const [selectedShippingIndex, setSelectedShippingIndex] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-
-  const [authorImage, setAuthorImage] = useState(""); 
-  const [croppedImage, setCroppedImage] = useState(""); 
-  const [processedAuthorImage, setProcessedAuthorImage] = useState(null); 
-
   const [error, setError] = useState(null);
+  const [processedAuthorImage, setProcessedAuthorImage] = useState(null);
+
+  useEffect(() => {
+ 
+      localStorage.setItem("authorName", JSON.stringify(authorName));
+    
+ 
+      localStorage.setItem("selectedAge", JSON.stringify(selectedAge));
+    
+   
+      localStorage.setItem("selectedGender", JSON.stringify(selectedGender));
+    
+    if (questionsAndAnswers.length > 0) {
+      localStorage.setItem("questionsAndAnswers", JSON.stringify(questionsAndAnswers));
+    }
+    if (authorEmail && authorEmail.trim() !== "") {
+      localStorage.setItem("authorEmail", JSON.stringify(authorEmail));
+    }
+  }, [authorName, selectedAge, selectedGender, questionsAndAnswers, authorEmail]);
 
   const addQuestionAndAnswer = (question, answer) => {
     setQuestionsAndAnswers((prev) => {
@@ -40,16 +75,10 @@ export const CreateBookProvider = ({ children }) => {
     );
   };
 
-  const [selectedTemplate, setSelectedTemplate] = useState({
-    templateId: null,
-    front: "",
-    back: "",
-    spine: "",
-    crop: { x: 0, y: 0 },  
-    zoom: 1.5,            
-  });
-  
-
+  const handleImageUpload = (file) => {
+    if (!file) return;
+    setAuthorImage(file);
+  };
 
   return (
     <CreateBookContext.Provider
@@ -71,16 +100,19 @@ export const CreateBookProvider = ({ children }) => {
         setCroppedImage,
         processedAuthorImage,
         setProcessedAuthorImage,
-        error,
-        setError,
         selectedTemplate,
         setSelectedTemplate,
+        handleImageUpload,
+        error,
+        setError,
         selectedCopies,
         setSelectedCopies,
         selectedCoverIndex,
         setSelectedCoverIndex,
         selectedShippingIndex,
         setSelectedShippingIndex, 
+        selectedCover,
+        setSelectedCover,
         subtotal, 
         setSubtotal, 
         totalPrice, 

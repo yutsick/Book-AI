@@ -61,6 +61,7 @@ const RadioButtonList = ({
               onFocus={handleFocus}
               onBlur={handleBlur}
               className="hidden"
+   
             />
             {icon && (
               <div className="w-[60px]">
@@ -69,9 +70,9 @@ const RadioButtonList = ({
             )}
             <div className="flex justify-between w-full">
               <div>
-                <div className={`font-bold text-base ${selectedGenre === name || selectedTopic === name ? "text-black" : "text-gray"}`}>{name}</div>
+                <div className={`font-bold text-base ${selectedGenre === name || selectedTopic === name ? "text-black" : "text-gray-700"}`}>{name}</div>
                 <div className={`text-[14px] md:text-[15px] leading-[18px] md:leading-[28px] font-medium ${
-                  selectedGenre === name  || selectedTopic === name ? "opacity-[0.79] text-gray" : "opacity-[0.49] text-black"
+                  selectedGenre === name  || selectedTopic === name ? " text-black" : " text-black/50"
                 }`}>
                   {description}
                 </div>

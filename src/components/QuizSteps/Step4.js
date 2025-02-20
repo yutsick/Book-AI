@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import CustomEmail from "@/components/FormsElements/CustomEmail";
+import CustomInput from "@/components/FormsElements/UniversalInput";
 import CreateBookContext from "@/contexts/CreateBookContext";
 
 function Step4({ setIsButtonDisabled, setProgressStep }) {
@@ -22,8 +22,9 @@ function Step4({ setIsButtonDisabled, setProgressStep }) {
   return (
     <div>
       <div className="w-full">
-        <div className="mt-2 md:px-6">
-          <CustomEmail
+        <div className="mt-4 md:mt-2 md:px-6">
+          <CustomInput
+            type="email"
             title="Stay Connected"
             description="Enter your email to continue crafting your book and save your progress."
             label="Your Email"

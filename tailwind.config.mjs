@@ -44,7 +44,7 @@ export default {
 
       },
       boxShadow: {
-        heroBtnShadow: '0px 0px 2.13px 2.13px #82828275',
+        heroBtnShadow: '0px 1px 4px 2px rgba(130, 130, 130, 0.2)',
         btnShadow: '0px 2.5px 4px 1.9px rgba(128, 128, 128, 0.28)',
         slideShadow: '0px 0px 4px 0px #00000040',
 
@@ -54,8 +54,7 @@ export default {
         storyCardShadow: '0px 1px 25px rgba(40, 44, 47, 0.15)',
         chooseShadow: '0px 0px 11.27px 1px rgba(0, 0, 0, 0.62)',
         detailsShadow: '0px 2px 6px 2px rgba(0, 0, 0, 0.23)',
-        
-
+        checkoutCardShadow: '0px 0px 4px 0.5px rgba(0, 0, 0, 0.1)',
   },
 },
   },
