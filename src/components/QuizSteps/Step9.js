@@ -254,7 +254,7 @@ function Step9({ setProgressStep }) {
               style={{
                 width: '206px',
                 height: 'auto',
-                boxShadow: selectedCoverIndex === index ? '0 0 5px rgba(0, 0, 0, 0.1)' : 'none',
+                boxShadow: selectedShippingIndex === index ? '0 0 5px rgba(0, 0, 0, 0.1)' : 'none',
               }}
             >
               <input
