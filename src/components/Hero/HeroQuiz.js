@@ -34,12 +34,12 @@ const HeroQuiz = ({  }) => {
       className="flex flex-col items-center justify-center  w-full md:mt-4 mt-2  pb-[70px] md:pb-[110px] px-4"
     >
       <div className="max-w-[1200px]">
-      <div className="text-center text-[32px] md:text-[46px] leading-[36px] font-bold text-orange mt-3 md:mt-[30px] w-full">
+      <div className="text-center text-[32px] md:text-[46px] leading-[36px] font-bold text-orange mt-[14px] md:mt-[30px] w-full">
         {heroQuizData.title}
       </div>
       <p
         
-        className="text-white  text-[22px] font-semibold mt-5 md:mt-10 w-full md:text-center leading-[29px] max-w-[720px] hidden md:block"
+        className="text-white  text-[22px] font-semibold mt-5 md:mt-[25px] w-full md:text-center leading-[29px] max-w-[720px] hidden md:block"
       >
         {heroQuizData.subTitle}
       </p>

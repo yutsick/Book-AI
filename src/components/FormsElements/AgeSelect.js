@@ -95,6 +95,7 @@ const CustomSelect = ({
       onChange={onChange}
       placeholder={placeholder}
       styles={customStyles}
+      inputProps={{ readOnly: true }}
     />
   );
 };

@@ -283,7 +283,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
           />
         </div>
 
-        <div className="mt-9 mb-2 mx-auto w-full text-center text-[14px] font-medium">
+        <div className="mt-[18px] mb-2 mx-auto w-full text-center text-[14px] font-medium">
         More Answers, Better Story
         </div>
         <div className="mb-9">

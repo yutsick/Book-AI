@@ -4,7 +4,7 @@ import Link from "next/link";
 const HeaderQuiz = () => {
 
   return (
-    <section className="w-full max-w-[910px] mx-auto items-center px-2 md:px-0">
+    <section className="w-full max-w-[820px] mx-auto items-center px-5 md:px-14">
       <div className="flex justify-between items-center mt-4">
         <Link
           href="/"

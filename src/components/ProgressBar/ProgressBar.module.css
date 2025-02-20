@@ -4,7 +4,7 @@
   align-items: flex-start;
   max-width: 768px;
   width: 100%;
-  margin: 32px auto 62px;
+  margin: 18px auto 44px;
 }
 
 .stepContainer {
@@ -119,6 +119,7 @@
 
   .progressBar{
     width: 75%;
+    margin: 20px auto;
   }
 
   .active, .completed{
@@ -141,10 +142,7 @@
     border: none;
   }
   
-  .progressBar {
-
-    margin: 28px auto;
-  }
+ 
 }
 @media (max-width:768px) {
   

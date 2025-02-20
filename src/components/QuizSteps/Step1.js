@@ -58,7 +58,7 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
 
             type='text'
             title="Who is this book about?"
-            description="Enter their name, age, and gender—they’ll be the star and the author on the cover! Could be you, a friend, or a family member."
+            description="Enter their details — they’ll be the star and the author on the cover!<br>Could be you, a friend, or a family member."
             label="Author's name"
             placeholder="Author's full name"
             value={authorName}
