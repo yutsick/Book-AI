@@ -79,9 +79,9 @@ function Step9({ setProgressStep }) {
     setTotalPrice(subtotalAndTotalPrice.newTotalPrice);
   }, [subtotalAndTotalPrice, setSubtotal, setTotalPrice]);
 
-      useEffect(() => {
-          setProgressStep(7);
-      }, [setProgressStep]);
+  useEffect(() => {
+    setProgressStep(7);
+  }, [setProgressStep]);
 
   return (
     <div className="pb-[17px]">
@@ -202,7 +202,8 @@ function Step9({ setProgressStep }) {
                 style={{
                   width: '125px',
                   height: 'auto',
-                  boxShadow: selectedCoverIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
+                  boxShadow: selectedCoverIndex === index ? '0 0 5px rgba(0, 0, 0, 0.1)' : 'none',
+
                 }}
               >
                 <input
@@ -253,7 +254,7 @@ function Step9({ setProgressStep }) {
               style={{
                 width: '206px',
                 height: 'auto',
-                boxShadow: selectedShippingIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
+                boxShadow: selectedCoverIndex === index ? '0 0 5px rgba(0, 0, 0, 0.1)' : 'none',
               }}
             >
               <input
