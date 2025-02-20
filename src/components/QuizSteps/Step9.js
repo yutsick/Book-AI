@@ -117,6 +117,7 @@ function Step9({ setProgressStep }) {
                   borderWidth: selectedCoverIndex === index ? '1px' : '0.5px',
                   width: '125px',
                   height: 'auto',
+                  boxShadow: selectedCoverIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
                 }}
               >
                 <input
@@ -168,6 +169,7 @@ function Step9({ setProgressStep }) {
                 borderWidth: selectedShippingIndex === index ? '1px' : '0.5px',
                 width: '206px',
                 height: 'auto',
+                boxShadow: selectedShippingIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
               }}
             >
               <input
