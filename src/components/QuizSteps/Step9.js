@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useMemo } from 'react';
 import CustomDropdown from "@/components/FormsElements/CustomDropdown";
 import CreateBookContext from '@/contexts/CreateBookContext';
 import GenreContext from '@/contexts/CreateGenreContext';
+import BookPreview from '../BookPreview/BookPreview';
 
 function Step9({ setProgressStep }) {
   const {
@@ -94,104 +95,11 @@ function Step9({ setProgressStep }) {
       <div className="text-[30px] font-bold text-center text-orange mb-[32px]">
         Checkout
       </div>
-      <div className="flex items-center  justify-center gap-4 flex-1 md:gap-12 mt-6 mb-[80px] md:mb-[110px]">
-
-        {selectedTemplate?.front ? (
-
-          <div
-            className="relative"
-            style={{
-              width: "155px",
-              height: "193px",
-              "--bookWidth": "155px",
-              "--bookHeight": "253px",
-              "--spineWidth": "27px",
-              perspective: "1000px",
-
-              backgroundColor: 'transparent'
-            }}
-          >
-            <div
-              className="relative transform-style-3d"
-              style={{
-                transform: "rotateY(-30deg)",
-                transformOrigin: "center center -25px",
-                transformStyle: ' preserve-3d'
-              }}
-            >
-              {/* Front page */}
-              <img
-                className=""
-                style={{
-                  transform: "translateZ(0)",
-                  boxShadow: "0 0 25px #999",
-
-                }}
-                src={selectedTemplate.front}
-                alt="Book Cover"
-              />
-
-              {/* Pages */}
-              <div
-                className="absolute z-1 bg-white"
-                style={{
-                  width: "var(--spineWidth)",
-                  height: "100%",
-                  transformOrigin: "left",
-                  transform: "rotateY(60deg)",
-                  borderTop: "1px solid rgba(0, 0, 0, 0.08)",
-                  borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
-                  top: '0',
-                  right: '-24px',
-                  boxShadow: "16px 0px 10px #eaeaea",
-                }}
-              >
-                <div
-                  className="absolute w-full h-full"
-                  style={{
-                    background: "linear-gradient(-90deg, transparent 60%, rgba(0, 0, 0, 0.2))",
-                  }}
-                ></div>
-              </div>
-
-              {/* Back */}
-              <div
-                className="absolute z-4 mt-1"
-                style={{
-                  width: "8px",
-                  transform: "",
-                  transformOrigin: "",
-                  right: '-25px',
-                  top: '0',
-                  height: 'calc(100% - 8px)',
-                  opacity: '0.7'
-                }}
-              >
-                <img
-                  src={selectedTemplate.spine}
-                  alt="Spine"
-                  className="w-full h-full"
-                />
-
-              </div>
-
-
-            </div>
-          </div>
-
-
-        ) : (
-          <p className="text-gray-500 mt-4">No cover selected</p>
-        )}
-        <div className="flex flex-col text-center text-[18px]  w-2/3 md:w-auto">
-          <div className="text-[#2B2B2B] md:text-[24px] font-bold">
-            {selectedTopic}
-          </div>
-          <div className="text-[#2B2B2B] md:text-[22px] font-bold">
-            by <span className='italic'>{authorName}</span>
-          </div>
-        </div>
-      </div>
+      <BookPreview 
+        selectedTemplate={selectedTemplate}
+        selectedTopic={selectedTopic}
+        authorName={authorName}
+      />
       <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-[0] md:gap-[45px] pb-[65px]  relative 
   after:content-[''] after:h-[1px] after:bg-[#ADADAD] after:absolute after:bottom-0 
   after:w-[285px] after:left-1/2 after:-translate-x-1/2 
