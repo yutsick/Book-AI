@@ -252,7 +252,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
 
   return (
     <div className="w-full ">
-      <div className="mt-2 md:mx-6">
+      <div className="mt-4 md:mt-2 md:mx-6">
         <div className="field-title">Tell us about {authorName}</div>
         <div className="field-desc mt-2">
           Share as much as you can! Each question you answer brings us closer to creating something truly special.
@@ -272,7 +272,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
             />
           ))}
         </div>
-        <div className="mb-6 w-full">
+        <div className=" w-full">
           <CustomSelect
             resetOnSelect={true}
             className="w-full border border-gray-300 rounded-lg p-2"
@@ -283,10 +283,10 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
           />
         </div>
 
-        <div className="mt-[18px] mb-2 mx-auto w-full text-center text-[14px] font-medium">
+        <div className="mt-[-10px] mb-2 mx-auto w-full text-center text-[14px] font-medium">
         More Answers, Better Story
         </div>
-        <div className="mb-9">
+        <div className="">
           <ProgressTracker activeSteps={qualityLevel === "Excellent" ? 4 : qualityLevel === "Good" ? 3 : qualityLevel === "OK" ? 2 : qualityLevel === "Basic" ? 1 : 0} />
         </div>
       </div>

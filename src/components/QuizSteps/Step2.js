@@ -30,7 +30,7 @@ const StepTwo = ({ setProgressStep}) => {
   return (
     genresData && (
       <div className="">
-        <div className="w-full mt-2">
+        <div className="w-full mt-4">
           <div className="md:mx-6">
             <div className="field-title">Pick a Vibe (Optional)</div>
             <div className="field-desc">
