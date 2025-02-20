@@ -71,9 +71,9 @@ const handleBlur = () => {
   return (
     <div className="w-full mb-8">
       <div className="flex items-center space-x-2">
-        <p className="field-title">{title}</p>
+        <p className="field-title" >{title}</p>
       </div>
-      <div className="field-desc">{description}</div>
+      <div className="field-desc" dangerouslySetInnerHTML={{ __html: description }}></div>
       {extraLabel && (
         <label className="block text-gray-300   -mb-1">{label}</label>
       )}

@@ -3,7 +3,7 @@ import CreateBookContext from '@/contexts/CreateBookContext';
 import GenreContext from '@/contexts/CreateGenreContext';
 import TableOfContents from '../TableOfContents/TableOfContents';
 
-function Step8({ setProgressStep }) {
+function Step8({ setProgressStep, goToNextStep }) {
   const { selectedTemplate, authorName } = useContext(CreateBookContext);
   const { selectedTopic } = useContext(GenreContext);
 
@@ -36,7 +36,7 @@ function Step8({ setProgressStep }) {
   }, [setProgressStep]);
 
   return (
-    <div className="flex flex-col  gap-8">
+    <div className="flex flex-col  gap-2">
       <div className="text-[30px] font-bold text-center text-orange">
         Your Book
       </div>
@@ -47,11 +47,11 @@ function Step8({ setProgressStep }) {
           <div
             className="relative"
             style={{
-              width: "195px",
+              width: "150px",
               height: "243px",
-              "--bookWidth": "195px",
+              "--bookWidth": "150px",
               "--bookHeight": "293px",
-              "--spineWidth": "27px",
+              "--spineWidth": "29px",
               perspective: "1000px",
             
               backgroundColor: 'transparent'
@@ -104,10 +104,10 @@ function Step8({ setProgressStep }) {
               <div
                 className="absolute z-4 mt-1"
                 style={{
-                  width: "8px",
+                  width: "5px",
                   transform: "",
                   transformOrigin: "",
-                  right: '-25px',
+                  right: '-27px',
                   top: '0',
                   height: 'calc(100% - 8px)',
                   opacity: '0.7'
@@ -129,7 +129,10 @@ function Step8({ setProgressStep }) {
         ) : (
           <p className="text-gray-500 mt-4">No cover selected</p>
         )}
-        <div className="flex flex-col text-center text-[18px]  w-2/3 md:w-auto">
+        <div 
+        className="flex flex-col  text-[18px]  w-2/3 md:w-auto cursor-pointer"
+        onClick={goToNextStep}
+        >
           <div className="text-[#2B2B2B] md:text-[24px] font-bold">
             {selectedTopic}
           </div>
@@ -138,7 +141,7 @@ function Step8({ setProgressStep }) {
           </div>
         </div>
       </div>
-      <div className="flex w-full justify-center items-center mt-10">
+      <div className="flex w-full justify-center items-center ">
       <TableOfContents contents={contents} />
       </div>
     </div>

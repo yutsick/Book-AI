@@ -76,10 +76,12 @@ const CustomSelect = ({
             {selected ? selected.label : placeholder}
           </span>
           {iconOrange ? (
-          <svg width="28" height="28" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="22.5" cy="22.5" r="22.5" fill="#EDB414"/>
-          <path d="M10.5 18L23.5 32L35 18" stroke="white" strokeWidth="4"/>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8" r="8" fill="#EDB414"/>
+          <line x1="8.15" y1="3" x2="8.15" y2="12" stroke="white" strokeWidth="1.3"/>
+          <line x1="3.5" y1="7.35" x2="12.5" y2="7.35" stroke="white" strokeWidth="1.3"/>
           </svg>
+          
           
 
           ) :

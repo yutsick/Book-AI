@@ -44,8 +44,8 @@ const RadioButtonList = ({
           return (
             <label
               key={id}
-              className={`flex flex-col items-center px-2 pt-4 pb-2 cursor-pointer transition  ${
-                selectedGenre === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] border-[0.8px] border-[#000]" : "bg-white hover:bg-[#ECEBE9] border-[0.5px] border-[#888888]"
+              className={`flex flex-col items-center px-3 md:px-[14px] pt-4 pb-2 cursor-pointer transition  ${
+                selectedGenre === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] border-[0.5px] border-[#000]" : "bg-white hover:bg-[#ECEBE9] border-[0.3px] border-[#A6A6A6]"
               }`}
             >
               <input
