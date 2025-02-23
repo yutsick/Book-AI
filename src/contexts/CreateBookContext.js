@@ -43,10 +43,8 @@ export const CreateBookProvider = ({ children }) => {
  
       localStorage.setItem("authorName", JSON.stringify(authorName));
     
- 
       localStorage.setItem("selectedAge", JSON.stringify(selectedAge));
     
-   
       localStorage.setItem("selectedGender", JSON.stringify(selectedGender));
     
     if (questionsAndAnswers.length > 0) {
@@ -57,6 +55,11 @@ export const CreateBookProvider = ({ children }) => {
     }
   }, [authorName, selectedAge, selectedGender, questionsAndAnswers, authorEmail]);
 
+  // Data update controlling
+  const [contextUpdated, setContextUpdated] = useState(false);
+  useEffect(() => {
+    setContextUpdated(true);
+  }, [authorName, selectedAge, selectedGender, questionsAndAnswers]);
   const addQuestionAndAnswer = (question, answer) => {
     setQuestionsAndAnswers((prev) => {
       const existingIndex = prev.findIndex((qa) => qa.question === question);
@@ -116,7 +119,9 @@ export const CreateBookProvider = ({ children }) => {
         subtotal, 
         setSubtotal, 
         totalPrice, 
-        setTotalPrice
+        setTotalPrice,
+        contextUpdated, 
+        setContextUpdated
       }}
     >
       {children}

@@ -43,7 +43,6 @@ const CustomSelect = ({
 
     }),
     dropdownIndicator: (base, state) => {
-      console.log("Current value:", state.selectProps.value);
       return {
         ...base,
         color: "#929292",

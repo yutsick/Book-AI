@@ -9,7 +9,11 @@ export const GenreProvider = ({ children }) => {
   const getStoredValue = (key, defaultValue = "") => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(key);
-      return saved && saved.trim() !== "" ? saved : defaultValue;
+      try {
+        return saved ? JSON.parse(saved) : defaultValue;
+      } catch (error) {
+        return defaultValue; 
+      }
     }
     return defaultValue;
   };
@@ -18,6 +22,10 @@ export const GenreProvider = ({ children }) => {
   const [selectedGenre, setSelectedGenre] = useState(() => getStoredValue("selectedGenre", ""));
   const [selectedTopic, setSelectedTopic] = useState(() => getStoredValue("selectedTopic", ""));
   const [selectedSubTopic, setSelectedSubTopic] = useState(() => getStoredValue("selectedSubTopic", ""));
+
+  // const [generatedBooks, setGeneratedBooks] = useState(() => getStoredValue("generatedBooks", []));
+  const [generatedBooks, setGeneratedBooks] = useState([]);
+
 
 
   useEffect(() => {
@@ -32,6 +40,17 @@ export const GenreProvider = ({ children }) => {
     }
   }, [selectedGenre, selectedTopic, selectedSubTopic]);
 
+
+  const [genreUpdated, setGenreUpdated] = useState(false);
+  const [topicUpdated, setTopicUpdated] = useState(false);
+
+  useEffect(() => {
+    setGenreUpdated(true);
+  }, [selectedGenre]);
+  useEffect(() => {
+    setTopicUpdated(true);
+  }, [selectedTopic]);
+
   return (
     <GenreContext.Provider
       value={{
@@ -41,6 +60,12 @@ export const GenreProvider = ({ children }) => {
         setSelectedTopic,
         selectedSubTopic,
         setSelectedSubTopic,
+        generatedBooks,
+        setGeneratedBooks,
+        genreUpdated, 
+        setGenreUpdated,
+        topicUpdated, 
+        setTopicUpdated
       }}
     >
       {children}

@@ -18,16 +18,17 @@ const RadioButtonList = ({
 
   const [focus, setFocus] = useState(false);
 
-  const handleChange = (value) => {
-    if (type == 'genre') {
-      selectedGenre === value ? setSelectedGenre('') : setSelectedGenre(value)
+  const handleChange = (value, description) => {
+    if (type === 'genre') {
+      selectedGenre === value ? setSelectedGenre('') : setSelectedGenre(value);
     } else {
-      setSelectedTopic(value);
-      onChange(value, description); 
-
+      if (selectedTopic !== value) { // 🔥 Запобігаємо повторному виклику
+        setSelectedTopic(value);
+        onChange && onChange(value, description);
+      }
     }
-   
-    setIsButtonDisabled && setIsButtonDisabled(false); 
+  
+    setIsButtonDisabled && setIsButtonDisabled(false);
   };
 
   const handleFocus = () => {
