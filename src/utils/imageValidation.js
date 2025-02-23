@@ -44,7 +44,7 @@ export const validateImage = async (file) => {
     }
 
     const sizePerMegapixel = (sizeInMB * 1_000_000) / totalPixels;
-    return sizePerMegapixel >= 0.1 ? { valid: true } : { valid: false, errorType: "low_quality", error: ERROR_PHRASE };
+    return sizePerMegapixel >= 0.045 ? { valid: true } : { valid: false, errorType: "low_quality", error: ERROR_PHRASE };
   };
 
   try {
