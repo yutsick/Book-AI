@@ -9,8 +9,9 @@
     { "text": "Contact Us", "href": "/contact-us" }
   ],
   "footerLinks": [
-    { "text": "Terms of Use", "href": "/terms" },
+    { "text": "Terms & Conditions", "href": "/terms" },
     { "text": "Privacy Policy", "href": "/privacy" },
-    { "text": "Return Policy", "href": "/returns" }
+    { "text": "California Privacy Notice", "href": "/california-privacy" },
+    { "text": "Return & Refund Policy", "href": "/returns" }
   ]
 }
