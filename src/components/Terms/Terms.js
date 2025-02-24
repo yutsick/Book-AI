@@ -42,11 +42,11 @@ function Terms() {
 
                     <div>
                         <h2 className="text-[20px] font-bold mb-2">3. Nature of Content</h2>
-                        <h3 className="mb-1">3.1 The Service produces satirical and fictional content.</h3>
-                        <p className="mb-2">
+                        <h3 className="mb-1 font-bold">3.1 The Service produces satirical and fictional content.</h3>
+                        <p className="mb-7">
                             All Content generated through the Service is intended for entertainment purposes only.
                         </p>
-                        <h3 className="mb-1">3.2 Users acknowledge and agree that:</h3>
+                        <h3 className="mb-1 font-bold">3.2 Users acknowledge and agree that:</h3>
                         <ul className="list-disc pl-4">
                             <li className="mb-2">
                                 Content may be fictional, exaggerated, or satirical in nature
@@ -62,7 +62,7 @@ function Terms() {
                     <div>
                         <h2 className="text-[20px] font-bold mb-2">4. Intellectual Property Rights</h2>
                         <h3 className=" font-bold mb-1">4.1 Proprietary Rights</h3>
-                        <ul className="list-disc pl-4">
+                        <ul className="list-disc pl-4 mb-7">
                             <li className="mb-2">
                                 The Service, including its underlying technology, algorithms, software, and all intellectual property rights therein, is owned by the Parent Company and licensed to Book Tailor.
                             </li>
@@ -90,7 +90,7 @@ function Terms() {
                     <div>
                         <h2 className="text-[20px] font-bold mb-2">5. Prohibited Uses</h2>
                         <h3 className=" font-bold mb-1">5.1 Users are expressly prohibited from:</h3>
-                        <ul className="list-disc pl-4">
+                        <ul className="list-disc pl-4 mb-7">
                             <li className="mb-2">
                                 Attempting to reverse engineer, decompile, or discover the underlying algorithms or technology of the Service
                             </li>
@@ -114,7 +114,7 @@ function Terms() {
                         <p className="mb-2">
                             Users shall not provide Input that:
                         </p>
-                        <ul className="list-disc pl-4">
+                        <ul className="list-disc pl-4 mb-7">
                             <li className="mb-2">
                                 Is designed to manipulate or exploit the Service&apos;s engine
                             </li>
@@ -132,7 +132,7 @@ function Terms() {
                     <div>
                         <h2 className="text-[20px] font-bold mb-2">6. User Accounts and Data</h2>
                         <h3 className=" font-bold mb-1">6.1 Account Creation</h3>
-                        <ul className="list-disc pl-4">
+                        <ul className="list-disc pl-4 mb-7">
                             <li className="mb-2">Accounts are automatically created upon purchase</li>
                             <li className="mb-2">Users must provide accurate and complete information</li>
                             <li className="mb-2">Users are responsible for maintaining the confidentiality of their account credentials</li>
@@ -147,7 +147,7 @@ function Terms() {
                     <div>
                         <h2 className="text-[20px] font-bold mb-2">7. Payment and Refunds</h2>
                         <h3 className=" font-bold mb-1">7.1 Payment Processing</h3>
-                        <ul className="list-disc pl-4">
+                        <ul className="list-disc pl-4 mb-7">
                             <li className="mb-2">All payments are processed through Stripe or other authorized payment processors</li>
                             <li className="mb-2">We do not store credit card information</li>
                             <li className="mb-2">All applicable taxes will be added to the final purchase price</li>
@@ -164,7 +164,7 @@ function Terms() {
                         <div>The Service utilizes various third-party tracking and analytics tools, including but not limited to:</div>
                
              
-                            <ul className="list-disc pl-6">
+                            <ul className="list-disc pl-4 mb-7">
                                 <li className="mb-2">Social media advertising platforms (including but not limited to Facebook, TikTok, Snapchat, and other advertising platforms)</li>
                                 <li className="mb-2">Google Analytics</li>
                                 <li className="mb-2">Marketing pixels and tracking tools</li>
@@ -181,7 +181,7 @@ function Terms() {
                         <h2 className="text-[20px] font-bold mb-2">9. Limitation of Liability</h2>
                         <div className=" mb-1">9.1 To the maximum extent permitted by law, neither Book Tailor nor its Parent Company shall be liable for:</div>
          
-                            <ul className="list-disc pl-6">
+                            <ul className="list-disc pl-4 mb-7">
                                 <li className="mb-2">Any indirect, incidental, special, consequential, or punitive damages</li>
                                 <li className="mb-2">Any loss of profits, revenue, data, or business opportunities</li>
                                 <li className="mb-2">Any damages arising from the use or inability to use the Service</li>
@@ -203,17 +203,13 @@ function Terms() {
                     <div>
                         <h2 className="text-[20px] font-bold mb-2">11. Governing Law and Jurisdiction</h2>
 
-                            <div className="mb-2">These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to its confdivct of law provisions.</div>
-                    
-                        <h3 className=" font-bold mb-1">11.2 Jurisdiction</h3>
-                   
-                            <div className="mb-2">Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of Delaware.</div>
+                            <div className="mb-2">These Terms shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to its conflict of law provisions. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of Delaware.</div>
                       
                     </div>
                     <div>
                         <h2 className="text-[20px] font-bold mb-2">12. Severability</h2>
 
-                            <div className="mb-2">If any provision of these Terms is found to be unenforceable or invadivd, that provision shall be limited or eliminated to the minimum extent necessary so that these Terms shall otherwise remain in full force and effect and enforceable.</div>
+                            <div className="mb-2">If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that these Terms shall otherwise remain in full force and effect and enforceable.</div>
                       
                     </div>
                     <div>

@@ -21,7 +21,7 @@ function Privacy() {
                         <p className="mb-2">
                         A. Personal Information:
                         </p>
-                        <ul className="list-disc pl-4">
+
                 
                                 <ul className="list-disc pl-8">
                                     <li className="mb-2">Name and contact information</li>
@@ -58,7 +58,7 @@ function Privacy() {
                                     <li className="mb-2">Saved or incomplete book projects</li>
                                 </ul>
                            
-                        </ul>
+                   
                         <h3 className=" font-bold mb-1">2.2 Methods of Collection</h3>
                         <p className="mb-2">
                             We collect information through:
