@@ -1,17 +1,17 @@
-import React, { useRef, useState, useEffect } from "react";
-import { adjustFontSizeByW, adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
+import React, { useRef, useState, useEffect} from "react";
+import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
+import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 
 const CoverTemplate1 = ({ type, data }) => {
-
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
-  
+  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
+
   const authorRef = useRef(null);
-  const [authorFontSize, setAuthorFontSize] = useState(21); 
+  const [authorFontSize, setAuthorFontSize] = useState(21);
 
   useEffect(() => {
     if (type === "spine") {
-      const newFontSize = adjustFontSizeByWidth(authorRef, 21, 150); 
+      const newFontSize = adjustFontSizeByWidth(authorRef, 21, 150);
       setAuthorFontSize(newFontSize);
     }
   }, [authorName, type]);
@@ -59,16 +59,21 @@ const CoverTemplate1 = ({ type, data }) => {
 
       {type === "back" && (
         <div
-        className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/create-book/bg/bg1-back.png')" }}
-      >
-        <img src={isMobile() ? 
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat font-degular text-white"
+          style={{ backgroundImage: "url('/images/create-book/bg/bg1-back.png')" }}
+        >
+          {/* <img src={isMobile() ? 
           "/images/create-book/bg/bg1-back-mob.png" : 
           "/images/create-book/bg/bg1-back-text.png"} 
           alt="Back Cover" 
-          className="w-full h-full"/>
-      </div>
-      
+          className="w-full h-full"/> */}
+          {praises ? (
+           generateBookBackCover({ author: authorName, praises, metaColor: "#000", website: "www.booktailor.com" })
+          ) : (
+            <p>Loading testimonials...</p>
+          )}
+        </div>
+
       )}
 
       {type === "spine" && (

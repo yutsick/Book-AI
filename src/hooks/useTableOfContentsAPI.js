@@ -15,10 +15,10 @@ export const useTableOfContentsAPI = () => {
     let missingFields = [];
 
     if (!authorName) missingFields.push("authorName");
-    if (!selectedAge) missingFields.push("selectedAge");
-    if (!selectedGender) missingFields.push("selectedGender");
+    // if (!selectedAge) missingFields.push("selectedAge");
+    // if (!selectedGender) missingFields.push("selectedGender");
     if (!questionsAndAnswers || questionsAndAnswers.length === 0) missingFields.push("quiz_answers");
-    if (!selectedGenre) missingFields.push("selectedGenre");
+    // if (!selectedGenre) missingFields.push("selectedGenre");
     if (!selectedTopic) missingFields.push("selectedTopic");
     if (!selectedSubTopic) missingFields.push("selectedSubTopic");
 
@@ -29,7 +29,6 @@ export const useTableOfContentsAPI = () => {
       return;
     }
 
-    // 🔥 Перевіряємо `localStorage`, щоб не фетчити повторно
     const storageKey = `toc_${selectedTopic}_${selectedSubTopic}`;
     if (!genreUpdated && typeof window !== "undefined") {
       const storedToc = localStorage.getItem(storageKey);
@@ -48,7 +47,6 @@ export const useTableOfContentsAPI = () => {
       }
     }
 
-    // 🔄 Якщо змінили `selectedTopic` або `selectedSubTopic`, очищаємо старий TOC
     if (genreUpdated) {
       console.log("🔄 Topic or SubTopic changed, clearing previous Table of Contents...");
       localStorage.removeItem(storageKey);
@@ -56,7 +54,6 @@ export const useTableOfContentsAPI = () => {
       fetchTriggered.current = false;
     }
 
-    // Запобігаємо повторному виклику API
     if (fetchTriggered.current) {
       console.warn("🚫 API call already triggered, skipping...");
       return;
@@ -112,7 +109,7 @@ export const useTableOfContentsAPI = () => {
     };
 
     fetchTableOfContents();
-  }, [genreUpdated]); // 🔥 Викликаємо ефект при зміні `genreUpdated`
+  }, [genreUpdated]); 
 
   return { tableOfContents, loading, error };
 };

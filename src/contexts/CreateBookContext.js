@@ -29,6 +29,7 @@ export const CreateBookProvider = ({ children }) => {
     zoom: 1.5,            
   });
   
+  const [praises, setPraises] = useState(null);
 
   const [selectedCopies, setSelectedCopies] = useState({ value: 1, label: "1", price: 0 });
   const [selectedCoverIndex, setSelectedCoverIndex] = useState(0);
@@ -121,7 +122,9 @@ export const CreateBookProvider = ({ children }) => {
         totalPrice, 
         setTotalPrice,
         contextUpdated, 
-        setContextUpdated
+        setContextUpdated,
+        praises,
+        setPraises 
       }}
     >
       {children}

@@ -5,6 +5,8 @@ import ImageCropperModal from "@/components/ImageCropper/ImageCropperModal";
 import CreateBookContext from "@/contexts/CreateBookContext";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
 
+import usePraises from "@/hooks/usePraises";
+
 const previewTemplates = [
   { id: 1, src: "images/create-book/previews/front1.png", alt: "Template 1" },
   { id: 2, src: "images/create-book/previews/front2.png", alt: "Template 2" },
@@ -29,6 +31,7 @@ const cropperData = [
 const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   const {
     authorName,
+    selectedGender,
     authorImage,
     processedAuthorImage,
     croppedImage,
@@ -37,7 +40,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
     setSelectedTemplate
   } = useContext(CreateBookContext);
 
-  const { selectedTopic, selectedSubTopic } = useContext(CreateGenreContext);
+  const { selectedTopic, selectedSubTopic} = useContext(CreateGenreContext);
 
   const [selectedCover, setSelectedCover] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -48,16 +51,18 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null);
 
+  const { praises, loading: praisesLoading } = usePraises();
+
 
   useEffect(() => {
     setProgressStep(5);
   }, [setProgressStep]);
 
   useEffect(() => {
-    if (croppedImage) {
+    if (croppedImage && !praisesLoading ) {
       fetchGeneratedCover(selectedTemplate.templateId || 1);
     }
-  }, [croppedImage]);
+  }, [croppedImage, praisesLoading]);
 
   useEffect(() => {
     setIsButtonDisabled(!croppedImage || loading);
@@ -72,6 +77,11 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
       return;
     }
 
+    if (praisesLoading) {
+      console.warn("⏳ Waiting for praises...");
+      return;
+    }
+
     setLoading(true);
     try {
       const contextData = {
@@ -80,9 +90,11 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
         selectedSubTopic,
         authorImage,
         processedAuthorImage,
-        croppedImage
+        croppedImage, 
+        praises
       };
 
+      console.log('contextData', contextData);
       const cover = await generateCoverById(contextData, templateId);
       setSelectedCover(cover);
 

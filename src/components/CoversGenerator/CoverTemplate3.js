@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth, adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
+import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 
 const CoverTemplate3 = ({ type, data }) => {
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const { authorName, selectedTopic, selectedSubTopic, croppedImage } = data;
+  const { authorName, selectedTopic, selectedSubTopic, croppedImage, praises } = data;
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
@@ -24,15 +25,15 @@ const CoverTemplate3 = ({ type, data }) => {
 
   useEffect(() => {
     const newFontSizes = {};
-  
-  
+
+
     Object.entries(elements).forEach(([key, { ref, maxFontSize, maxHeight }]) => {
       if (ref.current && maxHeight) {
         newFontSizes[key] = adjustFontSizeByHeight(ref, maxFontSize, maxHeight);
       }
     });
-  
- 
+
+
     Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth }]) => {
       if (ref.current && maxWidth) {
         newFontSizes[key] = adjustFontSizeByWidth(
@@ -42,13 +43,13 @@ const CoverTemplate3 = ({ type, data }) => {
         );
       }
     });
-  
+
     setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
   }, [authorName, selectedTopic]);
-  
 
 
-  
+
+
   return (
     <>
       {type === "front" && (
@@ -87,26 +88,27 @@ const CoverTemplate3 = ({ type, data }) => {
         </div>
       )}
 
-{type === "back" && (
-  <div
-    className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
-    style={{
-      backgroundImage: isIOS
-        ? "url('/images/create-book/bg/bg3-back.png')" 
-        : "none",
-      backgroundColor: "#EEE8D9", 
-    }}
-  >
-    {!isIOS && (
+      {type === "back" && (
+        <div
+          className="w-[431px] h-[648px] font-caveat mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat text-[#000082]"
+          style={{ backgroundImage: "url('/images/create-book/bg/bg3.png')" }}
+
+        >
+          {/* {!isIOS && (
       <img
         src={isMobile()
           ? "/images/create-book/bg/bg3-back-mob.jpg"
           : "/images/create-book/bg/bg3-back.png"}
         alt="Back Cover"
       />
-    )}
-  </div>
-)}
+    )} */}
+          {praises ? (
+            generateBookBackCover({ author: authorName, praises, metaColor: "#000082", website: "www.booktailor.com", fontSize: 15 })
+          ) : (
+            <p>Loading testimonials...</p>
+          )}
+        </div>
+      )}
 
 
       {type === "spine" && (
@@ -116,7 +118,7 @@ const CoverTemplate3 = ({ type, data }) => {
             style={{ backgroundImage: "url('/images/create-book/bg/bg3-spine.png')" }}
           >
             <div className="w-full flex items-center gap-4 justify-between font-bold font-caveat text-[#000082]">
-              
+
               <div className="spine-title-container flex-1 flex justify-center">
                 <div
                   ref={elements.spineTitle.ref}

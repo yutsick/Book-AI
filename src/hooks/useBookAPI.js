@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import CreateBookContext from "@/contexts/CreateBookContext";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
-
 export const useBookAPI = () => {
   const { 
     authorName, selectedAge, selectedGender, questionsAndAnswers, 
@@ -10,7 +9,7 @@ export const useBookAPI = () => {
   
   const { 
     selectedGenre, genreUpdated, setGenreUpdated, 
-    setSelectedTopic, setSelectedSubTopic 
+    setSelectedTopic, setSelectedSubTopic
   } = useContext(CreateGenreContext);
 
   const [books, setBooks] = useState([]);
@@ -75,41 +74,32 @@ export const useBookAPI = () => {
       setError(null);
 
       try {
-        console.log("🌍 Fetching books from API...");
         const response = await fetch("https://api.booktailor.com/generate-titles", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             author_name: authorName,
-            genre: selectedGenre,
-            gender: selectedGender,
-            age: String(selectedAge),
+            genre: selectedGenre || null,
+            gender: selectedGender || null,
+            age: selectedAge ? String(selectedAge.value) : null,
             quiz_answers: questionsAndAnswers
           }),
         });
 
-        if (!response.ok) throw new Error("Failed to fetch");
+        if (!response.ok) {
+          throw new Error("Oops... Something went wrong. Please try again in 20 seconds.");
+          console.log("❌ API Response:", response);
+        };
 
         const data = await response.json();
 
         const booksKey = Object.keys(data).find(key => Array.isArray(data[key]));
-
-        if (!booksKey) {
-          console.error("❌ API Response does not contain a book array:", data);
-          throw new Error("Invalid API response: No book array found");
-        }
-
-        console.log(`✅ Found books array under key: ${booksKey}`);
-
         const formattedBooks = data[booksKey].map(({ title, subtitle }) => ({ title, subtitle }));
 
-        console.log("📂 Saving to localStorage:", formattedBooks);
         localStorage.setItem(storageKey, JSON.stringify(formattedBooks));
 
         setBooks(formattedBooks);
 
-        // 🔥 Скидаємо вибір теми після генерації
-        console.log("🔄 Resetting selected topic after book generation...");
         setSelectedTopic("");
         setSelectedSubTopic("");
 

@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
 import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
+import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 
 const CoverTemplate2 = ({ type, data }) => {
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const { authorName, selectedTopic, selectedSubTopic, croppedImage } = data;
+  const { authorName, selectedTopic, selectedSubTopic, croppedImage, praises  } = data;
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -106,24 +107,29 @@ const CoverTemplate2 = ({ type, data }) => {
 
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: isIOS
-              ? "url('/images/create-book/bg/bgwhite-back-mob.png')" 
-              : "none",
-            backgroundColor: "black", 
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
+          className="w-[431px] h-[648px] mx-auto flex items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-black text-white font-degular"
+        // style={{
+        //   backgroundImage: isIOS
+        //     ? "url('/images/create-book/bg/bgwhite-back-mob.png')" 
+        //     : "none",
+        //   backgroundColor: "black", 
+        //   backgroundSize: "cover",
+        //   backgroundPosition: "center",
+        //   backgroundRepeat: "no-repeat",
+        // }}
         >
-          {!isIOS && (
+          {/* {!isIOS && (
             <img
               src={isMobile()
                 ? "/images/create-book/bg/bgwhite-back-mob.png"
                 : "/images/create-book/bg/bg2-back.png"}
               alt="Back Cover"
             />
+          )} */}
+          {praises ? (
+            generateBookBackCover({ author: authorName, praises, metaColor: "#fff", website: "www.booktailor.com" })
+          ) : (
+            <p>Loading testimonials...</p>
           )}
         </div>
 

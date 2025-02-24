@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth, adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
-
+import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate8 = ({ type, data }) => {
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const { authorName, selectedTopic, selectedSubTopic, croppedImage } = data;
+  const { authorName, selectedTopic, selectedSubTopic, croppedImage, praises } = data;
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -29,7 +29,7 @@ const CoverTemplate8 = ({ type, data }) => {
 
   useEffect(() => {
     const newFontSizes = {};
-  
+
     Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth, maxHeight }]) => {
       if (ref.current) {
         let fontSize = maxFontSize;
@@ -39,14 +39,14 @@ const CoverTemplate8 = ({ type, data }) => {
         if (maxHeight) {
           fontSize = adjustFontSizeByHeight(ref, fontSize, maxHeight);
         }
-  
+
         newFontSizes[key] = fontSize;
       }
     });
-  
+
     setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
   }, [selectedTopic, selectedSubTopic, authorName]);
-  
+
   return (
     <>
       {/* Front Cover */}
@@ -71,7 +71,7 @@ const CoverTemplate8 = ({ type, data }) => {
               <div className="max-w-[300px] w-full pb-[70px] relative">
                 <img src="/images/create-book/bg/title8.png" alt="" />
                 <div className="max-w-[260px] font-degular absolute top-10 left-10">
-                  
+
                   <div
                     ref={elements.title.ref}
                     className="font-black max-w-[200px]"
@@ -107,13 +107,13 @@ const CoverTemplate8 = ({ type, data }) => {
                 }}
               >
                 <div className=" rotate-[-3deg]">
-                  
+
                   <div className=" text-black font-degular font-bold mt-3 "
-                  ref={elements.frontAuthor.ref}
-                  style={{ 
-                    fontSize: `${fontSizes.frontAuthor}px`, 
-                    lineHeight: `${fontSizes.frontAuthor}px`
-                }}
+                    ref={elements.frontAuthor.ref}
+                    style={{
+                      fontSize: `${fontSizes.frontAuthor}px`,
+                      lineHeight: `${fontSizes.frontAuthor}px`
+                    }}
                   >
                     {authorName || "Default Author"}
                   </div>
@@ -127,31 +127,36 @@ const CoverTemplate8 = ({ type, data }) => {
       {/* Back Cover */}
       {type === "back" && (
         <div
-        className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-white"
-        style={{
-          backgroundImage: isIOS ? "url('/images/create-book/bg/bg8-back.png')" : "none",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        {!isIOS && (
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-white text-black font-degular"
+          // style={{
+          //   backgroundImage: isIOS ? "url('/images/create-book/bg/bg8-back.png')" : "none",
+          //   backgroundSize: "cover",
+          //   backgroundPosition: "center",
+          //   backgroundRepeat: "no-repeat",
+          // }}
+        >
+          {/* {!isIOS && (
           <img
             src={isMobile()
               ? "/images/create-book/bg/bg8-back-mob.jpg"
               : "/images/create-book/bg/bg8-back.png"}
             alt="Back Cover"
           />
-        )}
-      </div>
-      
+        )} */}
+          {praises ? (
+            generateBookBackCover({ author: authorName, praises, metaColor: "#000", website: "www.booktailor.com" })
+          ) : (
+            <p>Loading testimonials...</p>
+          )}
+        </div>
+
       )}
 
       {/* Spine */}
       {type === "spine" && (
         <div className="h-[648px] flex justify-center relative">
           <div className="flex text-black font-black items-center h-[57px] w-[648px] px-4 bg-white justify-center absolute rotate-90 origin-top-left left-[calc(50%+28px)] gap-10 font-degular">
-            
+
             <div className="flex pb-1 flex-col justify-center items-center text-[28px] leading-[28px] tracking-[0.01em] h-full">
               <div
                 ref={elements.spineTitle.ref}

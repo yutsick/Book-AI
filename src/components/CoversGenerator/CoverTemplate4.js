@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
-
+import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate4 = ({ type, data }) => {
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
+  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -69,21 +69,26 @@ const CoverTemplate4 = ({ type, data }) => {
       {/* Back Cover */}
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat text-[#0D453A] font-degular"
           style={{
-            backgroundImage: isIOS
-              ? "url('/images/create-book/bg/bg4-back-mob.jpg')"
-              : "none",
+            // backgroundImage: isIOS
+            //   ? "url('/images/create-book/bg/bg4-back-mob.jpg')"
+            //   : "none",
             backgroundColor: "#F0EADE",
           }}
         >
-          {!isIOS && (
+          {/* {!isIOS && (
             <img
               src={isMobile()
                 ? "/images/create-book/bg/bg4-back-mob.jpg"
                 : "/images/create-book/bg/bg4-back.png"}
               alt="Back Cover"
             />
+          )} */}
+          {praises ? (
+            generateBookBackCover({ author: authorName, praises, metaColor: "#000", website: "www.booktailor.com"})
+          ) : (
+            <p>Loading testimonials...</p>
           )}
         </div>
       )}

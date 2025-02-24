@@ -8,13 +8,11 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
 
     hiddenContainer.style.position = "absolute";
-  hiddenContainer.style.top = "-9999px"; 
-  hiddenContainer.style.left = "-9999px";
-
+    hiddenContainer.style.top = "-9999px"; 
+    hiddenContainer.style.left = "-9999px";
 
     hiddenContainer.style.pointerEvents = "none"; 
      
-
     document.body.appendChild(hiddenContainer);
 
     const waitForImages = async (element) => {

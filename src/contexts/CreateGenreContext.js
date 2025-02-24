@@ -6,7 +6,7 @@ const GenreContext = createContext();
 
 export const GenreProvider = ({ children }) => {
 
-  const getStoredValue = (key, defaultValue = "") => {
+  const getStoredValue = (key, defaultValue = null) => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(key);
       try {
@@ -19,19 +19,18 @@ export const GenreProvider = ({ children }) => {
   };
 
 
-  const [selectedGenre, setSelectedGenre] = useState(() => getStoredValue("selectedGenre", ""));
+  const [selectedGenre, setSelectedGenre] = useState(() => getStoredValue("selectedGenre", null));
   const [selectedTopic, setSelectedTopic] = useState(() => getStoredValue("selectedTopic", ""));
   const [selectedSubTopic, setSelectedSubTopic] = useState(() => getStoredValue("selectedSubTopic", ""));
 
   // const [generatedBooks, setGeneratedBooks] = useState(() => getStoredValue("generatedBooks", []));
   const [generatedBooks, setGeneratedBooks] = useState([]);
 
-
-
   useEffect(() => {
 
       localStorage.setItem("selectedGenre", selectedGenre);
     
+
     if (selectedTopic.trim() !== "") {
       localStorage.setItem("selectedTopic", selectedTopic);
     }

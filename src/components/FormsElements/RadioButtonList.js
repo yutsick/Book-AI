@@ -20,7 +20,7 @@ const RadioButtonList = ({
 
   const handleChange = (value, description) => {
     if (type === 'genre') {
-      selectedGenre === value ? setSelectedGenre('') : setSelectedGenre(value);
+      selectedGenre === value ? setSelectedGenre(null) : setSelectedGenre(value);
     } else {
       if (selectedTopic !== value) { // 🔥 Запобігаємо повторному виклику
         setSelectedTopic(value);

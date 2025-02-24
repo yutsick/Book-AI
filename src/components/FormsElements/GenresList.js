@@ -10,14 +10,9 @@ const RadioButtonList = ({
 
   onChange
 }) => {
-  const { selectedGenre,
-    setSelectedGenre } = useContext(GenreContext);
-
-
-  const [focus, setFocus] = useState(false);
-
+  const { selectedGenre, setSelectedGenre } = useContext(GenreContext);
   const handleChange = (value) => {
-    selectedGenre === value ? setSelectedGenre('') : setSelectedGenre(value)
+    selectedGenre === value ? setSelectedGenre(null) : setSelectedGenre(value)
   };
 
 
@@ -56,7 +51,7 @@ const RadioButtonList = ({
                 onChange={() => handleChange(name)}
                 onClick={() => {
                   if (selectedGenre === name) {
-                    handleChange('');
+                    handleChange(null);
                   }
                 }}
                 className="hidden"

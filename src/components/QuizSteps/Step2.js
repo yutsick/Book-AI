@@ -40,7 +40,7 @@ const StepTwo = ({ setProgressStep}) => {
               <RadioButtonList
                 
                 options={genresData}
-                selectedValue={selectedGenre} 
+                selectedValue={selectedGenre || null} 
               />
             </div>
           </div>

@@ -27,13 +27,13 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
   ];
   const ageOptions = [
     { value: null, label: "Clear selection" },
-    { value: "1", label: 'under 18' },
-    { value: "2", label: '18-24' },
-    { value: "3", label: '25-34' },
-    { value: "4", label: '35-44' },
-    { value: "5", label: '45-54' },
-    { value: "6", label: '55-64' },
-    { value: "7", label: '65 and above' }
+    { value: "under 18", label: 'under 18' },
+    { value: "18-24", label: '18-24' },
+    { value: "25-34", label: '25-34' },
+    { value: "35-44", label: '35-44' },
+    { value: "45-54", label: '45-54' },
+    { value: "55-64", label: '55-64' },
+    { value: "65 and above", label: '65 and above' }
    
   ];
 
@@ -90,7 +90,10 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
         </div> */}
         <div className="flex flex-col md:flex-row mb-4 md:gap-4 gap-8">
           <div className="">
-            <SimpleRadio options={genderOptions} value={selectedGender} onChange={setSelectedGender} />
+            <SimpleRadio 
+            options={genderOptions} 
+            value={selectedGender || null} 
+            onChange={setSelectedGender} />
           </div>
           <div className="  justify-center py-0.5 hidden md:flex">
             <div className="w-[1px] bg-[#929292]"></div>
@@ -102,7 +105,7 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
               title={null}
               className="w-full border border-gray-300 rounded-lg p-2"
               options={ageOptions}
-              value={selectedAge}
+              value={selectedAge || null}
               onChange={(newValue) => {
                 setSelectedAge(newValue.value === null || newValue === '' ? null : newValue);
               }}

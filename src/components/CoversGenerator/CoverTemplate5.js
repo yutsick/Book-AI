@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
-
+import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate5 = ({ type, data }) => {
-  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
+  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const canvasRef = useRef(null);
 
@@ -95,25 +95,30 @@ const CoverTemplate5 = ({ type, data }) => {
       {/* Back Cover */}
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat"
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat text-[#fff] font-degular"
           style={{
-            backgroundImage: isIOS
-              ? "url('/images/create-book/bg/bgwhite-back-mob.png')" 
-              : "none",
-            backgroundColor: "#A6AAAC", 
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            // backgroundImage: isIOS
+            //   ? "url('/images/create-book/bg/bgwhite-back-mob.png')"
+            //   : "none",
+            backgroundColor: "#A6AAAC",
+            // backgroundSize: "cover",
+            // backgroundPosition: "center",
+            // backgroundRepeat: "no-repeat",
           }}
         >
-          {!isIOS && (
+          {praises ? (
+            generateBookBackCover({ author: authorName, praises, metaColor: "#fff", website: "www.booktailor.com" })
+          ) : (
+            <p>Loading testimonials...</p>
+          )}
+          {/* {!isIOS && (
             <img
               src={isMobile()
                 ? "/images/create-book/bg/bgwhite-back-mob.png"
                 : "/images/create-book/bg/bg5-back.png"}
               alt="Back Cover"
             />
-          )}
+          )} */}
         </div>
 
       )}
