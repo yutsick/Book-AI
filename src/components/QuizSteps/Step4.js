@@ -31,6 +31,7 @@ function Step4({ setIsButtonDisabled, setProgressStep }) {
             placeholder="Enter your Email here"
             onChange={setAuthorEmail}
             value={authorEmail || ""}
+            setIsButtonDisabled={setIsButtonDisabled}
           />
         </div>
       </div>

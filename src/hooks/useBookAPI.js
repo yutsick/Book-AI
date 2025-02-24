@@ -23,10 +23,10 @@ export const useBookAPI = () => {
     let missingFields = [];
 
     if (!authorName) missingFields.push("authorName");
-    if (!selectedAge) missingFields.push("selectedAge");
-    if (!selectedGender) missingFields.push("selectedGender");
+    // if (!selectedAge) missingFields.push("selectedAge");
+    // if (!selectedGender) missingFields.push("selectedGender");
     if (questionsAndAnswers.length === 0) missingFields.push("questionsAndAnswers");
-    if (!selectedGenre) missingFields.push("selectedGenre");
+    // if (!selectedGenre) missingFields.push("selectedGenre");
 
     if (missingFields.length > 0) {
       console.error(`⛔ Missing required fields: ${missingFields.join(", ")}`);
