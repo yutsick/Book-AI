@@ -1,4 +1,4 @@
-import { f } from "html2pdf.js";
+
 import JsBarcode from "jsbarcode";
 
 export const generateBookBackCover = ({ author, praises, metaColor, website, fontSize=12 }) => {
