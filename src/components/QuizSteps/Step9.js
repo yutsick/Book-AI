@@ -1,10 +1,7 @@
 import React, { useEffect, useContext, useMemo } from 'react';
-import CustomDropdown from "@/components/FormsElements/CustomDropdown";
 import CreateBookContext from '@/contexts/CreateBookContext';
-import GenreContext from '@/contexts/CreateGenreContext';
-import BookPreview from '../BookPreview/BookPreview';
 
-function Step9({ setProgressStep, goToNextStep }) {
+function Step9({ setProgressStep }) {
   const {
     selectedTemplate,
     authorName,
@@ -26,56 +23,44 @@ function Step9({ setProgressStep, goToNextStep }) {
   const cover = [
     {
       title: 'Paperback',
-      materials: 'Soft, Casual & Portable',
-      img: '/images/create-book/bg/coverCard1.png',
       cost: 39.00
     },
     {
       title: 'Hardcover',
-      materials: 'Sturdy, Durable & Premium',
-      img: '/images/create-book/bg/coverCard2.png',
       cost: 59.00
     }
-  ];
-
-  const copies = [
-    { value: 1, label: "1", price: 0 },
-    { value: 2, label: "2", price: 20 },
-    { value: 3, label: "3", price: 40 },
-    { value: 4, label: "4", price: 60 },
-    { value: 5, label: "5", price: 80 },
   ];
 
   const shipping = [
     {
       title: 'Free Shipping',
-      description: 'Delivered in 10-14 business days',
-      img: '/images/create-book/bg/coverCard1.png',
+      description: '10-14 business days',
       cost: 0.00
     },
     {
       title: 'Express Shipping',
-      description: 'Delivered in 3-5 business days',
-      img: '/images/create-book/bg/coverCard2.png',
+      description: '3-5 business days',
       cost: 15.00
     }
   ];
 
-  const { selectedTopic, selectedSubTopic } = useContext(GenreContext);
+  const copyCost = 20.00;
 
   const subtotalAndTotalPrice = useMemo(() => {
     if (selectedCopies && typeof selectedCoverIndex === "number" && typeof selectedShippingIndex === "number") {
       const coverCost = cover[selectedCoverIndex]?.cost || 0;
-      const copiesCost = selectedCopies?.price || 0;
+      const copiesCost = selectedCopies * copyCost;
       const shippingCost = shipping[selectedShippingIndex]?.cost || 0;
 
-      const newSubtotal = coverCost * selectedCopies?.value + copiesCost;
-      const newTotalPrice = newSubtotal + shippingCost;
+      const newSubtotal = coverCost + copiesCost + shippingCost;
+      const newTotalPrice = newSubtotal;
 
       return { newSubtotal, newTotalPrice };
     }
     return { newSubtotal: 0, newTotalPrice: 0 };
   }, [selectedCoverIndex, selectedCopies, selectedShippingIndex]);
+
+
 
   useEffect(() => {
     setSubtotal(subtotalAndTotalPrice.newSubtotal);
@@ -90,129 +75,157 @@ function Step9({ setProgressStep, goToNextStep }) {
     setSelectedCover(cover[selectedCoverIndex]?.title || '');
   }, [selectedCoverIndex, setSelectedCover]);
 
+  const handleDecrease = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (selectedCopies > 1) {
+      setSelectedCopies(selectedCopies - 1);
+    }
+  };
+
+  const handleIncrease = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (selectedCopies < 15) {
+      setSelectedCopies(selectedCopies + 1);
+    }
+  };
+
   return (
     <div className="pb-[17px]">
       <div className="text-[30px] font-bold text-center text-orange mb-[32px]">
         Checkout
       </div>
-      <BookPreview 
-        selectedTemplate={selectedTemplate}
-        selectedTopic={selectedTopic}
-        selectedSubTopic={selectedSubTopic}
-        authorName={authorName}
-        goToNextStep  = {goToNextStep}
-      />
-      <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-[0] md:gap-[45px] pb-[65px]  relative 
-  after:content-[''] after:h-[1px] after:bg-[#ADADAD] after:absolute after:bottom-0 
-  after:w-[285px] after:left-1/2 after:-translate-x-1/2 
-  md:after:w-full md:after:left-0 md:after:translate-x-0">
-        <div className="border-b border-[#ADADAD] md:border-none pb-[65px] md:pb-[0]">
-          <h2 className="text-center text-[24px] font-bold mb-[20px]">Type of cover</h2>
-          <div className="flex items-center justify-center gap-[35px] flex-1">
-            {cover.map((option, index) => (
+      <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start sm:pb-[40px] pb-[35px]">
+        <div>
+          <h2 className="text-[24px] font-bold mb-[15px]">Choose your cover</h2>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-[20px] flex-1">
+            <div className="flex justify-center gap-[10px]">
+              {cover.map((option, index) => (
+                <label
+                  key={index}
+                  className={`xs:w-[165px] w-[145px] rounded-[3px] cursor-pointer transition border-[0.3px] border-[#bfbfbf]/50 text-[#6C6C6C] 
+          ${selectedCoverIndex === index ?
+                      "bg-[#DCDCDC] text-black border-[1px] shadow-checkoutCardShadow border-gray"
+                      :
+                      "hover:bg-[#F0F0F0] bg-white border-[#bcbcbc]"}`}
+                  style={{
+                    borderWidth: selectedCoverIndex === index ? '1px' : '0.3px',
+                    height: 'auto',
+                    boxShadow: selectedCoverIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
+                  }}
+                >
+                  <input
+                    type="radio"
+                    name="cover"
+                    value={option.title}
+                    checked={selectedCoverIndex === index}
+                    onChange={() => setSelectedCoverIndex(index)}
+                    className="hidden"
+                  />
+                  <div className="pl-[4px]">
+                    <h3 className="text-black font-semibold text-[17px] px-[6px] pt-[5px]">{option.title}</h3>
+                    <p className="text-black text-[14px] px-[6px] pb-[5px]">{`$${option.cost.toFixed(2)}`}</p>
+                  </div>
+                </label>
+              ))}
+            </div>
+
+            <div className="flex flex-row md:gap-[8px] gap-[24px] items-center">
+              <a
+                className="hover:cursor-pointer hover:brightness-110"
+                onClick={handleDecrease}
+                onMouseDown={(e) => e.preventDefault()}
+              >
+                <svg className="w-[32px] h-[40px] sm:w-[21px] sm:h-[29px]" viewBox="0 0 21 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10.5" cy="14.5" r="10.05" stroke="#2B2B2B" strokeWidth="0.9" />
+                  <path d="M13.7068 14.0355V15.3636H8.29772V14.0355H13.7068Z" fill="#2B2B2B" />
+                </svg>
+              </a>
+              <div className="text-center">
+                <span><strong>{selectedCopies}</strong></span>
+                <p>Copies</p>
+              </div>
+              <a
+                className="hover:cursor-pointer hover:brightness-110"
+                onClick={handleIncrease}
+                onMouseDown={(e) => e.preventDefault()}
+              >
+                <svg className="w-[32px] h-[40px] sm:w-[21px] sm:h-[29px]" viewBox="0 0 21 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10.5" cy="15.5" r="10.05" stroke="#2B2B2B" strokeWidth="0.9" />
+                  <path d="M10.3231 19.1548V11.1861H11.6754V19.1548H10.3231ZM7.01487 15.8466V14.4943H14.9836V15.8466H7.01487Z" fill="#2B2B2B" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div className="flex flex-col items-center sm:items-start mt-[30px] sm:pb-[40px] pb-[35px]">
+        <div>
+          <h2 className="text-[24px] font-bold mb-[15px] text-left">Shipping Type</h2>
+          <div className="flex items-center justify-center gap-[10px] flex-1">
+            {shipping.map((option, index) => (
               <label
                 key={index}
-                className={`rounded-[3px] cursor-pointer transition border-[#6C6C6C] border-[0.5px] text-[#6C6C6C] border
-                  ${selectedCoverIndex === index ? "bg-[#DCDCDC] hover:bg-[#DCDCDC] text-black border-[1px] shadow-checkoutCardShadow border-gray" : "bg-white bg-opacity-60 hover:bg-[#F0F0F0] border-[#bcbcbc]"}
-                  `}
+                className={`xs:w-[165px] w-[145px] rounded-[3px] cursor-pointer transition border-[0.3px] border-[#bfbfbf]/50 text-[#6C6C6C] 
+                ${selectedShippingIndex === index ?
+                    "bg-[#DCDCDC] text-black border-[1px] shadow-checkoutCardShadow border-gray"
+                    :
+                    "hover:bg-[#F0F0F0] bg-white border-[#bcbcbc]"}`}
                 style={{
-                  borderWidth: selectedCoverIndex === index ? '1px' : '0.5px',
-                  width: '125px',
+                  borderWidth: selectedShippingIndex === index ? '1px' : '0.3px',
                   height: 'auto',
-                  boxShadow: selectedCoverIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
+                  boxShadow: selectedShippingIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
                 }}
               >
                 <input
                   type="radio"
-                  name="cover"
+                  name="shipping"
                   value={option.title}
-                  checked={selectedCoverIndex === index}
-                  onChange={() => setSelectedCoverIndex(index)}
+                  checked={selectedShippingIndex === index}
+                  onChange={() => setSelectedShippingIndex(index)}
                   className="hidden"
                 />
-                <div className="text-center">
-                  <h3 className="text-black font-semibold text-[17px] px-[3px] py-[2px]">{option.title}</h3>
-                  <p className="text-[14px] px-[3px] py-[2px]">{option.materials}</p>
-                  <img src={option.img} alt={option.title} className="w-full h-auto" />
-                  <p className="text-[14px] px-[3px] py-[2px]">{`$${option.cost.toFixed(2)}`}</p>
+                <div className="text-gray inline-block">
+                  <div className="text-left p-[8px] inline-block">
+                    <h3 className="font-semibold text-[17px]">{option.title}</h3>
+                    <p className="text-[14px] text-[#6C6C6C] hover:text-[#4b4b4b]">{option.description}</p>
+                    <p>{`$${option.cost.toFixed(2)}`}</p>
+                  </div>
                 </div>
               </label>
             ))}
           </div>
         </div>
-        <span className="hidden md:inline-block w-px h-[184px] bg-[#ADADAD] my-auto"></span>
-        <div className="mt-[30px] md:mt-[0]">
-          <h2 className="text-center text-[24px] font-bold mb-[20px]">Number Of Copies</h2>
-          <CustomDropdown
-            title=""
-            options={copies}
-            value={selectedCopies}
-            onChange={(value) => setSelectedCopies(value)}
-            placeholder="Select an option"
-            afterFocusPlaceholder="Number of copies"
-          />
+      </div>
+      <div className="mt-[30px] flex flex-col items-center sm:items-start">
+        <div className="max-w-[325px] w-full">
+          <div className="mb-[15px]">
+            <h2 className="text-[24px] text-gray font-bold">Order Summary</h2>
+            <p className="text-[16px] text-[#727272]">Personalize full length book</p>
+          </div>
+          <div className=" flex gap-y-[10px] flex-col">
+            <div className="flex justify-between">
+              <span>1 {cover[selectedCoverIndex]?.title} cover book:</span>
+              <span className="text-right">${(cover[selectedCoverIndex]?.cost || 0).toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>+ <span>{selectedCopies}</span> copies:</span>
+              <span className="text-right">${(selectedCopies * copyCost).toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Shipping:</span>
+              <span className="text-right">${(shipping[selectedShippingIndex]?.cost || 0).toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <strong><span>Subtotal:</span></strong>
+              <strong><span className="text-right">${subtotal.toFixed(2)}</span></strong>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center md:items-start mt-[30px] pb-[65px] relative 
-  after:content-[''] after:h-[1px] after:bg-[#ADADAD] after:absolute after:bottom-0 
-  after:w-[285px] after:left-1/2 after:-translate-x-1/2 
-  md:after:w-full md:after:left-0 md:after:translate-x-0">
-
-
-        <h2 className="text-left text-[24px] font-bold mb-[20px]">Shipping Type</h2>
-        <div className="flex items-center justify-center flex-col md:flex-row  gap-[35px] flex-1">
-          {shipping.map((option, index) => (
-            <label
-              key={index}
-              className={`rounded-[3px] cursor-pointer transition border-[#6C6C6C] border-[0.5px] text-[#6C6C6C] border
-                ${selectedShippingIndex === index ? "bg-[#DCDCDC] hover:bg-[#DCDCDC] text-black border-[1px] shadow-checkoutCardShadow border-gray" : "bg-white bg-opacity-60 hover:bg-[#F0F0F0] border-[#bcbcbc]"}
-                `}
-              style={{
-                borderWidth: selectedShippingIndex === index ? '1px' : '0.5px',
-                width: '206px',
-                height: 'auto',
-                boxShadow: selectedShippingIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
-              }}
-            >
-              <input
-                type="radio"
-                name="shipping"
-                value={option.title}
-                checked={selectedShippingIndex === index}
-                onChange={() => setSelectedShippingIndex(index)}
-                className="hidden"
-              />
-              <div className="text-center  flex items-end text-gray">
-                <div className="text-left pl-[8px] pt-[8px] pb-[8px]">
-                  <h3 className=" font-semibold text-[17px]">{option.title}</h3>
-                  <p className="text-[14px] text-[#6C6C6C] hover:text-[#4b4b4b]">{option.description}</p>
-                </div>
-                <div className="text-[14px] pr-[8px] pt-[8px] pb-[8px] text-gray">
-                  <p>{`$${option.cost.toFixed(2)}`}</p>
-                </div>
-              </div>
-            </label>
-          ))}
-        </div>
-      </div>
-      <div className="mt-[30px]">
-        <div className="mb-[15px]">
-          <h2 className="text-[24px] text-gray font-bold">Order Summary</h2>
-          <p className="text-[16px] text-[#727272] ">Personalized Full-Length Book – Tailored to Your Story</p>
-        </div>  
-        <p>
-          <strong>Book Title:</strong> {selectedTopic} <br />
-          <strong>Author Name:</strong> {authorName} <br />
-          <strong>Format:</strong> {selectedCover} <br />
-          <strong>Page Count:</strong> 240 Pages <br />
-          <strong>Quantity:</strong> {selectedCopies?.value} <br />
-          <strong>Subtotal:</strong> ${subtotal.toFixed(2)} <br />
-          <strong>Shipping:</strong> {shipping[selectedShippingIndex].title} <br />
-          <strong>Total Price:</strong> ${totalPrice.toFixed(2)}*
-        </p>
-        <p className="text-[13px] text-[#727272] ">*Final total may vary based on your shipping address and applicable taxes</p>
-      </div>
-    </div>
+    </div >
   );
 }
 
