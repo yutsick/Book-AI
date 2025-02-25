@@ -53,6 +53,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
 
   const { praises, loading: praisesLoading } = usePraises();
 
+  const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   useEffect(() => {
     setProgressStep(5);
@@ -93,8 +94,6 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
         croppedImage, 
         praises
       };
-
-      console.log('contextData', contextData);
       const cover = await generateCoverById(contextData, templateId);
       setSelectedCover(cover);
 
@@ -197,11 +196,28 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
             <p>No cover selected</p>
           )}
         </div>
-
+          {/* Button for the modal mobile*/}
+      {isRendered && isMobile() && (
+        <div className={`relative z-20 flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-16" : "mt-4"
+          }`}>
+          <button
+            className="text-[10px] font-semibold bg-transparent text-[#2b2b2b] h-6 box-content w-[100px] flex items-center justify-center border-[0.4px] rounded-[3px]  border-[#2b2b2b] cursor-pointer"
+            onClick={() => {
+              setIsCropperOpen(true);
+              setIsModalOpen(true);
+            }}
+          >
+            Adjust Image
+            <span className="ml-2">
+              <img src="images/icon-image-adjustment.svg" alt="" className="h-3"/>
+            </span>
+          </button>
+        </div>
+      )}
         {/* Previews list */}
         {isRendered && (
           <div className={` 
-            ${isModalOpen ? "mt-16" : "mt-4"}
+            mt-4
             md:mt-0 flex md:grid grid-cols-2 grid-rows-4 gap-4 w-full md:w-auto 
             h-[135px] md:h-auto overflow-x-auto md:overflow-visible whitespace-nowrap`}
           >
@@ -219,20 +235,20 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
         )}
       </div>
 
-      {/* Button for the modal */}
-      {isRendered && (
+      {/* Button for the modal desktop*/}
+      {isRendered && !isMobile() && (
         <div className={`relative z-20 flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-8 md:mt-2" : "mt-8 md:-mt-6"
           }`}>
           <button
-            className="text-[14px] font-medium bg-[#EAAC0026] text-black shadow-md h-6 box-content w-[170px] flex items-center justify-center border rounded-[3px] border-[#878787] cursor-pointer"
+            className="text-[10px] font-semibold bg-transparent text-[#2b2b2b] h-6 box-content w-[100px] flex items-center justify-center border-[0.4px] rounded-[3px]  border-[#2b2b2b] cursor-pointer"
             onClick={() => {
               setIsCropperOpen(true);
               setIsModalOpen(true);
             }}
           >
-            Adjust the Image
+            Adjust Image
             <span className="ml-2">
-              <img src="images/icon-image-adjustment.svg" alt="" />
+              <img src="images/icon-image-adjustment.svg" alt="" className="h-3"/>
             </span>
           </button>
         </div>

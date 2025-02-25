@@ -22,7 +22,7 @@ const RadioButtonList = ({
     if (type === 'genre') {
       selectedGenre === value ? setSelectedGenre(null) : setSelectedGenre(value);
     } else {
-      if (selectedTopic !== value) { // 🔥 Запобігаємо повторному виклику
+      if (selectedTopic !== value) { 
         setSelectedTopic(value);
         onChange && onChange(value, description);
       }
@@ -50,7 +50,7 @@ const RadioButtonList = ({
           <label
             key={id} 
             className={`flex  items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] rounded-[3px] cursor-pointer transition ${
-              selectedGenre === name  || selectedTopic === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9]" : "bg-white hover:bg-[#ECEBE9]"
+              selectedGenre === name  || selectedTopic === name  ? "bg-[#D9D9D9] md:hover:bg-[#D9D9D9]" : "bg-white md:hover:bg-[#fafafa]"
             }`}
           >
             <input

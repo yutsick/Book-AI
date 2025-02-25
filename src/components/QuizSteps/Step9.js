@@ -4,7 +4,7 @@ import CreateBookContext from '@/contexts/CreateBookContext';
 import GenreContext from '@/contexts/CreateGenreContext';
 import BookPreview from '../BookPreview/BookPreview';
 
-function Step9({ setProgressStep }) {
+function Step9({ setProgressStep, goToNextStep }) {
   const {
     selectedTemplate,
     authorName,
@@ -61,7 +61,7 @@ function Step9({ setProgressStep }) {
     }
   ];
 
-  const { selectedTopic } = useContext(GenreContext);
+  const { selectedTopic, selectedSubTopic } = useContext(GenreContext);
 
   const subtotalAndTotalPrice = useMemo(() => {
     if (selectedCopies && typeof selectedCoverIndex === "number" && typeof selectedShippingIndex === "number") {
@@ -98,7 +98,9 @@ function Step9({ setProgressStep }) {
       <BookPreview 
         selectedTemplate={selectedTemplate}
         selectedTopic={selectedTopic}
+        selectedSubTopic={selectedSubTopic}
         authorName={authorName}
+        goToNextStep  = {goToNextStep}
       />
       <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-[0] md:gap-[45px] pb-[65px]  relative 
   after:content-[''] after:h-[1px] after:bg-[#ADADAD] after:absolute after:bottom-0 

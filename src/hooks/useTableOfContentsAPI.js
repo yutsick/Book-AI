@@ -4,7 +4,7 @@ import CreateGenreContext from "@/contexts/CreateGenreContext";
 
 export const useTableOfContentsAPI = () => {
   const { authorName, selectedAge, selectedGender, questionsAndAnswers } = useContext(CreateBookContext);
-  const { selectedGenre, selectedTopic, selectedSubTopic, genreUpdated, setGenreUpdated } = useContext(CreateGenreContext);
+  const { selectedGenre, selectedTopic, selectedSubTopic, genreUpdated, setGenreUpdated, topicUpdated, setTopicUpdated } = useContext(CreateGenreContext);
 
   const [tableOfContents, setTableOfContents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,8 +29,8 @@ export const useTableOfContentsAPI = () => {
       return;
     }
 
-    const storageKey = `toc_${selectedTopic}_${selectedSubTopic}`;
-    if (!genreUpdated && typeof window !== "undefined") {
+    const storageKey = `toc`;
+    if (!genreUpdated && !topicUpdated && typeof window !== "undefined") {
       const storedToc = localStorage.getItem(storageKey);
       if (storedToc) {
         try {
@@ -53,6 +53,12 @@ export const useTableOfContentsAPI = () => {
       setTableOfContents([]);
       fetchTriggered.current = false;
     }
+    if (topicUpdated) {
+      console.log("🔄 Topic or SubTopic changed, clearing previous Table of Contents...");
+      localStorage.removeItem(storageKey);
+      setTableOfContents([]);
+      fetchTriggered.current = false;
+    }
 
     if (fetchTriggered.current) {
       console.warn("🚫 API call already triggered, skipping...");
@@ -60,6 +66,7 @@ export const useTableOfContentsAPI = () => {
     }
     fetchTriggered.current = true;
     setGenreUpdated(false);
+    setTopicUpdated(false);
 
     const fetchTableOfContents = async () => {
       setLoading(true);
@@ -76,7 +83,7 @@ export const useTableOfContentsAPI = () => {
             author_name: authorName,
             genre: selectedGenre,
             gender: selectedGender,
-            age: String(selectedAge),
+            age: selectedAge ? String(selectedAge.value) : null,
             quiz_answers: questionsAndAnswers
           }),
         });
@@ -109,7 +116,7 @@ export const useTableOfContentsAPI = () => {
     };
 
     fetchTableOfContents();
-  }, [genreUpdated]); 
+  }, [genreUpdated, topicUpdated]); 
 
   return { tableOfContents, loading, error };
 };

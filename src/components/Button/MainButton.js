@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import config from "../../../config";
 
-const MainButton = ({ currentStep, text, onClick, disabled, width="330px", fontSize="23px" }) => {
+const MainButton = ({ currentStep, text, onClick, disabled, width="330px", fontSize="23px", positionLeft = false, smallButton = false }) => {
   const { buttonTextUrl } = config;
   const [buttonTextData, setButtonTextData] = useState([]);
   const [error, setError] = useState(null);
@@ -29,7 +29,7 @@ const MainButton = ({ currentStep, text, onClick, disabled, width="330px", fontS
       {error && <p className="text-red-500">{error}</p>}
 
       <button
-        className={`md:mt-6 w-full px-4  bg-orange text-white md:min-w-[238px] h-[50px] mx-auto flex justify-center items-center font-semibold text-[${fontSize}] rounded-[3px] gap-1 shadow-heroBtnShadow group 
+        className={`md:mt-6 w-full px-4  bg-orange text-white md:min-w-[238px] ${smallButton ? "h-[42px]" : " h-[50px]"} ${positionLeft ? "": "mx-auto" } flex justify-center items-center font-semibold text-[${fontSize}] rounded-[3px] gap-1 shadow-heroBtnShadow group 
           ${disabled ? "opacity-60 cursor-not-allowed" : "opacity-100"}`}
         onClick={onClick}
         disabled={disabled}

@@ -116,7 +116,7 @@ const MainScreen = () => {
   return (
     <div className="min-h-screen bg-[#F9F6EB] flex flex-col items-center pb-36">
      { currentStep === 1 && <HeaderQuiz />}
-      {currentStep === 1 && <HeroQuiz />}
+      {/* {currentStep === 1 && <HeroQuiz />} */}
       <ProgressBar
         progressStep={progressStep}
         currentStep={currentStep}
@@ -128,6 +128,19 @@ const MainScreen = () => {
       {currentStep !== 1 && (
         <div className="flex max-w-[850px] w-full px-5 mx-auto -mt-4">
           <button onClick={goToPreviousStep} className="pointer">
+            {isMobile ? <svg
+              width="30"
+              height="20"
+              viewBox="0 0 33 27"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.536635 12.1992C-0.179063 12.9149 -0.179063 14.0752 0.536635 14.7909L12.1992 26.4535C12.9148 27.1692 14.0752 27.1692 14.7909 26.4535C15.5065 25.7378 15.5065 24.5775 14.7909 23.8618L4.42414 13.4951L14.7909 3.1283C15.5065 2.4127 15.5065 1.2523 14.7909 0.536699C14.0752 -0.179001 12.9148 -0.179001 12.1992 0.536699L0.536635 12.1992ZM32.0703 11.6625L1.83244 11.6625L1.83244 15.3277L32.0703 15.3277L32.0703 11.6625Z"
+                fill="#747474"
+              />
+            </svg> :
+
             <svg
               width="26"
               height="18"
@@ -139,12 +152,13 @@ const MainScreen = () => {
                 d="M0.536635 12.1992C-0.179063 12.9149 -0.179063 14.0752 0.536635 14.7909L12.1992 26.4535C12.9148 27.1692 14.0752 27.1692 14.7909 26.4535C15.5065 25.7378 15.5065 24.5775 14.7909 23.8618L4.42414 13.4951L14.7909 3.1283C15.5065 2.4127 15.5065 1.2523 14.7909 0.536699C14.0752 -0.179001 12.9148 -0.179001 12.1992 0.536699L0.536635 12.1992ZM32.0703 11.6625L1.83244 11.6625L1.83244 15.3277L32.0703 15.3277L32.0703 11.6625Z"
                 fill="#747474"
               />
-            </svg>
+            </svg> 
+      }
           </button>
         </div>
       )}
 
-      <div className="max-w-[820px] w-full mx-auto px-5 md:px-14">
+      <div className="max-w-[820px] w-full mx-auto px-6 md:px-14">
         <div className={`${currentStep == 7 ? "mb-10" : "mb-[50px]"}`}>
           {currentStep === 1 && (
             <Step1
@@ -194,10 +208,13 @@ const MainScreen = () => {
             <Step8
               setProgressStep={setProgressStep}
               goToNextStep={goToNextStep}
+              isButtonDisabled = {isButtonDisabled}
+              setIsButtonDisabled={setIsButtonDisabled}
             />}
           {currentStep === 9 &&
             <Step9
               setProgressStep={setProgressStep}
+              goToNextStep={goToNextStep}
             />}
           {currentStep === 10 &&
             <Step10
@@ -205,7 +222,7 @@ const MainScreen = () => {
             />}
 
         </div>
-        {currentStep < totalScreens && (
+        {currentStep < totalScreens && currentStep !== 8 && (
           <MainButton
             currentStep={currentStep}
             onClick={currentStep === 6 ? handleFileUpload : goToNextStep}

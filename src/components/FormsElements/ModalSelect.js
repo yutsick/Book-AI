@@ -58,8 +58,12 @@ const CustomModalSelect = ({
 
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={() => setIsOpen(false)}>
-            <div className="bg-white rounded-lg  p-6 w-full max-w-[660px]" onClick={(e) => e.stopPropagation()}>
-              <ul className="max-h-60 overflow-auto custom-scrollbar">
+            <div 
+            className="bg-white rounded-lg  p-6 w-full max-w-[660px] relative" 
+            onClick={(e) => e.stopPropagation()
+
+            }>
+              <ul className="max-h-[280px] overflow-auto custom-scrollbar">
                 {options.map((option) => (
                   <li
                     key={option.value}
@@ -70,12 +74,12 @@ const CustomModalSelect = ({
                   </li>
                 ))}
               </ul>
-              {/* <button
+              <button
                  onClick={handleClose}
-                className="mt-4 w-full bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 rounded"
+                className="absolute right-2 top-1 text-[12px] text-gray-400"
               >
-                Cancel
-              </button> */}
+                ✖
+              </button>
             </div>
           </div>
         )}

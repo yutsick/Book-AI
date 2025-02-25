@@ -34,7 +34,7 @@ export const useBookAPI = () => {
       return;
     }
 
-    const storageKey = `books_${selectedGenre}`;
+    const storageKey = `books`;
 
     if (!contextUpdated && !genreUpdated && typeof window !== "undefined") {
       const storedBooks = localStorage.getItem(storageKey);

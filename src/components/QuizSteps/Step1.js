@@ -23,7 +23,7 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
   const genderOptions = [
     { value: "male", label: "Male" },
     { value: "female", label: "Female" },
-    { value: "prefer_not_say", label: "Prefer not to say" }
+    { value: "prefer not say", label: "Prefer not to say" }
   ];
   const ageOptions = [
     { value: null, label: "Clear selection" },

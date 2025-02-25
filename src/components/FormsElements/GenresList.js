@@ -22,7 +22,7 @@ const RadioButtonList = ({
         <p className="text-lg font-semibold">{label}</p>
       </div>
       {description && <p className="text-gray-500 mt-1">{description}</p>}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6 w-fit mx-auto">
         {options.map(({ id, name, description, icon }) => {
           const descRef = useRef(null);
           const [marginTop, setMarginTop] = useState("mt-3"); 
@@ -39,8 +39,8 @@ const RadioButtonList = ({
           return (
             <label
               key={id}
-              className={`flex flex-col items-center px-3 md:px-[14px] pt-4 pb-2 cursor-pointer transition  ${
-                selectedGenre === name  ? "bg-[#D9D9D9] hover:bg-[#D9D9D9] border-[0.5px] border-[#000]" : "bg-white hover:bg-[#ECEBE9] border-[0.3px] border-[#A6A6A6]/50"
+              className={`flex flex-col justify-center items-center px-3 md:px-[14px] pt-4 pb-2 cursor-pointer transition  ${
+                selectedGenre === name  ? "bg-[#D9D9D9] md:hover:bg-[#D9D9D9] border-[0.5px] border-[#000]" : "bg-white md:hover:bg-[#F6F5F3] border-[0.3px] border-[#bfbfbf]/50 w-[135px]  h-[105px]"
               }`}
             >
               <input
@@ -56,13 +56,13 @@ const RadioButtonList = ({
                 }}
                 className="hidden"
               />
-              {icon && <img src={icon} alt={name} className="w-12 h-12 mb-3" />}
-              <p className={`text-lg font-semibold ${selectedGenre === name ? "text-black" : "text-gray-700"}`}>
+              {icon && <img src={icon} alt={name} className="w-[28px] h-[28px]2 mb-3" />}
+              <p className={`text-[14px] font-medium ${selectedGenre === name ? "text-black" : "text-[#2b2b2b]"}`}>
                 {name}
               </p>
-              <p ref={descRef} className={`font-medium text-[13px] md:text-[14px] leading-[18px]  ${marginTop} ${selectedGenre === name ? "text-black" : "text-black/50"}`}>
+              {/* <p ref={descRef} className={`font-medium text-[13px] md:text-[14px] leading-[18px]  ${marginTop} ${selectedGenre === name ? "text-black" : "text-black/50"}`}>
                 {description}
-              </p>
+              </p> */}
             </label>
           );
         })}

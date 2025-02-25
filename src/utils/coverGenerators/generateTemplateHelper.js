@@ -146,8 +146,9 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
         const covers = {
           frontCover: await generateImage(frontElement),
-          spineCover: await generateImage(spineElement),
           backCover: await generateImage(backElement),
+          spineCover: await generateImage(spineElement),
+          
         };
 
         resolve(covers);

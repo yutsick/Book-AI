@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import MainButton from "@/components/Button/MainButton";
 
-function BookPreview({selectedTemplate, authorName, selectedTopic, goToNextStep}) {
+function BookPreview({selectedTemplate, authorName, selectedTopic,selectedSubTopic,  goToNextStep, disabled = false}) {
   return (
-    <div className="flex items-center  justify-center gap-4 flex-1 md:gap-12 mt-6">
+    <div className="flex   justify-center gap-4 flex-1 md:gap-12 mt-6">
        
-        {selectedTemplate?.front ? (
+        {selectedTemplate?.front ? ( 
 
           <div
             className="relative"
@@ -92,14 +93,27 @@ function BookPreview({selectedTemplate, authorName, selectedTopic, goToNextStep}
           <p className="text-gray-500 mt-4">No cover selected</p>
         )}
         <div 
-        className={`flex flex-col  text-[18px]  w-2/3 md:w-auto ${goToNextStep ? "cursor-pointer" : ""} `}
-        onClick={goToNextStep ? goToNextStep : undefined}
+        className={`flex flex-col font-inter  w-2/3 md:w-auto`}
+        
         >
-          <div className="text-[#2B2B2B] md:text-[24px] font-bold">
+          <div className="text-[#2B2B2B] text-[20px] md:text-[24px] leading-[26px] font-semibold">
             {selectedTopic}
           </div>
-          <div className="text-[#2B2B2B] md:text-[22px] font-bold">
-            by <span className='italic'>{authorName}</span>
+          <div className="text-[#2B2B2B]/75 text-[15px] md:text-[18px] mt-2">
+            {selectedSubTopic}
+          </div>
+
+          <div className="text-[#2B2B2B]  font-medium mt-1.5 md:mt-4">
+            by <span className=''>{authorName}</span>
+          </div>
+          <div className="mt-7">
+          <MainButton
+            text="Next"
+            onClick={ goToNextStep}
+            positionLeft = {true}
+            disabled={disabled}
+            smallButton = {true}
+          />
           </div>
         </div>
       </div>

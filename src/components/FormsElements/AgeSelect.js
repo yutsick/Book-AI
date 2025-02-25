@@ -63,11 +63,15 @@ const CustomSelect = ({
       borderRadius: "10px",
       overflow: "hidden",
       boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-    }),
-    menuList: (base) => ({
+    }),menuList: (base) => ({
       ...base,
       padding: "0",
+
+      "&::-webkit-scrollbar-track": {
+      margin: "6px 0",
+      },
     }),
+    
     option: (base, { isFocused, isSelected }) => ({
       ...base,
       backgroundColor: isSelected ? "#E0E0E0" : isFocused ? "#F0F0F0" : "#FFF",
@@ -95,6 +99,10 @@ const CustomSelect = ({
       placeholder={placeholder}
       styles={customStyles}
       isSearchable={false}
+      classNames={{
+        menuList: () => "custom-scrollbar", // Додаємо клас напряму
+      }}
+      
     />
   );
 };

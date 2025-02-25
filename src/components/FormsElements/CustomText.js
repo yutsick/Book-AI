@@ -93,7 +93,7 @@ const FloatingInput = ({
           ref={labelRef}
           className={`absolute top-3 left-4 pr-6 transition-all leading-[16px] ${
             !isFocused && localValue
-              ? "text-[#8F8F8F] text-[12.5px]"
+              ? "text-[#8F8F8F] text-[14px]"
               : "text-gray text-[16.5px] font-medium"
           }`}
         >
@@ -140,7 +140,7 @@ const FloatingInput = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className="text-[16px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px] rounded-[3px] px-4 w-full resize-none overflow-hidden focus:outline-none box-border"
+          className={`text-[16px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px] rounded-[3px] px-4 w-full resize-none overflow-hidden focus:outline-none box-border ${isFocused ? "border-[0.5px] border-[#434343]" : "" }`}
           placeholder={localValue ? "" : localPlaceholder}
           rows={1}
           style={{
