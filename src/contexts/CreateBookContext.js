@@ -31,7 +31,7 @@ export const CreateBookProvider = ({ children }) => {
   
   const [praises, setPraises] = useState(null);
 
-  const [selectedCopies, setSelectedCopies] = useState({ value: 1, label: "1", price: 0 });
+  const [selectedCopies, setSelectedCopies] = useState(1);
   const [selectedCoverIndex, setSelectedCoverIndex] = useState(0);
   const [selectedCover, setSelectedCover] = useState(0);
   const [selectedShippingIndex, setSelectedShippingIndex] = useState(0);
