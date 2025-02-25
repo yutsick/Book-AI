@@ -23,7 +23,7 @@ export default {
       },
       colors: {
         orange: '#EAAC00',
-        pink: 'rgba(175, 131, 0, 0.08)',
+        pink: '#FFFBEE',
         gray: {
           DEFAULT: '#2B2B2B',
           300: '#2B2B2B',

@@ -114,7 +114,7 @@ const MainScreen = () => {
   }, [isButtonDisabled, currentStep, file]);
 
   return (
-    <div className="min-h-screen bg-[#F9F6EB] flex flex-col items-center pb-36">
+    <div className="min-h-screen bg-[#FFFBEE] flex flex-col items-center pb-36">
      { currentStep === 1 && <HeaderQuiz />}
       {/* {currentStep === 1 && <HeroQuiz />} */}
       <ProgressBar

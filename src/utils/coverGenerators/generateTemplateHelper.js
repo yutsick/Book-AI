@@ -52,7 +52,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
     const createAndRender = async (type) => {
       return new Promise((resolve) => {
         const wrapper = document.createElement("div");
-        wrapper.style.backgroundColor = "#F9F6EB";
+        wrapper.style.backgroundColor = "#FFFBEE";
         wrapper.style.width = "431px";
         wrapper.style.height = "648px";
         hiddenContainer.appendChild(wrapper);

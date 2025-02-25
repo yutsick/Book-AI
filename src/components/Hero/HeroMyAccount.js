@@ -10,7 +10,7 @@ const heroData = {
 
 const HeroMyAccount = () => {
   return (
-    <div className="md:bg-[#F9F6EB] p-3 md:p-12 md:max-h-[343px] text-dark font-inter">
+    <div className="md:bg-pink p-3 md:p-12 md:max-h-[343px] text-dark font-inter">
       <div className="flex flex-col md:flex-row items-center md:items-start md:gap-[58px] max-w-[833px] mx-auto">
         <h1 className="text-[36px]  md:hidden font-bold ">{heroData.title}</h1>
         <div className="w-[251px] h-[251px] md:w-[251px] d:h-[251px] mt-4 md:mt-0">

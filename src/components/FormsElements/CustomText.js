@@ -103,7 +103,7 @@ const FloatingInput = ({
         {tip && (
           <div
             ref={tipRef}
-            className="w-full absolute bottom-[25px] left-4 rounded-[5px] min-h-[26px] px-2 md:px-4 flex items-center text-[13px] leading-[13px] py-1 bg-[#F9F6EB] max-w-[calc(100%-32px)]"
+            className="w-full absolute bottom-[25px] left-4 rounded-[5px] min-h-[26px] px-2 md:px-4 flex items-center text-[13px] leading-[13px] py-1 bg-pink max-w-[calc(100%-32px)]"
           >
             <div className="text-[#232323] md:min-w-[95px] flex items-center">
               <span className="hidden md:block">Pro Advice</span>

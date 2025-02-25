@@ -39,7 +39,7 @@ const stepsName = [
 
 const OrderDetails = () => {
   return (
-    <div className="w-full bg-[#F9F6EB] shadow-detailsShadow p-4 md:pt-4 md:pr-3 md:pb-[68px] ">
+    <div className="w-full bg-pink shadow-detailsShadow p-4 md:pt-4 md:pr-3 md:pb-[68px] ">
       <h1 className="text-xl md:text-[23px] font-bold text-center mb-6">
         Details for Order #{orderDetails.orderId}
       </h1>
