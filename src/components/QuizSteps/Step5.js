@@ -51,7 +51,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   return (
     <div>
       <div className="w-full mt-4 md:mt-2 md:px-6">
-        <div className="field-title">Choose a title and tagline that speaks to you</div>
+        <div className="field-title">Choose a title and subtitle</div>
         {loading && (
           <div className="flex justify-center items-center h-32">
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>

@@ -25,8 +25,8 @@ function Step4({ setIsButtonDisabled, setProgressStep }) {
         <div className="mt-4 md:mt-2 md:px-6">
           <CustomInput
             type="email"
-            title="Stay Connected"
-            description="Enter your email to continue crafting your book and save your progress."
+            title="Stay connected"
+            description="Enter your email to save progress and continue"
             label="Your Email"
             placeholder="Enter your Email here"
             onChange={setAuthorEmail}

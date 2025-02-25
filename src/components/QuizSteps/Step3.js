@@ -256,7 +256,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
       <div className="mt-4 md:mt-2 md:mx-6">
         <div className="field-title">Tell us about {authorName}</div>
         <div className="field-desc mt-2">
-          Share as much as you can! Each question you answer brings us closer to creating something truly special.
+        Each question you answer brings us closer to creating something truly special
         </div>
         <div className="mt-8">
           {questionsAndAnswers.map(({ question, answer }) => (

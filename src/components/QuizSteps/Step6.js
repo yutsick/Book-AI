@@ -139,9 +139,9 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   return (
     <div>
       <div className="w-full mt-4 md:mt-2 md:px-6">
-        <div className="field-title">Upload a photo</div>
+        <div className="field-title">Upload a photo for a book cover</div>
         <div className="field-desc">
-          We’ll feature it on the front cover to make your book feel more personal. For the best results, use a high-quality image of {authorName.trim()} — either a portrait or an upper-body shot.
+        For best results, use a high-quality portrait or upper-body shot of  {authorName.trim()}  
         </div>
 
         <div className="w-full flex justify-center mt-5">
