@@ -71,8 +71,8 @@ const RadioButtonList = ({
             )}
             <div className="flex justify-between w-full">
               <div>
-                <div className={`font-bold text-base ${selectedGenre === name || selectedTopic === name ? "text-black" : "text-gray-700"}`}>{name}</div>
-                <div className={`text-[14px] md:text-[15px] leading-[18px] md:leading-[28px] font-medium ${
+                <div className={`font-semibold md:font-bold text-base ${selectedGenre === name || selectedTopic === name ? "text-black" : "text-gray-700"}`}>{name}</div>
+                <div className={`mt-0.5 md:mt-1 text-[14px] md:text-[15px] leading-[19px] md:leading-[22px] font-[450] md:font-medium ${
                   selectedGenre === name  || selectedTopic === name ? " text-black" : " text-black/50"
                 }`}>
                   {description}
