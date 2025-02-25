@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import GenreContext from "@/contexts/CreateGenreContext";
 
 const RadioButtonList = ({ 
@@ -6,86 +6,52 @@ const RadioButtonList = ({
   label = null, 
   description = null, 
   setIsButtonDisabled = null, 
-  iconRight, 
-  type = 'genre' ,
-  onChange
+
 }) => {
-  const { selectedGenre, 
-    setSelectedGenre,
-    selectedTopic, 
-    setSelectedTopic } = useContext(GenreContext);
+  const { selectedTopic, setSelectedTopic } = useContext(GenreContext);
   
-
-  const [focus, setFocus] = useState(false);
-
-  const handleChange = (value, description) => {
-    if (type === 'genre') {
-      selectedGenre === value ? setSelectedGenre(null) : setSelectedGenre(value);
-    } else {
+  const handleChange = (value) => {
       if (selectedTopic !== value) { 
         setSelectedTopic(value);
-        onChange && onChange(value, description);
+
       }
-    }
-  
+    
     setIsButtonDisabled && setIsButtonDisabled(false);
   };
 
-  const handleFocus = () => {
-    setFocus(true);
-  };
-
-  const handleBlur = () => {
-    setFocus(false);
-  };
-
   return (
-    <div className="w-full mb-8">
+    <div className="w-full ">
       <div className="flex items-center space-x-2">
         <p className="field-title">{label}</p>
       </div>
       {description && <div className="field-desc">{description}</div>}
-      <div className="flex flex-col gap-4 mt-4">
-        {options.map(({ id, name, description, icon }) => (
+      <div className="flex flex-col gap-4 ">
+        {options.map(({ id, title, subtitle }, index) => (
           <label
-            key={id} 
-            className={`flex  items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] rounded-[3px] cursor-pointer transition ${
-              selectedGenre === name  || selectedTopic === name  ? "bg-[#D9D9D9] md:hover:bg-[#D9D9D9]" : "bg-white md:hover:bg-[#fafafa]"
+            key={id || `radio-option-${title}-${index}`} 
+            className={`flex  items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] rounded-[3px] cursor-pointer transition ${selectedTopic === title  ? "bg-[#D9D9D9] md:hover:bg-[#D9D9D9]" : "bg-white md:hover:bg-[#fafafa] max-w-[620px]"
             }`}
           >
             <input
               type="radio"
               name="radio-options"
               value={id}
-              checked = {selectedTopic === name}
-              onChange={() => handleChange(name)}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
+              checked = {selectedTopic === title}
+              onChange={() => handleChange(title, subtitle)}
               className="hidden"
    
             />
-            {icon && (
-              <div className="w-[60px]">
-                <img src={icon} alt="" className="w-full max-w-[40px]"/>
-              </div>
-            )}
+
             <div className="flex justify-between w-full">
               <div>
-                <div className={`font-semibold md:font-bold text-base ${selectedGenre === name || selectedTopic === name ? "text-black" : "text-gray-700"}`}>{name}</div>
-                <div className={`mt-0.5 md:mt-1 text-[14px] md:text-[15px] leading-[19px] md:leading-[22px] font-[450] md:font-medium ${
-                  selectedGenre === name  || selectedTopic === name ? " text-black" : " text-black/50"
+                <div className={`font-semibold md:font-bold text-base ${selectedTopic === title ? "text-black" : "text-gray-700"}`}>{title}</div>
+                <div classtitle={`mt-0.5 md:mt-1 text-[14px] md:text-[15px] leading-[19px] md:leading-[22px] font-[450] md:font-medium ${selectedTopic === title ? " text-black" : " text-black/50"
                 }`}>
-                  {description}
+                  {subtitle}
                 </div>
               </div>
             </div>
-            {iconRight && (
-              <div className="flex flex-col justify-center items-center w-[80] ml-4">
-                <img src={iconRight} alt="" className="w-[36px]"/>
-                <div className="text-center text-black opacity-[71%] text-[12px]">Regenerate</div>
-                
-              </div>
-            )}
+
           </label>
         ))}
       </div>

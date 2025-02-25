@@ -31,12 +31,12 @@ export const GenreProvider = ({ children }) => {
       localStorage.setItem("selectedGenre", selectedGenre);
     
 
-    if (selectedTopic.trim() !== "") {
+
       localStorage.setItem("selectedTopic", selectedTopic);
-    }
-    if (selectedSubTopic.trim() !== "") {
+    
+
       localStorage.setItem("selectedSubTopic", selectedSubTopic);
-    }
+    
   }, [selectedGenre, selectedTopic, selectedSubTopic]);
 
 

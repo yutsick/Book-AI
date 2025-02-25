@@ -1,17 +1,54 @@
 import React, { useEffect, useState, useContext } from "react";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
+import CreateBookContext from "@/contexts/CreateBookContext";
 import RadioButtonList from "@/components/FormsElements/RadioButtonList";
-
 import { useBookAPI } from "@/hooks/useBookAPI";
 
-
 function Step5({ setProgressStep, setIsButtonDisabled }) {
-
-  const { selectedTopic, setSelectedTopic, setSelectedSubTopic } = useContext(CreateGenreContext);
+  const { selectedTopic, setSelectedTopic, setSelectedSubTopic, selectedGenre } = useContext(CreateGenreContext);
+  const { authorName, selectedAge, selectedGender, questionsAndAnswers } = useContext(CreateBookContext);
   const { books, loading, error } = useBookAPI();
-  const [topicOptions, setTopicOptions] = useState([]);
+
+  const [visibleTopics, setVisibleTopics] = useState([]);
+  const [storedTopics, setStoredTopics] = useState([]);
+  const [regenerate, setRegenerate] = useState(false);
+
+  const startLoading = () => {
+    setRegenerate(true);
+    setIsButtonDisabled(true); 
+  };
+  
+  const stopLoading = () => {
+    setRegenerate(false);
+    setIsButtonDisabled(false); 
+  };
+
+  useEffect(() => {
+    const storedVisible = JSON.parse(localStorage.getItem("visibleBooks")) || [];
+    const storedHidden = JSON.parse(localStorage.getItem("storedBooks")) || [];
+
+    if (storedVisible.length > 0) {
+      setVisibleTopics(storedVisible);
+      setStoredTopics(storedHidden);
+    }
+  }, []);
 
 
+
+  useEffect(() => {
+    if (Array.isArray(books) && books.length > 0 && visibleTopics.length === 0) {
+      console.log("📚 Books from API:", books);
+
+      const visible = books.slice(0, 3);
+      const stored = books.slice(3);
+
+      setVisibleTopics(visible);
+      setStoredTopics(stored);
+
+      localStorage.setItem("visibleBooks", JSON.stringify(visible));
+      localStorage.setItem("storedBooks", JSON.stringify(stored));
+    }
+  }, [books]);
 
   useEffect(() => {
     setProgressStep(4);
@@ -24,32 +61,110 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
     };
   }, [setIsButtonDisabled, selectedTopic]);
 
-  useEffect(() => {
-    if (Array.isArray(books) && books.length > 0) {
-      console.log("📚 Books from API:", books);
-      
-      setTopicOptions(
-        books.map((book, index) => ({
-          id: String(index + 1),
-          name: book.title,
-          description: book.subtitle
-        }))
-      );
+  const fetchNewBooks = async () => {
+    startLoading();
+    try {
+
+      const response = await fetch("https://api.booktailor.com/generate-titles", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          author_name: authorName,
+          genre: selectedGenre || null,
+          gender: selectedGender || null,
+          age: selectedAge ? String(selectedAge.value) : null,
+          quiz_answers: questionsAndAnswers,
+        }),
+      });
+
+      if (!response.ok) throw new Error("❌ API request error");
+
+      const data = await response.json();
+      const booksKey = Object.keys(data).find((key) => Array.isArray(data[key]));
+      const formattedBooks = data[booksKey].map(({ title, subtitle }) => ({ title, subtitle }));
+
+      if (formattedBooks.length === 0) throw new Error("⚠️ API reponse is empty");
+
+      stopLoading();
+
+      return formattedBooks;
+    } catch (error) {
+      console.error("🚨 Book fetching error:", error);
+      return null;
     }
-  }, [books]);
-  // const topicOptions = [
-  //   { "id": "1", "name": "I Almost Missed a Taylor Swift Concert", "description": "The Untold Truth About Taking Time Off Work"},
-  //   { "id": "2", "name": "A small savings jar", "description": "My path to the world of big dreams has never been easier or felt farther away"},
-  //   { "id": "3", "name": "In My Next Life, I'd Like to Be a Shih Tzu", "description": "An Unforgettable Diary About Dogs, Humans, and the Lessons, They Teach Us"},
-  //   { "id": "4", "name": "It took us 4 years, 3 months & 8 days to finally meet for coffee", "description": "Close friends don’t always need to meet in person"  },
-  // ]
-  const handleTopicChange = (value, description) => {
-    setSelectedTopic(value);
-    setSelectedSubTopic(description);
   };
 
+
+  const handleRegenerate = async (index, topic) => {
+    let savedBooks = JSON.parse(localStorage.getItem("storedBooks")) || [];
+  
+    if (savedBooks.length === 0) {
+      startLoading();
+      const newBooks = await fetchNewBooks();
+      if (!newBooks) {
+        stopLoading();
+        return;
+      }
+  
+      localStorage.setItem("storedBooks", JSON.stringify(newBooks));
+      setStoredTopics(newBooks);
+  
+      const newTopic = newBooks.shift();
+  
+      const updatedVisible = [...visibleTopics];
+      updatedVisible[index] = newTopic;
+  
+      setVisibleTopics(updatedVisible);
+      localStorage.setItem("visibleBooks", JSON.stringify(updatedVisible));
+  
+      // ✅ Скидаємо `selectedTopic`, якщо він був замінений
+      if (selectedTopic === topic.title) {
+        console.log("🗑 Скидаємо вибраний топік, бо він був перегенерований");
+  
+        setSelectedTopic(null);
+        setSelectedSubTopic(null);
+        localStorage.removeItem("selectedTopic");
+        localStorage.removeItem("selectedSubTopic");
+      }
+  
+      stopLoading();
+      return;
+    }
+  
+    const newTopic = savedBooks.shift();
+    const updatedVisible = [...visibleTopics];
+  
+    // ✅ Якщо вибраний топік був змінений – скидаємо його в контексті та localStorage
+    if (selectedTopic === topic.title) {
+      console.log("🗑 Скидаємо вибраний топік, бо він був перегенерований");
+  
+      setSelectedTopic(null);
+      setSelectedSubTopic(null);
+      localStorage.removeItem("selectedTopic");
+      localStorage.removeItem("selectedSubTopic");
+    }
+  
+    updatedVisible[index] = newTopic;
+  
+    setVisibleTopics(updatedVisible);
+    setStoredTopics(savedBooks);
+  
+    localStorage.setItem("visibleBooks", JSON.stringify(updatedVisible));
+    localStorage.setItem("storedBooks", JSON.stringify(savedBooks));
+  
+    stopLoading();
+  };
+  
+
   return (
-    <div>
+    <div className="relative">
+       {regenerate && (
+      <div className="absolute w-full h-full bg-black opacity-60 flex justify-center items-center">
+        <div className=" ">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
+        </div>
+      </div>
+       )}
       <div className="w-full mt-4 md:mt-2 md:px-6">
         <div className="field-title">Choose a title and subtitle</div>
         {loading && (
@@ -58,23 +173,34 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
           </div>
         )}
 
-
         {error && <p style={{ color: "red" }}>{error}</p>}
-        {topicOptions.length > 0 && !loading && (
-          <div className="my-8">
-            <RadioButtonList
-              iconRight="images/create-book/icon-regenerate.svg"
-              options={topicOptions}
-              selectedValue={selectedTopic}
-              onChange={(value) => handleTopicChange(value, topicOptions.find(opt => opt.name === value)?.description)}
-              setIsButtonDisabled={setIsButtonDisabled}
-              type='topic'
-            />
+        {visibleTopics.length > 0 && !loading && (
+          <div className="my-8 ">
+            {visibleTopics.map((topic, index) => (
+              <div key={topic.id || `visible-topic-${index}`} className="flex items-center justify-between mb-3">
+                <RadioButtonList
+
+                  options={[topic]}
+                  selectedValue={selectedTopic}
+                  onChange={(value) => handleTopicChange(value, topic.description)}
+                  setIsButtonDisabled={setIsButtonDisabled}
+                  type="topic"
+                />
+                <button
+                  onClick={() => handleRegenerate(index, topic)}
+                  className=" flex flex-col justify-center items-center ml-2 px-2 py-1  hover:scale-105 text-sm"
+                 
+                >
+                  <img src="images/create-book/icon-regenerate.svg" alt="" />
+                  <span>Recreate</span>
+                </button>
+              </div>
+            ))}
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }
 
-export default Step5
+export default Step5;
