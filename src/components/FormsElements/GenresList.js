@@ -54,8 +54,8 @@ const RadioButtonList = ({
                 }}
                 className="hidden"
               />
-              {icon && <img src={icon} alt={name} className="w-[28px] h-[28px]2 mb-3" />}
-              <p className={`text-[14px] font-medium ${selectedGenre === name ? "text-black" : "text-[#2b2b2b]"}`}>
+              {icon && <img src={icon} alt={name} className="w-[32px] h-[32px]2 mb-3" />}
+              <p className={`text-[16px] font-medium ${selectedGenre === name ? "text-black" : "text-[#2b2b2b]"}`}>
                 {name}
               </p>
               {/* <p ref={descRef} className={`font-medium text-[13px] md:text-[14px] leading-[18px]  ${marginTop} ${selectedGenre === name ? "text-black" : "text-black/50"}`}>

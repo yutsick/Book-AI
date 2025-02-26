@@ -78,6 +78,20 @@ const FloatingInput = ({
     adjustTextareaHeight();
   }, [localValue, labelHeight, placeholderHeight, tipHeight]);
 
+  useEffect(() => {
+    if (!localValue.trim()) { 
+      const timer = setTimeout(() => {
+        if (textareaRef.current) {
+          textareaRef.current.focus();
+        }
+      }, 0);
+  
+      return () => clearTimeout(timer);
+    }
+  }, []); 
+  
+
+  
   return (
     <div className="w-full mb-2">
       {title && (
