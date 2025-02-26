@@ -44,12 +44,11 @@ function Step9({ setProgressStep }) {
     }
   ];
 
-  const copyCost = 20.00;
-
   const subtotalAndTotalPrice = useMemo(() => {
     if (selectedCopies && typeof selectedCoverIndex === "number" && typeof selectedShippingIndex === "number") {
+      const baseCopyCost = selectedCoverIndex === 0 ? 20.00 : 30.00;
       const coverCost = cover[selectedCoverIndex]?.cost || 0;
-      const copiesCost = selectedCopies * copyCost;
+      const copiesCost = selectedCopies * baseCopyCost;
       const shippingCost = shipping[selectedShippingIndex]?.cost || 0;
 
       const newSubtotal = coverCost + copiesCost + shippingCost;
@@ -106,13 +105,12 @@ function Step9({ setProgressStep }) {
                   key={index}
                   className={`xs:w-[165px] w-[145px] rounded-[3px] cursor-pointer transition border-[0.3px] border-[#bfbfbf]/50 text-[#6C6C6C] 
           ${selectedCoverIndex === index ?
-                      "bg-[#DCDCDC] text-black border-[1px] shadow-checkoutCardShadow border-gray"
+                      "bg-[#DCDCDC] text-black border-[1px] border-gray"
                       :
                       "hover:bg-[#F0F0F0] bg-white border-[#bcbcbc]"}`}
                   style={{
                     borderWidth: selectedCoverIndex === index ? '1px' : '0.3px',
                     height: 'auto',
-                    boxShadow: selectedCoverIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
                   }}
                 >
                   <input
@@ -170,13 +168,12 @@ function Step9({ setProgressStep }) {
                 key={index}
                 className={`xs:w-[165px] w-[145px] rounded-[3px] cursor-pointer transition border-[0.3px] border-[#bfbfbf]/50 text-[#6C6C6C] 
                 ${selectedShippingIndex === index ?
-                    "bg-[#DCDCDC] text-black border-[1px] shadow-checkoutCardShadow border-gray"
+                    "bg-[#DCDCDC] text-black border-[1px] border-gray"
                     :
                     "hover:bg-[#F0F0F0] bg-white border-[#bcbcbc]"}`}
                 style={{
                   borderWidth: selectedShippingIndex === index ? '1px' : '0.3px',
                   height: 'auto',
-                  boxShadow: selectedShippingIndex === index ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none',
                 }}
               >
                 <input
@@ -212,7 +209,9 @@ function Step9({ setProgressStep }) {
             </div>
             <div className="flex justify-between">
               <span>+ <span>{selectedCopies}</span> copies:</span>
-              <span className="text-right">${(selectedCopies * copyCost).toFixed(2)}</span>
+              <span className="text-right">
+                ${(selectedCopies * (selectedCoverIndex === 0 ? 20.00 : 30.00)).toFixed(2)}
+              </span>
             </div>
             <div className="flex justify-between">
               <span>Shipping:</span>
