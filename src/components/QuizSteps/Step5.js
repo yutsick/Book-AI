@@ -162,10 +162,10 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
                 />
                 <button
                   onClick={() => handleRegenerate(index, topic)}
-                  className="flex flex-col justify-center items-center ml-2   hover:scale-105 text-sm"
+                  className="flex flex-col justify-center items-center ml-3 md:ml-2 md:hover:scale-105 text-sm"
                  
                 >
-                  <img src="images/create-book/icon-regenerate.svg" alt="" />
+                  <img className="w-7" src="images/create-book/icon-regenerate.svg" alt="" />
                   <span className="hidden  md:block">Recreate</span>
                 </button>
               </div>
