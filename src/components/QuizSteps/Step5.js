@@ -13,15 +13,12 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   const [storedTopics, setStoredTopics] = useState([]);
   const [regenerate, setRegenerate] = useState(false);
 
-  const startLoading = () => {
-    setRegenerate(true);
-    setIsButtonDisabled(true); 
+  const toggleLoading = (state) => {
+    setRegenerate(state);
+    setIsButtonDisabled(state || !selectedTopic); 
   };
   
-  const stopLoading = () => {
-    setRegenerate(false);
-    setIsButtonDisabled(false); 
-  };
+
 
   useEffect(() => {
     const storedVisible = JSON.parse(localStorage.getItem("visibleBooks")) || [];
@@ -62,7 +59,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   }, [setIsButtonDisabled, selectedTopic]);
 
   const fetchNewBooks = async () => {
-    startLoading();
+    toggleLoading(true);
     try {
 
       const response = await fetch("https://api.booktailor.com/generate-titles", {
@@ -73,7 +70,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
           genre: selectedGenre || null,
           gender: selectedGender || null,
           age: selectedAge ? String(selectedAge.value) : null,
-          quiz_answers: questionsAndAnswers,
+          quiz_answers: questionsAndAnswers.filter((el) => el.answer.length !== 0),
         }),
       });
 
@@ -85,7 +82,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
 
       if (formattedBooks.length === 0) throw new Error("⚠️ API reponse is empty");
 
-      stopLoading();
+      toggleLoading(false);
 
       return formattedBooks;
     } catch (error) {
@@ -99,61 +96,38 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
     let savedBooks = JSON.parse(localStorage.getItem("storedBooks")) || [];
   
     if (savedBooks.length === 0) {
-      startLoading();
+      toggleLoading(true);
       const newBooks = await fetchNewBooks();
       if (!newBooks) {
-        stopLoading();
+        toggleLoading(false);
         return;
       }
   
       localStorage.setItem("storedBooks", JSON.stringify(newBooks));
       setStoredTopics(newBooks);
-  
-      const newTopic = newBooks.shift();
-  
-      const updatedVisible = [...visibleTopics];
-      updatedVisible[index] = newTopic;
-  
-      setVisibleTopics(updatedVisible);
-      localStorage.setItem("visibleBooks", JSON.stringify(updatedVisible));
-  
-      // ✅ Скидаємо `selectedTopic`, якщо він був замінений
-      if (selectedTopic === topic.title) {
-        console.log("🗑 Скидаємо вибраний топік, бо він був перегенерований");
-  
-        setSelectedTopic(null);
-        setSelectedSubTopic(null);
-        localStorage.removeItem("selectedTopic");
-        localStorage.removeItem("selectedSubTopic");
-      }
-  
-      stopLoading();
-      return;
+      savedBooks = newBooks;
     }
   
     const newTopic = savedBooks.shift();
     const updatedVisible = [...visibleTopics];
-  
-    // ✅ Якщо вибраний топік був змінений – скидаємо його в контексті та localStorage
-    if (selectedTopic === topic.title) {
-      console.log("🗑 Скидаємо вибраний топік, бо він був перегенерований");
-  
-      setSelectedTopic(null);
-      setSelectedSubTopic(null);
-      localStorage.removeItem("selectedTopic");
-      localStorage.removeItem("selectedSubTopic");
-    }
-  
     updatedVisible[index] = newTopic;
-  
     setVisibleTopics(updatedVisible);
     setStoredTopics(savedBooks);
   
     localStorage.setItem("visibleBooks", JSON.stringify(updatedVisible));
     localStorage.setItem("storedBooks", JSON.stringify(savedBooks));
   
-    stopLoading();
+    // ✅ Якщо топік був вибраний і його змінили, скидаємо вибір
+    if (selectedTopic === topic.title) {
+      setSelectedTopic(null);
+      setSelectedSubTopic(null);
+      localStorage.removeItem("selectedTopic");
+      localStorage.removeItem("selectedSubTopic");
+    }
+  
+    toggleLoading(false); 
   };
+  
   
 
   return (
@@ -182,7 +156,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
 
                   options={[topic]}
                   selectedValue={selectedTopic}
-                  onChange={(value) => handleTopicChange(value, topic.description)}
+                  // onChange={(value) => handleTopicChange(value, topic.subtitle)}
                   setIsButtonDisabled={setIsButtonDisabled}
                   type="topic"
                 />

@@ -6,9 +6,7 @@ const RadioButtonList = ({
   options,
   label = null,
   description = null,
-  setIsButtonDisabled = null,
 
-  onChange
 }) => {
   const { selectedGenre, setSelectedGenre } = useContext(GenreContext);
   const handleChange = (value) => {
@@ -22,19 +20,19 @@ const RadioButtonList = ({
         <p className="text-lg font-semibold">{label}</p>
       </div>
       {description && <p className="text-gray-500 mt-1">{description}</p>}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6 w-fit mx-auto">
-        {options.map(({ id, name, description, icon }) => {
-          const descRef = useRef(null);
-          const [marginTop, setMarginTop] = useState("mt-3"); 
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6  md:gap-4 mt-6 w-fit mx-auto">
+        {options.map(({ id, name,  icon }) => {
+          // const descRef = useRef(null);
+          // const [marginTop, setMarginTop] = useState("mt-3"); 
 
-          useEffect(() => {
-            if (descRef.current) {
-              const height = descRef.current.clientHeight;
-              if (height > 40) {
-                setMarginTop("mt-2"); 
-              }
-            }
-          }, []);
+          // useEffect(() => {
+          //   if (descRef.current) {
+          //     const height = descRef.current.clientHeight;
+          //     if (height > 40) {
+          //       setMarginTop("mt-2"); 
+          //     }
+          //   }
+          // }, []);
 
           return (
             <label

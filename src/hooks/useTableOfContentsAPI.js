@@ -84,7 +84,7 @@ export const useTableOfContentsAPI = () => {
             genre: selectedGenre,
             gender: selectedGender,
             age: selectedAge ? String(selectedAge.value) : null,
-            quiz_answers: questionsAndAnswers
+            quiz_answers: questionsAndAnswers.filter((el) => el.answer.length !== 0)
           }),
         });
 

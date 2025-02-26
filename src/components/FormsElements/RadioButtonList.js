@@ -8,12 +8,13 @@ const RadioButtonList = ({
   setIsButtonDisabled = null, 
 
 }) => {
-  const { selectedTopic, setSelectedTopic } = useContext(GenreContext);
+  const { selectedTopic, setSelectedTopic, selectedSubTopic, setSelectedSubTopic } = useContext(GenreContext);
   
-  const handleChange = (value) => {
-      if (selectedTopic !== value) { 
-        setSelectedTopic(value);
-
+  const handleChange = (title, subTitle) => {
+      if (selectedTopic !== title) { 
+        setSelectedTopic(title);
+        setSelectedSubTopic(subTitle);
+        
       }
     
     setIsButtonDisabled && setIsButtonDisabled(false);
@@ -44,8 +45,8 @@ const RadioButtonList = ({
 
             <div className="flex justify-between w-full">
               <div>
-                <div className={`font-semibold md:font-bold text-base ${selectedTopic === title ? "text-black" : "text-gray-700"}`}>{title}</div>
-                <div classtitle={`mt-0.5 md:mt-1 text-[14px] md:text-[15px] leading-[19px] md:leading-[22px] font-[450] md:font-medium ${selectedTopic === title ? " text-black" : " text-black/50"
+                <div className={`leading-[21px] md:leading-[24px] font-semibold md:font-bold text-base ${selectedTopic === title ? "text-black" : "text-gray-700"}`}>{title}</div>
+                <div className={`mt-1 text-[14px] md:text-[15px] leading-[17px] md:leading-[22px] font-[450] md:font-medium ${selectedTopic === title ? " text-black" : " text-black/50"
                 }`}>
                   {subtitle}
                 </div>
