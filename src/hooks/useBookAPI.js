@@ -74,22 +74,53 @@ export const useBookAPI = () => {
       setError(null);
 
       try {
-        const response = await fetch("https://api.booktailor.com/generate-titles", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            author_name: authorName,
-            genre: selectedGenre || null,
-            gender: selectedGender || null,
-            age: selectedAge ? String(selectedAge.value) : null,
-            quiz_answers: questionsAndAnswers.filter((el) => el.answer.length !== 0)
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Oops... Something went wrong. Please try again in 20 seconds.");
-          console.log("❌ API Response:", response);
+        // const response = await fetch("https://api.booktailor.com/generate-titles", {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({
+        //     author_name: authorName,
+        //     genre: selectedGenre || null,
+        //     gender: selectedGender || null,
+        //     age: selectedAge ? String(selectedAge.value) : null,
+        //     quiz_answers: questionsAndAnswers.filter((el) => el.answer.length !== 0)
+        //   }),
+        // });
+        const mockFetch = () => {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve({
+                ok: true,
+                json: async () => ({
+                  bookTitles: [
+                    {
+                      title: "I Almost Missed a Taylor Swift Concert",
+                      author: "Tarik",
+                      subtitle: "The Untold Truth About Taking Time Off Work",
+                    },
+                    {
+                      title: "A small savings jar",
+                      author: "Tarik",
+                      subtitle: "My path to the world of big dreams has never been easier or felt farther away",
+                    },
+                    {
+                      title: "In My Next Life, I'd Like to Be a Shih Tzu",
+                      author: "Tarik",
+                      subtitle: "An Unforgettable Diary About Dogs, Humans, and the Lessons, They Teach Us",
+                    },
+                  ],
+                }),
+              });
+            }, 900); 
+          });
         };
+        
+        
+        // if (!response.ok) {
+        //   throw new Error("Oops... Something went wrong. Please try again in 20 seconds.");
+        //   console.log("❌ API Response:", response);
+        // };
+        const response = await mockFetch();
+
 
         const data = await response.json();
 
