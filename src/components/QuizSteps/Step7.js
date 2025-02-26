@@ -202,7 +202,7 @@ const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
         <div className={`relative z-20 flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-16" : "mt-4"
           }`}>
           <button
-            className="text-[10px] font-semibold bg-transparent text-[#2b2b2b] h-6 box-content w-[100px] flex items-center justify-center border-[0.4px] rounded-[3px] bg-[#ECECEC] border-[#2b2b2b] cursor-pointer"
+            className="text-[10px] font-semibold  text-[#2b2b2b] h-6 box-content w-[100px] flex items-center justify-center border-[0.4px] rounded-[3px] bg-[#ECECEC] border-[#2b2b2b] cursor-pointer"
             onClick={() => {
               setIsCropperOpen(true);
               setIsModalOpen(true);

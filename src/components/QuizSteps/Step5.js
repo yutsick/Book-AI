@@ -117,7 +117,6 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
     localStorage.setItem("visibleBooks", JSON.stringify(updatedVisible));
     localStorage.setItem("storedBooks", JSON.stringify(savedBooks));
   
-    // ✅ Якщо топік був вибраний і його змінили, скидаємо вибір
     if (selectedTopic === topic.title) {
       setSelectedTopic(null);
       setSelectedSubTopic(null);
