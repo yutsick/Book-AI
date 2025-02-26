@@ -222,7 +222,7 @@ const MainScreen = () => {
             />}
 
         </div>
-        {currentStep < totalScreens && currentStep !== 8 && (
+        {currentStep < totalScreens && (
           <MainButton
             currentStep={currentStep}
             onClick={currentStep === 6 ? handleFileUpload : goToNextStep}

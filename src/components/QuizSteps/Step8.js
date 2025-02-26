@@ -1,8 +1,9 @@
 import React, { useEffect, useContext } from 'react';
 import CreateBookContext from '@/contexts/CreateBookContext';
 import GenreContext from '@/contexts/CreateGenreContext';
-import BookPreview from '../BookPreview/BookPreview';
-import TableOfContents from '../TableOfContents/TableOfContents';
+import BookPreview from '@/components/BookPreview/BookPreview';
+import TableOfContents from '@/components/TableOfContents/TableOfContents';
+import MainButton from '@/components/Button/MainButton';
 import { useTableOfContentsAPI } from "@/hooks/useTableOfContentsAPI";
 
 
@@ -11,7 +12,7 @@ function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDis
   const { selectedTopic, selectedSubTopic } = useContext(GenreContext);
 
   const { tableOfContents, loading, error } = useTableOfContentsAPI();
-console.log('YEP', loading)
+
   useEffect(() => {
     setProgressStep(6);
   }, [setProgressStep]);
@@ -47,6 +48,9 @@ console.log('YEP', loading)
           <TableOfContents contents={tableOfContents} />
         )}
       </div>
+     
+
+       
     </div>
   );
 }
