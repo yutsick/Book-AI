@@ -20,7 +20,7 @@ const RadioButtonList = ({
         <p className="text-lg font-semibold">{label}</p>
       </div>
       {description && <p className="text-gray-500 mt-1">{description}</p>}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6  md:gap-4 mt-6 w-fit mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-3  gap-6  md:gap-4 mt-6 w-fit mx-auto">
         {options.map(({ id, name,  icon }) => {
           // const descRef = useRef(null);
           // const [marginTop, setMarginTop] = useState("mt-3"); 
@@ -55,7 +55,7 @@ const RadioButtonList = ({
                 className="hidden"
               />
               {icon && <img src={icon} alt={name} className="w-[32px] h-[32px]2 mb-3" />}
-              <p className={`text-[16px] font-medium ${selectedGenre === name ? "text-black" : "text-[#2b2b2b]"}`}>
+              <p className={`text-[15px] font-medium ${selectedGenre === name ? "text-black" : "text-[#2b2b2b]"}`}>
                 {name}
               </p>
               {/* <p ref={descRef} className={`font-medium text-[13px] md:text-[14px] leading-[18px]  ${marginTop} ${selectedGenre === name ? "text-black" : "text-black/50"}`}>

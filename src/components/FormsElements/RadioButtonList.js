@@ -30,7 +30,7 @@ const RadioButtonList = ({
         {options.map(({ id, title, subtitle }, index) => (
           <label
             key={id || `radio-option-${title}-${index}`} 
-            className={`flex  items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] rounded-[3px] cursor-pointer transition ${selectedTopic === title  ? "bg-[#D9D9D9] md:hover:bg-[#D9D9D9] border-[0.5px] border-black" : "bg-white md:hover:bg-[#fafafa] max-w-[620px]"
+            className={`flex  items-center gap-1 md:gap-0 md:px-[10px] md:py-[12px] p-[10px] rounded-[3px] cursor-pointer transition ${selectedTopic === title  ? "bg-[#D9D9D9] md:hover:bg-[#D9D9D9] border-[0.5px] border-black" : "bg-white border-[0.3px] border-[#bfbfbf]/50  md:hover:bg-[#fafafa] max-w-[620px]"
             }`}
           >
             <input
