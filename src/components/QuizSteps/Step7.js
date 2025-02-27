@@ -28,7 +28,7 @@ const cropperData = [
   { id: 7, top: null, bottom: 90, left: 60, width: 230, height: 248, mobTop: null, mobBottom: 70, mobLeft: 0, mobWidth: 190, mobHeight: 200, radius: true },
   { id: 8, top: null, bottom: 10, left: 12, width: 327, height: 325, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 260 }
 ]
-const Step7 = ({ setProgressStep, setIsButtonDisabled }) => {
+function Step7 ({ setProgressStep, setIsButtonDisabled }) {
   const {
     authorName,
     selectedGender,

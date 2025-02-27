@@ -3,8 +3,9 @@ import CreateGenreContext from "@/contexts/CreateGenreContext";
 import CreateBookContext from "@/contexts/CreateBookContext";
 import RadioButtonList from "@/components/FormsElements/RadioButtonList";
 import { useBookAPI } from "@/hooks/useBookAPI";
-
+import config from "../../../config";
 function Step5({ setProgressStep, setIsButtonDisabled }) {
+  const { questionsUrl } = config;
   const { selectedTopic, setSelectedTopic, setSelectedSubTopic, selectedGenre } = useContext(CreateGenreContext);
   const { authorName, selectedAge, selectedGender, questionsAndAnswers } = useContext(CreateBookContext);
   const { books, loading, error } = useBookAPI();
@@ -12,13 +13,26 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   const [visibleTopics, setVisibleTopics] = useState([]);
   const [storedTopics, setStoredTopics] = useState([]);
   const [regenerate, setRegenerate] = useState(false);
-
+  const [questions, setQuestions] = useState(null);
   const toggleLoading = (state) => {
     setRegenerate(state);
     setIsButtonDisabled(state || !selectedTopic); 
   };
   
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await fetch(questionsUrl);
+        const data = await response.json();
+        setQuestions(data);
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+        setQuestions([]);
+      }
+    };
 
+    fetchQuestions();
+  }, [questionsUrl]);
 
   useEffect(() => {
     const storedVisible = JSON.parse(localStorage.getItem("visibleBooks")) || [];
@@ -33,6 +47,8 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
 
 
   useEffect(() => {
+    console.log("🔄 useEffect triggered - books changed:", books);
+
     if (Array.isArray(books) && books.length > 0 && visibleTopics.length === 0) {
       console.log("📚 Books from API:", books);
 
@@ -70,7 +86,16 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
           genre: selectedGenre || null,
           gender: selectedGender || null,
           age: selectedAge ? String(selectedAge.value) : null,
-          quiz_answers: questionsAndAnswers.filter((el) => el.answer.length !== 0),
+            quiz_answers: questionsAndAnswers
+              .filter((el) => el.answer.length !== 0)
+              .map(({ value, answer }) => {
+                const questionObj = questions.find((q) => q.value === value);
+                return {
+                  question: questionObj ? questionObj.label.replace("{author}", authorName) : "Unknown question",
+                  answer,
+                };
+              }),
+          
         }),
       });
 

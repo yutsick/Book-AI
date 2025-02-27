@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 // import CustomSelect from "@/components/FormsElements/CustomSelect";
+import config from "../../../config";
 import CustomModalSelect from "@/components/FormsElements/ModalSelect";
 import CustomText from "@/components/FormsElements/CustomText";
 import CreateBookContext from "@/contexts/CreateBookContext";
@@ -8,9 +9,25 @@ import ProgressTracker from "@/components/ProgressTracker/ProgressTracker";
 
 function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
 
+  const {questionsUrl} = config;
+  const [questions, setQuestions] = useState(null);
+
   const { authorName, questionsAndAnswers, addQuestionAndAnswer, removeQuestion } = useContext(CreateBookContext);
 
   const author = authorName.trim();
+
+
+    useEffect(() => {
+      fetch(questionsUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          setQuestions(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching questions data:", error);
+        });
+    }, [questionsUrl]);
+
 
   useEffect(() => {
     setProgressStep(3);
@@ -32,114 +49,125 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
   const [answeredQuestions, setAnsweredQuestions] = useState(0);
 
 
-  const questions = [
-    {
-      value: "1",
-      label: `What does ${author} do?`,
-      example: "She works as a machine learning engineer at DataCore AI, a company focused on predictive analytics tools for the healthcare industry. Her job revolves around designing algorithms that help doctors make better decisions using patient data.",
-      tip: "Include the role, company name, industry focus, and a specific project or achievement",
-      isDisabled: false,
-    },
-    {
-      value: "2",
-      label: `Where does ${author} live?`,
-      example: false,
-      tip: false,
-      isDisabled: false,
-    },
-    {
-      value: "3",
-      label: `What are ${author}’s hobbies?`,
-      example: false,
-      tip: false,
-      isDisabled: false,
-    },
-    {
-      value: "4",
-      label: `Who is ${author}’s family?`,
-      example: "Mom: Karen Dawson (female, 52) is a history teacher at the local high school. She spends her weekends gardening, especially taking care of her orchids, and watching NCIS. She loves trying to figure out the cases before the characters do.",
-      tip: "Specify the relationship, name, age, and gender. Add details like job, interests, or hobbies for a personal touch.",
-      isDisabled: false,
-    },
-    {
-      value: "5",
-      label: `What are ${author}’s backstories?`,
-      example: false,
-      tip: "Share stories about childhood, major life events, memorable moments, or challenges.",
-      isDisabled: false,
-    },
-    {
-      value: "6",
-      label: `What’s one thing ${author} really good at?`,
-      example: false,
-      tip: false,
-      isDisabled: false,
-    },
-    {
-      value: "7",
-      label: `What’s a topic ${author} can talk about for hours without getting bored?`,
-      example: false,
-      tip: false,
-      isDisabled: false,
-    },
-    {
-      value: "8",
-      label: `What’s something ${author} hilariously bad at?`,
-      example: false,
-      tip: false,
-      isDisabled: false,
-    },
-    {
-      value: "9",
-      label: `Does ${author} have any funny habits or routines?`,
-      example: false,
-      tip: false,
-      isDisabled: false,
-    },
-    {
-      value: "10",
-      label: `What’s ${author}’s biggest dream or goal?`,
-      example: false,
-      tip: false,
-      isDisabled: false,
-    },
-    {
-      value: "11",
-      label: `What are ${author}’s favorite places?`,
-      example: false,
-      tip: "Describe what the place is like and how you spend your time there.",
-      isDisabled: false,
-    },
-    {
-      value: "12",
-      label: `Who are ${author}’s best friends?`,
-      example: "Sarah Thompson (30, female) is a graphic designer at a marketing agency. She enjoys hiking and photography. They have been friends since college and often catch up over coffee.",
-      tip: "Include each friend's name, age, and gender. Add details like job, interests, or hobbies for a personal touch.",
-      isDisabled: false,
-    },
-    {
-      value: "13",
-      label: `Who are ${author}’s colleagues?`,
-      example: false,
-      tip: "Include their name, gender, and role.",
-      isDisabled: false,
-    },
-  ];
+  // const questions = [
+  //   {
+  //     value: "1",
+  //     label: `What does ${author} do?`,
+  //     example: "She works as a machine learning engineer at DataCore AI, a company focused on predictive analytics tools for the healthcare industry. Her job revolves around designing algorithms that help doctors make better decisions using patient data.",
+  //     tip: "Include the role, company name, industry focus, and a specific project or achievement",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "2",
+  //     label: `Where does ${author} live?`,
+  //     example: false,
+  //     tip: false,
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "3",
+  //     label: `What are ${author}’s hobbies?`,
+  //     example: false,
+  //     tip: false,
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "4",
+  //     label: `Who is ${author}’s family?`,
+  //     example: "Mom: Karen Dawson (female, 52) is a history teacher at the local high school. She spends her weekends gardening, especially taking care of her orchids, and watching NCIS. She loves trying to figure out the cases before the characters do.",
+  //     tip: "Specify the relationship, name, age, and gender. Add details like job, interests, or hobbies for a personal touch.",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "5",
+  //     label: `What are ${author}’s backstories?`,
+  //     example: false,
+  //     tip: "Share stories about childhood, major life events, memorable moments, or challenges.",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "6",
+  //     label: `What’s one thing ${author} really good at?`,
+  //     example: false,
+  //     tip: false,
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "7",
+  //     label: `What’s a topic ${author} can talk about for hours without getting bored?`,
+  //     example: false,
+  //     tip: false,
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "8",
+  //     label: `What’s something ${author} hilariously bad at?`,
+  //     example: false,
+  //     tip: false,
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "9",
+  //     label: `Does ${author} have any funny habits or routines?`,
+  //     example: false,
+  //     tip: false,
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "10",
+  //     label: `What’s ${author}’s biggest dream or goal?`,
+  //     example: false,
+  //     tip: false,
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "11",
+  //     label: `What are ${author}’s favorite places?`,
+  //     example: false,
+  //     tip: "Describe what the place is like and how you spend your time there.",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "12",
+  //     label: `Who are ${author}’s best friends?`,
+  //     example: "Sarah Thompson (30, female) is a graphic designer at a marketing agency. She enjoys hiking and photography. They have been friends since college and often catch up over coffee.",
+  //     tip: "Include each friend's name, age, and gender. Add details like job, interests, or hobbies for a personal touch.",
+  //     isDisabled: false,
+  //   },
+  //   {
+  //     value: "13",
+  //     label: `Who are ${author}’s colleagues?`,
+  //     example: false,
+  //     tip: "Include their name, gender, and role.",
+  //     isDisabled: false,
+  //   },
+  // ];
+
+  // const handleQuestionSelectChange = (option) => {
+  //   if (!questionsAndAnswers.some((qa) => qa.question === option.label)) {
+  //     addQuestionAndAnswer(option.label, "");
+  //   }
+  // };
 
   const handleQuestionSelectChange = (option) => {
-    if (!questionsAndAnswers.some((qa) => qa.question === option.label)) {
-      addQuestionAndAnswer(option.label, "");
+    if (!questionsAndAnswers.some((qa) => qa.value === option.value)) {
+      addQuestionAndAnswer(option.value, ""); 
     }
   };
+  
 
-  const handleDelete = (questionToRemove) => {
-    removeQuestion(questionToRemove);
+  const handleDelete = (value) => {
+    removeQuestion(value);
   };
+  
 
-  const optionsWithDisabled = questions.map((question) => ({
-    ...question,
-    isDisabled: questionsAndAnswers.some((qa) => qa.question === question.label),
-  }));
+  const optionsWithDisabled = questions
+  ? questions.map((question) => ({
+      ...question,
+      isDisabled: questionsAndAnswers.some((qa) => qa.value === question.value),
+    }))
+  : [];
+
 
 
   const weightConfig = {
@@ -160,18 +188,20 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
 
 
   const calculateScore = (answers = []) => {
+
     let score = 0;
     let answeredQuestions = 0;
 
-    answers.forEach(({ question, answer }) => {
-      if (!question || !answer) return;
+    answers.forEach(({ value, answer }) => {
+      if (!value || !answer) return;
 
       const wordCount = countWords(answer);
 
       if (wordCount > 0) {
         answeredQuestions++;
+        
+        const questionEntry = questions ? questions.find(q => q.value === value) : null;
 
-        const questionEntry = questions.find(q => q.label === question);
         if (!questionEntry) return;
 
         const weight = weightConfig[questionEntry.value] || { levels: [{ words: 1, score: 1 }] };
@@ -200,7 +230,6 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
     if (trimmedText.length === 0) return 0;
 
     const words = trimmedText.split(/\s+/);
-
     return words.length;
   };
 
@@ -241,12 +270,15 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
       return;
     }
 
-    const { score: newScore, answeredQuestions: newAnsweredQuestions } = calculateScore(questionsAndAnswers);
+    const { 
+      score: newScore, 
+      answeredQuestions: newAnsweredQuestions 
+    } = calculateScore(questionsAndAnswers);
 
     setScore(newScore);
     setAnsweredQuestions(newAnsweredQuestions);
 
-  }, [questionsAndAnswers]);
+  }, [questionsAndAnswers, questions]);
 
 
 
@@ -256,9 +288,9 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
       <div className="mt-4 md:mt-2 md:mx-6">
         <div className="field-title">Tell us about {authorName}</div>
         <div className="field-desc mt-2">
-        Each question you answer brings us closer to creating something truly special
+          Each question you answer brings us closer to creating something truly special
         </div>
-        <div className="mt-8">
+        {/* <div className="mt-8">
           {questionsAndAnswers.map(({ question, answer }) => (
             <CustomText
               setIsButtonDisabled={setIsButtonDisabled}
@@ -272,15 +304,36 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
               onDelete={() => handleDelete(question)}
             />
           ))}
+        </div> */}
+        <div className="mt-8">
+          {questionsAndAnswers.map(({ value, answer }) => {
+            const questionObj = questions ? questions.find((q) => q.value === value) : null;
+
+            if (!questionObj) return null; 
+
+            return (
+              <CustomText
+                setIsButtonDisabled={setIsButtonDisabled}
+                key={value}
+                label={questionObj.label.replace("{author}", author)}
+                placeholder="Type your answer here..."
+                value={answer}
+                onChange={(newAnswer) => handleInputChange(value, newAnswer)}
+                tip={questionObj.tip || null}
+                textError={textError}
+                onDelete={() => handleDelete(value)}
+              />
+            );
+          })}
         </div>
         <div className=" w-full">
-        <CustomModalSelect
-          resetOnSelect={true}
-          options={optionsWithDisabled}
-          onChange={handleQuestionSelectChange}
-          placeholder="Choose a question"
-          iconOrange={true}
-        />
+          <CustomModalSelect
+            resetOnSelect={true}
+            options={optionsWithDisabled}
+            onChange={handleQuestionSelectChange}
+            placeholder="Choose a question"
+            iconOrange={true}
+          />
 
           {/* <CustomSelect
             resetOnSelect={true}
@@ -293,7 +346,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
         </div>
 
         <div className="mt-[-10px] mb-2 mx-auto w-full text-center text-[14px] font-medium">
-        More Answers, Better Story
+          More Answers, Better Story
         </div>
         <div className="">
           <ProgressTracker activeSteps={qualityLevel === "Excellent" ? 4 : qualityLevel === "Good" ? 3 : qualityLevel === "OK" ? 2 : qualityLevel === "Basic" ? 1 : 0} />

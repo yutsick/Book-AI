@@ -1,24 +1,42 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import CreateBookContext from "@/contexts/CreateBookContext";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
+import config from "../../config";
 export const useBookAPI = () => {
-  const { 
-    authorName, selectedAge, selectedGender, questionsAndAnswers, 
-    contextUpdated, setContextUpdated 
+  const { questionsUrl } = config;
+  const {
+    authorName, selectedAge, selectedGender, questionsAndAnswers,
+    contextUpdated, setContextUpdated
   } = useContext(CreateBookContext);
-  
-  const { 
-    selectedGenre, genreUpdated, setGenreUpdated, 
+
+  const {
+    selectedGenre, genreUpdated, setGenreUpdated,
     setSelectedTopic, setSelectedSubTopic
   } = useContext(CreateGenreContext);
 
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [questions, setQuestions] = useState(null);
 
   const fetchTriggered = useRef(false);
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await fetch(questionsUrl);
+        const data = await response.json();
+        setQuestions(data);
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+        setQuestions([]);
+      }
+    };
+
+    fetchQuestions();
+  }, [questionsUrl]);
 
   useEffect(() => {
+    if (!questions) return;
     let missingFields = [];
 
     if (!authorName) missingFields.push("authorName");
@@ -68,7 +86,6 @@ export const useBookAPI = () => {
 
     setContextUpdated(false);
     setGenreUpdated(false);
-
     const fetchBooks = async () => {
       setLoading(true);
       setError(null);
@@ -82,7 +99,15 @@ export const useBookAPI = () => {
         //     genre: selectedGenre || null,
         //     gender: selectedGender || null,
         //     age: selectedAge ? String(selectedAge.value) : null,
-        //     quiz_answers: questionsAndAnswers.filter((el) => el.answer.length !== 0)
+        //     quiz_answers: questionsAndAnswers
+        //       .filter((el) => el.answer.length !== 0)
+        //       .map(({ value, answer }) => {
+        //         const questionObj = questions.find((q) => q.value === value);
+        //         return {
+        //           question: questionObj ? questionObj.label.replace("{author}", authorName) : "Unknown question",
+        //           answer,
+        //         };
+        //       }),
         //   }),
         // });
         const mockFetch = () => {
@@ -93,9 +118,9 @@ export const useBookAPI = () => {
                 json: async () => ({
                   bookTitles: [
                     {
-                      title: "I Almost Missed a Taylor Swift Concert",
+                      title: "It took us 4 years, 3 months & 8 days to finally meet for coffee",
                       author: "Tarik",
-                      subtitle: "The Untold Truth About Taking Time Off Work",
+                      subtitle: "Close friends don’t always need to meet in person",
                     },
                     {
                       title: "A small savings jar",
@@ -110,11 +135,11 @@ export const useBookAPI = () => {
                   ],
                 }),
               });
-            }, 900); 
+            }, 900);
           });
         };
-        
-        
+
+
         // if (!response.ok) {
         //   throw new Error("Oops... Something went wrong. Please try again in 20 seconds.");
         //   console.log("❌ API Response:", response);
@@ -142,7 +167,7 @@ export const useBookAPI = () => {
     };
 
     fetchBooks();
-  }, [genreUpdated]); 
+  }, [genreUpdated, questions, questionsAndAnswers]);
 
   return { books, loading, error };
 };

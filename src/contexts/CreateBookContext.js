@@ -61,23 +61,35 @@ export const CreateBookProvider = ({ children }) => {
   useEffect(() => {
     setContextUpdated(true);
   }, [authorName, selectedAge, selectedGender, questionsAndAnswers]);
-  const addQuestionAndAnswer = (question, answer) => {
+  // const addQuestionAndAnswer = (question, answer) => {
+  //   setQuestionsAndAnswers((prev) => {
+  //     const existingIndex = prev.findIndex((qa) => qa.question === question);
+  //     if (existingIndex !== -1) {
+  //       const updated = [...prev];
+  //       updated[existingIndex] = { ...updated[existingIndex], answer };
+  //       return updated;
+  //     }
+  //     return [...prev, { question, answer }];
+  //   });
+  // };
+  const addQuestionAndAnswer = (value, answer) => {
     setQuestionsAndAnswers((prev) => {
-      const existingIndex = prev.findIndex((qa) => qa.question === question);
+      const existingIndex = prev.findIndex((qa) => qa.value === value);
       if (existingIndex !== -1) {
         const updated = [...prev];
         updated[existingIndex] = { ...updated[existingIndex], answer };
         return updated;
       }
-      return [...prev, { question, answer }];
+      return [...prev, { value, answer }];
     });
   };
-
-  const removeQuestion = (question) => {
+  
+  const removeQuestion = (value) => { 
     setQuestionsAndAnswers((prev) =>
-      prev.filter((item) => item.question !== question)
+      prev.filter((item) => item.value !== value) 
     );
   };
+  
 
   const handleImageUpload = (file) => {
     if (!file) return;

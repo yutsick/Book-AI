@@ -15,7 +15,8 @@ const config = {
   buttonTextUrl: './data/createBook/buttonText.json',
   genresUrl: './data/createBook/genres.json',
   createBookStep1: './data/createBook/stepOne.json',
-
+  questionsUrl: './data/createBook/questions.json',
+  
   // Contact Us
   contactUsUrl: './data/contactUs/contactUs.json',
 

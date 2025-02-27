@@ -4,7 +4,7 @@ import config from "../../../config";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
 
 
-const StepTwo = ({ setProgressStep}) => {
+function StepTwo ({ setProgressStep}) {
   
  
   const { genresUrl } = config;

@@ -3,7 +3,7 @@ import CreateBookContext from "@/contexts/CreateBookContext";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import { validateImage } from "@/utils/imageValidation";
 
-const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
+function Step6  ({ setProgressStep, setIsButtonDisabled }) {
   const {
     authorImage,
     setAuthorImage,
