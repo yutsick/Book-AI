@@ -164,6 +164,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
   const optionsWithDisabled = questions
   ? questions.map((question) => ({
       ...question,
+      label: question.label.replace("{author}", authorName || "you"),
       isDisabled: questionsAndAnswers.some((qa) => qa.value === question.value),
     }))
   : [];

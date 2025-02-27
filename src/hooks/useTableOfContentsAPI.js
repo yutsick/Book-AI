@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import CreateBookContext from "@/contexts/CreateBookContext";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
+import config from "../../config";
 
 export const useTableOfContentsAPI = () => {
+
+  const { questionsUrl } = config;
   const { authorName, selectedAge, selectedGender, questionsAndAnswers } = useContext(CreateBookContext);
   const { selectedGenre, selectedTopic, selectedSubTopic, genreUpdated, setGenreUpdated, topicUpdated, setTopicUpdated } = useContext(CreateGenreContext);
 
@@ -10,8 +13,25 @@ export const useTableOfContentsAPI = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const fetchTriggered = useRef(false);
+  const [questions, setQuestions] = useState(null);
 
   useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await fetch(questionsUrl);
+        const data = await response.json();
+        setQuestions(data);
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+        setQuestions([]);
+      }
+    };
+
+    fetchQuestions();
+  }, [questionsUrl]);
+
+  useEffect(() => {
+    if (!questions) return;
     let missingFields = [];
 
     if (!authorName) missingFields.push("authorName");
@@ -84,7 +104,16 @@ export const useTableOfContentsAPI = () => {
             genre: selectedGenre,
             gender: selectedGender,
             age: selectedAge ? String(selectedAge.value) : null,
-            quiz_answers: questionsAndAnswers.filter((el) => el.answer.length !== 0)
+
+            quiz_answers: questionsAndAnswers
+              .filter((el) => el.answer.length !== 0)
+              .map(({ value, answer }) => {
+                const questionObj = questions.find((q) => q.value === value);
+                return {
+                  question: questionObj ? questionObj.label.replace("{author}", authorName) : "Unknown question",
+                  answer,
+                };
+              }),
           }),
         });
 
@@ -116,7 +145,7 @@ export const useTableOfContentsAPI = () => {
     };
 
     fetchTableOfContents();
-  }, [genreUpdated, topicUpdated]); 
+  }, [genreUpdated, topicUpdated, questions]); 
 
   return { tableOfContents, loading, error };
 };
