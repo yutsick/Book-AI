@@ -92,18 +92,18 @@ function Step9({ setProgressStep }) {
 
   return (
     <div className="pb-[17px]">
-      <div className="text-[30px] font-bold text-center text-orange mb-[32px]">
+      <div className="text-[30px] font-bold text-center text-orange mb-[26px]">
         Checkout
       </div>
-      <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start sm:pb-[40px] pb-[35px]">
+      <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start sm:pb-[20px] pb-[15px]">
         <div>
-          <h2 className="text-[24px] font-bold mb-[15px]">Choose your cover</h2>
+          <h2 className="field-title mb-[15px]">Choose your cover</h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-[20px] flex-1">
             <div className="flex justify-center gap-[10px]">
               {cover.map((option, index) => (
                 <label
                   key={index}
-                  className={`xs:w-[165px] w-[145px] rounded-[3px] cursor-pointer transition border-[0.3px] border-[#bfbfbf]/50 text-[#6C6C6C] 
+                  className={`xs:w-[165px] w-[145px]  cursor-pointer transition border-[0.3px] border-[#bfbfbf]/50 text-[#6C6C6C] 
           ${selectedCoverIndex === index ?
                       "bg-[#DCDCDC] text-black border-[1px] border-gray"
                       :
@@ -122,7 +122,7 @@ function Step9({ setProgressStep }) {
                     className="hidden"
                   />
                   <div className="pl-[4px]">
-                    <h3 className="text-black font-semibold text-[17px] px-[6px] pt-[5px]">{option.title}</h3>
+                    <h3 className="text-[17px] font-medium text-black px-[6px] pt-[5px]">{option.title}</h3>
                     <p className="text-black text-[14px] px-[6px] pb-[5px]">{`$${option.cost.toFixed(2)}`}</p>
                   </div>
                 </label>
@@ -159,14 +159,14 @@ function Step9({ setProgressStep }) {
 
         </div>
       </div>
-      <div className="flex flex-col items-center sm:items-start mt-[30px] sm:pb-[40px] pb-[35px]">
+      <div className="flex flex-col items-center sm:items-start mt-[30px] sm:pb-[20px] pb-[15px]">
         <div>
-          <h2 className="text-[24px] font-bold mb-[15px] text-left">Shipping Type</h2>
+          <h2 className="field-title mb-[15px]">Shipping Type</h2>
           <div className="flex items-center justify-center gap-[10px] flex-1">
             {shipping.map((option, index) => (
               <label
                 key={index}
-                className={`xs:w-[165px] w-[145px] rounded-[3px] cursor-pointer transition border-[0.3px] border-[#bfbfbf]/50 text-[#6C6C6C] 
+                className={`xs:w-[165px] w-[145px] cursor-pointer transition border-[0.3px] border-[#bfbfbf]/50 text-[#6C6C6C] 
                 ${selectedShippingIndex === index ?
                     "bg-[#DCDCDC] text-black border-[1px] border-gray"
                     :
@@ -186,7 +186,7 @@ function Step9({ setProgressStep }) {
                 />
                 <div className="text-gray inline-block">
                   <div className="text-left p-[8px] inline-block">
-                    <h3 className="font-semibold text-[17px]">{option.title}</h3>
+                    <h3 className="text-[17px] font-medium text-black">{option.title}</h3>
                     <p className="text-[14px] text-[#6C6C6C] hover:text-[#4b4b4b]">{option.description}</p>
                     <p>{`$${option.cost.toFixed(2)}`}</p>
                   </div>
@@ -199,7 +199,7 @@ function Step9({ setProgressStep }) {
       <div className="mt-[30px] flex flex-col items-center sm:items-start">
         <div className="max-w-[325px] w-full">
           <div className="mb-[15px]">
-            <h2 className="text-[24px] text-gray font-bold">Order Summary</h2>
+            <h2 className="field-title">Order Summary</h2>
             <p className="text-[16px] text-[#727272]">Personalize full length book</p>
           </div>
           <div className=" flex gap-y-[10px] flex-col">

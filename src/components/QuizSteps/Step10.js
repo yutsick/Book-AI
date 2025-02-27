@@ -19,8 +19,8 @@ function Step10({ setProgressStep }) {
     return (
         <div className="">
             <div className="mt-[30px] pb-[30px]">
-                <h2 className="text-[24px] text-gray font-bold text-center">Order Summery</h2>
-                <p className="text-[16px] text-[#727272] text-center">Personalize full length book - paperback cover </p>
+                <h2 className="field-title text-center">Order Summery</h2>
+                <p className="field-desc text-center">Personalize full length book - paperback cover </p>
             </div>
             <div className="mb-[30px] ">
                 <BookPreview
