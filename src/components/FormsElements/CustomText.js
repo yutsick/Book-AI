@@ -146,9 +146,9 @@ const FloatingInput = ({
           style={{
             paddingTop: `${labelHeight + 20}px`,
             minHeight: `${
-              labelHeight + placeholderHeight + (tip ? tipHeight + 54 : 54)
+              labelHeight + placeholderHeight + (tip ? tipHeight + 64 : 54)
             }px`,
-            paddingBottom: tip ? `${tipHeight + 32}px` : "32px",
+            paddingBottom: tip ? `${tipHeight + 42}px` : "32px",
           }}
         />
       </div>

@@ -6,22 +6,30 @@ import CreateBookContext from "@/contexts/CreateBookContext";
 import ProgressTracker from "@/components/ProgressTracker/ProgressTracker";
 
 function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
- 
+
   const { authorName, questionsAndAnswers, addQuestionAndAnswer, removeQuestion } = useContext(CreateBookContext);
 
   const author = authorName.trim();
 
   useEffect(() => {
-    setProgressStep(3); 
+    setProgressStep(3);
   }, [setProgressStep]);
 
-   
+
   useEffect(() => {
-    setIsButtonDisabled(questionsAndAnswers.filter(el=>el.answer.length !== 0).length === 0); 
+    setIsButtonDisabled(questionsAndAnswers.filter(el => el.answer.length !== 0).length === 0);
     return () => {
       setIsButtonDisabled(false);
     };
   }, [questionsAndAnswers, setIsButtonDisabled]);
+
+
+
+
+  const [answers, setAnswers] = useState([]);
+  const [score, setScore] = useState(0);
+  const [answeredQuestions, setAnsweredQuestions] = useState(0);
+
 
   const questions = [
     {
@@ -119,106 +127,167 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
 
   const handleQuestionSelectChange = (option) => {
     if (!questionsAndAnswers.some((qa) => qa.question === option.label)) {
-      addQuestionAndAnswer(option.label, ""); 
+      addQuestionAndAnswer(option.label, "");
     }
   };
-  
+
   const handleDelete = (questionToRemove) => {
-    removeQuestion(questionToRemove); 
+    removeQuestion(questionToRemove);
   };
-  
+
   const optionsWithDisabled = questions.map((question) => ({
     ...question,
     isDisabled: questionsAndAnswers.some((qa) => qa.question === question.label),
   }));
-   
 
-const weightConfig = {
-  "1": { max: 4, levels: [20, 10, 1] },
-  "2": { max: 1, levels: [1] },
-  "3": { max: 4, levels: [10, 5, 1] },
-  "4": { max: 3, levels: [50, 30, 10] },
-  "5": { max: 2, levels: [25, 5] },
-  "6": { max: 2, levels: [5, 1] },
-  "7": { max: 4, levels: [10, 5, 1] },
-  "8": { max: 1, levels: [1] },
-  "9": { max: 1, levels: [1] },
-  "10": { max: 1, levels: [1] },
-  "11": { max: 1, levels: [1] },
-  "12": { max: 2, levels: [15, 5] },
-  "13": { max: 2, levels: [15, 5] }
-};
 
-const calculateScore = () => {
-  let score = 0;
-  let answeredQuestions = 0;
+  const weightConfig = {
+    "1": { levels: [{ words: 20, score: 4 }, { words: 10, score: 3 }, { words: 1, score: 2 }] },
+    "2": { levels: [{ words: 1, score: 1 }] },
+    "3": { levels: [{ words: 10, score: 4 }, { words: 5, score: 3 }, { words: 1, score: 2 }] },
+    "4": { levels: [{ words: 40, score: 3 }, { words: 20, score: 2 }, { words: 10, score: 1 }] },
+    "5": { levels: [{ words: 30, score: 2 }, { words: 15, score: 2 }, { words: 5, score: 1 }] },
+    "6": { levels: [{ words: 5, score: 2 }, { words: 1, score: 1 }] },
+    "7": { levels: [{ words: 10, score: 4 }, { words: 5, score: 3 }, { words: 1, score: 2 }] },
+    "8": { levels: [{ words: 5, score: 2 }, { words: 1, score: 1 }] },
+    "9": { levels: [{ words: 1, score: 1 }] },
+    "10": { levels: [{ words: 1, score: 1 }] },
+    "11": { levels: [{ words: 5, score: 2 }, { words: 1, score: 1 }] },
+    "12": { levels: [{ words: 20, score: 3 }, { words: 10, score: 2 }, { words: 5, score: 1 }] },
+    "13": { levels: [{ words: 20, score: 3 }, { words: 10, score: 2 }, { words: 5, score: 1 }] }
+  };
 
-  questionsAndAnswers.forEach(({ question, answer }) => {
-    if (answer.length > 0) {
-      answeredQuestions++;
 
-      const questionEntry = questions.find(q => q.label === question);
-      if (!questionEntry) return;
+  const calculateScore = (answers = []) => {
+    let score = 0;
+    let answeredQuestions = 0;
 
-      const weight = weightConfig[questionEntry.value] || { max: 1, levels: [1] };
+    answers.forEach(({ question, answer }) => {
+      if (!question || !answer) return;
 
-      for (let i = 0; i < weight.levels.length; i++) {
-        if (answer.split(' ').length > weight.levels[i]) {
-          score += weight.max - i;
-          break;
+      const wordCount = countWords(answer);
+
+      if (wordCount > 0) {
+        answeredQuestions++;
+
+        const questionEntry = questions.find(q => q.label === question);
+        if (!questionEntry) return;
+
+        const weight = weightConfig[questionEntry.value] || { levels: [{ words: 1, score: 1 }] };
+
+        let questionScore = 0;
+
+        for (let i = 0; i < weight.levels.length; i++) {
+          if (wordCount >= weight.levels[i].words) {
+            questionScore = weight.levels[i].score;
+            break;
+          }
         }
+
+        score += questionScore;
       }
+    });
+
+    return { score, answeredQuestions };
+  };
+
+
+
+
+  const countWords = (text) => {
+    const trimmedText = text.trim();
+    if (trimmedText.length === 0) return 0;
+
+    const words = trimmedText.split(/\s+/);
+
+    return words.length;
+  };
+
+
+
+
+  let qualityLevel = "Empty bar";
+  if (score >= 13 && answeredQuestions >= 6) qualityLevel = "Excellent";
+  else if (score >= 9 && answeredQuestions >= 5) qualityLevel = "Good";
+  else if (score >= 5 && answeredQuestions >= 3) qualityLevel = "OK";
+  else if (score >= 1 && answeredQuestions >= 1) qualityLevel = "Basic";
+
+  const handleInputChange = (question, newAnswer) => {
+    setAnswers(prevAnswers => {
+      const updatedAnswers = prevAnswers ? [...prevAnswers] : [];
+
+      const existingIndex = updatedAnswers.findIndex(qa => qa.question === question);
+      if (existingIndex !== -1) {
+        updatedAnswers[existingIndex].answer = newAnswer;
+      } else {
+        updatedAnswers.push({ question, answer: newAnswer });
+      }
+
+      return updatedAnswers;
+    });
+
+    addQuestionAndAnswer(question, newAnswer);
+  };
+
+
+
+
+
+  useEffect(() => {
+    if (!questionsAndAnswers || questionsAndAnswers.length === 0) {
+      setScore(0);
+      setAnsweredQuestions(0);
+      return;
     }
-  });
 
-  return { score, answeredQuestions };
-};
+    const { score: newScore, answeredQuestions: newAnsweredQuestions } = calculateScore(questionsAndAnswers);
 
-const { score, answeredQuestions } = calculateScore();
-let qualityLevel = "Empty bar";
-if (score >= 15 && answeredQuestions >= 6) qualityLevel = "Excellent";
-else if (score >= 9 && answeredQuestions >= 5) qualityLevel = "Good";
-else if (score >= 5 && answeredQuestions >= 3) qualityLevel = "OK";
-else if (score >= 1 && answeredQuestions >= 1) qualityLevel = "Basic";
+    setScore(newScore);
+    setAnsweredQuestions(newAnsweredQuestions);
+
+  }, [questionsAndAnswers]);
+
+
+
 
   return (
     <div className="w-full ">
-      <div className="mt-2 md:mx-6">
+      <div className="mt-4 md:mt-2 md:mx-6">
         <div className="field-title">Tell us about {authorName}</div>
-        <div className="field-desc">
+        <div className="field-desc mt-2">
           Share as much as you can! Each question you answer brings us closer to creating something truly special.
         </div>
-        <div className="mt-9 mb-2 mx-auto w-full text-center text-[14px] font-medium">
-          Your Answers Quality
+        <div className="mt-8">
+          {questionsAndAnswers.map(({ question, answer }) => (
+            <CustomText
+              setIsButtonDisabled={setIsButtonDisabled}
+              key={question}
+              label={question}
+              placeholder="Type your answer here..."
+              value={answer}
+              onChange={(newAnswer) => handleInputChange(question, newAnswer)}
+              tip={questions.find((q) => q.label === question)?.tip || null}
+              textError={textError}
+              onDelete={() => handleDelete(question)}
+            />
+          ))}
         </div>
-        <div className="mb-9">
-          {/* <ProgressTracker activeSteps={questionsAndAnswers.length} /> */}
-          <ProgressTracker activeSteps={qualityLevel === "Excellent" ? 4 : qualityLevel === "Good" ? 3 : qualityLevel === "OK" ? 2 : qualityLevel === "Basic" ? 1 : 0} />
-        </div>
-
-        {questionsAndAnswers.map(({ question, answer }) => (
-          <CustomText
-            setIsButtonDisabled={setIsButtonDisabled}
-            key={question}
-            label={question}
-            placeholder={`Type your answer here...`}
-            value={answer}
-            onChange={(newAnswer) => addQuestionAndAnswer(question, newAnswer)} 
-            tip={questions.find((q) => q.label === question)?.tip || null}
-            textError={textError}
-            onDelete={() => handleDelete(question)} 
-          />
-        ))}
-
-
-        <div className="mb-6 w-full">
+        <div className=" w-full">
           <CustomSelect
             resetOnSelect={true}
             className="w-full border border-gray-300 rounded-lg p-2"
             options={optionsWithDisabled}
             onChange={handleQuestionSelectChange}
             placeholder="Choose a question"
+            iconOrange={true}
           />
+        </div>
+
+        <div className="mt-[-10px] mb-2 mx-auto w-full text-center text-[14px] font-medium">
+        More Answers, Better Story
+        </div>
+        <div className="">
+          <ProgressTracker activeSteps={qualityLevel === "Excellent" ? 4 : qualityLevel === "Good" ? 3 : qualityLevel === "OK" ? 2 : qualityLevel === "Basic" ? 1 : 0} />
         </div>
       </div>
     </div>

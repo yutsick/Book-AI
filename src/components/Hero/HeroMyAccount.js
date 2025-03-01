@@ -2,9 +2,9 @@ import React from "react";
 
 const heroData = {
   title: "My Account",
-  subtitle: "Welcome to Your account page",
+  subtitle: "Welcome to your Book Tailor account page!",
   description:
-    "Track your orders and stay updated on their status with ease. From viewing order details to tracking shipments, this is your one-stop hub for managing all your Book Tailor purchases. Whether you're checking progress on a custom book or reviewing past orders, we’ve got everything you need right here.",
+    "Easily track your orders, check their status, and stay updated every step of the way. Whether you're following the progress of your book or reviewing past purchases, everything you need is right here.",
   image: "/images/my-account/my-account-hero.png", 
 };
 

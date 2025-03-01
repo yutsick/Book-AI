@@ -1,12 +1,12 @@
 {
   "links": [
-    { "text": "My Account", "href": "/my-account" },
+    { "text": "My Account", "href": "/log-in" },
     { "text": "How it works", "href": "#how-it-works" },
     { "text": "Our Highlights", "href": "#highlights" },
     { "text": "Book Covers", "href": "#book-covers" },
     { "text": "FAQ", "href": "#faq" },
     { "text": "About Us", "href": "/about-us" },
-    { "text": "Contact Us", "href": "#" }
+    { "text": "Contact Us", "href": "/contact-us" }
   ],
   "footerLinks": [
     { "text": "Terms of Use", "href": "/terms" },

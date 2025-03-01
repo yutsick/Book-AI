@@ -18,25 +18,27 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
 
   const [preview, setPreview] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const isMobile = () => {
-    return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-  };
+
+  const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
   useEffect(() => {
     setProgressStep(5);
   }, [setProgressStep]);
 
   useEffect(() => {
-    if (authorImage) {
+    if (authorImage && typeof authorImage === "string" && authorImage.startsWith("data:image")) {
+      setPreview(authorImage);
+    } else if (authorImage instanceof File) {
       setPreview(URL.createObjectURL(authorImage));
     }
   }, [authorImage]);
 
   useEffect(() => {
-    setIsButtonDisabled(!croppedImage);
+    setIsButtonDisabled(isProcessing || !croppedImage);
     return () => {
       setIsButtonDisabled(false);
     };
-  }, [setIsButtonDisabled, croppedImage]);
+  }, [setIsButtonDisabled, croppedImage, isProcessing]);
 
   const resizeImage = async (file, maxWidth, maxHeight) => {
     return new Promise((resolve) => {
@@ -44,7 +46,6 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       img.src = URL.createObjectURL(file);
       img.onload = () => {
         let { width, height } = img;
-
         let scaleFactor = Math.min(maxWidth / width, maxHeight / height, 1);
 
         if (scaleFactor < 1) {
@@ -67,65 +68,64 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
   };
 
   const handleFileChange = async (file) => {
+    if (!file) return;
+
     setPreview(URL.createObjectURL(file));
-    setAuthorImage(file);
-    
+    setIsProcessing(true);
+    setCroppedImage(null);
+    setAuthorImage(null);
 
     const validationResult = await validateImage(file);
-  
+
     if (!validationResult.valid) {
       setError(validationResult.error);
-      
-      if (validationResult.errorType === "unsupported_type" || validationResult.errorType === "low_resolution") {
+      if (validationResult.errorType === "unsupported_type") {
         setIsProcessing(false);
         return;
       }
     } else {
       setError(null);
     }
-  
+
     let processedFile = file;
-  
+
     if (isMobile()) {
       console.log("📱 Mobile detected - resizing image...");
       processedFile = await resizeImage(file, 431 * 1.5, 648 * 1.5);
-    } else {
-      console.log("💻 Desktop detected - using original image.");
     }
-  
-    setCroppedImage(null);
-    setIsProcessing(true);
-  
+
+    setAuthorImage(file);
+
     try {
       const formData = new FormData();
       formData.append("image", processedFile);
-  
+
       const response = await fetch("https://api.booktailor.com/remove-background", {
         method: "POST",
         body: formData,
       });
-  
+
       if (!response.ok) {
         throw new Error("Error removing background");
       }
-  
+
       const data = await response.json();
       const processedUrl = data.data.processed_url;
       setProcessedAuthorImage(processedUrl);
-  
+
       const imageResponse = await fetch(processedUrl);
       if (!imageResponse.ok) {
         throw new Error("Error fetching processed image");
       }
-  
+
       const imageBlob = await imageResponse.blob();
       const imageFile = new File([imageBlob], "processed-image.png", { type: "image/png" });
-  
+
       let finalImage = imageFile;
       if (isMobile()) {
         finalImage = await resizeImage(imageFile, 431 * 4, 648 * 4);
       }
-  
+
       setCroppedImage(finalImage);
     } catch (error) {
       console.error("❌ Error processing image:", error);
@@ -135,17 +135,13 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
       setSelectedTemplate({});
     }
   };
-  
-  
-
-
 
   return (
     <div>
-      <div className="w-full mt-2 md:px-6">
+      <div className="w-full mt-4 md:mt-2 md:px-6">
         <div className="field-title">Upload a photo</div>
         <div className="field-desc">
-        We’ll feature it on the front cover to make your book feel more personal. For the best results, use a high-quality image of {authorName.trim()} — either a portrait or an upper-body shot
+          We’ll feature it on the front cover to make your book feel more personal. For the best results, use a high-quality image of {authorName.trim()} — either a portrait or an upper-body shot.
         </div>
 
         <div className="w-full flex justify-center mt-5">
@@ -162,8 +158,7 @@ const Step6 = ({ setProgressStep, setIsButtonDisabled }) => {
         {error && (
           <div className="flex items-center gap-2 w-full justify-center mt-2">
             <div className="text-[#CF8700] text-[16px] leading-[20px] flex gap-1 items-center">
-            <img src="/images/create-book/warning-icon.svg" alt="" />
-
+              <img src="/images/create-book/warning-icon.svg" alt="" />
               {error}
             </div>
           </div>
