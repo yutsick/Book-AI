@@ -11,8 +11,8 @@ export default function MyAccount() {
       <main>
         <Header />
         <HeroMyAccount />
-        <div className="max-w-[867px] mx-auto bg-[#fff] pt-10 pb-28 flex flex-col gap-14">
-          <OrdersSummary />
+        <div className="max-w-[762px] mx-auto  md:pt-10 pt-6 pb-10 md:pb-28 flex flex-col gap-14">
+          {/* <OrdersSummary /> */}
           <div className="px-4 md:px-0">
 
           <OrderDetails />

@@ -56,6 +56,9 @@ export default {
         chooseShadow: '0px 0px 11.27px 1px rgba(0, 0, 0, 0.62)',
         detailsShadow: '0px 2px 6px 2px rgba(0, 0, 0, 0.23)',
         checkoutCardShadow: '0px 0px 4px 0.5px rgba(0, 0, 0, 0.1)',
+        detailsShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.10)',
+        
+
   },
 },
   },
