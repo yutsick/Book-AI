@@ -7,7 +7,7 @@ import MainButton from '@/components/Button/MainButton';
 import { useTableOfContentsAPI } from "@/hooks/useTableOfContentsAPI";
 
 
-function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDisabled }) {
+function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDisabled, loader, setLoader }) {
   const { selectedTemplate, authorName } = useContext(CreateBookContext);
   const { selectedTopic, selectedSubTopic } = useContext(GenreContext);
 
@@ -19,6 +19,7 @@ function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDis
 
   useEffect(() => {
     setIsButtonDisabled(loading);
+    setLoader(loading);
     return () => {
       setIsButtonDisabled(false);
     };
