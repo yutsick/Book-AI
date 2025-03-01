@@ -119,8 +119,8 @@ const FloatingInput = ({
             ref={tipRef}
             className="w-full absolute bottom-[25px] left-4 rounded-[5px] min-h-[26px] px-2 md:px-4 flex items-center text-[13px] leading-[13px] py-1 bg-pink max-w-[calc(100%-32px)]"
           >
-            <div className="text-[#232323] md:min-w-[95px] flex items-center">
-              <span className="hidden md:block">Pro Advice</span>
+            <div className="text-[#232323] mr-2 flex items-center">
+              {/* <span className="hidden md:block">Pro Advice</span> */}
               <span className="mr-2 md:mr-0">
                 <img
                   className="min-w-[25px]"

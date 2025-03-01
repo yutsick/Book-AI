@@ -29,6 +29,8 @@ const MainScreen = () => {
   const [file, setFile] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  const [loader, setLoader] = useState(false);
+
   const stepsName = [
     "Author ",
     "Genre",
@@ -38,6 +40,12 @@ const MainScreen = () => {
     "Preview",
     "Checkout",
   ];
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), 300); 
+  }, []);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" }); 
   }, [currentStep]);
@@ -53,6 +61,8 @@ const MainScreen = () => {
   const goToPreviousStep = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
+
+
 
   const handleFileChange = (newFile) => {
     setFile(newFile);
@@ -114,7 +124,10 @@ const MainScreen = () => {
   }, [isButtonDisabled, currentStep, file]);
 
   return (
-    <div className="min-h-screen bg-[#FFFBEE] flex flex-col items-center pb-36">
+    <div 
+    className="min-h-screen bg-[#FFFBEE] flex flex-col items-center pb-36"
+    style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.3s ease-in-out" }}
+    >
      { currentStep === 1 && <HeaderQuiz />}
       {/* {currentStep === 1 && <HeroQuiz />} */}
       <ProgressBar
@@ -210,6 +223,7 @@ const MainScreen = () => {
               goToNextStep={goToNextStep}
               isButtonDisabled = {isButtonDisabled}
               setIsButtonDisabled={setIsButtonDisabled}
+              setLoader={setLoader} 
             />}
           {currentStep === 9 &&
             <Step9
@@ -222,7 +236,7 @@ const MainScreen = () => {
             />}
 
         </div>
-        {currentStep < totalScreens && currentStep !==8 &&(
+        {currentStep < totalScreens && !loader  &&(
           <MainButton
             currentStep={currentStep}
             onClick={currentStep === 6 ? handleFileUpload : goToNextStep}
