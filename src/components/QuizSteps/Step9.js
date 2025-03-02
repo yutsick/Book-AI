@@ -200,17 +200,19 @@ function Step9({ setProgressStep }) {
         <div className="max-w-[325px] w-full">
           <div className="mb-[15px]">
             <h2 className="field-title">Order Summary</h2>
-            <p className="text-[16px] text-[#727272]">Personalize full length book</p>
+            <p className="text-[16px] text-[#727272]">Personalized full length book</p>
           </div>
           <div className=" flex gap-y-[10px] flex-col">
             <div className="flex justify-between">
-              <span>1 {cover[selectedCoverIndex]?.title} cover book:</span>
+              {/* <span>1 {cover[selectedCoverIndex]?.title} cover book:</span> */}
+              <span>Paperback Cover Book:</span>
               <span className="text-right">${(cover[selectedCoverIndex]?.cost || 0).toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
-              <span>+ <span>{selectedCopies}</span> copies:</span>
+              {/* <span>+ <span>{selectedCopies}</span> copies:</span> */}
+              <span>Additional copies:</span>
               <span className="text-right">
-                ${(selectedCopies * (selectedCoverIndex === 0 ? 20.00 : 30.00)).toFixed(2)}
+                ${((selectedCopies-1) * (selectedCoverIndex === 0 ? 20.00 : 30.00)).toFixed(2)}
               </span>
             </div>
             <div className="flex justify-between">
