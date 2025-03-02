@@ -3,6 +3,7 @@ import CreateBookContext from "@/contexts/CreateBookContext";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
 import config from "../../config";
 export const useBookAPI = () => {
+
   const { questionsUrl } = config;
   const {
     authorName, selectedAge, selectedGender, questionsAndAnswers,
@@ -38,12 +39,8 @@ export const useBookAPI = () => {
   useEffect(() => {
     if (!questions) return;
     let missingFields = [];
-
     if (!authorName) missingFields.push("authorName");
-    // if (!selectedAge) missingFields.push("selectedAge");
-    // if (!selectedGender) missingFields.push("selectedGender");
     if (questionsAndAnswers.length === 0) missingFields.push("questionsAndAnswers");
-    // if (!selectedGenre) missingFields.push("selectedGenre");
 
     if (missingFields.length > 0) {
       console.error(`⛔ Missing required fields: ${missingFields.join(", ")}`);
@@ -56,11 +53,12 @@ export const useBookAPI = () => {
 
     if (!contextUpdated && !genreUpdated && typeof window !== "undefined") {
       const storedBooks = localStorage.getItem(storageKey);
+
       if (storedBooks) {
         try {
           const parsedBooks = JSON.parse(storedBooks);
           if (Array.isArray(parsedBooks) && parsedBooks.length > 0) {
-            console.log("📦 Using books from localStorage:", parsedBooks);
+            console.log("📦 Using books from localStorage");
             setBooks(parsedBooks);
             setLoading(false);
             return;
@@ -79,7 +77,7 @@ export const useBookAPI = () => {
     }
 
     if (fetchTriggered.current) {
-      console.warn("🚫 API call already triggered, skipping...");
+      // console.warn("🚫 API call already triggered, skipping...");
       return;
     }
     fetchTriggered.current = true;
@@ -91,61 +89,31 @@ export const useBookAPI = () => {
       setError(null);
 
       try {
-        // const response = await fetch("https://api.booktailor.com/generate-titles", {
-        //   method: "POST",
-        //   headers: { "Content-Type": "application/json" },
-        //   body: JSON.stringify({
-        //     author_name: authorName,
-        //     genre: selectedGenre || null,
-        //     gender: selectedGender || null,
-        //     age: selectedAge ? String(selectedAge.value) : null,
-        //     quiz_answers: questionsAndAnswers
-        //       .filter((el) => el.answer.length !== 0)
-        //       .map(({ value, answer }) => {
-        //         const questionObj = questions.find((q) => q.value === value);
-        //         return {
-        //           question: questionObj ? questionObj.label.replace("{author}", authorName) : "Unknown question",
-        //           answer,
-        //         };
-        //       }),
-        //   }),
-        // });
-        const mockFetch = () => {
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              resolve({
-                ok: true,
-                json: async () => ({
-                  bookTitles: [
-                    {
-                      title: "It took us 4 years, 3 months & 8 days to finally meet for coffee",
-                      author: "Tarik",
-                      subtitle: "Close friends don’t always need to meet in person",
-                    },
-                    {
-                      title: "A small savings jar",
-                      author: "Tarik",
-                      subtitle: "My path to the world of big dreams has never been easier or felt farther away",
-                    },
-                    {
-                      title: "In My Next Life, I'd Like to Be a Shih Tzu",
-                      author: "Tarik",
-                      subtitle: "An Unforgettable Diary About Dogs, Humans, and the Lessons, They Teach Us",
-                    },
-                  ],
-                }),
-              });
-            }, 900);
-          });
+        const response = await fetch("https://api.booktailor.com/generate-titles", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            author_name: authorName,
+            genre: selectedGenre || null,
+            gender: selectedGender || null,
+            age: selectedAge ? String(selectedAge.value) : null,
+            quiz_answers: questionsAndAnswers
+              .filter((el) => el.answer.length !== 0)
+              .map(({ value, answer }) => {
+                const questionObj = questions.find((q) => q.value === value);
+                return {
+                  question: questionObj ? questionObj.label.replace("{author}", authorName) : "Unknown question",
+                  answer,
+                };
+              }),
+          }),
+        });
+     
+
+        if (!response.ok) {
+          throw new Error("Oops... Something went wrong. Please try again in 20 seconds.");
+          console.log("❌ API Response:", response);
         };
-
-
-        // if (!response.ok) {
-        //   throw new Error("Oops... Something went wrong. Please try again in 20 seconds.");
-        //   console.log("❌ API Response:", response);
-        // };
-        const response = await mockFetch();
-
 
         const data = await response.json();
 
@@ -168,6 +136,6 @@ export const useBookAPI = () => {
 
     fetchBooks();
   }, [genreUpdated, questions, questionsAndAnswers]);
-
+console.log(books);
   return { books, loading, error };
 };
