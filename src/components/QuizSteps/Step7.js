@@ -241,7 +241,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
         <div className={`relative z-20 flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-8 md:mt-2" : "mt-8 md:-mt-6"
           }`}>
           <button
-            className="text-[12px] shadow-sm font-semibold bg-transparent text-[#2b2b2b] h-8 box-content w-[120px] flex items-center justify-center border-[0.4px] rounded-[3px]  border-[#2b2b2b] cursor-pointer bg-[#ECECEC]"
+            className="text-[12px] shadow-sm font-semibold text-[#2b2b2b] h-8 box-content w-[120px] flex items-center justify-center border-[0.4px] rounded-[3px]  border-[#2b2b2b] cursor-pointer bg-[#ECECEC]"
             onClick={() => {
               setIsCropperOpen(true);
               setIsModalOpen(true);
