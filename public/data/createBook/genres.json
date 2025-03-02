@@ -4,7 +4,7 @@
   {"id": "3", "name": "Romance", "description": "Love stories filled with emotion, connection, and heart", "icon": "images/create-book/Romance.png"},
   {"id": "4", "name": "Mystery", "description": "Whodunits, suspenseful plots, and gripping investigations", "icon": "images/create-book/Mystery.png"},
   {"id": "5", "name": "Memoir", "description": "Personal stories capturing life’s highs, lows, and lessons", "icon": "images/create-book/Memoir.png"},
-  {"id": "6", "name": "Non-fiction ", "description": "Mixing professional knowledge with creative stories.", "icon": "images/create-book/Expert_Fiction.png"}
+  {"id": "6", "name": "Non-fiction", "description": "Mixing professional knowledge with creative stories.", "icon": "images/create-book/Expert_Fiction.png"}
 ]
   
  

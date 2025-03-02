@@ -49,7 +49,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   useEffect(() => {
     console.log("🔄 useEffect triggered - books changed:", books);
 
-    if (Array.isArray(books) && books.length > 0 && visibleTopics.length === 0) {
+    if (Array.isArray(books) && books.length > 0 ) {
       console.log("📚 Books from API:", books);
 
       const visible = books.slice(0, 3);
@@ -68,11 +68,12 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   }, [setProgressStep]);
 
   useEffect(() => {
-    setIsButtonDisabled(!selectedTopic);
+    console.log('YEOP', loading, selectedTopic);
+    setIsButtonDisabled(!selectedTopic || loading);
     return () => {
       setIsButtonDisabled(false);
     };
-  }, [setIsButtonDisabled, selectedTopic]);
+  }, [setIsButtonDisabled, selectedTopic, loading]);
 
   const fetchNewBooks = async () => {
     toggleLoading(true);

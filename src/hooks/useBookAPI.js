@@ -136,6 +136,6 @@ export const useBookAPI = () => {
 
     fetchBooks();
   }, [genreUpdated, questions, questionsAndAnswers]);
-console.log(books);
+
   return { books, loading, error };
 };
