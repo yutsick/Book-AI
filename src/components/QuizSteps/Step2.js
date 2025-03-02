@@ -34,7 +34,7 @@ function StepTwo ({ setProgressStep}) {
           <div className="md:mx-6">
             <div className="field-title">Pick a vibe (optional)</div>
             <div className="field-desc">
-            Your book will be funny and satirical—the genre shapes its style and atmosphere
+            Your book will be <strong>funny and satirical</strong> — the genre shapes its style and atmosphere
             </div>
             <div className="mb-8 ">
               <RadioButtonList

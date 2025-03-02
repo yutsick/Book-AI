@@ -82,7 +82,13 @@ const FloatingInput = ({
     if (!localValue.trim()) { 
       const timer = setTimeout(() => {
         if (textareaRef.current) {
-          textareaRef.current.focus();
+
+          const el = textareaRef.current;
+          el.focus();
+  
+
+          el.value = " ";
+          el.value = "";
         }
       }, 0);
   
@@ -154,7 +160,7 @@ const FloatingInput = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className={`text-[16px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px] rounded-[3px] px-4 w-full resize-none overflow-hidden focus:outline-none box-border ${isFocused ? "border-[0.5px] border-[#434343]" : "" }`}
+          className={`text-[16px] leading-[20px] text-gray placeholder:text-[12px] placeholder:leading-[16px] rounded-[3px] px-4 w-full resize-none overflow-hidden focus:outline-none box-border ${isFocused ? "border-[0.5px] border-[#434343]" : "border-[0.3px] border-[#bfbfbf]/50" }`}
           placeholder={localValue ? "" : localPlaceholder}
           rows={1}
           style={{

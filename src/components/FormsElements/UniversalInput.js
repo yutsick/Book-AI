@@ -75,7 +75,7 @@ const handleBlur = () => {
       </div>
       <div className="field-desc" dangerouslySetInnerHTML={{ __html: description }}></div>
       {extraLabel && (
-        <label className="block text-gray-300   -mb-1">{label}</label>
+        <label className=" block text-gray-300   -mb-1">{label}</label>
       )}
 
       <div className="relative">
@@ -104,7 +104,7 @@ const handleBlur = () => {
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className={`mt-[14px] rounded-[3px]  ${ focus || value ? 'pb-[9px] pt-7' : 'pt-2 pb-2'} ${border ? "border" : ""} border-gray-300 px-4 w-full h-[60px] focus:outline-none text-[17px]`}
+          className={`mt-[14px] rounded-[3px]  ${ focus || value ? 'pb-[9px] pt-7' : 'pt-2 pb-2'} ${border ? "border" : ""} border-[0.3px] border-[#bfbfbf]/50 px-4 w-full h-[60px] focus:outline-none text-[17px]`}
           placeholder={value ? "" : localPlaceholder}
         />
       </div>

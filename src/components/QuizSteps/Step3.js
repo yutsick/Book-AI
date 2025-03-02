@@ -291,21 +291,7 @@ function Step3({ setIsButtonDisabled, setProgressStep, textError }) {
         <div className="field-desc mt-2">
           Each question you answer brings us closer to creating something truly special
         </div>
-        {/* <div className="mt-8">
-          {questionsAndAnswers.map(({ question, answer }) => (
-            <CustomText
-              setIsButtonDisabled={setIsButtonDisabled}
-              key={question}
-              label={question}
-              placeholder="Type your answer here..."
-              value={answer}
-              onChange={(newAnswer) => handleInputChange(question, newAnswer)}
-              tip={questions.find((q) => q.label === question)?.tip || null}
-              textError={textError}
-              onDelete={() => handleDelete(question)}
-            />
-          ))}
-        </div> */}
+
         <div className="mt-8">
           {questionsAndAnswers.map(({ value, answer }) => {
             const questionObj = questions ? questions.find((q) => q.value === value) : null;

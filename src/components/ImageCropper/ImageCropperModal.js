@@ -16,9 +16,6 @@ const useScreenWidth = () => {
 };
 
 
-
-
-
 const ImageCropperModal = ({ 
   imageSrc, 
   onClose, 
@@ -45,7 +42,7 @@ const ImageCropperModal = ({
   const selectedTemplateData = cropperData.find((item) => item.id === templateId);
   if (!selectedTemplateData) return null;
 
-  const { top, bottom, left, width, height, mobTop, mobLeft, mobWidth, mobHeight, mobBottom, radius } = selectedTemplateData;
+  const { top, bottom, left, width, height, mobTop, mobLeft, mobWidth, mobHeight, mobBottom, radius, rounded } = selectedTemplateData;
 
   const isMobile = window.innerWidth <= 768;
   const [cropWidth, setCropWidth] = useState(isMobile ? mobWidth : width);
@@ -169,7 +166,8 @@ const dynamicWidth = screenWidth >= 465 ? 400 : screenWidth - 50;
               cropShape={radius ? "round" : "rect"}
               style={{
                 containerStyle: {
-                  borderRadius: radius ? "50%" : "0",
+                  borderRadius: rounded ? "8px" :  radius ? "50%" : "0",
+                  transform: rounded ? "rotate(3.5deg)" : "none",
                 },
               }}
             />
@@ -178,7 +176,7 @@ const dynamicWidth = screenWidth >= 465 ? 400 : screenWidth - 50;
           <p className="text-gray-500">Loading image...</p>
         )}
 
-        <div className={`flex items-center justify-between px-4 gap-5 bg-white -bottom-14 md:-bottom-6 left-1/2 -translate-x-1/2 absolute h-[45px]`}
+        <div className={`flex items-center justify-between px-4 gap-5 bg-white -bottom-14 md:-bottom-12 left-1/2 -translate-x-1/2 absolute h-[45px]`}
         style={{ width: dynamicWidth }}>
           <div className="flex items-center gap-2">
             <label htmlFor="zoom-slider" className="text-[12px] text-gray-500 font-bold">Zoom:</label>

@@ -70,24 +70,6 @@ function StepOne({ setIsButtonDisabled, setProgressStep, textError, setTextError
           />
         </div>
 
-        {/* <div className="mb-4">
-          <label
-            htmlFor="author-gender"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
-
-          </label>
-          <CustomSelect
-            title="How does the author identify?"
-            className="w-full border border-gray-300 rounded-lg p-2"
-            options={genderOptions}
-            value={selectedGender} 
-            onChange={setSelectedGender} 
-            placeholder="Select an option"
-            afterFocusPlaceholder="Author's gender"
-          />
-
-        </div> */}
         <div className="flex flex-col md:flex-row mb-4 md:gap-4 gap-8">
           <div className="">
             <SimpleRadio 

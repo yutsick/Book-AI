@@ -1,149 +1,168 @@
 import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth, adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
-
 const CoverTemplate3 = ({ type, data }) => {
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, selectedSubTopic, croppedImage, praises } = data;
+
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const elements = {
-    spineTitle: { ref: useRef(null), maxFontSize: 44, maxWidth: 400 },
-    spineAuthor: { ref: useRef(null), maxFontSize: 28, maxWidth: 250, maxHeight: 50 },
-    frontAuthor: { ref: useRef(null), maxFontSize: 28, maxWidth: 320, maxHeight: 50 },
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280, maxHeight: 40 },
+    title: { ref: useRef(null), maxFontSize: 27, maxHeight: 80 },
+    subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
+    spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
+    spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
   };
 
   const [fontSizes, setFontSizes] = useState({
-    spineTitle: 44,
-    spineAuthor: 28,
-    frontAuthor: 28,
+    frontAuthor: 26,
+    title: 27,
+    subTitle: 20,
+    spineTitle: 28,
+    spineAuthor: 17,
   });
 
   useEffect(() => {
     const newFontSizes = {};
 
+    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth, maxHeight }]) => {
+      if (ref.current) {
+        let fontSize = maxFontSize;
+        if (maxWidth) {
+          fontSize = adjustFontSizeByWidth(ref, fontSize, maxWidth);
+        }
+        if (maxHeight) {
+          fontSize = adjustFontSizeByHeight(ref, fontSize, maxHeight);
+        }
 
-    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxHeight }]) => {
-      if (ref.current && maxHeight) {
-        newFontSizes[key] = adjustFontSizeByHeight(ref, maxFontSize, maxHeight);
-      }
-    });
-
-
-    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth }]) => {
-      if (ref.current && maxWidth) {
-        newFontSizes[key] = adjustFontSizeByWidth(
-          ref,
-          newFontSizes[key] || maxFontSize,
-          maxWidth
-        );
+        newFontSizes[key] = fontSize;
       }
     });
 
     setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
-  }, [authorName, selectedTopic]);
-
-
-
+  }, [selectedTopic, selectedSubTopic, authorName]);
 
   return (
     <>
+      {/* Front Cover */}
       {type === "front" && (
-        <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-caveat text-[#000082]"
-          style={{ backgroundImage: "url('/images/create-book/bg/bg3.png')" }}
-        >
-          <div className="flex flex-col gap-4 max-w-[75%] mx-auto">
-            <div className="text-[44px] leading-[44px] font-bold text-center mt-6 -rotate-1">
-              {selectedTopic || "Default Topic"}
-            </div>
-            <div className="text-[28px] leading-[28px] text-center">
-              {selectedSubTopic || "Default Sub Topic"}
-            </div>
-          </div>
-
-          <div className="flex flex-col w-full flex-1 relative mt-10">
-            <div className="w-[300px] h-[360px] mx-auto shadow rotate-[-2deg] border-[3px] border-white bg-[#C6B360]">
+        <div className="w-[431px] h-[648px] bg-white p-3 mx-auto relative">
+          <div
+            className="relative h-full w-full flex flex-col items-center justify-between"
+            style={{ backgroundImage: "url('/images/create-book/bg/bg8.png')" }}
+          >
+            {/* Heading */}
+            <div className="w-full h-full flex items-end">
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-full object-cover block"
+                className="w-full h-full max-h-[400px] object-cover block"
               />
             </div>
+          </div>
 
-            <div className=" mx-auto shadow max-w-[80%] bg-white h-[46px] w-full flex items-center justify-center rotate-[2deg] mt-[-30px] px-2">
+          <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4 px-8 text-center flex-1 text-black pt-8 pb-11">
+            <div className="text-left text-[20px] h-full flex flex-col justify-between w-full">
+              <div className="max-w-[300px] w-full pb-[70px] relative">
+                <img src="/images/create-book/bg/title8.png" alt="" />
+                <div className="max-w-[260px] font-degular absolute top-10 left-10">
+
+                  <div
+                    ref={elements.title.ref}
+                    className="font-black max-w-[200px]"
+                    style={{
+                      fontSize: `${fontSizes.title}px`,
+                      lineHeight: `${fontSizes.title}px`,
+                    }}
+                  >
+                    {selectedTopic || "Default Topic"}
+                  </div>
+
+                  <div
+                    ref={elements.subTitle.ref}
+                    className="mt-1 font-degular font-semibold max-w-[200px]"
+                    style={{
+                      fontSize: `${fontSizes.subTitle}px`,
+                      lineHeight: `${fontSizes.subTitle * 0.9}px`,
+                    }}
+                  >
+                    {selectedSubTopic || "Default Sub Topic"}
+                  </div>
+
+                </div>
+              </div>
+
               <div
-                ref={elements.frontAuthor.ref}
-                style={{ fontSize: `${fontSizes.frontAuthor}px` }}
-                className="font-reenie"
+                className="h-[80px] flex items-center justify-center font-bold"
+                style={{
+                  backgroundImage: "url('/images/create-book/bg/author8.png')",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "contain",
+                  backgroundPosition: "center",
+                }}
               >
-                {authorName || "Default Author"}
+                <div className=" rotate-[-3deg]">
+
+                  <div className=" text-black font-degular font-bold mt-3 "
+                    ref={elements.frontAuthor.ref}
+                    style={{
+                      fontSize: `${fontSizes.frontAuthor}px`,
+                      lineHeight: `${fontSizes.frontAuthor}px`
+                    }}
+                  >
+                    {authorName || "Default Author"}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
 
+      {/* Back Cover */}
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] font-caveat mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat text-[#000082]"
-          style={{ backgroundImage: "url('/images/create-book/bg/bg3.png')" }}
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-white text-black font-degular"
 
         >
-          {/* {!isIOS && (
-      <img
-        src={isMobile()
-          ? "/images/create-book/bg/bg3-back-mob.jpg"
-          : "/images/create-book/bg/bg3-back.png"}
-        alt="Back Cover"
-      />
-    )} */}
+
           {praises ? (
-            generateBookBackCover({ author: authorName, praises, metaColor: "#000082", website: "www.booktailor.com", fontSize: 15 })
+            generateBookBackCover({ author: authorName, praises, metaColor: "#000", website: "www.booktailor.com" })
           ) : (
             <p>Loading testimonials...</p>
           )}
         </div>
+
       )}
 
-
+      {/* Spine */}
       {type === "spine" && (
         <div className="h-[648px] flex justify-center relative">
-          <div
-            className="p-2 h-[57px] bg-cover bg-center bg-no-repeat flex items-center w-[648px] gap-10 justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] bg-[#EEE8D9]"
-            style={{ backgroundImage: "url('/images/create-book/bg/bg3-spine.png')" }}
-          >
-            <div className="w-full flex items-center gap-4 justify-between font-bold font-caveat text-[#000082]">
+          <div className="flex text-black font-black items-center h-[57px] w-[648px] px-4 bg-white justify-center absolute rotate-90 origin-top-left left-[calc(50%+28px)] gap-10 font-degular">
 
-              <div className="spine-title-container flex-1 flex justify-center">
-                <div
-                  ref={elements.spineTitle.ref}
-                  className="whitespace-nowrap font-bold text-center pb-2"
-                  style={{ fontSize: `${fontSizes.spineTitle}px` }}
-                >
-                  {selectedTopic || "Default Topic"}
-                </div>
+            <div className="flex pb-1 flex-col justify-center items-center text-[28px] leading-[28px] tracking-[0.01em] h-full">
+              <div
+                ref={elements.spineTitle.ref}
+                className="whitespace-nowrap"
+                style={{ fontSize: `${fontSizes.spineTitle}px` }}
+              >
+                {selectedTopic || "Default Topic"}
               </div>
+            </div>
 
-              <div className="spine-author-container flex justify-end pr-2 w-[180px] text-center">
-                <div
-                  ref={elements.spineAuthor.ref}
-                  className="font-medium font-reenie break-words"
-                  style={{
-                    fontSize: `${fontSizes.spineAuthor}px`,
-
-                    lineHeight: "1.2",
-                    overflow: "hidden",
-                  }}
-                >
-                  {authorName || "Default Author"}
-                </div>
+            <div className="flex flex-col justify-center items-center  h-full">
+              <div
+                ref={elements.spineAuthor.ref}
+                className="whitespace-nowrap"
+                style={{ fontSize: `${fontSizes.spineAuthor}px` }}
+              >
+                {authorName || "Default Author"}
               </div>
-
             </div>
           </div>
         </div>
