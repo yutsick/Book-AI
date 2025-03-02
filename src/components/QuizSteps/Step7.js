@@ -229,14 +229,14 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
           <div className={` 
             mt-4
             md:mt-0 flex md:grid grid-cols-2 grid-rows-4 gap-4 w-full md:w-auto 
-            h-[135px] md:h-auto overflow-x-auto md:overflow-visible whitespace-nowrap`}
+            h-[135px] md:h-auto overflow-x-auto md:overflow-visible whitespace-nowrap scrollbar-visible`}
           >
             {previewTemplates.map((preview) => (
               <div className="w-[90px] flex-shrink-0 md:h-auto h-[130px]" key={preview.id}>
                 <img
                   src={preview.src}
                   alt={preview.alt}
-                  className="w-full h-auto cursor-pointer"
+                  className="w-full pb-1 md:p-0 h-full md:h-auto cursor-pointer"
                   onClick={() => fetchGeneratedCover(preview.id)}
                 />
               </div>

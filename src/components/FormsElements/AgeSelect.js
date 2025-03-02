@@ -24,6 +24,11 @@ const CustomSelect = ({
       justifyContent: "center",
       position: "relative",
       cursor: "pointer",
+      border: state?.hasValue ? "0.5px solid #00000080" : "0.3px solid #bfbfbf80",
+      "&:hover": {
+        border: state?.hasValue ? "0.5px solid #00000080" : "0.3px solid #bfbfbf80", 
+        backgroundColor: "#fff", 
+      }
     }),
     placeholder: (base) => ({
       ...base,
@@ -31,12 +36,12 @@ const CustomSelect = ({
       fontSize: "17px",
       textAlign: "center",
       width: "auto",
-      marginRight: "38px", 
-      
+      marginRight: "38px",
+
     }),
     singleValue: (base) => ({
       ...base,
-   
+
       color: "#000",
       fontSize: "17px",
       textAlign: "center",
@@ -47,31 +52,31 @@ const CustomSelect = ({
         ...base,
         color: "#929292",
         transition: "0.3s",
-        marginLeft: "8px", 
-        flexShrink: 0, 
-        position: state.selectProps.value.value ?   "static" : "absolute",
-        right: "37%", 
+        marginLeft: "8px",
+        flexShrink: 0,
+        position: state.selectProps.value.value ? "static" : "absolute",
+        right: "37%",
         // top: "50%",
         // transform: "translateY(-50%)", 
       };
     },
     indicatorSeparator: () => ({
-      display: "none", 
+      display: "none",
     }),
     menu: (base) => ({
       ...base,
       borderRadius: "10px",
       overflow: "hidden",
       boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-    }),menuList: (base) => ({
+    }), menuList: (base) => ({
       ...base,
       padding: "0",
 
       "&::-webkit-scrollbar-track": {
-      margin: "6px 0",
+        margin: "6px 0",
       },
     }),
-    
+
     option: (base, { isFocused, isSelected }) => ({
       ...base,
       backgroundColor: isSelected ? "#E0E0E0" : isFocused ? "#F0F0F0" : "#FFF",
@@ -100,9 +105,9 @@ const CustomSelect = ({
       styles={customStyles}
       isSearchable={false}
       classNames={{
-        menuList: () => "custom-scrollbar", // Додаємо клас напряму
+        menuList: () => "custom-scrollbar",
       }}
-      
+
     />
   );
 };

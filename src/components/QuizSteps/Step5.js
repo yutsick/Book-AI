@@ -68,7 +68,6 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   }, [setProgressStep]);
 
   useEffect(() => {
-    console.log('YEOP', loading, selectedTopic);
     setIsButtonDisabled(!selectedTopic || loading);
     return () => {
       setIsButtonDisabled(false);
@@ -158,7 +157,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   return (
     <div className="relative">
        {regenerate && (
-      <div className="absolute w-full h-full bg-black opacity-60 flex justify-center items-center">
+      <div className="absolute w-full h-full bg-transparent  flex justify-center items-center">
         <div className=" ">
           <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
         </div>

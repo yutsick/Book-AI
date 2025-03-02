@@ -40,11 +40,12 @@ const CustomModalSelect = ({
             {selected ? selected.label : placeholder}
           </span>
           {iconOrange ? (
-            <svg width="32" height="32" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="8" cy="8" r="8" fill="#EDB414" />
-              <line x1="8.15" y1="3" x2="8.15" y2="12" stroke="white" strokeWidth="1.3" />
-              <line x1="3.5" y1="7.35" x2="12.5" y2="7.35" stroke="white" strokeWidth="1.3" />
-            </svg>
+            <div className="w-8 h-8 rounded-full text-[32px] leading-[32px] font-medium bg-orange text-white flex justify-center items-center pb-1 pl-[0.5px]">+</div>
+            // <svg width="32" height="32" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            //   <circle cx="8" cy="8" r="8" fill="#EDB414" />
+            //   <line x1="8.15" y1="3" x2="8.15" y2="12" stroke="white" strokeWidth="1.3" />
+            //   <line x1="3.5" y1="7.35" x2="12.5" y2="7.35" stroke="white" strokeWidth="1.3" />
+            // </svg>
           ) : (
             <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path
@@ -63,11 +64,11 @@ const CustomModalSelect = ({
             onClick={(e) => e.stopPropagation()
 
             }>
-              <ul className="max-h-[280px] overflow-auto custom-scrollbar">
+              <ul className="max-h-[280px] overflow-auto custom-scrollbar flex flex-col gap-2">
                 {options.map((option) => (
                   <li
                     key={option.value}
-                    className={`p-3 cursor-pointer rounded-md hover:bg-gray-100 ${option.isDisabled ? "text-gray-300 opacity-50 cursor-not-allowed" : selected?.value === option.value ? "bg-gray-200 font-bold" : ""}`}
+                    className={`border-[#959595] border-[0.5px] p-3 cursor-pointer rounded-md hover:bg-gray-100 mr-6 ${option.isDisabled ? "text-gray-300 opacity-50 cursor-not-allowed hover:bg-white" : selected?.value === option.value ? "bg-gray-200 font-bold " : ""}`}
                     onClick={() => !option.isDisabled && handleSelect(option)}
                   >
                     {option.label}

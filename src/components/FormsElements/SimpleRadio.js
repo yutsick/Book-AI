@@ -8,8 +8,8 @@ const SimpleRadio = ({ options, onChange, value }) => {
           key={option.value}
           className={`flex items-center px-4 h-[43px]  rounded-[12px] cursor-pointer transition-all hover:bg-[#F1F1F1] ${
             value === option.value
-              ? "bg-[#e4e4e4]  text-gray-900 font-semibold md:hover:bg-[#e4e4e4]"
-              : "bg-white border-[#484848] text-[#484848] md:hover:bg-[#F6F5F3]"
+              ? "bg-[#e4e4e4]  text-gray-900 font-semibold md:hover:bg-[#e4e4e4] border-[0.5px] border-black"
+              : "bg-white border-[0.3px] border-[#bfbfbf]/50 text-[#484848] md:hover:bg-[#F6F5F3]"
           }`}
         >
           <input
