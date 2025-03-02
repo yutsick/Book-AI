@@ -13,7 +13,7 @@ function BookPreview({ selectedTemplate, authorName, selectedTopic, selectedSubT
           style={{
             "--bookWidth": "135px",
             "--bookHeight": "190px",
-            "--spineWidth": "29px",
+            "--spineWidth": "16px",
             perspective: "1000px",
 
             backgroundColor: 'transparent'
@@ -27,6 +27,8 @@ function BookPreview({ selectedTemplate, authorName, selectedTopic, selectedSubT
               transformStyle: ' preserve-3d',
               width: "100%",
               height: "100%",
+              position: "relative",
+              zIndex: "2",
             }}
           >
             {/* Front page */}
@@ -34,9 +36,10 @@ function BookPreview({ selectedTemplate, authorName, selectedTopic, selectedSubT
               className=""
               style={{
                 transform: "translateZ(0)",
-                boxShadow: "0 0 25px #999",
+                boxShadow: "0 0 15px #999",
                 width: "100%",
                 height: "100%",
+
 
               }}
               src={selectedTemplate.front}
@@ -54,8 +57,8 @@ function BookPreview({ selectedTemplate, authorName, selectedTopic, selectedSubT
                 borderTop: "1px solid rgba(0, 0, 0, 0.08)",
                 borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
                 top: '0',
-                right: '-24px',
-                boxShadow: "16px 0px 10px #eaeaea",
+                right: '-16px',
+                boxShadow: "8px 0px 6px #eaeaea",
               }}
             >
               <div
@@ -73,9 +76,9 @@ function BookPreview({ selectedTemplate, authorName, selectedTopic, selectedSubT
                 width: "5px",
                 transform: "",
                 transformOrigin: "",
-                right: '-27px',
-                top: '0',
-                height: 'calc(100% - 8px)',
+                right: '-16px',
+                top: '-2px',
+                height: 'calc(100% - 4px)',
                 opacity: '0.7'
               }}
             >

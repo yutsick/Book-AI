@@ -19,14 +19,14 @@ const previewTemplates = [
 ];
 
 const cropperData = [
-  { id: 1, top: null, bottom: 63, left: 0, width: 350, height: 290, mobTop: 0, mobBottom: 50, mobLeft: 0, mobWidth: 280, mobHeight: 250 },
-  { id: 2, top: null, bottom: 173, left: 0, width: 350, height: 355, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 280 },
-  { id: 3, top: null, bottom: 70, left: 58, width: 242, height: 270, mobTop: null, mobBottom: 55, mobLeft: 40, mobWidth: 198, mobHeight: 220 },
-  { id: 4, top: 0, bottom: null, left: 0, width: 350, height: 330, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
+  { id: 1, top: null, bottom: 173, left: 0, width: 350, height: 355, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 280 },
+  { id: 2, top: null, bottom: 0, left: 0, width: 350, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 350 },
+  { id: 3, top: null, bottom: 10, left: 12, width: 327, height: 325, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 260 },
+  { id: 4, top: null, top: 115, left: 75, width: 200, height: 195, mobTop: null, mobBottom: 175, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true  },
   { id: 5, top: null, bottom: 0, left: 0, width: 350, height: 527, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 420 },
-  { id: 6, top: null, bottom: 90, left: 60, width: 230, height: 248, mobTop: null, mobBottom: 70, mobLeft: 0, mobWidth: 195, mobHeight: 200, radius: true },
+  { id: 6, top: 0, bottom: null, left: 0, width: 350, height: 330, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
   { id: 7, top: null, bottom: 90, left: 60, width: 230, height: 248, mobTop: null, mobBottom: 70, mobLeft: 0, mobWidth: 190, mobHeight: 200, radius: true },
-  { id: 8, top: null, bottom: 10, left: 12, width: 327, height: 325, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 260 }
+  { id: 8, top: null, bottom: 0, left:140,  width: 212, height: 200, mobTop: null, mobBottom: 0.01, mobLeft: 130, mobWidth: 152, mobHeight: 160 },
 ]
 function Step7 ({ setProgressStep, setIsButtonDisabled }) {
   const {
@@ -52,6 +52,9 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
   const modalRef = useRef(null);
 
   const { praises, loading: praisesLoading } = usePraises();
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const swiperInstance = useRef(null);
 
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
@@ -192,7 +195,11 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
               <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
             </div>
           ) : selectedCover ? (
-            <CoverSlider selectedCover={selectedCover} setSwiperSize={setSwiperSize} />
+            <CoverSlider 
+              selectedCover={selectedCover} 
+              setSwiperSize={setSwiperSize} 
+              swiperInstance={swiperInstance} 
+            />
           ) : (
             <p>No cover selected</p>
           )}
@@ -206,6 +213,8 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
             onClick={() => {
               setIsCropperOpen(true);
               setIsModalOpen(true);
+              swiperInstance.current.slideTo(0); 
+              
             }}
           >
             Adjust Image
@@ -245,6 +254,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
             onClick={() => {
               setIsCropperOpen(true);
               setIsModalOpen(true);
+              swiperInstance.current.slideTo(0); 
             }}
           >
             Adjust Image

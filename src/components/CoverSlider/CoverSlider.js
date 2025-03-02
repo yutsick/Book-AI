@@ -5,8 +5,9 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-const CoverSlider = ({ selectedCover, setSwiperSize }) => {
+const CoverSlider = ({ selectedCover, setSwiperSize, swiperInstance }) => {
   const swiperRef = useRef(null);
+
 
   useEffect(() => {
     const updateSize = () => {
@@ -78,9 +79,12 @@ const CoverSlider = ({ selectedCover, setSwiperSize }) => {
         modules={[Navigation]}
         spaceBetween={20}
         slidesPerView={1}
-        loop={true}
+        // loop={true}
+        loop={false} 
+        rewind={true} // Added for scroll backward
         className="w-full"
         onSwiper={(swiper) => {
+          swiperInstance.current = swiper;
           setTimeout(() => {
             if (swiper && swiper.el) {
               setSwiperSize({

@@ -95,7 +95,7 @@ const CoverTemplate5 = ({ type, data }) => {
       {/* Back Cover */}
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat text-[#fff] font-degular"
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat  font-degular"
           style={{
             // backgroundImage: isIOS
             //   ? "url('/images/create-book/bg/bgwhite-back-mob.png')"

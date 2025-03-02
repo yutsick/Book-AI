@@ -1,11 +1,11 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
-
+import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate7 = ({ type, data }) => {
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage } = data;
+  const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -29,7 +29,7 @@ const CoverTemplate7 = ({ type, data }) => {
     <>
       {type === "front" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-montserrat bg-[#FA423B] text-[#000082] py-5">
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-montserrat bg-[#E35205] text-[#000082] py-5">
           <div className="">
             <img src="/images/create-book/bg/wave-blue.png" alt="" className="w-full" />
           </div>
@@ -52,15 +52,15 @@ const CoverTemplate7 = ({ type, data }) => {
           {/* Image with Text */}
           <div className="flex flex-col w-full pt-4 justify-end "
             style={{
-              backgroundImage: "url('/images/create-book/bg/picture-waves-blue.png')",
+              backgroundImage: "url('/images/create-book/bg/picture-waves-blue.svg')",
               backgroundRepeat: "no-repeat",
-              backgroundSize: "305px 330px",
+              backgroundSize: "310px 330px",
               backgroundPosition: "center 0"
             }}>
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="w-[278px] h-[302px] rounded-full object-cover block object-top mx-auto border border-[#000082] bg-white"
+              className="w-[276px] h-[300px] rounded-full object-cover block object-top mx-auto border border-white bg-white"
             />
             <div className="font-montserrat mb-5 mt-6 text-[26px] text-center font-semibold">
               {authorName || "Default Author"}
@@ -72,25 +72,30 @@ const CoverTemplate7 = ({ type, data }) => {
 
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between"
-          style={{
-            backgroundImage: isIOS
-              ? "url('/images/create-book/bg/bg7-back-mob.png')"
-              : "none",
-            backgroundColor: "#FA423B",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-[#E35205]"
+          // style={{
+          //   backgroundImage: isIOS
+          //     ? "url('/images/create-book/bg/bg7-back-mob.png')"
+          //     : "none",
+          //   backgroundColor: "#FA423B",
+          //   backgroundSize: "cover",
+          //   backgroundPosition: "center",
+          //   backgroundRepeat: "no-repeat",
+          // }}
         >
-          {!isIOS && (
+          {/* {!isIOS && (
             <img
               src={isMobile()
                 ? "/images/create-book/bg/bg7-back-mob.png"
                 : "/images/create-book/bg/bg7-back.png"}
               alt="Back Cover"
             />
-          )}
+          )} */}
+                {praises ? (
+                      generateBookBackCover({ author: authorName, praises, metaColor: "#fff", website: "www.booktailor.com"})
+                    ) : (
+                      <p>Loading testimonials...</p>
+                    )}
         </div>
 
       )}
@@ -99,14 +104,14 @@ const CoverTemplate7 = ({ type, data }) => {
 
         <div className="h-[648px] flex justify-center relative">
           <div
-            className="px-5 py-2 bg-[#FA423B] text-[#000082]  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-4  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
+            className="px-5 py-2 bg-[#E35205] text-[#000082]  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-4  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
             <img src="/images/create-book/bg/wave-blue-spine.png" alt="" className="h-[57px] " />
             <div className=" flex items-center justify-between text-[18px] font-semibold font-montserrat flex-1">
 
               <div className="whitespace-nowrap font-montserrat text-[18px] leading-[20px] ">
                 {selectedTopic || "Default Topic"}
               </div>
-              <div className="whitespace-nowrap font-montserrat text-[17px] leading-[17px]">
+              <div className="whitespace-nowrap text-white font-montserrat text-[17px] leading-[17px]">
                 <div
                   ref={spineAuthorRef}
                   style={{ fontSize: `${spineAuthorFontSize}px` }}
