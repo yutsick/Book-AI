@@ -108,7 +108,8 @@ const CoverTemplate3 = ({ type, data }) => {
               >
                 <div className=" rotate-[-3deg]">
 
-                  <div className=" text-black font-degular font-bold mt-3 "
+                  <div className=" text-black font-degular font-bold mt-3 whitespace-nowrap
+"
                     ref={elements.frontAuthor.ref}
                     style={{
                       fontSize: `${fontSizes.frontAuthor}px`,

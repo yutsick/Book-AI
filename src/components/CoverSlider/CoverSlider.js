@@ -110,11 +110,12 @@ const CoverSlider = ({ selectedCover, setSwiperSize, swiperInstance }) => {
             }}
           />
         </SwiperSlide>
-        <SwiperSlide>
-          <img src={selectedCover.spineCover} alt="Spine Cover" className="w-full h-auto" />
-        </SwiperSlide>
+
         <SwiperSlide>
           <img src={selectedCover.backCover} alt="Back Cover" className="w-full h-auto" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src={selectedCover.spineCover} alt="Spine Cover" className="w-full h-auto" />
         </SwiperSlide>
       </Swiper>
     </div>

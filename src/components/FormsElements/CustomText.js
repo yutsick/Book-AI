@@ -79,17 +79,22 @@ const FloatingInput = ({
   }, [localValue, labelHeight, placeholderHeight, tipHeight]);
 
   useEffect(() => {
-    if (!localValue.trim()) { 
-      setTimeout(() => {
-        if (textareaRef.current) {
-          const el = textareaRef.current;
-          el.value = " "; 
-          el.value = ""; 
-          requestAnimationFrame(() => el.focus()); // Гарантує, що зміни застосуються після оновлення UI
-        }
-      }, 10); // Дрібна затримка для коректного спрацьовування
-    }
+    setTimeout(() => {
+      if (textareaRef.current) {
+        const el = textareaRef.current;
+        
+        el.value = " "; 
+        el.value = "";
+        
+        el.click(); // Симулюємо клік перед фокусуванням
+        el.focus();
+        el.setSelectionRange(0, 0);
+      }
+    }, 50);
   }, []);
+  
+  
+  
   
   
 

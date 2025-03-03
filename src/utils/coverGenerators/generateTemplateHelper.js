@@ -52,7 +52,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
     const createAndRender = async (type) => {
       return new Promise((resolve) => {
         const wrapper = document.createElement("div");
-        wrapper.style.backgroundColor = "#FFFBEE";
+        wrapper.style.backgroundColor = "transparent";
         wrapper.style.width = "431px";
         wrapper.style.height = "648px";
         hiddenContainer.appendChild(wrapper);
@@ -140,9 +140,10 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
     (async () => {
       try {
         const frontElement = await createAndRender("front");
-        const spineElement = await createAndRender("spine");
 
         const backElement = await createAndRender("back");
+        const spineElement = await createAndRender("spine");
+
 
         const covers = {
           frontCover: await generateImage(frontElement),

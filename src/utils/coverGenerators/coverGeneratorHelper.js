@@ -1,12 +1,12 @@
 import { generateTemplateCovers } from "./generateTemplateHelper";
-import CoverTemplate1 from "@/components/CoversGenerator/CoverTemplate2";
-import CoverTemplate2 from "@/components/CoversGenerator/CoverTemplate1";
-import CoverTemplate3 from "@/components/CoversGenerator/CoverTemplate8";
-import CoverTemplate4 from "@/components/CoversGenerator/CoverTemplate6";
+import CoverTemplate1 from "@/components/CoversGenerator/CoverTemplate1";
+import CoverTemplate2 from "@/components/CoversGenerator/CoverTemplate2";
+import CoverTemplate3 from "@/components/CoversGenerator/CoverTemplate3";
+import CoverTemplate4 from "@/components/CoversGenerator/CoverTemplate4";
 import CoverTemplate5 from "@/components/CoversGenerator/CoverTemplate5";
-import CoverTemplate6 from "@/components/CoversGenerator/CoverTemplate4";
+import CoverTemplate6 from "@/components/CoversGenerator/CoverTemplate6";
 import CoverTemplate7 from "@/components/CoversGenerator/CoverTemplate7";
-import CoverTemplate8 from "@/components/CoversGenerator/CoverTemplate3";
+import CoverTemplate8 from "@/components/CoversGenerator/CoverTemplate8";
 
 const templates = {
   1: CoverTemplate1,

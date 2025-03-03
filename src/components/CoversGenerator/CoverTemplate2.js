@@ -11,13 +11,13 @@ const CoverTemplate2 = ({ type, data }) => {
   const titleRef = useRef(null);
   const spineTitleRef = useRef(null);
 
-  const [authorFontSize, setAuthorFontSize] = useState(17);
+  const [authorFontSize, setAuthorFontSize] = useState(20);
   const [titleFontSize, setTitleFontSize] = useState(55);
   const [spineTitleFontSize, setSpineTitleFontSize] = useState(28);
 
   useEffect(() => {
     if (type === "spine") {
-      const newFontSize = adjustFontSizeByWidth(authorRef, 17, 150);
+      const newFontSize = adjustFontSizeByWidth(authorRef, 20, 220);
       setAuthorFontSize(newFontSize);
     }
   }, [authorName, type]);
@@ -54,12 +54,12 @@ const CoverTemplate2 = ({ type, data }) => {
         >
           <div
             ref={titleRef}
-            className=" font-extrabold  absolute top-14 left-10  text-center uppercase"
+            className=" font-extrabold  absolute top-12 left-8   uppercase"
             style={{
               transform: "rotate(90deg) translateY(-100%)",
               transformOrigin: "left top",
               fontSize: `${titleFontSize}px`,
-              lineHeight: `${titleFontSize * 1.2}px`,
+              lineHeight: `${titleFontSize * 0.9}px`,
             }}
           >
             {selectedTopic || "Default Topic"}

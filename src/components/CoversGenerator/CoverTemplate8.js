@@ -12,11 +12,11 @@ const CoverTemplate8 = ({ type, data }) => {
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280, maxHeight: 40 },
-    title: { ref: useRef(null), maxFontSize: 56, maxHeight: 220 },
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280 },
+    title: { ref: useRef(null), maxFontSize: 56, maxHeight: 190 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
-    spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
+    spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 220 },
   };
 
   const [fontSizes, setFontSizes] = useState({
@@ -24,7 +24,7 @@ const CoverTemplate8 = ({ type, data }) => {
     title: 56,
     subTitle: 20,
     spineTitle: 28,
-    spineAuthor: 17,
+    spineAuthor: 20,
   });
 
   useEffect(() => {
