@@ -64,11 +64,11 @@ const CustomModalSelect = ({
             onClick={(e) => e.stopPropagation()
 
             }>
-              <ul className="max-h-[280px] overflow-auto custom-scrollbar flex flex-col gap-2">
+              <ul className="max-h-[280px] overflow-auto custom-scrollbar flex flex-col gap-[0.85rem]">
                 {options.map((option) => (
                   <li
                     key={option.value}
-                    className={`border-[#959595] border-[0.5px] p-3 cursor-pointer rounded-md hover:bg-gray-100 mr-6 ${option.isDisabled ? "text-gray-300 opacity-50 cursor-not-allowed hover:bg-white" : selected?.value === option.value ? "bg-gray-200 font-bold " : ""}`}
+                    className={`border-[#959595] border-[0.5px] p-[10px] cursor-pointer rounded-md hover:bg-gray-100 mr-6 ${option.isDisabled ? "text-gray-300 opacity-50 cursor-not-allowed hover:bg-white" : selected?.value === option.value ? "bg-gray-200 font-bold " : ""}`}
                     onClick={() => !option.isDisabled && handleSelect(option)}
                   >
                     {option.label}

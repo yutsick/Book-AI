@@ -80,21 +80,17 @@ const FloatingInput = ({
 
   useEffect(() => {
     if (!localValue.trim()) { 
-      const timer = setTimeout(() => {
+      setTimeout(() => {
         if (textareaRef.current) {
-
           const el = textareaRef.current;
-          el.focus();
-  
-
-          el.value = " ";
-          el.value = "";
+          el.value = " "; 
+          el.value = ""; 
+          requestAnimationFrame(() => el.focus()); // Гарантує, що зміни застосуються після оновлення UI
         }
-      }, 0);
-  
-      return () => clearTimeout(timer);
+      }, 10); // Дрібна затримка для коректного спрацьовування
     }
-  }, []); 
+  }, []);
+  
   
 
   

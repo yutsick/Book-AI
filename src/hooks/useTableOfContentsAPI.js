@@ -101,7 +101,7 @@ export const useTableOfContentsAPI = () => {
             title: selectedTopic,
             subtitle: selectedSubTopic,
             author_name: authorName,
-            genre: selectedGenre.toLowerCase().trim(),
+            genre: (selectedGenre) ? selectedGenre.toLowerCase().trim() : null,
             gender: selectedGender,
             age: selectedAge ? String(selectedAge.value) : null,
 
