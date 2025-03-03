@@ -17,7 +17,7 @@ export default function About() {
         {/* <WhatWeDo /> */}
         <Choose />
         {/* <Vision /> */}
-        <JoinUs />
+        {/* <JoinUs /> */}
         <Footer />
       </main>
     </>
