@@ -24,7 +24,7 @@ function HowItWorks() {
     <div>
       <div className="w-full max-w-[1260px] mx-auto px-10 section-py" id="how-it-works">
         <h2 className="text-title text-center">{worksData.title}</h2>
-        <div className="mt-12 md:mt-[72px] grid grid-cols-1 lg:grid-cols-3 gap-y-[20px] justify-items-center max-w-[1140px] w-full mx-auto md:px-8">
+        <div className="mt-8 md:mt-[72px] grid grid-cols-1 lg:grid-cols-3 gap-y-[20px] justify-items-center max-w-[1140px] w-full mx-auto md:px-8">
           {worksData.cards.map((card, index) => (
             <React.Fragment key={index}>
               <WorkCard

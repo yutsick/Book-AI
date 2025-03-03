@@ -23,10 +23,10 @@ function Videos() {
   return video?.slides?.length ? (
     <>
       <div className='bg-pink section-py relative'>
-        <div className="max-w-[1260px] mx-auto">
+        <div className="max-w-[1260px] mx-auto px-4 md:px-0">
           <h2 className="text-title text-center">{video.title}</h2>
           <div className="h-[460px]">
-            <div  className="relative mx-auto max-w-[90%] md:max-w-[870px]  ">
+            <div  className="relative mx-auto w-full md:max-w-[870px]  ">
                 <Slider
                   type='video'
                   slides={video.slides}

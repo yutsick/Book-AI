@@ -18,7 +18,7 @@ const Hero = () => {
   }, []);
 
   return heroData ? (
-    <section className="flex items-center justify-between px-2 lg:px-0 py-8 md:pb-[32px] bg-white max-w-[910px] mx-auto flex-col md:flex-row gap-2  ">
+    <section className="flex items-center justify-between px-4 lg:px-0 py-8 md:pb-[32px] bg-white max-w-[910px] mx-auto flex-col md:flex-row gap-2  ">
       <div className="md:flex-1 w-full md:w-auto">
         <h1 className=" font-bold text-orange md:leading-[52px] font-roboto md:font-inter">
           {heroData.heading}

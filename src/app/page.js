@@ -24,7 +24,7 @@ export default function Home() {
       <FAQ />
       <Footer />
     </main>
-    <div className="fixed right-1 md:right-[14px] bottom-4 md:bottom-20 z-10">
+    <div className="fixed right-1 md:right-[14px] bottom-14 md:bottom-20 z-10">
           <ChatButton />
         </div>
     </>

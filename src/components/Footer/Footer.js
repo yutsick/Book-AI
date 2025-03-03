@@ -24,7 +24,7 @@ const Footer = () => {
     <footer className="bg-[#454646] text-white md:py-5 pb-3">
       <div className="max-w-[1260px] px-4 mx-auto flex flex-col  justify-between ">
         {/* Navigation Links */}
-        <div className="flex  gap-x-16 px-4 md:px-0">
+        <div className="flex  gap-x-16 ">
           <div className="flex flex-col items-center mt-4 space-y-4 ">
             <ul className="space-y-2">
               {footerData.links.map((link, index) => (

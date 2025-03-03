@@ -12,7 +12,7 @@ const Accordion = ({ data }) => {
   };
 
   return (
-    <div className="max-w-[930px] mx-auto">
+    <div className="max-w-[930px] mx-auto -mt-2">
       {data.map((item, index) => (
         <div
           key={index}

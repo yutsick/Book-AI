@@ -74,11 +74,11 @@ body {
   }
   @layer utilities {
     .text-title {
-      @apply text-[30px] md:text-[44px] text-orange font-bold mb-6 md:mb-[31px] leading-[32px] md:leading-[44px];
+      @apply text-[30px] md:text-[44px] text-orange font-bold mb-3 md:mb-[31px] leading-[32px] md:leading-[44px];
     }
 
     .section-py{
-      @apply py-11 md:pt-20 md:pb-[70px];
+      @apply pb-11 pt-8 md:pt-20 md:pb-[70px];
     }
     .button-sec:hover{
       @apply bg-orange text-white border-orange;
@@ -129,7 +129,7 @@ body {
 
   h1 {
     white-space: nowrap; 
-    font-size: clamp(24px, 8vw, 46px); 
+    font-size: clamp(26px, 8vw, 46px); 
     line-height: clamp(1.2em, 5vw, 1.5em);
 }
 textarea {
