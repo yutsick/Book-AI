@@ -11,13 +11,6 @@ const CoverTemplate8 = ({ type, data }) => {
 
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-  const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280 },
-    title: { ref: useRef(null), maxFontSize: 56, maxHeight: 190 },
-    subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
-    spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
-    spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 220 },
-  };
 
   const [fontSizes, setFontSizes] = useState({
     frontAuthor: 26,
@@ -27,6 +20,14 @@ const CoverTemplate8 = ({ type, data }) => {
     spineAuthor: 20,
   });
 
+  const elements = {
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280 },
+    title: { ref: useRef(null), maxFontSize: 56, maxHeight: 210 },
+    title: { ref: useRef(null), maxFontSize: fontSizes.title, maxWidth: 270},
+    subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
+    spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
+    spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 220 },
+  };
   useEffect(() => {
     const newFontSizes = {};
 
@@ -85,7 +86,7 @@ const CoverTemplate8 = ({ type, data }) => {
                   </div>
                   <div
                     ref={elements.title.ref}
-                    className="text-[#FFE600] mt-2 max-w-[300px] max-h-[220px] block font-extrabold"
+                    className="text-[#FFE600] mt-4   block font-extrabold"
                     style={{
                       fontSize: `${fontSizes.title}px`,
                       lineHeight: `${fontSizes.title*0.85}px`

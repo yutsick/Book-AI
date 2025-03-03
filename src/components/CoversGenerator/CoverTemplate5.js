@@ -100,7 +100,7 @@ const CoverTemplate5 = ({ type, data }) => {
             // backgroundImage: isIOS
             //   ? "url('/images/create-book/bg/bgwhite-back-mob.png')"
             //   : "none",
-            backgroundColor: "#A6AAAC",
+            backgroundColor: "#747778",
             // backgroundSize: "cover",
             // backgroundPosition: "center",
             // backgroundRepeat: "no-repeat",
