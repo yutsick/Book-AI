@@ -3,39 +3,25 @@
     "backgroundUrl": "/images/about-us/stepsBg.png",
     "cards": [
         {
-            "title": "The Beginning of an Idea",
-            "description": "We believe a truly unique, personal gift should be effortless. Writing a book takes time and money—but we changed that. Our platform creates a professionally written, personalized book in minutes, no writing experience needed.",
+            "title": "The Birth of an Idea",
+            "description": "We believe a truly unique, personal gift should be effortless. Writing a book takes time and money—but we changed that. Our platform harnesses AI to create a professionally written, personalized book in minutes, no writing experience needed.",
             "imageUrl": "/images/about-us/icon1.png",
             "alt": "Lamp",
             "cardColor": "#F5F1E7"
         },
         {
-            "title": "Building the Dream Team",
-            "description": "To bring this vision to life, we assembled a team of writers, technologists, and creative thinkers. With expertise in publishing, design, and artificial intelligence, we combined our skills to develop a tool that empowers individuals to share their stories with the world.",
+            "title": "Bringing the Vision to Life",
+            "description": "To make this idea a reality, we built a team of writers, technologists, and creatives with expertise in publishing, design, and artificial intelligence. Together, we developed an intuitive platform that empowers anyone to turn their ideas into beautifully crafted books with ease.",
             "imageUrl": "/images/about-us/icon2.png",
             "alt": "Team",
             "cardColor": "#E0DCCF"
         },
         {
-            "title": "Developing the Platform",
-            "description": "We designed an intuitive platform powered by cutting-edge AI technology. This innovation allows users to turn their ideas into reality with ease—from generating personalized content to choosing stunningbook covers from the catalog we created",
+            "title": "A Gift That Lasts—and Makes You Laugh",
+            "description": "A truly lasting gift isn’t just something to keep—it’s something to enjoy again and again. Humor has the power to bring people together, relieve stress, and create unforgettable memories. That’s why our books don’t just tell stories—they spark laughter, brighten days, and become cherished keepsakes.",
             "imageUrl": "/images/about-us/icon3.png",
             "alt": "Ai",
             "cardColor": "#E4D8B7"
-        },
-        {
-            "title": "A long-lasting gift",
-            "description": "A long-lasting gift isn’t just something to keep—it’s something to enjoy over and over again, especially when it’s filled with humor. A gift that makes someone laugh doesn’t just brighten their day; it becomes a cherished memory, a source of joy they can revisit anytime",
-            "imageUrl": "/images/about-us/icon4.png",
-            "alt": "Book",
-            "cardColor": "#E7D195"
-        },
-        {
-            "title": "We believe in a good laugh",
-            "description": "Humor is more than just entertainment—it’s a powerful tool that brings people together, eases stress and adds joy to everyday life. A good laugh can lighten even the toughest moments, offering a fresh perspective and a sense of relief. Scientifically, humor has been shown to boost mood, improve health, and strengthen relationships.",
-            "imageUrl": "/images/about-us/icon5.png",
-            "alt": "Hand with people",
-            "cardColor": "#EEC85FDB"
         }
     ]
 }

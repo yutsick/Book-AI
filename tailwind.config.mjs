@@ -59,20 +59,20 @@ export default {
         detailsShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.10)',
         
 
-  },
-},
-  },
-plugins: [
-  function ({ addUtilities }) {
-    addUtilities({
-      '.no-scrollbar': {
-        'scrollbar-width': 'none', /* Firefox */
-        '-ms-overflow-style': 'none', /* IE 10+ */
       },
-      '.no-scrollbar::-webkit-scrollbar': {
-        display: 'none', /* Chrome, Safari, Edge */
-      },
-    });
+    },
   },
-],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.no-scrollbar': {
+          'scrollbar-width': 'none', /* Firefox */
+          '-ms-overflow-style': 'none', /* IE 10+ */
+        },
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none', /* Chrome, Safari, Edge */
+        },
+      });
+    },
+  ],
 };

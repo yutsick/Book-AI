@@ -29,7 +29,6 @@ function JoinUs() {
                         className="md:mt-6 w-full h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[23px] rounded-[3px] gap-1 shadow-heroBtnShadow group "
                         href="/create-book"
                     >
-
                         <span className='mb-[2px]'>{joinUsData.buttonText}</span>
                         <span className='group-hover:translate-x-1.5 transition'>
                             <svg className='' width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +42,6 @@ function JoinUs() {
                                     </clipPath>
                                 </defs>
                             </svg>
-
                         </span>
                     </a>
                 </div>

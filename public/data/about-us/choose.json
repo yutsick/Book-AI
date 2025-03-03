@@ -1,6 +1,7 @@
 {
     "title": "Why Choose Us",
     "backgroundUrl": "/images/about-us/chooseBg.png",
+    "buttonText": "Create My Book",
     "cards": [
         {
             "title": "User-Friendly Experience",
