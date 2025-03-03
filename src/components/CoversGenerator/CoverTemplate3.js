@@ -70,7 +70,7 @@ const CoverTemplate3 = ({ type, data }) => {
             <div className="text-left text-[20px] h-full flex flex-col justify-between w-full">
               <div className="max-w-[300px] w-full pb-[70px] relative">
                 <img src="/images/create-book/bg/title8.png" alt="" />
-                <div className="max-w-[260px] font-degular absolute top-10 left-10">
+                <div className="max-w-[260px] font-degular absolute top-8 left-10">
 
                   <div
                     ref={elements.title.ref}

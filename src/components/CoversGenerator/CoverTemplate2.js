@@ -17,7 +17,7 @@ const CoverTemplate2 = ({ type, data }) => {
 
   useEffect(() => {
     if (type === "spine") {
-      const newFontSize = adjustFontSizeByWidth(authorRef, 20, 220);
+      const newFontSize = adjustFontSizeByWidth(authorRef, 20, 180);
       setAuthorFontSize(newFontSize);
     }
   }, [authorName, type]);
@@ -65,7 +65,7 @@ const CoverTemplate2 = ({ type, data }) => {
             {selectedTopic || "Default Topic"}
           </div>
           <div className="flex w-full mt-8 justify-end px-10" >
-            <div className="text-[30px] font-extrabold  w-full flex items-end justify-end">
+            <div className="text-[30px] font-extrabold  w-[70%] flex items-end justify-end">
               {authorName || "Default Author"}
             </div>
           </div>

@@ -64,7 +64,7 @@ const CoverTemplate8 = ({ type, data }) => {
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-full max-h-[250px] max-w-[250px] object-cover block"
+                className="w-full h-full max-h-[255px] max-w-[245px] object-cover block"
               />
             </div>
           </div>
@@ -74,7 +74,7 @@ const CoverTemplate8 = ({ type, data }) => {
               <img src="/images/create-book/bg/bubble.svg" alt="" />
               <div className=" font-degular text-center absolute w-full h-full top-0  pt-12 pb-4 px-14">
                 <div className="w-full h-full flex flex-col items-center ">
-                  <div className=" text-white font-degular font-extrabold mt-3 "
+                  <div className=" text-white font-degular font-extrabold "
                     ref={elements.frontAuthor.ref}
                     style={{
                       fontSize: `${fontSizes.frontAuthor}px`,
@@ -85,10 +85,10 @@ const CoverTemplate8 = ({ type, data }) => {
                   </div>
                   <div
                     ref={elements.title.ref}
-                    className="text-[#FFE600] mt-2 max-h-[200px] block font-extrabold"
+                    className="text-[#FFE600] mt-2 max-w-[300px] max-h-[220px] block font-extrabold"
                     style={{
                       fontSize: `${fontSizes.title}px`,
-                      lineHeight: "normal"
+                      lineHeight: `${fontSizes.title*0.85}px`
                     }}
                   >
                     {selectedTopic || "Default Topic"}

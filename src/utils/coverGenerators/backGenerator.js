@@ -1,7 +1,7 @@
 
 import JsBarcode from "jsbarcode";
 
-export const generateBookBackCover = ({ author, praises, praisesColor, metaColor, website, fontSize=12 }) => {
+export const generateBookBackCover = ({ author, praises, praisesColor, metaColor, website, fontSize=12, decor = false }) => {
   //  EAN-13 
   const barcodeValue = "558462162004"; 
 
@@ -14,7 +14,7 @@ export const generateBookBackCover = ({ author, praises, praisesColor, metaColor
   const barcodeSrc = barcodeCanvas.toDataURL("image/png");
 
   return (
-    <div className="relative w-full h-full px-9 pt-14 pb-8  flex flex-col justify-between"
+    <div className={`relative w-full h-full px-9  ${decor ? "pt-6 pb-6" : "pt-14 pb-8" } flex flex-col justify-between`}
     style={{ color: praisesColor ? praisesColor : metaColor }}
     >
       {/* Testimonials */}

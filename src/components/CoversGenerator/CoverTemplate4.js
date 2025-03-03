@@ -17,8 +17,12 @@ const CoverTemplate4 = ({ type, data }) => {
 
 
   const spineAuthorRef = useRef(null);
-  const maxSpineAuthorWidth = 230;
+  const spineTitleRef = useRef(null);
 
+  const maxSpineTitleWidth = 350;
+  const maxSpineAuthorWidth = 150;
+
+  const [spineTitleFontSize, setSpineTitleFontSize] = useState(20);
   const [spineAuthorFontSize, setSpineAuthorFontSize] = useState(17);
 
   useEffect(() => {
@@ -28,13 +32,21 @@ const CoverTemplate4 = ({ type, data }) => {
     }
   }, [authorName]);
 
+  useEffect(() => {
+    if (spineTitleRef.current) {
+      const newSize = adjustFontSizeByWidth(spineTitleRef, 20, maxSpineTitleWidth);
+      setSpineTitleFontSize(newSize);
+    }
+  }, [selectedTopic]);
+
+
   return (
     <>
       {type === "front" && (
         <div
           className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between  font-montserrat bg-[#000082] text-white py-5">
           <div className="">
-            <img src="/images/create-book/bg/wave-red.png" alt="" className="w-full" />
+            <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
           </div>
           <div className="">
             <div className="font-montserrat  text-[26px] text-center font-semibold">
@@ -74,37 +86,25 @@ const CoverTemplate4 = ({ type, data }) => {
 
             </div>
 
-            <img src="/images/create-book/bg/wave-red.png" alt="" className="w-full" />
+            <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
           </div>
         </div>
       )}
 
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-[#000082]"
-        // style={{
-        //   backgroundImage: isIOS
-        //     ? "url('/images/create-book/bg/bg6-back-mob.png')"
-        //     : "none",
-        //   backgroundColor: "#000082",
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "center",
-        //   backgroundRepeat: "no-repeat",
-        // }}
-        >
-          {/* {!isIOS && (
-            <img
-              src={isMobile()
-                ? "/images/create-book/bg/bg6-back-mob.png"
-                : "/images/create-book/bg/bg6-back.png"}
-              alt="Back Cover"
-            />
-          )} */}
+          className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-[#000082] py-5">
+        <div className="">
+            <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
+          </div>
           {praises ? (
-            generateBookBackCover({ author: authorName, praises, metaColor: "#fff", website: "www.booktailor.com" })
+            generateBookBackCover({ author: authorName, praises, metaColor: "#fff", website: "www.booktailor.com", decor: true })
           ) : (
             <p>Loading testimonials...</p>
           )}
+               <div className="">
+            <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
+          </div>
         </div>
 
       )}
@@ -114,10 +114,17 @@ const CoverTemplate4 = ({ type, data }) => {
         <div className="h-[648px] flex justify-center relative">
           <div
             className="px-5  py-2 bg-[#000082] text-white  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-4  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
-            <img src="/images/create-book/bg/wave-red-spine.png" alt="" className="h-[57px] " />
+            <img src="/images/create-book/bg/line-spine-blue.png" alt="" className="h-[57px] " />
             <div className=" flex items-center justify-between text-[18px] font-semibold font-montserrat flex-1">
 
-              <div className="whitespace-nowrap font-montserrat text-[18px] leading-[20px]">
+              <div 
+              ref={spineTitleRef}
+              style={{ 
+                fontSize: `${spineTitleFontSize}px`, 
+                lineHeight: `${spineTitleFontSize}px`,
+              }}
+
+              className="whitespace-nowrap font-montserrat ">
                 {selectedTopic || "Default Topic"}
               </div>
 
@@ -130,7 +137,7 @@ const CoverTemplate4 = ({ type, data }) => {
                 </div>
               </div>
             </div>
-            <img src="/images/create-book/bg/wave-red-spine.png" alt="" className="h-[57px]" />
+            <img src="/images/create-book/bg/line-spine-blue.png" alt="" className="h-[57px]" />
           </div>
         </div>
       )}

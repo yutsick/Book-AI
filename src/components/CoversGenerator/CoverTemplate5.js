@@ -54,14 +54,14 @@ const CoverTemplate5 = ({ type, data }) => {
           style={{ filter: "grayscale(100%)" }}
         >
           {/* Heading */}
-          <div className="w-full h-full">
+          <div className="w-full h-full flex flex-col justify-end">
             {isIOS ? (
               <canvas ref={canvasRef} className="w-full h-full object-cover block"></canvas>
             ) : (
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-full object-cover block"
+                className="w-full h-[550px] object-cover block"
               />
             )}
           </div>
