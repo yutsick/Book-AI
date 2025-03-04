@@ -79,19 +79,15 @@ const FloatingInput = ({
   }, [localValue, labelHeight, placeholderHeight, tipHeight]);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (textareaRef.current) {
-        const el = textareaRef.current;
-        
-        el.value = " "; 
-        el.value = "";
-        
-        el.click(); // Симулюємо клік перед фокусуванням
-        el.focus();
-        el.setSelectionRange(0, 0);
-      }
-    }, 50);
-  }, []);
+    if (!localValue.trim()) { 
+        if (textareaRef.current) {
+          const el = textareaRef.current;
+          el.focus();
+        }
+    
+    }
+  }, []); 
+  
   
   
   

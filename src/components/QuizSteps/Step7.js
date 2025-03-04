@@ -19,14 +19,14 @@ const previewTemplates = [
 ];
 
 const cropperData = [
-  { id: 1, top: null, bottom: 173, left: 0, width: 350, height: 355, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 280 },
-  { id: 2, top: null, bottom: 0, left: 0, width: 350, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 350 },
-  { id: 3, top: null, bottom: 10, left: 12, width: 327, height: 325, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 260 },
-  { id: 4,  top: 125, left: 78, width: 195, height: 195, mobTop: null, mobBottom: 165, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true  },
-  { id: 5, top: null, bottom: 0, left: 0, width: 350, height: 450, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 360 },
-  { id: 6, top: 0, bottom: null, left: 0, width: 350, height: 330, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
-  { id: 7, top: null, bottom: 90, left: 60, width: 230, height: 248, mobTop: null, mobBottom: 70, mobLeft: 0, mobWidth: 190, mobHeight: 200, radius: true },
-  { id: 8, top: null, bottom: 0, left:147,  width: 205, height: 205, mobTop: null, mobBottom: 0.01, mobLeft: 130, mobWidth: 152, mobHeight: 160 },
+  { id: 1, top: null, bottom: 160, left: 0, width: 320, height: 265, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 220 },
+  { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 390, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 330 },
+  { id: 3, top: null, bottom: 10, left: 12, width: 297, height: 305, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 260 },
+  { id: 4,  top: 115, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 165, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true  },
+  { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 410, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 360 },
+  { id: 6, top: 0, bottom: null, left: 0, width: 320, height: 302, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
+  { id: 7, top: null, bottom: 85, left: 55, width: 210, height: 222, mobTop: null, mobBottom: 75, mobLeft: 0, mobWidth: 185, mobHeight: 195, radius: true },
+  { id: 8, top: null, bottom: 0, left:137,  width: 183, height: 190, mobTop: null, mobBottom: 0.01, mobLeft: 120, mobWidth: 162, mobHeight: 165 },
 ]
 function Step7 ({ setProgressStep, setIsButtonDisabled }) {
   const {
