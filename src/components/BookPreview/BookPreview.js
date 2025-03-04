@@ -99,7 +99,7 @@ function BookPreview({ selectedTemplate, authorName, selectedTopic, selectedSubT
         <p className="text-gray-500 mt-4">No cover selected</p>
       )}
       <div
-        className={`flex flex-col justify-between h-[190px] font-inter  w-2/3 md:w-auto`}
+        className={`flex flex-col justify-between min-h-[210px] md:min-h-[190px] font-inter  w-2/3 md:w-auto`}
 
       >
         <div className="">
@@ -127,7 +127,7 @@ function BookPreview({ selectedTemplate, authorName, selectedTopic, selectedSubT
         </div>
       </div>
   </div>
-  <div className="md:hidden w-[330px] mx-auto">
+  <div className="md:hidden  f-full max-w-[320px] mx-auto">
           {!hideButton && (
             <MainButton
               text="Next"

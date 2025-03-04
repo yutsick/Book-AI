@@ -232,7 +232,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
             </div>
           ) : loading && progress ? (
 
-            <div className="w-full flex justify-center items-center relative md:h-[648px] -ml-[36px]">
+            <div className="w-full flex justify-center items-center relative md:h-[648px] md:-ml-[36px]">
               <div className="relative w-full h-4 border border-[#898989] bg-[#fffae7] rounded-md overflow-hidden">
                 <div
                   className="h-full transition-all duration-300 bg-orange"
@@ -251,8 +251,8 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
           )}
         </div>
         {/* Button for the modal mobile*/}
-        {isRendered && isMobile() && (
-          <div className={`relative z-20 flex justify-center md:max-w-[320px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-16" : "mt-4"
+        {isRendered  && (
+          <div className={`md:hidden relative z-20 flex justify-center md:max-w-[320px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-16" : "mt-4"
             }`}>
             <button
               className="text-[10px] font-semibold  text-[#2b2b2b] h-6 box-content w-[100px] flex items-center justify-center border-[0.4px] rounded-[3px] bg-[#ECECEC] border-[#2b2b2b] cursor-pointer"
@@ -292,8 +292,8 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
       </div>
 
       {/* Button for the modal desktop*/}
-      {isRendered && !isMobile() && (
-        <div className={`relative z-20 flex justify-center md:max-w-[320px] md:ml-[95px] transition-all duration-300 ${isModalOpen ? "mt-14" : "mt-2"
+      {isRendered &&  (
+        <div className={`hidden md:flex relative z-20  justify-center md:max-w-[320px] md:ml-[95px] transition-all duration-300 ${isModalOpen ? "mt-14" : "mt-2"
           }`}>
           <button
             className="text-[12px] shadow-sm font-semibold text-[#2b2b2b] h-8 box-content w-[120px] flex items-center justify-center border-[0.4px] rounded-[3px]  border-[#2b2b2b] cursor-pointer bg-[#ECECEC]"
