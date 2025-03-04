@@ -185,7 +185,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
   
   return (
     <>
-      <div className={`relative w-full mt-4 md:mt-2 md:px-2 flex flex-col items-center md:items-start md:flex-row ${loading && !isRendered ? "md:justify-center" : "md:justify-end"  }  md:gap-24 `}>
+      <div className={`relative w-full md:pl-[50px] mt-4 md:mt-2 md:px-2 flex flex-col items-center md:items-start md:flex-row ${loading && !isRendered ? "md:justify-center" : "md:justify-center"  }  md:gap-20 `}>
 
         {isCropperOpen && (
           <div
@@ -198,7 +198,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
         )}
 
         {/* Slider */}
-        <div className=" max-w-[350px] w-full flex justify-center items-center relative max-h-[420px] md:max-h-[648px]">
+        <div className=" max-w-[320px] w-full flex justify-center items-center relative max-h-[420px] md:max-h-[648px]">
 
           {/* Modal crop window */}
           {isCropperOpen && selectedTemplate.templateId && (
@@ -252,7 +252,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
         </div>
           {/* Button for the modal mobile*/}
       {isRendered && isMobile() && (
-        <div className={`relative z-20 flex justify-center md:max-w-[350px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-16" : "mt-4"
+        <div className={`relative z-20 flex justify-center md:max-w-[320px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-16" : "mt-4"
           }`}>
           <button
             className="text-[10px] font-semibold  text-[#2b2b2b] h-6 box-content w-[100px] flex items-center justify-center border-[0.4px] rounded-[3px] bg-[#ECECEC] border-[#2b2b2b] cursor-pointer"
@@ -278,7 +278,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
             h-[135px] md:h-auto overflow-x-auto md:overflow-visible whitespace-nowrap scrollbar-visible`}
           >
             {previewTemplates.map((preview) => (
-              <div className="w-[90px] md:w-[79px] md:mt-[0.5px] flex-shrink-0 md:h-auto h-[130px]" key={preview.id}>
+              <div className="w-[90px] md:w-[72px]  flex-shrink-0 md:h-auto h-[130px]" key={preview.id}>
                 <img
                   src={preview.src}
                   alt={preview.alt}
@@ -293,7 +293,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
 
       {/* Button for the modal desktop*/}
       {isRendered && !isMobile() && (
-        <div className={`relative z-20 flex justify-center md:max-w-[350px] md:ml-20 transition-all duration-300 ${isModalOpen ? "mt-14" : "mt-2"
+        <div className={`relative z-20 flex justify-center md:max-w-[320px] md:ml-[95px] transition-all duration-300 ${isModalOpen ? "mt-14" : "mt-2"
           }`}>
           <button
             className="text-[12px] shadow-sm font-semibold text-[#2b2b2b] h-8 box-content w-[120px] flex items-center justify-center border-[0.4px] rounded-[3px]  border-[#2b2b2b] cursor-pointer bg-[#ECECEC]"
