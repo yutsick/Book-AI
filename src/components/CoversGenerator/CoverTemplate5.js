@@ -56,12 +56,12 @@ const CoverTemplate5 = ({ type, data }) => {
           {/* Heading */}
           <div className="w-full h-full flex flex-col justify-end">
             {isIOS ? (
-              <canvas ref={canvasRef} className="w-full h-full object-cover block"></canvas>
+              <canvas ref={canvasRef} className="w-full h-[550px]  object-top object-cover block"></canvas>
             ) : (
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-[550px] object-cover block"
+                className="w-full h-[180px] md:h-[550px] object-top object-cover block"
               />
             )}
           </div>

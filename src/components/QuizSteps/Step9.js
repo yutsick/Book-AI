@@ -210,7 +210,7 @@ function Step9({ setProgressStep }) {
             </div>
             <div className="flex justify-between">
               {/* <span>+ <span>{selectedCopies}</span> copies:</span> */}
-              <span>Additional copies:</span>
+              <span>Additional Copies:</span>
               <span className="text-right">
                 ${((selectedCopies-1) * (selectedCoverIndex === 0 ? 20.00 : 30.00)).toFixed(2)}
               </span>

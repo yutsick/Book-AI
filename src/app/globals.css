@@ -90,13 +90,32 @@ body {
       }
     }
 
+    
+    .custom-scrollbar {
+      overflow-y: auto;
+      
+      -webkit-overflow-scrolling: auto;
+    }
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
+      display: block !important;
     }
+
+    .custom-scrollbar::before {
+      content: "";
+      display: block;
+      height: 1px;
+      min-height: 1px;
+      visibility: hidden; /* Додає фейковий контент, щоб Safari побачив скрол */
+    }
+
+
     .custom-scrollbar::-webkit-scrollbar-thumb {
       background-color: #6b7280; 
       border-radius: 4px;
+      visibility: visible !important;
     }
+
     .bar::-webkit-scrollbar-track {
       background-color: #d1d5db; 
       border-radius: 4px;

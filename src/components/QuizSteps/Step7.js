@@ -19,16 +19,16 @@ const previewTemplates = [
 ];
 
 const cropperData = [
-  { id: 1, top: null, bottom: 160, left: 0, width: 320, height: 320, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 280 },
-  { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 380, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 330 },
+  { id: 1, top: null, bottom: 160, left: 0, width: 320, height: 260, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 228 },
+  { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 350 },
   { id: 3, top: null, bottom: 10, left: 12, width: 297, height: 305, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 260 },
-  { id: 4,  top: 115, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 165, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true  },
+  { id: 4, top: 115, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 165, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true },
   { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 410, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 355 },
   { id: 6, top: 0, bottom: null, left: 0, width: 320, height: 302, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
   { id: 7, top: null, bottom: 85, left: 55, width: 210, height: 222, mobTop: null, mobBottom: 75, mobLeft: 0, mobWidth: 185, mobHeight: 195, radius: true },
-  { id: 8, top: null, bottom: 0, left:137,  width: 183, height: 190, mobTop: null, mobBottom: 0.01, mobLeft: 120, mobWidth: 162, mobHeight: 165 },
+  { id: 8, top: null, bottom: 0, left: 137, width: 183, height: 190, mobTop: null, mobBottom: 0.01, mobLeft: 120, mobWidth: 162, mobHeight: 165 },
 ]
-function Step7 ({ setProgressStep, setIsButtonDisabled }) {
+function Step7({ setProgressStep, setIsButtonDisabled }) {
   const {
     authorName,
     selectedGender,
@@ -40,7 +40,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
     setSelectedTemplate
   } = useContext(CreateBookContext);
 
-  const { selectedTopic, selectedSubTopic} = useContext(CreateGenreContext);
+  const { selectedTopic, selectedSubTopic } = useContext(CreateGenreContext);
 
   const [selectedCover, setSelectedCover] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -64,7 +64,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
   }, [setProgressStep]);
 
   useEffect(() => {
-    if (croppedImage && !praisesLoading ) {
+    if (croppedImage && !praisesLoading) {
       fetchGeneratedCover(selectedTemplate.templateId || 1);
     }
   }, [croppedImage, praisesLoading]);
@@ -80,34 +80,34 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
 
   useEffect(() => {
 
-    setProgress(true); 
-  
-    let progressValue = 10; 
-    setProgress(progressValue); 
-  
+    setProgress(true);
+
+    let progressValue = 10;
+    setProgress(progressValue);
+
     const interval = setInterval(() => {
       if (progressValue < 98) {
-        progressValue += Math.random() * 5; 
+        progressValue += Math.random() * 5;
         setProgress(progressValue);
       }
     }, 300);
-  
+
     const checkLoading = setInterval(() => {
       if (isRendered) {
         clearInterval(interval);
         clearInterval(checkLoading);
-        setProgress(false); 
+        setProgress(false);
       }
     }, 100);
-  
+
     return () => {
       clearInterval(interval);
       clearInterval(checkLoading);
       setProgress(false);
     };
   }, [isRendered]);
-  
-  
+
+
 
 
   const fetchGeneratedCover = async (templateId) => {
@@ -129,7 +129,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
         selectedSubTopic,
         authorImage,
         processedAuthorImage,
-        croppedImage, 
+        croppedImage,
         praises
       };
 
@@ -137,13 +137,13 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
       setSelectedCover(cover);
 
       setSelectedTemplate((prevTemplate) => ({
-       
+
         ...prevTemplate,
         templateId,
         front: cover.frontCover,
         back: cover.backCover,
         spine: cover.spineCover,
-        
+
 
       }));
 
@@ -159,7 +159,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
     if (croppedImage && croppedImage instanceof File) {
       const reader = new FileReader();
       reader.onload = () => {
-        setImageSrc(""); 
+        setImageSrc("");
         setTimeout(() => setImageSrc(reader.result), 10);
       };
       reader.readAsDataURL(croppedImage);
@@ -168,24 +168,24 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
       setTimeout(() => setImageSrc(croppedImage), 10);
     }
   }, []);
-  
+
   const handleCropSave = (newCroppedImage, crop, zoom) => {
     setCroppedImage(newCroppedImage);
-  
+
     setSelectedTemplate((prevTemplate) => ({
       ...prevTemplate,
-      crop: crop ?? prevTemplate.crop,  
-      zoom: zoom ?? prevTemplate.zoom,  
+      crop: crop ?? prevTemplate.crop,
+      zoom: zoom ?? prevTemplate.zoom,
     }));
-  
+
     setIsCropperOpen(false);
     setIsModalOpen(false);
   };
-  
-  
+
+
   return (
     <>
-      <div className={`relative w-full md:pl-[50px] mt-4 md:mt-2 md:px-2 flex flex-col items-center md:items-start md:flex-row ${loading && !isRendered ? "md:justify-center" : "md:justify-center"  }  md:gap-20 `}>
+      <div className={`relative w-full md:pl-[50px] mt-4 md:mt-2 md:px-2 flex flex-col items-center md:items-start md:flex-row ${loading && !isRendered ? "md:justify-center" : "md:justify-center"}  md:gap-20 `}>
 
         {isCropperOpen && (
           <div
@@ -223,7 +223,7 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
               />
             </>
           )}
-          
+
           {loading && !progress ? (
             <div className="w-full flex justify-center items-center relative md:h-[648px]"
               style={{ height: swiperSize.height ? `${swiperSize.height}px` : "auto" }}
@@ -231,45 +231,45 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
               <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
             </div>
           ) : loading && progress ? (
-            
-            <div className="w-full flex justify-center items-center relative md:h-[648px]">
-            <div className="relative w-full h-4 border border-[#898989] bg-[#fffae7] rounded-md overflow-hidden">
-              <div
-                className="h-full transition-all duration-300 bg-orange"
-                style={{ width: `${progress}%` }}
-              ></div>
+
+            <div className="w-full flex justify-center items-center relative md:h-[648px] -ml-[36px]">
+              <div className="relative w-full h-4 border border-[#898989] bg-[#fffae7] rounded-md overflow-hidden">
+                <div
+                  className="h-full transition-all duration-300 bg-orange"
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
             </div>
-          </div>
           ) : selectedCover ? (
-            <CoverSlider 
-              selectedCover={selectedCover} 
-              setSwiperSize={setSwiperSize} 
-              swiperInstance={swiperInstance} 
+            <CoverSlider
+              selectedCover={selectedCover}
+              setSwiperSize={setSwiperSize}
+              swiperInstance={swiperInstance}
             />
           ) : (
             <p>No cover selected</p>
           )}
         </div>
-          {/* Button for the modal mobile*/}
-      {isRendered && isMobile() && (
-        <div className={`relative z-20 flex justify-center md:max-w-[320px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-16" : "mt-4"
-          }`}>
-          <button
-            className="text-[10px] font-semibold  text-[#2b2b2b] h-6 box-content w-[100px] flex items-center justify-center border-[0.4px] rounded-[3px] bg-[#ECECEC] border-[#2b2b2b] cursor-pointer"
-            onClick={() => {
-              setIsCropperOpen(true);
-              setIsModalOpen(true);
-              swiperInstance.current.slideTo(0); 
-              
-            }}
-          >
-            Adjust Image
-            <span className="ml-2">
-              <img src="images/icon-image-adjustment.svg" alt="" className="h-3"/>
-            </span>
-          </button>
-        </div>
-      )}
+        {/* Button for the modal mobile*/}
+        {isRendered && isMobile() && (
+          <div className={`relative z-20 flex justify-center md:max-w-[320px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-16" : "mt-4"
+            }`}>
+            <button
+              className="text-[10px] font-semibold  text-[#2b2b2b] h-6 box-content w-[100px] flex items-center justify-center border-[0.4px] rounded-[3px] bg-[#ECECEC] border-[#2b2b2b] cursor-pointer"
+              onClick={() => {
+                setIsCropperOpen(true);
+                setIsModalOpen(true);
+                swiperInstance.current.slideTo(1);
+
+              }}
+            >
+              Adjust Image
+              <span className="ml-2">
+                <img src="images/icon-image-adjustment.svg" alt="" className="h-3" />
+              </span>
+            </button>
+          </div>
+        )}
         {/* Previews list */}
         {isRendered && (
           <div className={` 
@@ -300,12 +300,12 @@ function Step7 ({ setProgressStep, setIsButtonDisabled }) {
             onClick={() => {
               setIsCropperOpen(true);
               setIsModalOpen(true);
-              swiperInstance.current.slideTo(0); 
+              swiperInstance.current.slideTo(1);
             }}
           >
             Adjust Image
             <span className="ml-2">
-              <img src="images/icon-image-adjustment.svg" alt="" className="h-4"/>
+              <img src="images/icon-image-adjustment.svg" alt="" className="h-4" />
             </span>
           </button>
         </div>

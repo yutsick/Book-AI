@@ -21,9 +21,9 @@ const CoverTemplate8 = ({ type, data }) => {
   });
 
   const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280 },
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 220 },
     title: { ref: useRef(null), maxFontSize: 56, maxHeight: 210 },
-    title: { ref: useRef(null), maxFontSize: fontSizes.title, maxWidth: 270},
+    title: { ref: useRef(null), maxFontSize: fontSizes.title, maxWidth: 240},
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 220 },
@@ -65,17 +65,17 @@ const CoverTemplate8 = ({ type, data }) => {
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-full max-h-[255px] max-w-[245px] object-cover block"
+                className="w-full h-full max-h-[255px] max-w-[245px] object-cover object-top block"
               />
             </div>
           </div>
 
-          <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-between  gap-4 px-8 text-center flex-1 text-white pt-12 pb-11">
+          <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-between  gap-4 px-8 text-center flex-1 text-white pt-12 pb-6">
             <div className="relative mx-auto max-w-[350px] max-h-[360px]">
               <img src="/images/create-book/bg/bubble.svg" alt="" />
               <div className=" font-degular text-center absolute w-full h-full top-0  pt-12 pb-4 px-14">
                 <div className="w-full h-full flex flex-col items-center ">
-                  <div className=" text-white font-degular font-extrabold "
+                  <div className=" text-white font-degular font-extrabold whitespace-nowrap"
                     ref={elements.frontAuthor.ref}
                     style={{
                       fontSize: `${fontSizes.frontAuthor}px`,
@@ -89,7 +89,7 @@ const CoverTemplate8 = ({ type, data }) => {
                     className="text-[#FFE600] mt-4   block font-extrabold"
                     style={{
                       fontSize: `${fontSizes.title}px`,
-                      lineHeight: `${fontSizes.title*0.85}px`
+                      lineHeight: `${fontSizes.title*0.95}px`
                     }}
                   >
                     {selectedTopic || "Default Topic"}
