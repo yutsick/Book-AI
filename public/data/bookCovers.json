@@ -4,14 +4,14 @@
   "slidesTitle": null,
   "slidesSubTitle": null,
   "slides":[
-    {"id": 1, "imageUrl": "/images/cover2.png"},
-    {"id": 2, "imageUrl": "/images/cover3.png"},
-    {"id": 3, "imageUrl": "/images/cover4.png"},
-    {"id": 4, "imageUrl": "/images/cover5.png"},
-    {"id": 5, "imageUrl": "/images/cover6.png"},
-    {"id": 6, "imageUrl": "/images/cover7.png"},
-    {"id": 7, "imageUrl": "/images/cover2.png"},
-    {"id": 8, "imageUrl": "/images/cover3.png"}
+    {"id": 1, "imageUrl": "/images/cover1.png"},
+    {"id": 2, "imageUrl": "/images/cover2.png"},
+    {"id": 3, "imageUrl": "/images/cover3.png"},
+    {"id": 4, "imageUrl": "/images/cover4.png"},
+    {"id": 5, "imageUrl": "/images/cover5.png"},
+    {"id": 6, "imageUrl": "/images/cover6.png"},
+    {"id": 7, "imageUrl": "/images/cover7.png"},
+    {"id": 8, "imageUrl": "/images/cover8.png"}
 
   ],
   "button": "Get Started"
