@@ -143,7 +143,7 @@ const CoverTemplate1 = ({ type, data }) => {
               {selectedTopic || "Default Topic"}
             </div>
 
-            <div className="text-white flex items-center h-full w-[215px] bg-[#BB2621] px-4">
+            <div className="text-white flex items-center h-full w-[180px] bg-[#BB2621] px-4">
               <div
                 ref={elements.spineAuthor.ref}
                 className="whitespace-nowrap"
