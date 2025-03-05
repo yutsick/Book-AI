@@ -22,7 +22,7 @@ export const adjustFontSizeByHeight = (elementRef, maxFontSize, maxHeight, minFo
 };
 
 
-export const adjustFontSizeByWidth = (elementRef, maxFontSize, maxWidth, minFontSize = 10) => {
+export const adjustFontSizeByWidth = (elementRef, maxFontSize, maxWidth, shouldWrap = false, minFontSize = 10) => {
   const element = elementRef.current;
   if (!element) return maxFontSize;
 
@@ -30,10 +30,17 @@ export const adjustFontSizeByWidth = (elementRef, maxFontSize, maxWidth, minFont
     return maxFontSize; 
   }
 
+  // Якщо дозволено перенос, встановлюємо відповідні стилі
+  if (shouldWrap) {
+    element.style.whiteSpace = "normal";
+    element.style.wordBreak = "break-word";
+  } 
+
   let fontSize = maxFontSize;
   element.style.fontSize = `${fontSize}px`;
 
-  while (element.offsetWidth> maxWidth && fontSize > minFontSize) {
+  // Зменшуємо шрифт, якщо текст все ще ширший за maxWidth
+  while (element.offsetWidth > maxWidth && fontSize > minFontSize) {
     fontSize -= 1;
     element.style.fontSize = `${fontSize}px`;
     requestAnimationFrame(() => window.getComputedStyle(element).width);
@@ -41,4 +48,5 @@ export const adjustFontSizeByWidth = (elementRef, maxFontSize, maxWidth, minFont
 
   return fontSize;
 };
+
 

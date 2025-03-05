@@ -22,8 +22,8 @@ const CoverTemplate8 = ({ type, data }) => {
 
   const elements = {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 220 },
-    title: { ref: useRef(null), maxFontSize: 56, maxHeight: 210 },
-    title: { ref: useRef(null), maxFontSize: fontSizes.title, maxWidth: 240},
+    title: { ref: useRef(null), maxFontSize: 56, maxHeight: 170 },
+    title: { ref: useRef(null), maxFontSize: 56, maxWidth: 200},
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 220 },
@@ -65,7 +65,7 @@ const CoverTemplate8 = ({ type, data }) => {
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-full max-h-[255px] max-w-[245px] object-cover object-top block"
+                className="w-full h-full max-h-[297px] max-w-[245px] object-cover object-top block"
               />
             </div>
           </div>
@@ -86,10 +86,10 @@ const CoverTemplate8 = ({ type, data }) => {
                   </div>
                   <div
                     ref={elements.title.ref}
-                    className="text-[#FFE600] mt-4   block font-extrabold"
+                    className="text-[#FFE600] mt-4 max-h-[180px]  block font-extrabold"
                     style={{
                       fontSize: `${fontSizes.title}px`,
-                      lineHeight: `${fontSizes.title*0.95}px`
+                      lineHeight: `${fontSizes.title}px`
                     }}
                   >
                     {selectedTopic || "Default Topic"}

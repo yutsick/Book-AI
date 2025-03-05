@@ -7,13 +7,30 @@ const CoverTemplate2 = ({ type, data }) => {
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
 
+  const frontAuthorRef = useRef(null);
   const authorRef = useRef(null);
   const titleRef = useRef(null);
   const spineTitleRef = useRef(null);
 
+  const [frontAuthorFontSize, setFrontAuthorFontSize] = useState(30);
   const [authorFontSize, setAuthorFontSize] = useState(20);
   const [titleFontSize, setTitleFontSize] = useState(55);
   const [spineTitleFontSize, setSpineTitleFontSize] = useState(28);
+
+  // useEffect(() => {
+  //   if (type === "front") {
+  //     const newFontSize = adjustFontSizeByHeight(frontAuthorRef, 30, 250);
+  //     setFrontAuthorFontSize(newFontSize);
+  //   }
+  // }, [authorName, type]);
+  useEffect(() => {
+    if (type === "front") {
+      const newFontSize = adjustFontSizeByWidth(frontAuthorRef, 30, 250);
+      setFrontAuthorFontSize(newFontSize);
+    }
+  }, [authorName, type]);
+
+
 
   useEffect(() => {
     if (type === "spine") {
@@ -64,8 +81,15 @@ const CoverTemplate2 = ({ type, data }) => {
           >
             {selectedTopic || "Default Topic"}
           </div>
-          <div className="flex w-full mt-8 justify-end px-10" >
-            <div className="text-[30px] font-extrabold  w-[70%] flex items-end justify-end">
+          <div className="w-full  mt-8 flex justify-end h-8 px-10" >
+            <div 
+            ref={frontAuthorRef}
+            className="font-extrabold max-w-[220px]"
+            style={{
+              fontSize: `${frontAuthorFontSize}px`,
+              lineHeight: `${frontAuthorFontSize}px`,
+            }}
+            >
               {authorName || "Default Author"}
             </div>
           </div>

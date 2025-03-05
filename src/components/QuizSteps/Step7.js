@@ -20,13 +20,13 @@ const previewTemplates = [
 
 const cropperData = [
   { id: 1, top: null, bottom: 160, left: 0, width: 320, height: 260, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 228 },
-  { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 350 },
+  { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 375 },
   { id: 3, top: null, bottom: 10, left: 12, width: 297, height: 335, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 295 },
   { id: 4, top: 115, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 165, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true },
-  { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 410, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 355 },
+  { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 425, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 370 },
   { id: 6, top: 0, bottom: null, left: 0, width: 320, height: 302, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
   { id: 7, top: null, bottom: 85, left: 55, width: 210, height: 222, mobTop: null, mobBottom: 75, mobLeft: 0, mobWidth: 185, mobHeight: 195, radius: true },
-  { id: 8, top: null, bottom: 0, left: 137, width: 183, height: 190, mobTop: null, mobBottom: 0.01, mobLeft: 120, mobWidth: 162, mobHeight: 165 },
+  { id: 8, top: null, bottom: 0, left: 137, width: 183, height: 220, mobTop: null, mobBottom: 0.01, mobLeft: 120, mobWidth: 162, mobHeight: 190 },
 ]
 function Step7({ setProgressStep, setIsButtonDisabled }) {
   const {
@@ -198,7 +198,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
         )}
 
         {/* Slider */}
-        <div className=" max-w-[320px] w-full flex justify-center items-center relative max-h-[420px] md:max-h-[648px]">
+        <div className=" max-w-[320px] w-full flex justify-center items-center relative md:static max-h-[420px] md:max-h-[648px]">
 
           {/* Modal crop window */}
           {isCropperOpen && selectedTemplate.templateId && (
@@ -231,15 +231,17 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
               <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
             </div>
           ) : loading && progress ? (
-
-            <div className="w-full flex justify-center items-center relative md:h-[648px] md:-ml-[42px]">
-              <div className="relative w-full h-4 border border-[#898989] bg-[#fffae7] rounded-md overflow-hidden">
+            <>
+            <div className="md:h-[480px]"></div>
+            <div className=" z-[2] left-0 w-full flex justify-center items-center absolute md:h-[480px]">
+              <div className="max-w-[320px] relative w-full h-4 border border-[#898989] bg-[#fffae7] rounded-md overflow-hidden">
                 <div
                   className="h-full transition-all duration-300 bg-orange"
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
             </div>
+            </>
           ) : selectedCover ? (
             <CoverSlider
               selectedCover={selectedCover}
@@ -251,7 +253,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
           )}
         </div>
         {/* Button for the modal mobile*/}
-        {isRendered  && (
+        {isRendered && (
           <div className={`md:hidden relative z-20 flex justify-center md:max-w-[320px] md:ml-[60px] transition-all duration-300 ${isModalOpen ? "mt-16" : "mt-4"
             }`}>
             <button
@@ -292,7 +294,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
       </div>
 
       {/* Button for the modal desktop*/}
-      {isRendered &&  (
+      {isRendered && (
         <div className={`hidden md:flex relative z-20  justify-center md:max-w-[320px] md:ml-[95px] transition-all duration-300 ${isModalOpen ? "mt-14" : "mt-2"
           }`}>
           <button

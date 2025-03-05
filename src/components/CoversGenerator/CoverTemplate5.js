@@ -61,7 +61,7 @@ const CoverTemplate5 = ({ type, data }) => {
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-[180px] md:h-[550px] object-top object-cover block"
+                className="w-full h-[570px] object-top object-cover block"
               />
             )}
           </div>
@@ -70,7 +70,7 @@ const CoverTemplate5 = ({ type, data }) => {
           <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4 px-8 text-center flex-1 text-white pt-12 pb-11">
             <div className="text-left h-full flex flex-col justify-between">
               <div className="">
-                <div className="font-black text-[30px] font-degular">
+                <div className="font-black text-[30px] leading-[34px] font-degular">
                   {authorName || "Default Author"}
                 </div>
               </div>

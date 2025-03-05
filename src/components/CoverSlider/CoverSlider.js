@@ -75,37 +75,29 @@ const CoverSlider = ({ selectedCover, setSwiperSize, swiperInstance }) => {
         spaceBetween={20}
         slidesPerView={1}
         loop={false}
-        rewind={false}
-        initialSlide={middleSlideIndex} // Початковий слайд — середній
+        rewind={true}
+        initialSlide={middleSlideIndex} 
         onSwiper={(swiper) => {
           swiperInstance.current = swiper;
-          setIsBeginning(swiper.isBeginning);
-          setIsEnd(swiper.isEnd);
+          // setIsBeginning(swiper.isBeginning);
+          // setIsEnd(swiper.isEnd);
 
-          // Встановлюємо початковий розмір
-          setTimeout(() => {
-            if (swiperRef.current) {
-              setSwiperSize({
-                width: swiperRef.current.clientWidth,
-                height: swiperRef.current.scrollHeight,
-              });
-            }
-          }, 100);
+
         }}
-        onSlideChange={(swiper) => {
-          setIsBeginning(swiper.isBeginning);
-          setIsEnd(swiper.isEnd);
+        // onSlideChange={(swiper) => {
+        //   setIsBeginning(swiper.isBeginning);
+        //   setIsEnd(swiper.isEnd);
 
 
-          setTimeout(() => {
-            if (swiperRef.current) {
-              setSwiperSize({
-                width: swiperRef.current.clientWidth,
-                height: swiperRef.current.scrollHeight,
-              });
-            }
-          }, 100);
-        }}
+        //   setTimeout(() => {
+        //     if (swiperRef.current) {
+        //       setSwiperSize({
+        //         width: swiperRef.current.clientWidth,
+        //         height: swiperRef.current.scrollHeight,
+        //       });
+        //     }
+        //   }, 100);
+        // }}
         className="w-full"
       >
         {slides.map((slide, index) => (
