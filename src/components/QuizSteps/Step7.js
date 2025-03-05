@@ -21,7 +21,7 @@ const previewTemplates = [
 const cropperData = [
   { id: 1, top: null, bottom: 160, left: 0, width: 320, height: 260, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 228 },
   { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 350 },
-  { id: 3, top: null, bottom: 10, left: 12, width: 297, height: 305, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 260 },
+  { id: 3, top: null, bottom: 10, left: 12, width: 297, height: 335, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 295 },
   { id: 4, top: 115, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 165, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true },
   { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 410, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 355 },
   { id: 6, top: 0, bottom: null, left: 0, width: 320, height: 302, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
@@ -232,7 +232,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
             </div>
           ) : loading && progress ? (
 
-            <div className="w-full flex justify-center items-center relative md:h-[648px] md:-ml-[36px]">
+            <div className="w-full flex justify-center items-center relative md:h-[648px] md:-ml-[42px]">
               <div className="relative w-full h-4 border border-[#898989] bg-[#fffae7] rounded-md overflow-hidden">
                 <div
                   className="h-full transition-all duration-300 bg-orange"
