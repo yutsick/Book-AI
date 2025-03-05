@@ -98,11 +98,11 @@ const CoverTemplate7 = ({ type, data }) => {
 
       {type === "spine" && (
 
-        <div className="h-[648px] flex justify-center relative">
+        <div className="h-[648px] flex  justify-center relative">
           <div
             className="px-5 py-2 bg-[#E35205] text-[#000082]  h-[57px] bg-cover bg-center bg-no-repeat   flex items-center ] w-[648px] gap-4  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
             <img src="/images/create-book/bg/wave-blue-spine.png" alt="" className="h-[57px] " />
-            <div className=" flex items-center justify-between text-[18px] font-semibold font-montserrat flex-1">
+            <div className=" flex items-center justify-between gap-4 text-[18px] font-semibold font-montserrat flex-1">
 
               <div 
               ref={spineTitleRef}

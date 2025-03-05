@@ -38,7 +38,7 @@ const CoverTemplate1 = ({ type, data }) => {
   const elements = {
     title: { ref: useRef(null), maxFontSize: 50, maxHeight: 150 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 60 },
-    spineTitle: { ref: useRef(null), maxFontSize: 36, maxHeight: 50 },
+    spineTitle: { ref: useRef(null), maxFontSize: 36, maxWidth: 400 },
     spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 188 },
   };
 
@@ -74,7 +74,7 @@ const CoverTemplate1 = ({ type, data }) => {
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-full max-h-[220px] md:max-h-[350px] object-top  object-cover block"
+                className="w-full h-full max-h-[350px] object-top  object-cover block"
               />
             )}
             <div className="absolute top-[50px] text-[20px] leading-[26px] font-black text-white left-[36px]">
@@ -137,7 +137,7 @@ const CoverTemplate1 = ({ type, data }) => {
           <div className="flex flex-1 items-center h-[57px] w-[648px] gap-10 pl-4 bg-black justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular font-black">
             <div
               ref={elements.spineTitle.ref}
-              className="text-white flex justify-center items-center text-[36px] font-black"
+              className="text-white flex justify-center items-center text-[36px] font-black whitespace-nowrap"
               style={{ fontSize: `${fontSizes.spineTitle}px`, lineHeight: `${fontSizes.spineTitle * 1.1}px` }}
             >
               {selectedTopic || "Default Topic"}

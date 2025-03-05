@@ -47,8 +47,8 @@ const CoverSlider = ({ selectedCover, setSwiperSize, swiperInstance }) => {
   return (
     <div ref={swiperRef} className="relative w-[65%] md:w-full">
       <button
-        className={`swiper-button-prev-arrow absolute -left-8 md:left-[-40px] top-1/2 transform md:-translate-y-1/2 z-10 ${isBeginning ? "opacity-50 cursor-not-allowed" : ""}`}
-        disabled={isBeginning}
+        className={`swiper-button-prev-arrow absolute -left-8 md:left-[-40px] top-1/2 transform md:-translate-y-1/2 z-10`}
+
         aria-label="Previous Slide"
       >
         <svg className="w-6 h-5 md:w-8 md:h-7" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,8 +57,7 @@ const CoverSlider = ({ selectedCover, setSwiperSize, swiperInstance }) => {
       </button>
 
       <button
-        className={`swiper-button-next-arrow absolute -right-8 md:right-[-40px] top-1/2 transform md:-translate-y-1/2 z-10 ${isEnd ? "opacity-50 cursor-not-allowed" : ""}`}
-        disabled={isEnd}
+        className={`swiper-button-next-arrow absolute -right-8 md:right-[-40px] top-1/2 transform md:-translate-y-1/2 z-10 `}
         aria-label="Next Slide"
       >
         <svg className="w-6 h-5 md:w-8 md:h-7" viewBox="0 0 33 28" fill="none" xmlns="http://www.w3.org/2000/svg">
