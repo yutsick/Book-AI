@@ -134,8 +134,8 @@ const CoverTemplate1 = ({ type, data }) => {
 
       {type === "spine" && (
         <div className="h-[648px] flex justify-center relative w-full">
-          <div className="flex items-center  h-[57px]   bg-black  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular font-black">
-            <div className="max-w-[433px] w-full h-full flex justify-center items-center  ">
+          <div className="flex items-center  h-[57px] w-[648px]  bg-black  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular font-black">
+            <div className="w-[433px]  h-full flex justify-center items-center  ">
               <div
                 ref={elements.spineTitle.ref}
                 className="text-white px-4  text-[36px]  whitespace-nowrap"
@@ -145,7 +145,7 @@ const CoverTemplate1 = ({ type, data }) => {
               </div>
             </div>
 
-            <div className="text-white flex items-center h-full w-[215px] bg-[#BB2621] px-4">
+            <div className="text-white flex items-center h-full flex-1 bg-[#BB2621] px-4">
               <div
                 ref={elements.spineAuthor.ref}
                 className="whitespace-nowrap"
