@@ -6,7 +6,7 @@ import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate1 = ({ type, data }) => {
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const { authorName, selectedTopic, selectedSubTopic, croppedImage, praises  } = data;
+  const { authorName, selectedTopic, selectedSubTopic, croppedImage, praises } = data;
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -86,7 +86,7 @@ const CoverTemplate1 = ({ type, data }) => {
             <div
               ref={elements.title.ref}
               className="font-black text-white mt-2 max-w-[280px]"
-              style={{ fontSize: `${fontSizes.title}px`, lineHeight: `${fontSizes.title*0.8}px` }}
+              style={{ fontSize: `${fontSizes.title}px`, lineHeight: `${fontSizes.title * 0.8}px` }}
             >
               {selectedTopic || "Default Topic"}
             </div>
@@ -134,16 +134,18 @@ const CoverTemplate1 = ({ type, data }) => {
 
       {type === "spine" && (
         <div className="h-[648px] flex justify-center relative w-full">
-          <div className="flex flex-1 items-center h-[57px] w-[648px] gap-10 pl-4 bg-black justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular font-black">
-            <div
-              ref={elements.spineTitle.ref}
-              className="text-white flex justify-center items-center text-[36px] font-black whitespace-nowrap"
-              style={{ fontSize: `${fontSizes.spineTitle}px`, lineHeight: `${fontSizes.spineTitle * 1.1}px` }}
-            >
-              {selectedTopic || "Default Topic"}
+          <div className="flex items-center  h-[57px]   bg-black  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular font-black">
+            <div className="max-w-[433px] w-full h-full flex justify-center items-center  ">
+              <div
+                ref={elements.spineTitle.ref}
+                className="text-white px-4  text-[36px]  whitespace-nowrap"
+                style={{ fontSize: `${fontSizes.spineTitle}px`, lineHeight: `${fontSizes.spineTitle * 1.1}px` }}
+              >
+                {selectedTopic || "Default Topic"}
+              </div>
             </div>
 
-            <div className="text-white flex items-center h-full w-[180px] bg-[#BB2621] px-4">
+            <div className="text-white flex items-center h-full w-[215px] bg-[#BB2621] px-4">
               <div
                 ref={elements.spineAuthor.ref}
                 className="whitespace-nowrap"
