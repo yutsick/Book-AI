@@ -182,6 +182,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
     setIsModalOpen(false);
   };
 
+  const [middleSlideIndex, setMiddleSlideIndex] = useState(0);
 
   return (
     <>
@@ -247,6 +248,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
               selectedCover={selectedCover}
               setSwiperSize={setSwiperSize}
               swiperInstance={swiperInstance}
+              setMiddleSlideIndex={setMiddleSlideIndex}
             />
           ) : (
             <p>No cover selected</p>
@@ -302,7 +304,9 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
             onClick={() => {
               setIsCropperOpen(true);
               setIsModalOpen(true);
-              swiperInstance.current.slideTo(1);
+              if (swiperInstance.current) {
+                swiperInstance.current.slideToLoop(middleSlideIndex);
+              }
             }}
           >
             Adjust Image

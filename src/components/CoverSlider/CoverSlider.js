@@ -5,10 +5,8 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-const CoverSlider = ({ selectedCover, setSwiperSize, swiperInstance }) => {
+const CoverSlider = ({ selectedCover, setSwiperSize, swiperInstance, setMiddleSlideIndex }) => {
   const swiperRef = useRef(null);
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
 
   const slides = [
     { src: selectedCover.spineCover, alt: "Spine Cover" },
@@ -19,28 +17,13 @@ const CoverSlider = ({ selectedCover, setSwiperSize, swiperInstance }) => {
   const middleSlideIndex = Math.floor(slides.length / 2);
 
   useEffect(() => {
-    const updateSize = () => {
-      if (swiperRef.current) {
-        setSwiperSize({
-          width: swiperRef.current.clientWidth,
-          height: swiperRef.current.scrollHeight,
-        });
-      }
-    };
-
-    const observer = new MutationObserver(updateSize);
-    if (swiperRef.current) {
-      observer.observe(swiperRef.current, { childList: true, subtree: true });
+    if (setMiddleSlideIndex) {
+      setMiddleSlideIndex(middleSlideIndex);
     }
+  }, [middleSlideIndex, setMiddleSlideIndex]);
 
-    updateSize();
-    window.addEventListener("resize", updateSize);
 
-    return () => {
-      window.removeEventListener("resize", updateSize);
-      observer.disconnect();
-    };
-  }, []);
+  
 
   if (!selectedCover) return <p>No cover available</p>;
 
@@ -73,30 +56,14 @@ const CoverSlider = ({ selectedCover, setSwiperSize, swiperInstance }) => {
         modules={[Navigation]}
         spaceBetween={20}
         slidesPerView={1}
-        loop={false}
-        rewind={true}
+        loop={true}
+
         initialSlide={middleSlideIndex} 
         onSwiper={(swiper) => {
           swiperInstance.current = swiper;
-          // setIsBeginning(swiper.isBeginning);
-          // setIsEnd(swiper.isEnd);
-
 
         }}
-        // onSlideChange={(swiper) => {
-        //   setIsBeginning(swiper.isBeginning);
-        //   setIsEnd(swiper.isEnd);
 
-
-        //   setTimeout(() => {
-        //     if (swiperRef.current) {
-        //       setSwiperSize({
-        //         width: swiperRef.current.clientWidth,
-        //         height: swiperRef.current.scrollHeight,
-        //       });
-        //     }
-        //   }, 100);
-        // }}
         className="w-full"
       >
         {slides.map((slide, index) => (
