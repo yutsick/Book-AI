@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
+import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate6 = ({ type, data }) => {
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -20,17 +20,9 @@ const CoverTemplate6 = ({ type, data }) => {
     spineAuthor: 23,
   });
 
-  useEffect(() => {
-    const newFontSizes = {};
-    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth }]) => {
-      if (ref.current) {
-        newFontSizes[key] = adjustFontSizeByWidth(ref, maxFontSize, maxWidth);
-      }
-    });
+    useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setFontSizes);
 
-    setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
-  }, [selectedTopic, authorName]);
-
+  
   return (
     <>
       {/* Front Cover */}

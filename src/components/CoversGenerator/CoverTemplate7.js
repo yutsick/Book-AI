@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
-import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
+import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate7 = ({ type, data }) => {
 
@@ -14,29 +14,18 @@ const CoverTemplate7 = ({ type, data }) => {
     return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
   };
 
+  
+  const elements = {
+    spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 150 },
+    spineTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 350 },
+  };
 
-  const spineAuthorRef = useRef(null);
-  const spineTitleRef = useRef(null);
+  const [fontSizes, setFontSizes] = useState({
+    spineAuthor: 20,
+    spineTitle: 28,
+  });
 
-  const maxSpineTitleWidth = 350;
-  const maxSpineAuthorWidth = 150;
-
-  const [spineTitleFontSize, setSpineTitleFontSize] = useState(20);
-  const [spineAuthorFontSize, setSpineAuthorFontSize] = useState(17);
-
-  useEffect(() => {
-    if (spineAuthorRef.current) {
-      const newSize = adjustFontSizeByWidth(spineAuthorRef, 17, maxSpineAuthorWidth);
-      setSpineAuthorFontSize(newSize);
-    }
-  }, [authorName]);
-
-  useEffect(() => {
-    if (spineTitleRef.current) {
-      const newSize = adjustFontSizeByWidth(spineTitleRef, 20, maxSpineTitleWidth);
-      setSpineTitleFontSize(newSize);
-    }
-  }, [selectedTopic]);
+  useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setFontSizes);
 
   return (
     <>
@@ -105,18 +94,18 @@ const CoverTemplate7 = ({ type, data }) => {
             <div className=" flex items-center justify-between gap-4 text-[18px] font-semibold font-montserrat flex-1">
 
               <div 
-              ref={spineTitleRef}
+              ref={elements.spineTitle.ref}
               style={{ 
-                fontSize: `${spineTitleFontSize}px`, 
-                lineHeight: `${spineTitleFontSize}px`
+                fontSize: `${elements.spineTitle.fontSize}px`, 
+              
               }} 
               className="whitespace-nowrap font-montserrat ">
                 {selectedTopic || "Default Topic"}
               </div>
               <div className="whitespace-nowrap text-white font-montserrat text-[17px] leading-[17px]">
                 <div
-                  ref={spineAuthorRef}
-                  style={{ fontSize: `${spineAuthorFontSize}px` }}
+                  ref={elements.spineAuthor.ref}
+                  style={{ fontSize: `${elements.spineAuthor.fontSize}px` }}
                 >
                   {authorName || "Default Author"}
                 </div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
-import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
+import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 
 const CoverTemplate1 = ({ type, data }) => {
 
@@ -36,7 +35,7 @@ const CoverTemplate1 = ({ type, data }) => {
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const elements = {
-    title: { ref: useRef(null), maxFontSize: 50, maxHeight: 150 },
+    title: { ref: useRef(null), maxFontSize: 50, maxHeight: 140 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 60 },
     spineTitle: { ref: useRef(null), maxFontSize: 36, maxWidth: 400 },
     spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 188 },
@@ -49,18 +48,7 @@ const CoverTemplate1 = ({ type, data }) => {
     spineAuthor: 20,
   });
 
-  useEffect(() => {
-    const newFontSizes = {};
-    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxHeight, maxWidth }]) => {
-      if (maxWidth) {
-        newFontSizes[key] = adjustFontSizeByWidth(ref, maxFontSize, maxWidth);
-      } else {
-        newFontSizes[key] = adjustFontSizeByHeight(ref, maxFontSize, maxHeight);
-      }
-    });
-
-    setFontSizes(newFontSizes);
-  }, [selectedTopic, selectedSubTopic, authorName]);
+  useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setFontSizes);
 
 
   return (
@@ -86,15 +74,15 @@ const CoverTemplate1 = ({ type, data }) => {
             <div
               ref={elements.title.ref}
               className="font-black text-white mt-2 max-w-[280px]"
-              style={{ fontSize: `${fontSizes.title}px`, lineHeight: `${fontSizes.title * 0.8}px` }}
+              style={{ fontSize: `${fontSizes.title}px`, lineHeight: `${fontSizes.title.lineHeight}px` }}
             >
               {selectedTopic || "Default Topic"}
             </div>
 
             <div
               ref={elements.subTitle.ref}
-              className="font-semibold text-white"
-              style={{ fontSize: `${fontSizes.subTitle}px` }}
+              className="font-semibold text-white mt-2"
+              style={{ fontSize: `${fontSizes.subTitle}px` ,  lineHeight: `${fontSizes.subTitle.lineHeight}px`}}
             >
               {selectedSubTopic || "Default Sub Topic"}
             </div>

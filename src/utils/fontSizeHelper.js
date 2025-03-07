@@ -8,17 +8,18 @@ export const adjustFontSizeByHeight = (elementRef, maxFontSize, maxHeight, minFo
 
   const adjustSize = () => {
     if (element.scrollHeight > maxHeight && fontSize > minFontSize) {
+      console.log(fontSize,element.scrollHeight, maxHeight);
       
       fontSize -= 1;
       element.style.fontSize = `${fontSize}px`;
-
+      element.style.lineHeight = `${fontSize*0.9}px`;
       setTimeout(adjustSize, 10); 
     }
   };
 
   setTimeout(adjustSize, 10); 
 
-  return fontSize;
+  return {fontSize: fontSize, lineHeight: fontSize * 0.9};
 };
 
 
@@ -43,10 +44,12 @@ export const adjustFontSizeByWidth = (elementRef, maxFontSize, maxWidth, shouldW
   while (element.offsetWidth > maxWidth && fontSize > minFontSize) {
     fontSize -= 1;
     element.style.fontSize = `${fontSize}px`;
+    element.style.lineHeight = `${fontSize*0.9}px`;
+
     requestAnimationFrame(() => window.getComputedStyle(element).width);
   }
 
-  return fontSize;
+   return {fontSize: fontSize, lineHeight: fontSize * 0.9};
 };
 
 

@@ -1,53 +1,51 @@
-import React, { useEffect, useRef, useState } from "react";
-import { adjustFontSizeByWidth, adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
+import React, { useEffect, useRef, useState, useMemo } from "react";
+import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate8 = ({ type, data }) => {
 
-  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
   const { authorName, selectedTopic, selectedSubTopic, croppedImage, praises } = data;
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
-  const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    const elements = {
+      frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 220 },
+      title: { ref: useRef(null), maxFontSize: 56, maxWidth: 220, maxHeight: 180 },
+      subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
+      spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
+      spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 180 },
+    };
 
-
-  const [fontSizes, setFontSizes] = useState({
-    frontAuthor: 26,
-    title: 56,
-    subTitle: 20,
-    spineTitle: 28,
-    spineAuthor: 20,
-  });
-
-  const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 220 },
-    title: { ref: useRef(null), maxFontSize: 56, maxHeight: 170 },
-    title: { ref: useRef(null), maxFontSize: 56, maxWidth: 200},
-    subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
-    spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
-    spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 220 },
-  };
-  useEffect(() => {
-    const newFontSizes = {};
-
-    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth, maxHeight }]) => {
-      if (ref.current) {
-        let fontSize = maxFontSize;
-
-        if (maxWidth) {
-          fontSize = adjustFontSizeByWidth(ref, fontSize, maxWidth);
-        }
-        if (maxHeight) {
-          fontSize = adjustFontSizeByHeight(ref, fontSize, maxHeight);
-        }
-
-        newFontSizes[key] = fontSize;
-      }
+    const [fontSizes, setfontSizes] = useState({
+      frontAuthor: 26,
+      title:  56,
+      subTitle:  20,
+      spineTitle:  28,
+      spineAuthor:  20,
     });
 
-    setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
-  }, [selectedTopic, selectedSubTopic, authorName]);
+    useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setfontSizes);
+
+    const bubbleContainerRef = useRef(null);
+    
+    useEffect(() => {
+      setTimeout(() => {
+        if (bubbleContainerRef.current) {
+          const authorHeight = elements.frontAuthor.ref.current?.offsetHeight || 0;
+          const titleHeight = elements.title.ref.current?.offsetHeight || 0;
+          const totalHeight = authorHeight + titleHeight;
+          const bubbleHeight = bubbleContainerRef.current.offsetHeight;
+    
+          if (totalHeight < bubbleHeight) {
+            bubbleContainerRef.current.style.paddingTop = `${(bubbleHeight - totalHeight) / 2}px`;
+          } else {
+            bubbleContainerRef.current.style.paddingTop = "0px";
+          }
+        }
+      }, 0);
+    }, [fontSizes]);
+    
 
   return (
     <>
@@ -74,22 +72,29 @@ const CoverTemplate8 = ({ type, data }) => {
             <div className="relative mx-auto max-w-[350px] max-h-[360px]">
               <img src="/images/create-book/bg/bubble.svg" alt="" />
               <div className=" font-degular text-center absolute w-full h-full top-0  pt-12 pb-4 px-14">
-                <div className="w-full h-full flex flex-col items-center ">
-                  <div className=" text-white font-degular font-extrabold whitespace-nowrap"
+                <div 
+                ref={bubbleContainerRef}
+                className="w-full h-full flex flex-col items-center ">
+                  <div 
+                  className={`text-white font-degular font-extrabold ${
+                    authorName.length > 30 && authorName.trim().split(/\s+/).length > 1 
+                      ? "whitespace-normal break-words" 
+                      : "whitespace-nowrap"
+                  }`}
                     ref={elements.frontAuthor.ref}
                     style={{
-                      fontSize: `${fontSizes.frontAuthor}px`,
-                      lineHeight: `${fontSizes.frontAuthor}px`
+                      fontSize: `${elements.frontAuthor.fontSize}px`,
+                      lineHeight: `${elements.frontAuthor.fontSize}px`
                     }}
                   >
                     {authorName || "Default Author"}
                   </div>
                   <div
                     ref={elements.title.ref}
-                    className="text-[#FFE600] mt-4 max-h-[180px]  block font-extrabold"
+                    className="text-[#FFE600] mt-4 max-h-[200px]  block font-extrabold"
                     style={{
-                      fontSize: `${fontSizes.title}px`,
-                      lineHeight: `${fontSizes.title}px`
+                      fontSize: `${elements.title.fontSize}px`,
+                      lineHeight: `${elements.title.lineHeight}px`
                     }}
                   >
                     {selectedTopic || "Default Topic"}
@@ -131,7 +136,7 @@ const CoverTemplate8 = ({ type, data }) => {
               <div
                 ref={elements.spineTitle.ref}
                 className="whitespace-nowrap text-[#FFE600] font-extrabold"
-                style={{ fontSize: `${fontSizes.spineTitle}px` }}
+                style={{ fontSize: `${elements.spineTitle.fontSize}px` }}
               >
                 {selectedTopic || "Default Topic"}
               </div>
@@ -141,7 +146,7 @@ const CoverTemplate8 = ({ type, data }) => {
               <div
                 ref={elements.spineAuthor.ref}
                 className="whitespace-nowrap text-white font-extrabold"
-                style={{ fontSize: `${fontSizes.spineAuthor}px` }}
+                style={{ fontSize: `${elements.spineAuthor.fontSize}px` }}
               >
                 {authorName || "Default Author"}
               </div>

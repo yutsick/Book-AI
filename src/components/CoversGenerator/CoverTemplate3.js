@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { adjustFontSizeByWidth, adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
+
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
+import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
+
 const CoverTemplate3 = ({ type, data }) => {
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -13,8 +15,8 @@ const CoverTemplate3 = ({ type, data }) => {
 
   const elements = {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280, maxHeight: 40 },
-    title: { ref: useRef(null), maxFontSize: 27, maxHeight: 80 },
-    subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 220, maxHeight: 65 },
+    title: { ref: useRef(null), maxFontSize: 27, maxHeight: 40 },
+    subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 220, maxHeight: 180 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
   };
@@ -27,25 +29,9 @@ const CoverTemplate3 = ({ type, data }) => {
     spineAuthor: 17,
   });
 
-  useEffect(() => {
-    const newFontSizes = {};
+  useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setFontSizes);
 
-    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth, maxHeight }]) => {
-      if (ref.current) {
-        let fontSize = maxFontSize;
-        if (maxWidth) {
-          fontSize = adjustFontSizeByWidth(ref, fontSize, maxWidth);
-        }
-        if (maxHeight) {
-          fontSize = adjustFontSizeByHeight(ref, fontSize, maxHeight);
-        }
-
-        newFontSizes[key] = fontSize;
-      }
-    });
-
-    setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
-  }, [selectedTopic, selectedSubTopic, authorName]);
+  
 
   return (
     <>

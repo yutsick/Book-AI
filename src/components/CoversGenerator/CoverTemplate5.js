@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
+import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate5 = ({ type, data }) => {
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
@@ -32,17 +32,16 @@ const CoverTemplate5 = ({ type, data }) => {
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  
+  const elements = {
+    spineAuthor: { ref: useRef(null), maxFontSize: 21, maxWidth: 215 },
+  };
 
-  const spineAuthorRef = useRef(null);
-  const maxSpineAuthorWidth = 215;
-  const [spineAuthorFontSize, setSpineAuthorFontSize] = useState(21);
+  const [fontSizes, setFontSizes] = useState({
+    spineAuthor: 21,
+  });
 
-  useEffect(() => {
-    if (spineAuthorRef.current) {
-      const newSize = adjustFontSizeByWidth(spineAuthorRef, 21, maxSpineAuthorWidth);
-      setSpineAuthorFontSize(newSize);
-    }
-  }, [authorName]);
+  useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setFontSizes);
 
   return (
     <>
@@ -133,9 +132,9 @@ const CoverTemplate5 = ({ type, data }) => {
 
             <div className="flex font-black flex-col justify-center items-center font-degular h-full">
               <div
-                ref={spineAuthorRef}
+                ref={elements.spineAuthor.ref}
                 className="whitespace-nowrap"
-                style={{ fontSize: `${spineAuthorFontSize}px` }}
+                style={{ fontSize: `${elements.spineAuthor.fontSize}px` }}
               >
                 {authorName || "Default Author"}
               </div>

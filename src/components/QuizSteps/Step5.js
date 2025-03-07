@@ -49,7 +49,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   useEffect(() => {
     console.log("🔄 useEffect triggered - books changed:", books);
 
-    if (Array.isArray(books) && books.length > 0 ) {
+    if (Array.isArray(books) && books.length > 0 && !selectedTopic) {
       console.log("📚 Books from API:", books);
 
       const visible = books.slice(0, 3);

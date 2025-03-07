@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
-import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
+import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate4 = ({ type, data }) => {
 
@@ -15,29 +15,20 @@ const CoverTemplate4 = ({ type, data }) => {
     return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
   };
 
+  
+  const elements = {
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 400  },
+    spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 150 },
+    spineTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 350 },
+  };
 
-  const spineAuthorRef = useRef(null);
-  const spineTitleRef = useRef(null);
+  const [fontSizes, setFontSizes] = useState({
+    frontAuthor: 30,
+    spineAuthor: 20,
+    spineTitle: 28,
+  });
 
-  const maxSpineTitleWidth = 350;
-  const maxSpineAuthorWidth = 150;
-
-  const [spineTitleFontSize, setSpineTitleFontSize] = useState(20);
-  const [spineAuthorFontSize, setSpineAuthorFontSize] = useState(17);
-
-  useEffect(() => {
-    if (spineAuthorRef.current) {
-      const newSize = adjustFontSizeByWidth(spineAuthorRef, 17, maxSpineAuthorWidth);
-      setSpineAuthorFontSize(newSize);
-    }
-  }, [authorName]);
-
-  useEffect(() => {
-    if (spineTitleRef.current) {
-      const newSize = adjustFontSizeByWidth(spineTitleRef, 20, maxSpineTitleWidth);
-      setSpineTitleFontSize(newSize);
-    }
-  }, [selectedTopic]);
+  useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setFontSizes);
 
 
   return (
@@ -49,7 +40,14 @@ const CoverTemplate4 = ({ type, data }) => {
             <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
           </div>
           <div className="">
-            <div className="font-montserrat  text-[26px] text-center font-semibold">
+            <div
+              ref={elements.frontAuthor.ref}
+              className="font-montserrat text-center font-semibold whitespace-nowrap"
+              style={{
+                fontSize: `${elements.frontAuthor.fontSize}px`
+
+              }}
+            >
               {authorName || "Default Author"}
             </div>
             <div className="w-[274px] h-[274px] mx-auto pt-4 mt-4"
@@ -94,7 +92,7 @@ const CoverTemplate4 = ({ type, data }) => {
       {type === "back" && (
         <div
           className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between bg-[#000082] py-5">
-        <div className="">
+          <div className="">
             <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
           </div>
           {praises ? (
@@ -102,7 +100,7 @@ const CoverTemplate4 = ({ type, data }) => {
           ) : (
             <p>Loading testimonials...</p>
           )}
-               <div className="">
+          <div className="">
             <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
           </div>
         </div>
@@ -117,21 +115,21 @@ const CoverTemplate4 = ({ type, data }) => {
             <img src="/images/create-book/bg/line-spine-blue.png" alt="" className="h-[57px] " />
             <div className=" flex items-center justify-between gap-4 text-[18px] font-semibold font-montserrat flex-1">
 
-              <div 
-              ref={spineTitleRef}
-              style={{ 
-                fontSize: `${spineTitleFontSize}px`, 
-                lineHeight: `${spineTitleFontSize}px`,
-              }}
+              <div
+                ref={elements.spineTitle.ref}
+                style={{
+                  fontSize: `${elements.spineTitle.fontSize}px`,
+                  lineHeight: `${elements.spineTitle.lineHeight}px`,
+                }}
 
-              className="whitespace-nowrap font-montserrat ">
+                className="whitespace-nowrap font-montserrat ">
                 {selectedTopic || "Default Topic"}
               </div>
 
               <div className="whitespace-nowrap font-montserrat text-[17px] leading-[17px]">
                 <div
-                  ref={spineAuthorRef}
-                  style={{ fontSize: `${spineAuthorFontSize}px` }}
+                  ref={elements.spineAuthor.ref}
+                  style={{ fontSize: `${elements.spineAuthor.fontSize}px` }}
                 >
                   {authorName || "Default Author"}
                 </div>

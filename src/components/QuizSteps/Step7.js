@@ -25,7 +25,7 @@ const cropperData = [
   { id: 4, top: 115, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 165, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true },
   { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 425, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 370 },
   { id: 6, top: 0, bottom: null, left: 0, width: 320, height: 302, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
-  { id: 7, top: null, bottom: 85, left: 55, width: 210, height: 222, mobTop: null, mobBottom: 98, mobLeft: 0, mobWidth: 185, mobHeight: 195, radius: true },
+  { id: 7, top: null, bottom: 85, left: 55, width: 210, height: 222, mobTop: null, mobBottom: 73, mobLeft: 0, mobWidth: 183, mobHeight: 195, radius: true },
   { id: 8, top: null, bottom: 0, left: 137, width: 183, height: 220, mobTop: null, mobBottom: 0.01, mobLeft: 120, mobWidth: 162, mobHeight: 190 },
 ]
 function Step7({ setProgressStep, setIsButtonDisabled }) {

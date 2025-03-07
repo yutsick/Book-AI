@@ -1,57 +1,29 @@
 import React, { useRef, useState, useEffect } from "react";
-import { adjustFontSizeByWidth } from "@/utils/fontSizeHelper";
-import { adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
+import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 
 const CoverTemplate2 = ({ type, data }) => {
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
 
-  const frontAuthorRef = useRef(null);
-  const authorRef = useRef(null);
-  const titleRef = useRef(null);
-  const spineTitleRef = useRef(null);
-
-  const [frontAuthorFontSize, setFrontAuthorFontSize] = useState(30);
-  const [authorFontSize, setAuthorFontSize] = useState(20);
-  const [titleFontSize, setTitleFontSize] = useState(55);
-  const [spineTitleFontSize, setSpineTitleFontSize] = useState(28);
-
-  // useEffect(() => {
-  //   if (type === "front") {
-  //     const newFontSize = adjustFontSizeByHeight(frontAuthorRef, 30, 250);
-  //     setFrontAuthorFontSize(newFontSize);
-  //   }
-  // }, [authorName, type]);
-  useEffect(() => {
-    if (type === "front") {
-      const newFontSize = adjustFontSizeByWidth(frontAuthorRef, 30, 250);
-      setFrontAuthorFontSize(newFontSize);
-    }
-  }, [authorName, type]);
 
 
+  const elements = {
+    frontAuthor: { ref: useRef(null), maxFontSize: 30, maxWidth: 260, maxHeight: 60  },
+    spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 220 },
+    frontTitle: { ref: useRef(null), maxFontSize: 55,  maxHeight: 80 },
+    spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 370 },
+  };
 
-  useEffect(() => {
-    if (type === "spine") {
-      const newFontSize = adjustFontSizeByWidth(authorRef, 20, 180);
-      setAuthorFontSize(newFontSize);
-    }
-  }, [authorName, type]);
+  const [fontSizes, setFontSizes] = useState({
+    frontAuthor: 30,
+    spineAuthor: 20,
+    frontTitle: 55,
+    spineTitle: 28,
+  });
 
-  useEffect(() => {
-    if (type === "spine") {
-      const newFontSize = adjustFontSizeByWidth(spineTitleRef, 28, 390);
-      setSpineTitleFontSize(newFontSize);
-    }
-  }, [selectedTopic, type]);
+  useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setFontSizes);
 
-  useEffect(() => {
-    if (type === "front") {
-      const newFontSize = adjustFontSizeByHeight(titleRef, 55, 135);
-      setTitleFontSize(newFontSize);
-    }
-  }, [selectedTopic, type]);
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -70,24 +42,28 @@ const CoverTemplate2 = ({ type, data }) => {
           }}
         >
           <div
-            ref={titleRef}
-            className=" font-extrabold  absolute top-12 left-8   uppercase"
+            ref={elements.frontTitle.ref}
+            className=" font-extrabold  absolute top-12 left-8 uppercase"
             style={{
               transform: "rotate(90deg) translateY(-100%)",
               transformOrigin: "left top",
-              fontSize: `${titleFontSize}px`,
-              lineHeight: `${titleFontSize * 0.9}px`,
+              fontSize: `${elements.frontTitle.fontSizes}px`,
+              lineHeight: `${elements.frontTitle.lineHeight}px`,
             }}
           >
             {selectedTopic || "Default Topic"}
           </div>
-          <div className="w-full  mt-8 flex justify-end h-8 px-10" >
+          <div className="w-full  mt-8 flex justify-end h-8 px-10 " >
             <div 
-            ref={frontAuthorRef}
-            className="font-extrabold max-w-[220px]"
+            ref={elements.frontAuthor.ref}
+            className={`font-extrabold max-w-[260px] ${
+              authorName.length > 30 && authorName.trim().split(/\s+/).length > 1 
+                ? "whitespace-normal break-words" 
+                : "whitespace-nowrap"
+            }`}
             style={{
-              fontSize: `${frontAuthorFontSize}px`,
-              lineHeight: `${frontAuthorFontSize}px`,
+              fontSize: `${elements.frontAuthor}px`,
+              lineHeight: `${elements.frontAuthor.lineHeight}px`,
             }}
             >
               {authorName || "Default Author"}
@@ -138,20 +114,20 @@ const CoverTemplate2 = ({ type, data }) => {
             <div className="h-full right-0 w-[210px] bg-gradient-to-r from-transparent to-black/50 absolute" ></div>
             <div className="text-white px-2 flex items-center justify-between  font-degular flex-1">
               <div 
-              ref={spineTitleRef}
+              ref={elements.spineTitle.ref}
               className="uppercase whitespace-nowrap text-[28px] font-extrabold"
               style={{ 
                 background: "#878B91",
-                fontSize: `${spineTitleFontSize}px`,
-                lineHeight: `${spineTitleFontSize * 1.2}px`,
+                fontSize: `${elements.spineTitle.fontSizes}px`,
+                lineHeight: `${elements.spineTitle.lineHeight}px`,
               }}
               >
                 {selectedTopic || "Default Topic"}
               </div>
               <div
-                ref={authorRef}
+                ref={elements.spineAuthor.ref}
                 className=" whitespace-nowrap font-degular font-extrabold relative z-2"
-                style={{ fontSize: `${authorFontSize}px` }}
+                style={{ fontSize: `${elements.spineAuthor.fontSizes}px` }}
               >
                 {authorName || "Default Author"}
               </div>
