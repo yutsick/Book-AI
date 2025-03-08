@@ -30,21 +30,23 @@ const CoverTemplate8 = ({ type, data }) => {
     const bubbleContainerRef = useRef(null);
     
     useEffect(() => {
-      setTimeout(() => {
-        if (bubbleContainerRef.current) {
+      if (bubbleContainerRef.current) {
+        requestAnimationFrame(() => {
           const authorHeight = elements.frontAuthor.ref.current?.offsetHeight || 0;
           const titleHeight = elements.title.ref.current?.offsetHeight || 0;
           const totalHeight = authorHeight + titleHeight;
-          const bubbleHeight = bubbleContainerRef.current.offsetHeight;
+          const bubbleHeight = 294;
+          console.log(bubbleHeight, totalHeight, authorHeight, titleHeight);
     
           if (totalHeight < bubbleHeight) {
-            bubbleContainerRef.current.style.paddingTop =(isMobile) ? `${(bubbleHeight - totalHeight) / 2}px` : `${(bubbleHeight - titleHeight) / 2}px`;
+            bubbleContainerRef.current.style.paddingTop = `${(bubbleHeight - totalHeight) / 2 - 32 }px`;
           } else {
             bubbleContainerRef.current.style.paddingTop = "0px";
           }
-        }
-      }, 0);
+        });
+      }
     }, [fontSizes]);
+    
     
 
   return (
@@ -69,11 +71,13 @@ const CoverTemplate8 = ({ type, data }) => {
           </div>
 
           <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-between  gap-4 px-8 text-center flex-1 text-white pt-12 pb-6">
-            <div className="relative mx-auto max-w-[350px] max-h-[360px]">
+            <div 
+             
+            className="relative mx-auto max-w-[350px] max-h-[360px]">
               <img src="/images/create-book/bg/bubble.svg" alt="" />
               <div className=" font-degular text-center absolute w-full h-full top-0  pt-12 pb-4 px-14">
                 <div 
-                ref={bubbleContainerRef}
+               ref={bubbleContainerRef}
                 className="w-full h-full flex flex-col items-center ">
                   <div 
                   className={`text-white font-degular font-extrabold ${
