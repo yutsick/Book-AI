@@ -22,7 +22,7 @@ const cropperData = [
   { id: 1, top: null, bottom: 160, left: 0, width: 320, height: 270, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 235 },
   { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 375 },
   { id: 3, top: null, bottom: 10, left: 12, width: 297, height: 335, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 295 },
-  { id: 4, top: 105, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 175, mobLeft: 0, mobWidth: 160, mobHeight: 155, rounded: true },
+  { id: 4, top: 102, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 175, mobLeft: 0, mobWidth: 160, mobHeight: 155, rounded: true },
   { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 425, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 370 },
   { id: 6, top: 0, bottom: null, left: 0, width: 320, height: 302, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
   { id: 7, top: null, bottom: 85, left: 55, width: 210, height: 222, mobTop: null, mobBottom: 73, mobLeft: 0, mobWidth: 183, mobHeight: 195, radius: true },
