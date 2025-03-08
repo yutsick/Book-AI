@@ -3,7 +3,6 @@ import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 const CoverTemplate8 = ({ type, data }) => {
 
-
   const { authorName, selectedTopic, selectedSubTopic, croppedImage, praises } = data;
 
   const authorImageSrc =
@@ -38,7 +37,7 @@ const CoverTemplate8 = ({ type, data }) => {
           const bubbleHeight = bubbleContainerRef.current.offsetHeight;
     
           if (totalHeight < bubbleHeight) {
-            bubbleContainerRef.current.style.paddingTop = `${(bubbleHeight - totalHeight) / 2}px`;
+            bubbleContainerRef.current.style.paddingTop = `${(bubbleHeight - titleHeight) / 2}px`;
           } else {
             bubbleContainerRef.current.style.paddingTop = "0px";
           }

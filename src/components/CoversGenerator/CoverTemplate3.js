@@ -16,7 +16,7 @@ const CoverTemplate3 = ({ type, data }) => {
   const elements = {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280, maxHeight: 40 },
     title: { ref: useRef(null), maxFontSize: 27, maxHeight: 40 },
-    subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 220, maxHeight: 180 },
+    subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 200, maxHeight: 130 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
   };
@@ -62,8 +62,8 @@ const CoverTemplate3 = ({ type, data }) => {
                     ref={elements.title.ref}
                     className="font-black max-w-[200px]"
                     style={{
-                      fontSize: `${fontSizes.title}px`,
-                      lineHeight: `${fontSizes.title}px`,
+                      fontSize: `${elements.title}px`,
+                      lineHeight: `${elements.title}px`,
                     }}
                   >
                     {selectedTopic || "Default Topic"}
@@ -73,8 +73,8 @@ const CoverTemplate3 = ({ type, data }) => {
                     ref={elements.subTitle.ref}
                     className="mt-1 font-degular font-semibold max-w-[200px]"
                     style={{
-                      fontSize: `${fontSizes.subTitle}px`,
-                      lineHeight: `${fontSizes.subTitle * 0.9}px`,
+                      fontSize: `${fontSizes.subTitle.fontSize}px`,
+                      lineHeight: `${fontSizes.subTitle.lineHeight}px`,
                     }}
                   >
                     {selectedSubTopic || "Default Sub Topic"}

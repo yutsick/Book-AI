@@ -57,12 +57,12 @@ const CoverTemplate1 = ({ type, data }) => {
         <div className="w-[431px] h-[648px] bg-black mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-degular">
           <div className="w-full relative h-[433px] flex flex-col justify-end">
             {isIOS ? (
-              <canvas ref={canvasRef} className="w-full h-full max-h-[350px] object-top object-cover block"></canvas>
+              <canvas ref={canvasRef} className="w-full h-full max-h-[360px] object-top object-cover block"></canvas>
             ) : (
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-full max-h-[350px] object-top  object-cover block"
+                className="w-full h-full max-h-[360px] object-top  object-cover block"
               />
             )}
             <div className="absolute top-[50px] text-[20px] leading-[26px] font-black text-white left-[36px]">
