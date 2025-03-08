@@ -1,6 +1,6 @@
 "use client";
 
-import Slider from '../Slider/Slider';
+import VideoGrid from '../VideoGrid/VideoGrid';
 import Button from '../Button/Button';
 
 import React, { useState, useEffect } from "react";
@@ -15,9 +15,10 @@ function Videos() {
     fetch(videosUrl)
       .then((response) => response.json())
       .then((data) => setVideo(data))
-      .catch((err) => console.error("Error fetching Video slider data:", err));
-      setError('Failed to load Video slider data.');
-
+      .catch((err) => {
+        console.error("Error fetching Video grid data:", err);
+        setError("Failed to load Video grid data.");
+      });
   }, []);
 
   return video?.slides?.length ? (
@@ -25,42 +26,18 @@ function Videos() {
       <div className='bg-pink section-py relative'>
         <div className="max-w-[1260px] mx-auto px-4 md:px-0">
           <h2 className="text-title text-center">{video.title}</h2>
-          <div className="h-[460px]">
-            <div  className="relative mx-auto w-full md:max-w-[870px]  ">
-                <Slider
-                  type='video'
-                  slides={video.slides}
-
-                  breakpoints={{
-                    0: { slidesPerView: 1.3, spaceBetween: 10 },
-                    335: { slidesPerView: 1.4, spaceBetween: 10 },
-                    355: { slidesPerView: 1.6, spaceBetween: 10 },
-                    395: { slidesPerView: 1.8, spaceBetween: 10 },
-                    430: { slidesPerView: 2, spaceBetween: 10 },
-                    485: { slidesPerView: 2.2, spaceBetween: 10 },
-                    545: { slidesPerView: 2.4, spaceBetween: 10 },
-                    635: { slidesPerView: 2.7, spaceBetween: 15 },
-                    700: { slidesPerView: 3, spaceBetween: 15 },
-                    768: { slidesPerView: 3.6, spaceBetween: 20 },
-                    900: { slidesPerView: 4, spaceBetween: 20 },
-                  }}
-                  imageSizes={{
-                    width: 186,
-                    height: 340
-                  }}
-                  imageClasses={"rounded-lg"}
-                />
-              </div>
+          <div className="h-auto">
+            <div className="relative mx-auto w-full md:max-w-[870px]">
+              <VideoGrid videos={video.slides.slice(0, 4)} />
+            </div>
           </div>
           <div className="">
             <Button text={video.button} />
           </div>
         </div>
-
       </div>
     </>
-  ) : null
+  ) : null;
 }
 
-
-export default Videos
+export default Videos;
