@@ -1,20 +1,27 @@
 export const adjustFontSizeByHeight = (elementRef, maxFontSize, maxHeight, minFontSize = 10) => {
   const element = elementRef.current;
   
-  if (!element) return { fontSize: maxFontSize, lineHeight: maxFontSize * 0.9 };
+  if (!element) return { fontSize: maxFontSize, lineHeight: getLineHeight(maxFontSize) };
 
   let fontSize = maxFontSize;
   element.style.fontSize = `${fontSize}px`;
+  element.style.lineHeight = `${getLineHeight(fontSize)}px`;
 
   while (element.scrollHeight > maxHeight && fontSize > minFontSize) {
     fontSize -= 1;
     element.style.fontSize = `${fontSize}px`;
-    element.style.lineHeight = `${fontSize * 0.9}px`;
+    element.style.lineHeight = `${getLineHeight(fontSize)}px`;
   }
 
-
-  return { fontSize, lineHeight: fontSize * 0.9 };
+  return { fontSize, lineHeight: getLineHeight(fontSize) };
 };
+
+const getLineHeight = (fontSize) => {
+  if (fontSize > 28) return fontSize * 0.9;
+  if (fontSize > 22) return fontSize * 1;
+  return fontSize * 1.1;
+};
+
 
 
 
@@ -26,7 +33,6 @@ export const adjustFontSizeByWidth = (elementRef, maxFontSize, maxWidth, shouldW
     return maxFontSize; 
   }
 
-  // Якщо дозволено перенос, встановлюємо відповідні стилі
   if (shouldWrap) {
     element.style.whiteSpace = "normal";
     element.style.wordBreak = "break-word";
@@ -35,7 +41,6 @@ export const adjustFontSizeByWidth = (elementRef, maxFontSize, maxWidth, shouldW
   let fontSize = maxFontSize;
   element.style.fontSize = `${fontSize}px`;
 
-  // Зменшуємо шрифт, якщо текст все ще ширший за maxWidth
   while (element.offsetWidth > maxWidth && fontSize > minFontSize) {
     fontSize -= 1;
     element.style.fontSize = `${fontSize}px`;

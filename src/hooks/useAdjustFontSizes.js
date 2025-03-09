@@ -10,15 +10,16 @@ const useAdjustFontSizes = (elements, dependencies, setFontSizes) => {
     Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth, maxHeight }]) => {
       if (ref.current) {
         let fontSize = maxFontSize;
-        let lineHeight = fontSize * 0.9;
+        let lineHeight = fontSize ;
   
         if (maxWidth) {
           ({ fontSize, lineHeight } = adjustFontSizeByWidth(ref, fontSize, maxWidth));
         }
         if (maxHeight) {
-         
-          
+
           ({ fontSize, lineHeight } = adjustFontSizeByHeight(ref, fontSize, maxHeight));
+          console.log(fontSize, lineHeight);
+          
         }
   
         newFontSizes[key] = { fontSize, lineHeight };

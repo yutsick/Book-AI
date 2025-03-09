@@ -15,9 +15,9 @@ const CoverTemplate4 = ({ type, data }) => {
     return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
   };
 
-  
+
   const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 400  },
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 350 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 150 },
     spineTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 350 },
   };
@@ -36,35 +36,39 @@ const CoverTemplate4 = ({ type, data }) => {
       {type === "front" && (
         <div
           className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between  font-montserrat bg-[#000082] text-white py-5">
-          <div className="">
-            <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
-          </div>
-          <div className="">
-            <div
-              ref={elements.frontAuthor.ref}
-              className="font-montserrat text-center font-semibold whitespace-nowrap"
-              style={{
-                fontSize: `${elements.frontAuthor.fontSize}px`
-
-              }}
-            >
-              {authorName || "Default Author"}
+          <div className="flex flex-col">
+            <div className="">
+              <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
             </div>
-            <div className="w-[274px] h-[274px] mx-auto pt-4 mt-4"
-              style={{
-                backgroundImage: "url('/images/create-book/bg/lines-strokes.svg')",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "274px 274px",
-                backgroundPosition: "center 0"
-              }}>
-              <img
-                src={authorImageSrc}
-                alt={authorName || "Default Author"}
-                className="w-[240px] h-[240px] rotate-[3.5deg] rounded-[8px] object-cover block object-top mx-auto border border-white bg-white"
-              />
+            <div className=" mt-6">
+              <div className="h-20 flex justify-center">
+              <div
+                ref={elements.frontAuthor.ref}
+                className=" font-montserrat whitespace-nowrap text-center font-semibold max-w-[400px] "
+                style={{
+                  fontSize: `${elements.frontAuthor.fontSize}px`,
+                  lineHeight: `${elements.frontAuthor.lineHeight}px`
+                }}
+              >
+                {authorName || "Default Author"}
+              </div>
+              </div>
+              <div className="w-[274px] h-[274px] mx-auto pt-4"
+                style={{
+                  backgroundImage: "url('/images/create-book/bg/lines-strokes.svg')",
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "274px 274px",
+                  backgroundPosition: "center 0"
+                }}>
+                <img
+                  src={authorImageSrc}
+                  alt={authorName || "Default Author"}
+                  className="w-[240px] h-[240px] rotate-[3.5deg] rounded-[8px] object-cover block object-top mx-auto border border-white bg-white"
+                />
+              </div>
             </div>
           </div>
-          <div className="flex flex-col w-full   "
+          <div className="flex-1 flex flex-col w-full  justify-end  "
           >
 
             {/* Heading */}
