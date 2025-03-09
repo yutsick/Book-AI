@@ -27,7 +27,7 @@ const Slider = ({ type, slides = [], breakpoints, imageSizes, imageClasses }) =>
       (entries) => {
         entries.forEach((entry) => {
           const index = parseInt(entry.target.dataset.index);
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && entry.intersectionRatio === 1) {
             setActiveIndex(index);
           }
         });
@@ -58,10 +58,6 @@ const Slider = ({ type, slides = [], breakpoints, imageSizes, imageClasses }) =>
     });
   }, [activeIndex]);
 
-  const handleMouseEnter = (index) => {
-    setActiveIndex(index);
-  };
-
   return (
     <div className="relative">
       <Swiper
@@ -70,14 +66,17 @@ const Slider = ({ type, slides = [], breakpoints, imageSizes, imageClasses }) =>
           prevEl: ".swiper-button-prev-arrow",
           nextEl: ".swiper-button-next-arrow",
         }}
-        loop = {true}
-        
+        loop={false}
         breakpoints={breakpoints}
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         className="video-slider"
       >
         {slides.map((slide, index) => (
-          <SwiperSlide key={slide.id || index}>
+          <SwiperSlide key={slide.id || index} className="flex flex-col shadow-slideShadow bg-[#F6F6F6]">
+            <div
+              className={`text-center italic text-[#2b2b2b] opacity-[0.88] font-medium ${slide.font ? `text-[${slide.font}px]` : 'text-[14px]'} leading-[16px] h-[65px] pt-2 px-2`} 
+              dangerouslySetInnerHTML={{ __html: slide.text }}
+            ></div>
             {type === "video" && slide.videoUrl ? (
               <video
                 ref={(el) => (videoRefs.current[index] = el)}
@@ -86,8 +85,7 @@ const Slider = ({ type, slides = [], breakpoints, imageSizes, imageClasses }) =>
                 muted
                 loop
                 playsInline
-                className="slider-video"
-                onMouseEnter={() => handleMouseEnter(index)}
+                className="slider-video pointer-events-none"
               />
             ) : type === "image" && slide.imageUrl ? (
               <img
@@ -99,6 +97,7 @@ const Slider = ({ type, slides = [], breakpoints, imageSizes, imageClasses }) =>
             ) : (
               <div className="error">Invalid slide data</div>
             )}
+            <div className="text-[#2b2b2b] opacity-[0.88] justify-center text-center h-8 flex items-center font-semibold">{slide.title}</div>
           </SwiperSlide>
         ))}
       </Swiper>

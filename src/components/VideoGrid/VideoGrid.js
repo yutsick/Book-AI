@@ -21,14 +21,18 @@ const VideoGrid = ({ videos = [] }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        let firstVisibleIndex = null;
         entries.forEach((entry) => {
           const index = parseInt(entry.target.dataset.index);
-          if (entry.isIntersecting) {
-            setActiveIndex(index);
+          if (entry.isIntersecting && firstVisibleIndex === null) {
+            firstVisibleIndex = index;
           }
         });
+        if (firstVisibleIndex !== null) {
+          setActiveIndex(firstVisibleIndex);
+        }
       },
-      { threshold: 0.5 }
+      { threshold: 1 }
     );
 
     videoRefs.current.forEach((video) => {
@@ -46,6 +50,11 @@ const VideoGrid = ({ videos = [] }) => {
         if (index === activeIndex) {
           if (video.readyState >= 2) {
             video.play().catch(() => {});
+          } else {
+            video.oncanplay = () => {
+              video.play().catch(() => {});
+              video.oncanplay = null;
+            };
           }
         } else {
           video.pause();
@@ -61,17 +70,23 @@ const VideoGrid = ({ videos = [] }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {videos.slice(0, 4).map((video, index) => (
-        <video
-          key={index}
-          ref={(el) => (videoRefs.current[index] = el)}
-          data-index={index}
-          src={video.videoUrl}
-          muted
-          loop
-          playsInline
-          className="w-full h-auto"
-          onMouseEnter={() => handleMouseEnter(index)}
-        />
+        <div key={index} className="flex flex-col shadow-slideShadow bg-[#F6F6F6]">
+          <div
+            className={`text-center italic text-[#2b2b2b] opacity-[0.88] font-medium ${video.font ? `text-[${video.font}px]` : 'text-[14px]'} leading-[16px] h-[65px] pt-2 px-2`} 
+            dangerouslySetInnerHTML={{ __html: video.text }} 
+          ></div>
+          <video
+            ref={(el) => (videoRefs.current[index] = el)}
+            data-index={index}
+            src={video.videoUrl}
+            muted
+            loop
+            playsInline
+            className="w-full h-auto"
+            onMouseEnter={() => handleMouseEnter(index)}
+          />
+          <div className="text-[#2b2b2b] opacity-[0.88] justify-center text-center h-8 flex items-center font-semibold">{video.title}</div>
+        </div>
       ))}
     </div>
   );
