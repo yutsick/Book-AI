@@ -15,7 +15,8 @@ export const useTableOfContentsAPI = () => {
     setTableOfContents,
     setError,
     setLoading,
-
+    questions,
+    setQuestions,
   } = useContext(CreateBookContext);
 
   const {
@@ -32,7 +33,22 @@ export const useTableOfContentsAPI = () => {
   const fetchTriggered = useRef(false);
 
 
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await fetch(questionsUrl);
+        const data = await response.json();
+        setQuestions(data);
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+        setQuestions([]);
+      }
+    };
 
+    if (!questions || questions.length === 0) {
+      fetchQuestions();
+    }
+  }, [questionsUrl]);
 
   useEffect(() => {
     const shouldRegenerate = (

@@ -9,7 +9,7 @@ const CoverTemplate2 = ({ type, data }) => {
 
 
   const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 30, maxWidth: 260, maxHeight: 60  },
+    frontAuthor: { ref: useRef(null), maxFontSize: 30, maxWidth: 220, maxHeight: 60  },
     spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 220 },
     frontTitle: { ref: useRef(null), maxFontSize: 55,  maxHeight: 80 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 370 },
@@ -47,7 +47,7 @@ const CoverTemplate2 = ({ type, data }) => {
             style={{
               transform: "rotate(90deg) translateY(-100%)",
               transformOrigin: "left top",
-              fontSize: `${elements.frontTitle.fontSizes}px`,
+              fontSize: `${elements.frontTitle.fontSize}px`,
               lineHeight: `${elements.frontTitle.lineHeight}px`,
             }}
           >
@@ -62,7 +62,7 @@ const CoverTemplate2 = ({ type, data }) => {
                 : "whitespace-nowrap"
             }`}
             style={{
-              fontSize: `${elements.frontAuthor}px`,
+              fontSize: `${elements.frontAuthor.fontSize}px`,
               lineHeight: `${elements.frontAuthor.lineHeight}px`,
             }}
             >

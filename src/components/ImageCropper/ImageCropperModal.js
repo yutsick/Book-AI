@@ -92,6 +92,7 @@ const dynamicWidth = screenWidth >= 465 ? 400 : screenWidth - 50;
         bottom: cropBottom !== undefined ? `${cropBottom}px` : undefined,
         width: cropWidth,
         height: cropHeight,
+        borderRadius: radius ? "50%" : "0",
       }
     : {
         top: cropTop !== undefined ? `${cropTop}px` : undefined,
