@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import HeaderQuiz from "@/components/Header/HeaderQuiz";
-import HeroQuiz from "@/components/Hero/HeroQuiz";
 import ProgressBar from "@/components/ProgressBar/ProgressBar";
 import MainButton from "@/components/Button/MainButton";
+import CreateGenreContext from "@/contexts/CreateGenreContext";
+import CreateBookContext from "@/contexts/CreateBookContext";
 
 import Step1 from "@/components/QuizSteps/Step1";
 import Step2 from "@/components/QuizSteps/Step2";
@@ -42,12 +43,17 @@ const MainScreen = () => {
   ];
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const { selectedTopic, selectedGenre } = useContext(CreateGenreContext);
+  const { authorName, authorEmail, selectedAge, selectedGender, questionsAndAnswers } = useContext(CreateBookContext);
+
+
   useEffect(() => {
-    setTimeout(() => setIsLoaded(true), 300); 
+    setTimeout(() => setIsLoaded(true), 300);
   }, []);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" }); 
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [currentStep]);
 
   const goToNextStep = () => {
@@ -123,12 +129,48 @@ const MainScreen = () => {
     };
   }, [isButtonDisabled, currentStep, file]);
 
+
+  const handleApiCall = async () => {
+    const payload = {
+      email: authorEmail,
+      name: authorName,
+      gender: selectedGender,
+      quizAnswers : questionsAndAnswers,
+      genre: selectedGenre,
+      age: selectedAge,
+    };
+
+    try {
+      const response = await fetch("https://api.booktailor.com/create-draft", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (data.status === "success") {
+        localStorage.setItem("draftUUID", data.data.uuid);
+        localStorage.setItem("draftEmail", data.data.email);
+      } else {
+        console.error("API Error:", data.message);
+      }
+    } catch (error) {
+      console.error("API call failed:", error);
+    }
+
+    goToNextStep();
+  };
+
+
   return (
-    <div 
-    className="min-h-screen bg-[#F9F6EB] flex flex-col items-center pb-36"
-    style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.3s ease-in-out" }}
+    <div
+      className="min-h-screen bg-[#F9F6EB] flex flex-col items-center pb-36"
+      style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.3s ease-in-out" }}
     >
-     { currentStep === 1 && <HeaderQuiz />}
+      {currentStep === 1 && <HeaderQuiz />}
       {/* {currentStep === 1 && <HeroQuiz />} */}
       <ProgressBar
         progressStep={progressStep}
@@ -154,19 +196,19 @@ const MainScreen = () => {
               />
             </svg> :
 
-            <svg
-              width="26"
-              height="18"
-              viewBox="0 0 33 27"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0.536635 12.1992C-0.179063 12.9149 -0.179063 14.0752 0.536635 14.7909L12.1992 26.4535C12.9148 27.1692 14.0752 27.1692 14.7909 26.4535C15.5065 25.7378 15.5065 24.5775 14.7909 23.8618L4.42414 13.4951L14.7909 3.1283C15.5065 2.4127 15.5065 1.2523 14.7909 0.536699C14.0752 -0.179001 12.9148 -0.179001 12.1992 0.536699L0.536635 12.1992ZM32.0703 11.6625L1.83244 11.6625L1.83244 15.3277L32.0703 15.3277L32.0703 11.6625Z"
-                fill="#747474"
-              />
-            </svg> 
-      }
+              <svg
+                width="26"
+                height="18"
+                viewBox="0 0 33 27"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0.536635 12.1992C-0.179063 12.9149 -0.179063 14.0752 0.536635 14.7909L12.1992 26.4535C12.9148 27.1692 14.0752 27.1692 14.7909 26.4535C15.5065 25.7378 15.5065 24.5775 14.7909 23.8618L4.42414 13.4951L14.7909 3.1283C15.5065 2.4127 15.5065 1.2523 14.7909 0.536699C14.0752 -0.179001 12.9148 -0.179001 12.1992 0.536699L0.536635 12.1992ZM32.0703 11.6625L1.83244 11.6625L1.83244 15.3277L32.0703 15.3277L32.0703 11.6625Z"
+                  fill="#747474"
+                />
+              </svg>
+            }
           </button>
         </div>
       )}
@@ -221,9 +263,9 @@ const MainScreen = () => {
             <Step8
               setProgressStep={setProgressStep}
               goToNextStep={goToNextStep}
-              isButtonDisabled = {isButtonDisabled}
+              isButtonDisabled={isButtonDisabled}
               setIsButtonDisabled={setIsButtonDisabled}
-              setLoader={setLoader} 
+              setLoader={setLoader}
             />}
           {currentStep === 9 &&
             <Step9
@@ -236,13 +278,20 @@ const MainScreen = () => {
             />}
 
         </div>
-        {currentStep < totalScreens && !loader  &&(
+        {currentStep < totalScreens && !loader && (
           <MainButton
             currentStep={currentStep}
-            onClick={currentStep === 6 ? handleFileUpload : goToNextStep}
+            onClick={
+              currentStep === 4
+                ? handleApiCall
+                : currentStep === 6
+                  ? handleFileUpload
+                  : goToNextStep
+            }
             disabled={isButtonDisabled}
           />
         )}
+
       </div>
 
     </div>

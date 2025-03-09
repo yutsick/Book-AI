@@ -20,6 +20,10 @@ export const CreateBookProvider = ({ children }) => {
   const [authorEmail, setAuthorEmail] = useState(() => getStoredValue("authorEmail", null));
   const [authorImage, setAuthorImage] = useState("");
   const [croppedImage, setCroppedImage] = useState("");
+  const [praises, setPraises] = useState(() => getStoredValue("praises", null));
+  const [tableOfContents, setTableOfContents] = useState(() => getStoredValue("tableOfContents", []));
+  const [questions, setQuestions] = useState([]);
+  
   const [selectedTemplate, setSelectedTemplate] = useState({
     templateId: null,
     front: "",
@@ -28,8 +32,6 @@ export const CreateBookProvider = ({ children }) => {
     crop: { x: 0, y: 0 },  
     zoom: 1.5,            
   });
-  
-  const [praises, setPraises] = useState(null);
 
   const [selectedCopies, setSelectedCopies] = useState(1);
   const [selectedCoverIndex, setSelectedCoverIndex] = useState(0);
@@ -38,40 +40,32 @@ export const CreateBookProvider = ({ children }) => {
   const [subtotal, setSubtotal] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [processedAuthorImage, setProcessedAuthorImage] = useState(null);
 
   useEffect(() => {
- 
-      localStorage.setItem("authorName", JSON.stringify(authorName));
-    
-      localStorage.setItem("selectedAge", JSON.stringify(selectedAge));
-    
-      localStorage.setItem("selectedGender", JSON.stringify(selectedGender));
-    
-    if (questionsAndAnswers.length > 0) {
-      localStorage.setItem("questionsAndAnswers", JSON.stringify(questionsAndAnswers));
-    }
-    if (authorEmail && authorEmail.trim() !== "") {
-      localStorage.setItem("authorEmail", JSON.stringify(authorEmail));
-    }
-  }, [authorName, selectedAge, selectedGender, questionsAndAnswers, authorEmail]);
+    localStorage.setItem("authorName", JSON.stringify(authorName));
+    localStorage.setItem("selectedAge", JSON.stringify(selectedAge));
+    localStorage.setItem("selectedGender", JSON.stringify(selectedGender));
+    localStorage.setItem("questionsAndAnswers", JSON.stringify(questionsAndAnswers));
+    localStorage.setItem("authorEmail", JSON.stringify(authorEmail));
+    localStorage.setItem("praises", JSON.stringify(praises));
+    localStorage.setItem("tableOfContents", JSON.stringify(tableOfContents));
+  }, [
+    authorName,
+    selectedAge,
+    selectedGender,
+    questionsAndAnswers,
+    authorEmail,
+    praises,
+    tableOfContents,
+  ]);
 
-  // Data update controlling
   const [contextUpdated, setContextUpdated] = useState(false);
   useEffect(() => {
     setContextUpdated(true);
   }, [authorName, selectedAge, selectedGender, questionsAndAnswers]);
-  // const addQuestionAndAnswer = (question, answer) => {
-  //   setQuestionsAndAnswers((prev) => {
-  //     const existingIndex = prev.findIndex((qa) => qa.question === question);
-  //     if (existingIndex !== -1) {
-  //       const updated = [...prev];
-  //       updated[existingIndex] = { ...updated[existingIndex], answer };
-  //       return updated;
-  //     }
-  //     return [...prev, { question, answer }];
-  //   });
-  // };
+
   const addQuestionAndAnswer = (value, answer) => {
     setQuestionsAndAnswers((prev) => {
       const existingIndex = prev.findIndex((qa) => qa.value === value);
@@ -83,17 +77,24 @@ export const CreateBookProvider = ({ children }) => {
       return [...prev, { value, answer }];
     });
   };
-  
-  const removeQuestion = (value) => { 
+
+  const removeQuestion = (value) => {
     setQuestionsAndAnswers((prev) =>
-      prev.filter((item) => item.value !== value) 
+      prev.filter((item) => item.value !== value)
     );
   };
-  
 
   const handleImageUpload = (file) => {
     if (!file) return;
     setAuthorImage(file);
+  };
+
+  const updateBookData = (data) => {
+    setAuthorEmail(data.email || "");
+    setAuthorName(data.name || "");
+    setQuestionsAndAnswers(data.quiz_answers || []);
+    setPraises(data.praises || []);
+    setTableOfContents(data.table_of_contents || []);
   };
 
   return (
@@ -121,22 +122,29 @@ export const CreateBookProvider = ({ children }) => {
         handleImageUpload,
         error,
         setError,
+        loading,
+        setLoading,
         selectedCopies,
         setSelectedCopies,
         selectedCoverIndex,
         setSelectedCoverIndex,
         selectedShippingIndex,
-        setSelectedShippingIndex, 
+        setSelectedShippingIndex,
         selectedCover,
         setSelectedCover,
-        subtotal, 
-        setSubtotal, 
-        totalPrice, 
+        subtotal,
+        setSubtotal,
+        totalPrice,
         setTotalPrice,
-        contextUpdated, 
+        contextUpdated,
         setContextUpdated,
         praises,
-        setPraises 
+        setPraises,
+        tableOfContents,
+        setTableOfContents,
+        questions,
+        setQuestions,
+        updateBookData,
       }}
     >
       {children}

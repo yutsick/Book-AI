@@ -16,7 +16,7 @@ const CoverTemplate3 = ({ type, data }) => {
   const elements = {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280, maxHeight: 40 },
     title: { ref: useRef(null), maxFontSize: 27, maxHeight: 40 },
-    subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 200, maxHeight: 110 },
+    subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 190, maxHeight: 105 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
   };
@@ -71,7 +71,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
                   <div
                     ref={elements.subTitle.ref}
-                    className="mt-1 font-degular font-semibold max-w-[200px]"
+                    className="mt-1 font-degular font-semibold max-w-[190px]"
                     style={{
                       fontSize: `${fontSizes.subTitle.fontSize}px`,
                       lineHeight: `${fontSizes.subTitle.lineHeight}px`,

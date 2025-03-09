@@ -1,99 +1,61 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useEffect, useContext, useRef, useState } from "react";
 import CreateBookContext from "@/contexts/CreateBookContext";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
 import config from "../../config";
 
 export const useTableOfContentsAPI = () => {
-
   const { questionsUrl } = config;
-  const { authorName, selectedAge, selectedGender, questionsAndAnswers } = useContext(CreateBookContext);
-  const { selectedGenre, selectedTopic, selectedSubTopic, genreUpdated, setGenreUpdated, topicUpdated, setTopicUpdated } = useContext(CreateGenreContext);
 
-  const [tableOfContents, setTableOfContents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {
+    authorName,
+    selectedAge,
+    selectedGender,
+    questionsAndAnswers,
+    tableOfContents,
+    setTableOfContents,
+    setError,
+    setLoading,
+
+  } = useContext(CreateBookContext);
+
+  const {
+    selectedGenre,
+    selectedTopic,
+    selectedSubTopic,
+    genreUpdated,
+    setGenreUpdated,
+    topicUpdated,
+    setTopicUpdated,
+  } = useContext(CreateGenreContext);
+
+  const [localTableOfContents, setLocalTableOfContents] = useState(tableOfContents || []);
   const fetchTriggered = useRef(false);
-  const [questions, setQuestions] = useState(null);
+
+
+
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const response = await fetch(questionsUrl);
-        const data = await response.json();
-        setQuestions(data);
-      } catch (error) {
-        console.error("Error fetching questions:", error);
-        setQuestions([]);
-      }
-    };
+    const shouldRegenerate = (
+      genreUpdated || topicUpdated ||
+      !tableOfContents || tableOfContents.length === 0
+    );
 
-    fetchQuestions();
-  }, [questionsUrl]);
-
-  useEffect(() => {
-    if (!questions) return;
-    let missingFields = [];
-
-    if (!authorName) missingFields.push("authorName");
-    // if (!selectedAge) missingFields.push("selectedAge");
-    // if (!selectedGender) missingFields.push("selectedGender");
-    if (!questionsAndAnswers || questionsAndAnswers.length === 0) missingFields.push("quiz_answers");
-    // if (!selectedGenre) missingFields.push("selectedGenre");
-    if (!selectedTopic) missingFields.push("selectedTopic");
-    if (!selectedSubTopic) missingFields.push("selectedSubTopic");
-
-    if (missingFields.length > 0) {
-      console.error(`⛔ Missing required fields: ${missingFields.join(", ")}`);
+    if (!shouldRegenerate) {
+      setLocalTableOfContents(tableOfContents);
       setLoading(false);
-      setError(`Missing required fields: ${missingFields.join(", ")}`);
       return;
-    }
-
-    const storageKey = `toc`;
-    if (!genreUpdated && !topicUpdated && typeof window !== "undefined") {
-      const storedToc = localStorage.getItem(storageKey);
-      if (storedToc) {
-        try {
-          const parsedToc = JSON.parse(storedToc);
-          if (Array.isArray(parsedToc) && parsedToc.length > 0) {
-            console.log("📦 Using Table of Contents from localStorage");
-            setTableOfContents(parsedToc);
-            setLoading(false);
-            return;
-          }
-        } catch (error) {
-          console.error("❌ Error parsing stored Table of Contents:", error);
-        }
-      }
-    }
-
-    if (genreUpdated) {
-      console.log("🔄 Topic or SubTopic changed, clearing previous Table of Contents...");
-      localStorage.removeItem(storageKey);
-      setTableOfContents([]);
-      fetchTriggered.current = false;
-    }
-    if (topicUpdated) {
-      console.log("🔄 Topic or SubTopic changed, clearing previous Table of Contents...");
-      localStorage.removeItem(storageKey);
-      setTableOfContents([]);
-      fetchTriggered.current = false;
     }
 
     if (fetchTriggered.current) {
-      console.warn("🚫 API call already triggered, skipping...");
       return;
     }
+
     fetchTriggered.current = true;
-    setGenreUpdated(false);
-    setTopicUpdated(false);
+    setLoading(true);
+    setError(null);
 
     const fetchTableOfContents = async () => {
-      setLoading(true);
-      setError(null);
-
       try {
-        console.log("📖 Fetching Table of Contents from API...");
         const response = await fetch("https://api.booktailor.com/generate-table-of-contents", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -101,19 +63,16 @@ export const useTableOfContentsAPI = () => {
             title: selectedTopic,
             subtitle: selectedSubTopic,
             author_name: authorName,
-            genre: (selectedGenre) ? selectedGenre.toLowerCase().trim() : null,
+            genre: selectedGenre ? selectedGenre.toLowerCase().trim() : null,
             gender: selectedGender,
             age: selectedAge ? String(selectedAge.value) : null,
-
-            quiz_answers: questionsAndAnswers
-              .filter((el) => el.answer.length !== 0)
-              .map(({ value, answer }) => {
-                const questionObj = questions.find((q) => q.value === value);
-                return {
-                  question: questionObj ? questionObj.label.replace("{author}", authorName) : "Unknown question",
-                  answer,
-                };
-              }),
+            quiz_answers: questionsAndAnswers.map(({ value, answer }) => {
+              const questionObj = questions.find((q) => q.value === value);
+              return {
+                question: questionObj ? questionObj.label.replace("{author}", authorName) : "Unknown question",
+                answer,
+              };
+            }),
           }),
         });
 
@@ -121,31 +80,44 @@ export const useTableOfContentsAPI = () => {
 
         const data = await response.json();
 
-        if (!data.table_of_contents || !Array.isArray(data.table_of_contents)) {
-          console.error("❌ API Response does not contain a valid Table of Contents:", data);
+        if (!Array.isArray(data.table_of_contents)) {
           throw new Error("Invalid API response: No valid Table of Contents found");
         }
 
-        console.log("✅ Table of Contents received:", data.table_of_contents);
-
+        // Форматуємо дані перед збереженням
         const formattedContents = data.table_of_contents.map(item => ({
           chapter: `Chapter ${item.chapter_number}: ${item.title}`,
           title: item.description,
-          page: item.page_number
+          page: item.page_number,
         }));
 
         setTableOfContents(formattedContents);
-        localStorage.setItem(storageKey, JSON.stringify(formattedContents));
+        setLocalTableOfContents(formattedContents);
 
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
+        setGenreUpdated(false);
+        setTopicUpdated(false);
       }
     };
 
     fetchTableOfContents();
-  }, [genreUpdated, topicUpdated, questions]); 
 
-  return { tableOfContents, loading, error };
+  }, [
+    genreUpdated,
+    topicUpdated,
+    selectedGenre,
+    selectedTopic,
+    selectedSubTopic,
+    authorName,
+    selectedAge,
+    selectedGender,
+    questionsAndAnswers,
+    questions,
+  ]);
+
+
+  return { tableOfContents: localTableOfContents };
 };
