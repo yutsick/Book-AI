@@ -12,10 +12,10 @@ const Slider = ({ type, slides = [], breakpoints, imageSizes, imageClasses }) =>
     if (videoRefs.current[0]) {
       const firstVideo = videoRefs.current[0];
       if (firstVideo.readyState >= 2) {
-        firstVideo.play().catch(() => {});
+        firstVideo.play().catch(() => { });
       } else {
         firstVideo.oncanplay = () => {
-          firstVideo.play().catch(() => {});
+          firstVideo.play().catch(() => { });
           firstVideo.oncanplay = null;
         };
       }
@@ -49,7 +49,7 @@ const Slider = ({ type, slides = [], breakpoints, imageSizes, imageClasses }) =>
       if (video) {
         if (index === activeIndex) {
           if (video.readyState >= 2) {
-            video.play().catch(() => {});
+            video.play().catch(() => { });
           }
         } else {
           video.pause();
@@ -72,32 +72,46 @@ const Slider = ({ type, slides = [], breakpoints, imageSizes, imageClasses }) =>
         className="video-slider"
       >
         {slides.map((slide, index) => (
-          <SwiperSlide key={slide.id || index} className="flex flex-col shadow-slideShadow bg-[#F6F6F6]">
-            <div
-              className={`text-center italic text-[#2b2b2b] opacity-[0.88] font-medium ${slide.font ? `text-[${slide.font}px]` : 'text-[14px]'} leading-[16px] h-[65px] pt-2 px-2`} 
-              dangerouslySetInnerHTML={{ __html: slide.text }}
-            ></div>
-            {type === "video" && slide.videoUrl ? (
-              <video
-                ref={(el) => (videoRefs.current[index] = el)}
-                data-index={index}
-                src={slide.videoUrl}
-                muted
-                loop
-                playsInline
-                className="slider-video pointer-events-none"
-              />
-            ) : type === "image" && slide.imageUrl ? (
-              <img
-                src={slide.imageUrl}
-                alt="Slide"
-                className={imageClasses}
-                sizes={imageSizes}
-              />
-            ) : (
-              <div className="error">Invalid slide data</div>
-            )}
-            <div className="text-[#2b2b2b] opacity-[0.88] justify-center text-center h-8 flex items-center font-semibold">{slide.title}</div>
+          <SwiperSlide key={slide.id || index} className="flex flex-col  bg-[#F6F6F6] p-1">
+            <div className="shadow-slideShadow">
+              <div
+                className={` text-center italic text-[#2b2b2b] opacity-[0.88] font-medium ${slide.font ? `text-[${slide.font}px]` : 'text-[14px]'} leading-[16px] h-[65px] pt-2 px-2`}
+                dangerouslySetInnerHTML={{ __html: slide.text }}
+              ></div>
+              {type === "video" && slide.videoUrl ? (
+                   <video
+                   ref={(el) => (videoRefs.current[index] = el)}
+                   data-index={index}
+                   src={slide.videoUrl}
+                   muted
+                   loop
+                   playsInline
+                   autoPlay
+                   className="slider-video pointer-events-none"
+                   onLoadedData={(e) => {
+                    const isMobile = /iPhone|iPad|iPod|Android/.test(navigator.userAgent);
+                    if (index === 0) {
+                      e.target.play().catch(() => {});
+                    } else if (index === 1 && isMobile) {
+                      e.target.pause();
+                    }
+                  }}
+                  
+                  
+                 />
+
+              ) : type === "image" && slide.imageUrl ? (
+                <img
+                  src={slide.imageUrl}
+                  alt="Slide"
+                  className={imageClasses}
+                  sizes={imageSizes}
+                />
+              ) : (
+                <div className="error">Invalid slide data</div>
+              )}
+              <div className="text-[#2b2b2b] opacity-[0.88] justify-center text-center h-8 flex items-center font-semibold">{slide.title}</div>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

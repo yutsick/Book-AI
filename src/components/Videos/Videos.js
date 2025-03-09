@@ -52,15 +52,11 @@ function Videos() {
                   slides={video.slides}
                   breakpoints={{
                     0: { slidesPerView: 1.3, spaceBetween: 10 },
-                    335: { slidesPerView: 1.4, spaceBetween: 10 },
-                    355: { slidesPerView: 1.6, spaceBetween: 10 },
-                    395: { slidesPerView: 1.8, spaceBetween: 10 },
-                    430: { slidesPerView: 2, spaceBetween: 10 },
-                    485: { slidesPerView: 2.2, spaceBetween: 10 },
-                    545: { slidesPerView: 2.4, spaceBetween: 10 },
-                    635: { slidesPerView: 2.7, spaceBetween: 15 },
-                    700: { slidesPerView: 3, spaceBetween: 15 },
-                    768: { slidesPerView: 3.6, spaceBetween: 20 },
+
+
+                    485: { slidesPerView: 1.6, spaceBetween: 10 },
+                    700: { slidesPerView: 1.9, spaceBetween: 20 },
+
                     900: { slidesPerView: 4, spaceBetween: 20 },
                   }}
                   imageSizes={{ width: 186, height: 340 }}

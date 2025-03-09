@@ -68,7 +68,7 @@ const VideoGrid = ({ videos = [] }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-4  gap-4">
       {videos.slice(0, 4).map((video, index) => (
         <div key={index} className="flex flex-col shadow-slideShadow bg-[#F6F6F6]">
           <div
