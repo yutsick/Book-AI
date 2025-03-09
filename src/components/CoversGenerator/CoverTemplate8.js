@@ -11,7 +11,7 @@ const CoverTemplate8 = ({ type, data }) => {
 
     const elements = {
       frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 220 },
-      title: { ref: useRef(null), maxFontSize: 56, maxWidth: 220, maxHeight: 180 },
+      title: { ref: useRef(null), maxFontSize: 56, maxWidth: 260, maxHeight: 180 },
       subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
       spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
       spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 180 },

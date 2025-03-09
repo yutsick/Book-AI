@@ -22,10 +22,10 @@ const cropperData = [
   { id: 1, top: null, bottom: 160, left: 0, width: 320, height: 270, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 235 },
   { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 375 },
   { id: 3, top: null, bottom: 10, left: 12, width: 297, height: 335, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 295 },
-  { id: 4, top: 110, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 162, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true },
+  { id: 4, top: 110, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 168, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true },
   { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 425, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 370 },
   { id: 6, top: 0, bottom: null, left: 0, width: 320, height: 302, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
-  { id: 7, top: null, bottom: 100, left: 55, width: 210, height: 223, mobTop: null, mobBottom: 73, mobLeft: 0, mobWidth: 183, mobHeight: 195, radius: true },
+  { id: 7, top: null, bottom: 100, left: 55, width: 210, height: 223, mobTop: null, mobBottom: 87, mobLeft: 0, mobWidth: 183, mobHeight: 195, radius: true },
   { id: 8, top: null, bottom: 0, left: 137, width: 183, height: 220, mobTop: null, mobBottom: 0.01, mobLeft: 120, mobWidth: 162, mobHeight: 190 },
 ]
 function Step7({ setProgressStep, setIsButtonDisabled }) {
@@ -57,6 +57,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
   const swiperInstance = useRef(null);
 
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const { praises, loading: praisesLoading } = usePraises();
   useEffect(() => {
@@ -183,6 +184,15 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
   };
 
   const [middleSlideIndex, setMiddleSlideIndex] = useState(0);
+  const [showFakeScrollbar, setShowFakeScrollbar] = useState(true);
+
+  const handleScroll = () => {
+    if (showFakeScrollbar) {
+      setShowFakeScrollbar(false);
+    }
+  };
+
+
 
   return (
     <>
@@ -233,15 +243,15 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
             </div>
           ) : loading && progress ? (
             <>
-            <div className="md:h-[480px]"></div>
-            <div className=" z-[2] left-0 w-full flex justify-center items-center absolute md:h-[480px]">
-              <div className="max-w-[320px] relative w-full h-4 border border-[#898989] bg-[#fffae7] rounded-md overflow-hidden">
-                <div
-                  className="h-full transition-all duration-300 bg-orange"
-                  style={{ width: `${progress}%` }}
-                ></div>
+              <div className="md:h-[480px]"></div>
+              <div className=" z-[2] left-0 w-full flex justify-center items-center absolute md:h-[480px]">
+                <div className="max-w-[320px] relative w-full h-4 border border-[#898989] bg-[#fffae7] rounded-md overflow-hidden">
+                  <div
+                    className="h-full transition-all duration-300 bg-orange"
+                    style={{ width: `${progress}%` }}
+                  ></div>
+                </div>
               </div>
-            </div>
             </>
           ) : selectedCover ? (
             <CoverSlider
@@ -278,10 +288,12 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
         )}
         {/* Previews list */}
         {isRendered && (
-          <div className={` 
+          <div
+            onScroll={handleScroll}
+            className={` 
             mt-4
             md:mt-0 flex md:grid grid-cols-2 grid-rows-4 gap-4 w-full md:w-auto 
-            h-[135px] md:h-auto overflow-x-auto md:overflow-visible whitespace-nowrap scrollbar-visible`}
+            h-[135px] md:h-auto overflow-x-auto md:overflow-visible whitespace-nowrap scrollbar-visible relative`}
           >
             {previewTemplates.map((preview) => (
               <div className="w-[90px] md:w-[72px]  flex-shrink-0 md:h-auto h-[130px]" key={preview.id}>
@@ -293,6 +305,10 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
                 />
               </div>
             ))}
+            {isIOS && showFakeScrollbar && (
+              <div className="absolute bottom-1 left-0  h-[3px] w-[40%] bg-gray-400 rounded-md pointer-events-none"></div>
+            )}
+
           </div>
         )}
       </div>
