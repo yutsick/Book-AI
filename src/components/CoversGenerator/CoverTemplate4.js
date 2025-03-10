@@ -41,13 +41,13 @@ const CoverTemplate4 = ({ type, data }) => {
               <img src="/images/create-book/bg/line-blue.png" alt="" className="w-full" />
             </div>
             <div className=" mt-6">
-              <div className="h-20 flex justify-center">
+              <div className="h-20 flex pt-4 justify-center">
               <div
                 ref={elements.frontAuthor.ref}
                 className=" font-montserrat whitespace-nowrap text-center font-semibold max-w-[400px] "
                 style={{
-                  fontSize: `${elements.frontAuthor.fontSize}px`,
-                  lineHeight: `${elements.frontAuthor.lineHeight}px`
+                  fontSize: `${fontSizes.frontAuthor.fontSize}px`,
+                  lineHeight: `${fontSizes.frontAuthor.lineHeight}px`
                 }}
               >
                 {authorName || "Default Author"}
@@ -122,8 +122,8 @@ const CoverTemplate4 = ({ type, data }) => {
               <div
                 ref={elements.spineTitle.ref}
                 style={{
-                  fontSize: `${elements.spineTitle.fontSize}px`,
-                  lineHeight: `${elements.spineTitle.lineHeight}px`,
+                  fontSize: `${fontSizes.spineTitle.fontSize}px`,
+                  lineHeight: `${fontSizes.spineTitle.lineHeight}px`,
                 }}
 
                 className="whitespace-nowrap font-montserrat ">
@@ -133,7 +133,7 @@ const CoverTemplate4 = ({ type, data }) => {
               <div className="whitespace-nowrap font-montserrat text-[17px] leading-[17px]">
                 <div
                   ref={elements.spineAuthor.ref}
-                  style={{ fontSize: `${elements.spineAuthor.fontSize}px` }}
+                  style={{ fontSize: `${fontSizes.spineAuthor.fontSize}px` }}
                 >
                   {authorName || "Default Author"}
                 </div>

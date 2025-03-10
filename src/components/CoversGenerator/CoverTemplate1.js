@@ -70,7 +70,7 @@ const CoverTemplate1 = ({ type, data }) => {
             </div>
           </div>
 
-          <div className="py-4 flex flex-col h-full  gap-2 bg-[#BB2621] px-4 flex-1">
+          <div className="py-4 flex flex-col h-full  gap-2 bg-[#BB2621] pr-4 pl-7 flex-1">
             <div
               ref={elements.title.ref}
               className="font-black text-white max-w-[400px]"
@@ -93,24 +93,8 @@ const CoverTemplate1 = ({ type, data }) => {
       {type === "back" && (
         <div
           className="w-[431px] h-[648px] mx-auto flex items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-black text-white font-degular"
-        // style={{
-        //   backgroundImage: isIOS
-        //     ? "url('/images/create-book/bg/bgwhite-back-mob.png')" 
-        //     : "none",
-        //   backgroundColor: "black", 
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "center",
-        //   backgroundRepeat: "no-repeat",
-        // }}
         >
-          {/* {!isIOS && (
-            <img
-              src={isMobile()
-                ? "/images/create-book/bg/bgwhite-back-mob.png"
-                : "/images/create-book/bg/bg2-back.png"}
-              alt="Back Cover"
-            />
-          )} */}
+
           {praises ? (
             generateBookBackCover({ author: authorName, praises, metaColor: "#fff", website: "www.booktailor.com" })
           ) : (

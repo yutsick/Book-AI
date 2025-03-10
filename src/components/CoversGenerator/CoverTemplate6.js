@@ -11,11 +11,13 @@ const CoverTemplate6 = ({ type, data }) => {
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const elements = {
+    frontTitle: { ref: useRef(null), maxFontSize: 40, maxHeight: 80 },
     spineTitle: { ref: useRef(null), maxFontSize: 23, maxWidth: 380 },
     spineAuthor: { ref: useRef(null), maxFontSize: 23, maxWidth: 220 },
   };
 
   const [fontSizes, setFontSizes] = useState({
+    frontTitle: 49,
     spineTitle: 23,
     spineAuthor: 23,
   });
@@ -39,7 +41,14 @@ const CoverTemplate6 = ({ type, data }) => {
 
           <div className="flex flex-col justify-center items-center gap-4 bg-[#F0EADE] px-8 text-center flex-1 font-pacifico">
             {/* Title */}
-            <div className="text-[40px] leading-[50px] text-[#0D453A]">
+            <div 
+            ref={elements.frontTitle.ref}
+            className=" text-[#0D453A]"
+            style={{
+              fontSize: `${elements.frontTitle.fontSize}px`,
+              lineHeight: `${elements.frontTitle.lineHeight}px`,
+            }}
+            >
               {selectedTopic || "Default Topic"}
             </div>
 

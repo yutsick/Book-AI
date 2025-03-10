@@ -280,8 +280,8 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
               }}
             >
               Adjust Image
-              <span className="ml-2">
-                <img src="images/icon-image-adjustment.svg" alt="" className="h-3" />
+              <span className="ml-2 w-[18px]">
+                <img src="images/icon-image-adjustment.svg" alt="" className="w-full" />
               </span>
             </button>
           </div>
@@ -329,7 +329,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
           >
             Adjust Image
             <span className="ml-2">
-              <img src="images/icon-image-adjustment.svg" alt="" className="h-4" />
+              <img src="images/icon-image-adjustment.svg" alt="" className="w-4 block" />
             </span>
           </button>
         </div>

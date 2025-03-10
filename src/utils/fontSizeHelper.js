@@ -18,7 +18,7 @@ export const adjustFontSizeByHeight = (elementRef, maxFontSize, maxHeight, minFo
 
 const getLineHeight = (fontSize) => {
   // if (fontSize > 28) return fontSize * 0.9;
-  if (fontSize > 22) return fontSize * 1;
+  if (fontSize > 22) return fontSize * 1.1;
   return fontSize * 1.2;
 };
 
@@ -44,12 +44,12 @@ export const adjustFontSizeByWidth = (elementRef, maxFontSize, maxWidth, shouldW
   while (element.offsetWidth > maxWidth && fontSize > minFontSize) {
     fontSize -= 1;
     element.style.fontSize = `${fontSize}px`;
-    element.style.lineHeight = `${fontSize*0.9}px`;
+    element.style.lineHeight = `${fontSize*1.3}px`;
 
     requestAnimationFrame(() => window.getComputedStyle(element).width);
   }
 
-   return {fontSize: fontSize, lineHeight: fontSize * 0.9};
+   return {fontSize: fontSize, lineHeight: fontSize * 1.2};
 };
 
 
