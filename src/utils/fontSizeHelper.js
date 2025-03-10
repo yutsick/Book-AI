@@ -19,7 +19,7 @@ export const adjustFontSizeByHeight = (elementRef, maxFontSize, maxHeight, minFo
 const getLineHeight = (fontSize) => {
   // if (fontSize > 28) return fontSize * 0.9;
   if (fontSize > 22) return fontSize * 1;
-  return fontSize * 1.1;
+  return fontSize * 1.2;
 };
 
 

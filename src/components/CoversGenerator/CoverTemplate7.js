@@ -18,14 +18,14 @@ const CoverTemplate7 = ({ type, data }) => {
 
   const elements = {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxHeight: 64 },
-    frontTitle: { ref: useRef(null), maxFontSize: 24, maxHeight: 60 },
+    frontTitle: { ref: useRef(null), maxFontSize: 30, maxHeight: 80 },
     frontSubTitle: { ref: useRef(null), maxFontSize: 18, maxHeight: 70 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 200 },
     spineTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 350 },
   };
 
   const [fontSizes, setFontSizes] = useState({
-    frontTitle: 24,
+    frontTitle: 30,
     frontSubTitle: 18,
     frontAuthor: 26,
     spineAuthor: 20,

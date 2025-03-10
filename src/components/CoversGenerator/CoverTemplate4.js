@@ -63,7 +63,7 @@ const CoverTemplate4 = ({ type, data }) => {
                 <img
                   src={authorImageSrc}
                   alt={authorName || "Default Author"}
-                  className="w-[240px] h-[240px] rotate-[3.5deg] rounded-[8px] object-cover block object-top mx-auto border-[3px] border-white bg-white"
+                  className="w-[240px] h-[240px] rotate-[3.5deg] rounded-[8px] object-cover block object-top mx-auto border-[3px] border-white bg-gray-200"
                 />
               </div>
             </div>
@@ -75,7 +75,7 @@ const CoverTemplate4 = ({ type, data }) => {
             <div className=" flex flex-col gap-3 max-w-[340px] mx-auto mb-8 ">
 
 
-              <div className="text-[28px] leading-[32px] font-semibold  text-center font-montserrat">
+              <div className="text-[30px] leading-[32px] font-semibold  text-center font-montserrat">
                 {selectedTopic || "Default Topic"}
               </div>
 

@@ -70,10 +70,10 @@ const CoverTemplate1 = ({ type, data }) => {
             </div>
           </div>
 
-          <div className="flex flex-col h-full justify-center gap-1 bg-[#BB2621] px-8 flex-1">
+          <div className="py-4 flex flex-col h-full  gap-2 bg-[#BB2621] px-4 flex-1">
             <div
               ref={elements.title.ref}
-              className="font-black text-white mt-2 max-w-[320px]"
+              className="font-black text-white max-w-[400px]"
               style={{ fontSize: `${fontSizes.title}px`, lineHeight: `${fontSizes.title.lineHeight}px` }}
             >
               {selectedTopic || "Default Topic"}

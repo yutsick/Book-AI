@@ -167,7 +167,7 @@ const MainScreen = () => {
 
   return (
     <div
-      className="min-h-screen bg-[#F9F6EB] flex flex-col items-center pb-36"
+      className="min-h-screen bg-[#F9F6EB] flex flex-col items-center pb-[72px] md:pb-36"
       style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.3s ease-in-out" }}
     >
       {currentStep === 1 && <HeaderQuiz />}
