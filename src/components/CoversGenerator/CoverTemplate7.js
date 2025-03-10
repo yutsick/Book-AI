@@ -20,7 +20,7 @@ const CoverTemplate7 = ({ type, data }) => {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxHeight: 64 },
     frontTitle: { ref: useRef(null), maxFontSize: 24, maxHeight: 60 },
     frontSubTitle: { ref: useRef(null), maxFontSize: 18, maxHeight: 70 },
-    spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 150 },
+    spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 200 },
     spineTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 350 },
   };
 
@@ -85,7 +85,7 @@ const CoverTemplate7 = ({ type, data }) => {
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="w-[276px] h-[300px] rounded-full object-cover block object-top mx-auto border border-white bg-white"
+              className="w-[276px] h-[300px] rounded-full object-cover block object-top mx-auto border border-white bg-gray-200 "
             />
             </div>
             <div className="">

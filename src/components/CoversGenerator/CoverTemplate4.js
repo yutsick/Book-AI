@@ -18,7 +18,7 @@ const CoverTemplate4 = ({ type, data }) => {
 
   const elements = {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 350 },
-    spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 150 },
+    spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 200 },
     spineTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 350 },
   };
 
@@ -63,7 +63,7 @@ const CoverTemplate4 = ({ type, data }) => {
                 <img
                   src={authorImageSrc}
                   alt={authorName || "Default Author"}
-                  className="w-[240px] h-[240px] rotate-[3.5deg] rounded-[8px] object-cover block object-top mx-auto border border-white bg-white"
+                  className="w-[240px] h-[240px] rotate-[3.5deg] rounded-[8px] object-cover block object-top mx-auto border-[3px] border-white bg-white"
                 />
               </div>
             </div>
@@ -75,7 +75,7 @@ const CoverTemplate4 = ({ type, data }) => {
             <div className=" flex flex-col gap-3 max-w-[340px] mx-auto mb-8 ">
 
 
-              <div className="text-[24px] leading-[28px] font-semibold  text-center font-montserrat">
+              <div className="text-[28px] leading-[32px] font-semibold  text-center font-montserrat">
                 {selectedTopic || "Default Topic"}
               </div>
 

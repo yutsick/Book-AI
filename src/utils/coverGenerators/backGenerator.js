@@ -42,7 +42,12 @@ export const generateBookBackCover = ({ author, praises, praisesColor, metaColor
         <div className="flex flex-col gap-1"
         style={{ color: metaColor }}>
           <div className="flex flex-col gap-0 text-[13px] leading-[13px] font-degular">
-            <div className="font-medium  ">Visit Us at</div>
+            <div className="font-medium  ">Visit <ul class="list-unstyled">
+              <li>Item</li>
+              <li>Item</li>
+              <li>Item</li>
+            </ul>
+            s at</div>
             <div className="font-bold  ">{website}</div>
           </div>
           <img src="images/main-logo.svg" alt="" className="w-[105px]"/>

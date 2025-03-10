@@ -125,7 +125,7 @@ const CoverTemplate5 = ({ type, data }) => {
       {/* Spine */}
       {type === "spine" && (
         <div className="h-[648px] flex justify-center relative">
-          <div className="flex text-white items-center h-[57px] gap-4 px-4 w-[648px]  pl-6 bg-[#747778] justify-center absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
+          <div className="flex text-white items-center h-[57px] gap-4 px-6 w-[648px]  bg-[#747778] justify-center absolute rotate-90 origin-top-left left-[calc(50%+28px)]">
             <div className="flex font-georgia flex-1 flex-col justify-center text-[24px] italic pb-1">
               <div className="whitespace-nowrap">{selectedTopic || "Default Topic"}</div>
             </div>

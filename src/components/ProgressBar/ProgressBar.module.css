@@ -39,7 +39,7 @@
 
 .active, .completed {
   background-color: var(--custom-orange);
-  color: #F6F0EB;
+  color: #FFF;
   
 }
 

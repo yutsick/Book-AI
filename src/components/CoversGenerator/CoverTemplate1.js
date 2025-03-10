@@ -35,7 +35,7 @@ const CoverTemplate1 = ({ type, data }) => {
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const elements = {
-    title: { ref: useRef(null), maxFontSize: 50, maxHeight: 140 },
+    title: { ref: useRef(null), maxFontSize: 50, maxHeight: 95 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 60 },
     spineTitle: { ref: useRef(null), maxFontSize: 36, maxWidth: 400 },
     spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 188 },

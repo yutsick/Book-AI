@@ -52,10 +52,10 @@ const BookCovers = () => {
 
        
         <div className="mx-auto w-full mt-6  overflow-x-scroll no-scrollbar">
-          <div className="grid grid-rows-2 grid-cols-[repeat(4,155px)] md:grid-cols-[repeat(4,180px)] gap-x-3 md:gap-x-9 gap-y-3 md:gap-y-6 865:justify-center">
+          <div className="grid grid-rows-2 grid-cols-[repeat(4,145px)] md:grid-cols-[repeat(4,180px)] gap-x-3 md:gap-x-1 gap-y-3 md:gap-y-1 865:justify-center">
             {slides.map((slide) => (
               <div className="w-full" key={slide.id}>
-                <img className="w-full h-[235px] md:w-[180px] md:h-[265px] object-cover" src={slide.imageUrl} alt="" />
+                <img className="w-full md:h-[235px] md:w-[220px] object-contain" src={slide.imageUrl} alt="" />
               </div>
             ))}
           </div>
