@@ -10,7 +10,7 @@ const CoverTemplate8 = ({ type, data }) => {
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
   const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 320 },
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 350 },
     title: { ref: useRef(null), maxFontSize: 56, maxHeight: 220, maxWidth: 240 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
@@ -23,14 +23,34 @@ const CoverTemplate8 = ({ type, data }) => {
     subTitle: 20,
     spineTitle: 28,
     spineAuthor: 20,
-  });
+  }, []);
+
+
+  useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setfontSizes);
+  useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setfontSizes);
 
   useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setfontSizes);
 
-  const bubbleContainerRef = useRef(null);
+  useEffect(() => {
+    const titleElement = elements.title.ref.current;
+    const authorElement = elements.frontAuthor.ref.current;
 
+    if (!titleElement || !authorElement) return;
 
+    document.fonts.ready.then(() => {
+      const titleFontSize = parseFloat(window.getComputedStyle(titleElement).fontSize);
+      const calculatedAuthorFontSize = titleFontSize / 2;
+      const newAuthorFontSize = Math.min(calculatedAuthorFontSize, fontSizes.frontAuthor);
 
+      setfontSizes((prev) => ({
+        ...prev,
+        frontAuthor: newAuthorFontSize,
+      }));
+
+      authorElement.style.fontSize = `${newAuthorFontSize}px`;
+      authorElement.style.lineHeight = `${newAuthorFontSize * 1.2}px`;
+    });
+  }, [fontSizes.title, selectedTopic, authorName]);
 
 
   return (
@@ -38,14 +58,25 @@ const CoverTemplate8 = ({ type, data }) => {
       {/* Front Cover */}
       {type === "front" && (
         <div className="w-[431px] h-[648px] bg-white  mx-auto relative">
+
           <div
             className="relative h-full w-full flex flex-col items-center justify-between"
             style={{
               background: "#0EACB0"
             }}
           >
+            <div
+              className={`text-white mt-6 ml-8 self-start text-left font-degular font-extrabold whitespace-nowrap`}
+              ref={elements.frontAuthor.ref}
+              style={{
+                fontSize: `${elements.frontAuthor.fontSize}px`,
+                // lineHeight: `${elements.frontAuthor.fontSize}px`
+              }}
+            >
+              {authorName || "Default Author"}
+            </div>
             {/* Heading */}
-            <div className="w-full h-full flex justify-end items-end">
+            <div className="w-full h-full flex justify-end items-end ">
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
@@ -54,27 +85,16 @@ const CoverTemplate8 = ({ type, data }) => {
             </div>
           </div>
 
-          <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-between  gap-4 px-8 text-center flex-1 text-white pt-12 pb-6">
-          <div
-                    className={`text-white text-left font-degular font-extrabold whitespace-nowrap`}
-                    ref={elements.frontAuthor.ref}
-                    style={{
-                      fontSize: `${elements.frontAuthor.fontSize}px`,
-                      // lineHeight: `${elements.frontAuthor.fontSize}px`
-                    }}
-                  >
-                    {authorName || "Default Author"}
-                  </div>
+          <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-between  gap-4 px-8 text-center flex-1 text-white pt-[72px] pb-6">
+
             <div
 
               className="relative mx-auto max-w-[350px] max-h-[360px]">
               <img src="/images/create-book/bg/bubble.svg" alt="" />
-              <div className=" font-degular text-center absolute w-full h-full top-0  pt-12 pb-4 px-14">
-                <div
-                  ref={bubbleContainerRef}
-                  className="w-full h-full flex flex-col items-center ">
-                  
-                  <div className="pt-4 pb-8 max-w-[240px] h-full flex items-center">
+              <div className=" font-degular text-center absolute w-full h-full top-0  pt-6 pb-9 px-12">
+                <div className="w-full h-full flex flex-col items-center ml-1">
+
+                  <div className=" max-w-[240px]  h-full flex items-center">
                     <div
                       ref={elements.title.ref}
                       id="tester"
