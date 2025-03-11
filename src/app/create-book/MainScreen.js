@@ -131,14 +131,14 @@ const MainScreen = () => {
 
 
   const handleApiCall = async () => {
-    const payload = {
-      email: authorEmail,
-      name: authorName,
-      gender: selectedGender,
-      quiz_answers : questionsAndAnswers,
-      genre: selectedGenre,
-      age: selectedAge.value,
-    };
+    // const payload = {
+    //   email: authorEmail,
+    //   name: authorName,
+    //   gender: selectedGender,
+    //   quiz_answers : questionsAndAnswers,
+    //   genre: selectedGenre,
+    //   age: selectedAge.value,
+    // };
     console.log('yep',payload);
     
     // try {
