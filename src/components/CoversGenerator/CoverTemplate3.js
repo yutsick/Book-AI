@@ -15,7 +15,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
   const elements = {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280, maxHeight: 40 },
-    title: { ref: useRef(null), maxFontSize: 32, maxHeight: 140 },
+    title: { ref: useRef(null), maxFontSize: 32, maxHeight: 140, maxWidth: 200 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 190, maxHeight: 85 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
@@ -56,30 +56,18 @@ const CoverTemplate3 = ({ type, data }) => {
             <div className="text-left text-[20px] h-full flex flex-col justify-between w-full">
               <div className="max-w-[300px] w-full pb-[70px] relative">
                 <img src="/images/create-book/bg/title8.png" alt="" />
-                <div className="max-w-[260px] max-h-[140px] h-full font-degular absolute top-7 left-11 flex items-center justify-center">
+                <div className="max-w-[200px] max-h-[140px] h-full font-degular absolute top-7 left-11 flex items-center justify-center">
 
                   <div
                     ref={elements.title.ref}
-                    className="font-black max-w-[190px]"
+                    className="font-black "
                     style={{
-                      fontSize: `${elements.title}px`,
-                      lineHeight: `${elements.title}px`,
+                      fontSize: `${elements.title.fontSize}px`,
+                      lineHeight: `${elements.title.lineHeight}px`,
                     }}
                   >
                     {selectedTopic || "Default Topic"}
                   </div>
-{/* 
-                  <div
-                    ref={elements.subTitle.ref}
-                    className="mt-1 font-degular font-semibold max-w-[190px]"
-                    style={{
-                      fontSize: `${fontSizes.subTitle.fontSize}px`,
-                      lineHeight: `${fontSizes.subTitle.lineHeight}px`,
-                    }}
-                  >
-                    {selectedSubTopic || "Default Sub Topic"}
-                  </div> */}
-
                 </div>
               </div>
 
@@ -94,8 +82,7 @@ const CoverTemplate3 = ({ type, data }) => {
               >
                 <div className=" rotate-[-3deg]">
 
-                  <div className=" text-black font-degular font-bold mt-3 whitespace-nowrap
-"
+                  <div className=" text-black font-degular font-bold mt-3 whitespace-nowrap"
                     ref={elements.frontAuthor.ref}
                     style={{
                       fontSize: `${fontSizes.frontAuthor}px`,

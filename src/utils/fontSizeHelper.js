@@ -1,6 +1,6 @@
 export const adjustFontSizeByHeight = (elementRef, maxFontSize, maxHeight, minFontSize = 10) => {
   const element = elementRef.current;
-  
+
   if (!element) return { fontSize: maxFontSize, lineHeight: getLineHeight(maxFontSize) };
 
   let fontSize = maxFontSize;
@@ -35,29 +35,36 @@ const getLineHeight = (fontSize) => {
 
 export const adjustFontSizeByWidth = (elementRef, maxFontSize, maxWidth, shouldWrap = false, minFontSize = 10) => {
   const element = elementRef.current;
-  if (!element) return maxFontSize;
+
+
+  if (!element) return { fontSize: maxFontSize, lineHeight: maxFontSize * 1.2 };
 
   if (element.offsetWidth === 0) {
-    return maxFontSize; 
+    return { fontSize: maxFontSize, lineHeight: maxFontSize * 1.2 };
   }
 
   if (shouldWrap) {
     element.style.whiteSpace = "normal";
     element.style.wordBreak = "break-word";
-  } 
+  }
 
   let fontSize = maxFontSize;
   element.style.fontSize = `${fontSize}px`;
+  element.style.lineHeight = `${getLineHeight(fontSize)}px`;
 
-  while (element.offsetWidth > maxWidth && fontSize > minFontSize) {
-    fontSize -= 1;
-    element.style.fontSize = `${fontSize}px`;
-    element.style.lineHeight = `${fontSize*1.3}px`;
+  setTimeout(() => {
+    while (element.offsetWidth > maxWidth && fontSize > minFontSize) {
 
-    requestAnimationFrame(() => window.getComputedStyle(element).width);
-  }
+      fontSize -= 1;
+      element.style.fontSize = `${fontSize}px`;
+      element.style.lineHeight = `${getLineHeight(fontSize)}px`;
 
-   return {fontSize: fontSize, lineHeight: fontSize * 1.2};
+      element.offsetWidth;
+    }
+  }, 100);
+
+  return { fontSize, lineHeight: getLineHeight(fontSize) };
 };
+
 
 

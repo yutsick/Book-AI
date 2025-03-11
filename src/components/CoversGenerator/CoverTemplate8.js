@@ -10,7 +10,7 @@ const CoverTemplate8 = ({ type, data }) => {
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
   const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 220 },
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 320 },
     title: { ref: useRef(null), maxFontSize: 56, maxHeight: 220, maxWidth: 240 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
@@ -29,23 +29,7 @@ const CoverTemplate8 = ({ type, data }) => {
 
   const bubbleContainerRef = useRef(null);
 
-  // useEffect(() => {
-  //   if (bubbleContainerRef.current) {
-  //     requestAnimationFrame(() => {
-  //       const authorHeight = elements.frontAuthor.ref.current?.offsetHeight || 0;
-  //       const titleHeight = elements.title.ref.current?.offsetHeight || 0;
-  //       const totalHeight = authorHeight + titleHeight;
-  //       const bubbleHeight = 294;
-  //       console.log(bubbleHeight, totalHeight, authorHeight, titleHeight);
 
-  //       if (totalHeight < bubbleHeight) {
-  //         bubbleContainerRef.current.style.paddingTop = `${(bubbleHeight - totalHeight) / 2 - 32 }px`;
-  //       } else {
-  //         bubbleContainerRef.current.style.paddingTop = "0px";
-  //       }
-  //     });
-  //   }
-  // }, [fontSizes]);
 
 
 
@@ -71,6 +55,16 @@ const CoverTemplate8 = ({ type, data }) => {
           </div>
 
           <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-between  gap-4 px-8 text-center flex-1 text-white pt-12 pb-6">
+          <div
+                    className={`text-white text-left font-degular font-extrabold whitespace-nowrap`}
+                    ref={elements.frontAuthor.ref}
+                    style={{
+                      fontSize: `${elements.frontAuthor.fontSize}px`,
+                      // lineHeight: `${elements.frontAuthor.fontSize}px`
+                    }}
+                  >
+                    {authorName || "Default Author"}
+                  </div>
             <div
 
               className="relative mx-auto max-w-[350px] max-h-[360px]">
@@ -79,19 +73,7 @@ const CoverTemplate8 = ({ type, data }) => {
                 <div
                   ref={bubbleContainerRef}
                   className="w-full h-full flex flex-col items-center ">
-                  <div
-                    className={`text-white font-degular font-extrabold ${authorName.length > 30 && authorName.trim().split(/\s+/).length > 1
-                        ? "whitespace-normal break-words"
-                        : "whitespace-nowrap"
-                      }`}
-                    ref={elements.frontAuthor.ref}
-                    style={{
-                      fontSize: `${elements.frontAuthor.fontSize}px`,
-                      lineHeight: `${elements.frontAuthor.fontSize}px`
-                    }}
-                  >
-                    {authorName || "Default Author"}
-                  </div>
+                  
                   <div className="pt-4 pb-8 max-w-[240px] h-full flex items-center">
                     <div
                       ref={elements.title.ref}
