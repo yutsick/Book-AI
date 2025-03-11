@@ -3,7 +3,7 @@ import CreateBookContext from '@/contexts/CreateBookContext';
 import GenreContext from '@/contexts/CreateGenreContext';
 import BookPreview from '@/components/BookPreview/BookPreview';
 import TableOfContents from '@/components/TableOfContents/TableOfContents';
-import { useTableOfContentsAPI } from "@/hooks/useTableOfContentsAPI";
+
 
 function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDisabled, setLoader }) {
   const {
@@ -11,7 +11,7 @@ function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDis
     authorName,
     tableOfContents,
     loading,
-    error,
+    errorToc,
   } = useContext(CreateBookContext);
 
 
@@ -51,8 +51,8 @@ function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDis
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
           </div>
         )}
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {!loading && !error && tableOfContents.length > 0 && (
+        {errorToc && <p style={{ color: "red" }}>{errorToc}</p>}
+        {!loading && !errorToc && tableOfContents.length > 0 && (
           <TableOfContents contents={tableOfContents} />
         )}
       </div>

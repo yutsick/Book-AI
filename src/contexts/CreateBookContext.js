@@ -40,6 +40,7 @@ export const CreateBookProvider = ({ children }) => {
   const [subtotal, setSubtotal] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState(null);
+  const [errorToc, setErrorToc] = useState(null);
   const [loading, setLoading] = useState(false);
   const [processedAuthorImage, setProcessedAuthorImage] = useState(null);
 
@@ -122,6 +123,8 @@ export const CreateBookProvider = ({ children }) => {
         handleImageUpload,
         error,
         setError,
+        errorToc,
+        setErrorToc,
         loading,
         setLoading,
         selectedCopies,

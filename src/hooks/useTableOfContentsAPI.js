@@ -13,7 +13,7 @@ export const useTableOfContentsAPI = () => {
     questionsAndAnswers,
     tableOfContents,
     setTableOfContents,
-    setError,
+    setErrorToc,
     setLoading,
     questions,
     setQuestions,
@@ -68,7 +68,7 @@ export const useTableOfContentsAPI = () => {
 
     fetchTriggered.current = true;
     setLoading(true);
-    setError(null);
+    setErrorToc(null);
 
     const fetchTableOfContents = async () => {
       try {
@@ -110,7 +110,7 @@ export const useTableOfContentsAPI = () => {
         setLocalTableOfContents(formattedContents);
 
       } catch (err) {
-        setError(err.message);
+        setErrorToc(err.message);
       } finally {
         setLoading(false);
         setGenreUpdated(false);
