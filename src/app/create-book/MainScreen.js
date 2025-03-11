@@ -45,7 +45,7 @@ const MainScreen = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const { selectedTopic, selectedGenre } = useContext(CreateGenreContext);
-  const { authorName, authorEmail, selectedAge, selectedGender, questionsAndAnswers } = useContext(CreateBookContext);
+  const { authorName, authorEmail, selectedAge, selectedGender, questionsAndAnswers} = useContext(CreateBookContext);
 
 
   useEffect(() => {
@@ -135,11 +135,12 @@ const MainScreen = () => {
       email: authorEmail,
       name: authorName,
       gender: selectedGender,
-      quizAnswers : questionsAndAnswers,
+      quiz_answers : questionsAndAnswers,
       genre: selectedGenre,
-      age: selectedAge,
+      age: selectedAge.value,
     };
-
+    console.log('yep',payload);
+    
     try {
       const response = await fetch("https://api.booktailor.com/create-draft", {
         method: "POST",
@@ -147,6 +148,8 @@ const MainScreen = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
+        mode: 'cors',
+        redirect: 'follow',
       });
 
       const data = await response.json();
@@ -252,6 +255,7 @@ const MainScreen = () => {
             <Step6
               setProgressStep={setProgressStep}
               setIsButtonDisabled={setIsButtonDisabled}
+              setLoader={setLoader}
             />
           )}
           {currentStep === 7 &&
@@ -278,7 +282,7 @@ const MainScreen = () => {
             />}
 
         </div>
-        {currentStep < totalScreens && !loader && (
+        {currentStep < totalScreens  && !(currentStep ===8 && loader) &&  (
           <MainButton
             currentStep={currentStep}
             onClick={

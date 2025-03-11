@@ -100,7 +100,6 @@ export const useTableOfContentsAPI = () => {
           throw new Error("Invalid API response: No valid Table of Contents found");
         }
 
-        // Форматуємо дані перед збереженням
         const formattedContents = data.table_of_contents.map(item => ({
           chapter: `Chapter ${item.chapter_number}: ${item.title}`,
           title: item.description,

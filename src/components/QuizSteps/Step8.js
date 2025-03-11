@@ -5,7 +5,7 @@ import BookPreview from '@/components/BookPreview/BookPreview';
 import TableOfContents from '@/components/TableOfContents/TableOfContents';
 import { useTableOfContentsAPI } from "@/hooks/useTableOfContentsAPI";
 
-function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDisabled, loader, setLoader }) {
+function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDisabled, setLoader }) {
   const {
     selectedTemplate,
     authorName,
@@ -17,7 +17,6 @@ function Step8({ setProgressStep, goToNextStep, isButtonDisabled, setIsButtonDis
 
   const { selectedTopic, selectedSubTopic } = useContext(GenreContext);
 
-  useTableOfContentsAPI();
 
   useEffect(() => {
     setProgressStep(6);

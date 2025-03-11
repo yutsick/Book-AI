@@ -2,8 +2,8 @@ import React, { useEffect, useContext, useState } from "react";
 import CreateBookContext from "@/contexts/CreateBookContext";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import { validateImage } from "@/utils/imageValidation";
-
-function Step6  ({ setProgressStep, setIsButtonDisabled }) {
+import { useTableOfContentsAPI } from "@/hooks/useTableOfContentsAPI";
+function Step6  ({ setProgressStep, setIsButtonDisabled,loader, setLoader }) {
   const {
     authorImage,
     setAuthorImage,
@@ -13,8 +13,13 @@ function Step6  ({ setProgressStep, setIsButtonDisabled }) {
     authorName,
     error,
     setError,
-    setSelectedTemplate
+    setSelectedTemplate,
+
   } = useContext(CreateBookContext);
+
+
+   useTableOfContentsAPI();//  TOC Generating
+
 
   const [preview, setPreview] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
