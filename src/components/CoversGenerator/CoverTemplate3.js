@@ -60,7 +60,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
                   <div
                     ref={elements.title.ref}
-                    className="font-black max-w-[200px]"
+                    className="font-black max-w-[190px]"
                     style={{
                       fontSize: `${elements.title}px`,
                       lineHeight: `${elements.title}px`,
