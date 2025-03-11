@@ -6,6 +6,7 @@ import ProgressBar from "@/components/ProgressBar/ProgressBar";
 import MainButton from "@/components/Button/MainButton";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
 import CreateBookContext from "@/contexts/CreateBookContext";
+import useCreateDraft from "@/hooks/useCreateDraft"
 
 import Step1 from "@/components/QuizSteps/Step1";
 import Step2 from "@/components/QuizSteps/Step2";
@@ -129,44 +130,12 @@ const MainScreen = () => {
     };
   }, [isButtonDisabled, currentStep, file]);
 
+  const createDraft = useCreateDraft();
 
-  const handleApiCall = () => {
-    // const payload = {
-    //   email: authorEmail,
-    //   name: authorName,
-    //   gender: selectedGender,
-    //   quiz_answers : questionsAndAnswers,
-    //   genre: selectedGenre,
-    //   age: selectedAge.value,
-    // };
-    // console.log('yep',payload);
-    
-    // try {
-    //   const response = await fetch("https://api.booktailor.com/create-draft", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(payload),
-    //     mode: 'cors',
-    //     redirect: 'follow',
-    //   });
-
-    //   const data = await response.json();
-
-    //   if (data.status === "success") {
-    //     localStorage.setItem("draftUUID", data.data.uuid);
-    //     localStorage.setItem("draftEmail", data.data.email);
-    //   } else {
-    //     console.error("API Error:", data.message);
-    //   }
-    // } catch (error) {
-    //   console.error("API call failed:", error);
-    // }
-
+  const handleDraftCreation = async () => {
+    await createDraft();
     goToNextStep();
   };
-
 
   return (
     <div
@@ -287,7 +256,7 @@ const MainScreen = () => {
             currentStep={currentStep}
             onClick={
               currentStep === 4
-                ? handleApiCall
+                ? handleDraftCreation
                 : currentStep === 6
                   ? handleFileUpload
                   : goToNextStep
