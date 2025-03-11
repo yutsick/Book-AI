@@ -141,28 +141,28 @@ const MainScreen = () => {
     };
     console.log('yep',payload);
     
-    try {
-      const response = await fetch("https://api.booktailor.com/create-draft", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-        mode: 'cors',
-        redirect: 'follow',
-      });
+    // try {
+    //   const response = await fetch("https://api.booktailor.com/create-draft", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(payload),
+    //     mode: 'cors',
+    //     redirect: 'follow',
+    //   });
 
-      const data = await response.json();
+    //   const data = await response.json();
 
-      if (data.status === "success") {
-        localStorage.setItem("draftUUID", data.data.uuid);
-        localStorage.setItem("draftEmail", data.data.email);
-      } else {
-        console.error("API Error:", data.message);
-      }
-    } catch (error) {
-      console.error("API call failed:", error);
-    }
+    //   if (data.status === "success") {
+    //     localStorage.setItem("draftUUID", data.data.uuid);
+    //     localStorage.setItem("draftEmail", data.data.email);
+    //   } else {
+    //     console.error("API Error:", data.message);
+    //   }
+    // } catch (error) {
+    //   console.error("API call failed:", error);
+    // }
 
     goToNextStep();
   };
