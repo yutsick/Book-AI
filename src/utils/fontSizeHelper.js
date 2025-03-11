@@ -7,14 +7,22 @@ export const adjustFontSizeByHeight = (elementRef, maxFontSize, maxHeight, minFo
   element.style.fontSize = `${fontSize}px`;
   element.style.lineHeight = `${getLineHeight(fontSize)}px`;
 
-  while (element.scrollHeight > maxHeight && fontSize > minFontSize) {
-    fontSize -= 1;
-    element.style.fontSize = `${fontSize}px`;
-    element.style.lineHeight = `${getLineHeight(fontSize)}px`;
-  }
+  setTimeout(() => {
+    while (element.scrollHeight > maxHeight && fontSize > minFontSize) {
+      fontSize -= 1;
+      element.style.fontSize = `${fontSize}px`;
+      element.style.lineHeight = `${getLineHeight(fontSize)}px`;
+
+      element.offsetHeight;
+    }
+  }, 100);
 
   return { fontSize, lineHeight: getLineHeight(fontSize) };
 };
+
+
+
+
 
 const getLineHeight = (fontSize) => {
   // if (fontSize > 28) return fontSize * 0.9;

@@ -9,45 +9,45 @@ const CoverTemplate8 = ({ type, data }) => {
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
 
-    const elements = {
-      frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 220 },
-      title: { ref: useRef(null), maxFontSize: 56, maxWidth: 260, maxHeight: 180 },
-      subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
-      spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
-      spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 180 },
-    };
+  const elements = {
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 220 },
+    title: { ref: useRef(null), maxFontSize: 56, maxHeight: 220, maxWidth: 240 },
+    subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65 },
+    spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
+    spineAuthor: { ref: useRef(null), maxFontSize: 20, maxWidth: 180 },
+  };
 
-    const [fontSizes, setfontSizes] = useState({
-      frontAuthor: 26,
-      title:  56,
-      subTitle:  20,
-      spineTitle:  28,
-      spineAuthor:  20,
-    });
+  const [fontSizes, setfontSizes] = useState({
+    frontAuthor: 26,
+    title: 56,
+    subTitle: 20,
+    spineTitle: 28,
+    spineAuthor: 20,
+  });
 
-    useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setfontSizes);
+  useAdjustFontSizes(elements, [selectedTopic, selectedSubTopic, authorName], setfontSizes);
 
-    const bubbleContainerRef = useRef(null);
-    
-    useEffect(() => {
-      if (bubbleContainerRef.current) {
-        requestAnimationFrame(() => {
-          const authorHeight = elements.frontAuthor.ref.current?.offsetHeight || 0;
-          const titleHeight = elements.title.ref.current?.offsetHeight || 0;
-          const totalHeight = authorHeight + titleHeight;
-          const bubbleHeight = 294;
-          console.log(bubbleHeight, totalHeight, authorHeight, titleHeight);
-    
-          if (totalHeight < bubbleHeight) {
-            bubbleContainerRef.current.style.paddingTop = `${(bubbleHeight - totalHeight) / 2 - 32 }px`;
-          } else {
-            bubbleContainerRef.current.style.paddingTop = "0px";
-          }
-        });
-      }
-    }, [fontSizes]);
-    
-    
+  const bubbleContainerRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (bubbleContainerRef.current) {
+  //     requestAnimationFrame(() => {
+  //       const authorHeight = elements.frontAuthor.ref.current?.offsetHeight || 0;
+  //       const titleHeight = elements.title.ref.current?.offsetHeight || 0;
+  //       const totalHeight = authorHeight + titleHeight;
+  //       const bubbleHeight = 294;
+  //       console.log(bubbleHeight, totalHeight, authorHeight, titleHeight);
+
+  //       if (totalHeight < bubbleHeight) {
+  //         bubbleContainerRef.current.style.paddingTop = `${(bubbleHeight - totalHeight) / 2 - 32 }px`;
+  //       } else {
+  //         bubbleContainerRef.current.style.paddingTop = "0px";
+  //       }
+  //     });
+  //   }
+  // }, [fontSizes]);
+
+
 
   return (
     <>
@@ -71,20 +71,19 @@ const CoverTemplate8 = ({ type, data }) => {
           </div>
 
           <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-between  gap-4 px-8 text-center flex-1 text-white pt-12 pb-6">
-            <div 
-             
-            className="relative mx-auto max-w-[350px] max-h-[360px]">
+            <div
+
+              className="relative mx-auto max-w-[350px] max-h-[360px]">
               <img src="/images/create-book/bg/bubble.svg" alt="" />
               <div className=" font-degular text-center absolute w-full h-full top-0  pt-12 pb-4 px-14">
-                <div 
-               ref={bubbleContainerRef}
-                className="w-full h-full flex flex-col items-center ">
-                  <div 
-                  className={`text-white font-degular font-extrabold ${
-                    authorName.length > 30 && authorName.trim().split(/\s+/).length > 1 
-                      ? "whitespace-normal break-words" 
-                      : "whitespace-nowrap"
-                  }`}
+                <div
+                  ref={bubbleContainerRef}
+                  className="w-full h-full flex flex-col items-center ">
+                  <div
+                    className={`text-white font-degular font-extrabold ${authorName.length > 30 && authorName.trim().split(/\s+/).length > 1
+                        ? "whitespace-normal break-words"
+                        : "whitespace-nowrap"
+                      }`}
                     ref={elements.frontAuthor.ref}
                     style={{
                       fontSize: `${elements.frontAuthor.fontSize}px`,
@@ -93,15 +92,18 @@ const CoverTemplate8 = ({ type, data }) => {
                   >
                     {authorName || "Default Author"}
                   </div>
-                  <div
-                    ref={elements.title.ref}
-                    className="text-[#FFE600] mt-4 max-h-[200px]  block font-extrabold"
-                    style={{
-                      fontSize: `${elements.title.fontSize}px`,
-                      lineHeight: `${elements.title.lineHeight}px`
-                    }}
-                  >
-                    {selectedTopic || "Default Topic"}
+                  <div className="pt-4 pb-8 max-w-[240px] h-full flex items-center">
+                    <div
+                      ref={elements.title.ref}
+                      id="tester"
+                      className="text-[#FFE600] font-degular font-extrabold"
+                      style={{
+                        fontSize: `${elements.title.fontSize}px`,
+                        lineHeight: `${elements.title.lineHeight}px`
+                      }}
+                    >
+                      {selectedTopic || "Default Topic"}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -15,7 +15,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
   const elements = {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280, maxHeight: 40 },
-    title: { ref: useRef(null), maxFontSize: 27, maxHeight: 60 },
+    title: { ref: useRef(null), maxFontSize: 32, maxHeight: 140 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 190, maxHeight: 85 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
@@ -23,7 +23,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
   const [fontSizes, setFontSizes] = useState({
     frontAuthor: 26,
-    title: 27,
+    title: 32,
     subTitle: 20,
     spineTitle: 28,
     spineAuthor: 17,
@@ -56,7 +56,7 @@ const CoverTemplate3 = ({ type, data }) => {
             <div className="text-left text-[20px] h-full flex flex-col justify-between w-full">
               <div className="max-w-[300px] w-full pb-[70px] relative">
                 <img src="/images/create-book/bg/title8.png" alt="" />
-                <div className="max-w-[260px] font-degular absolute top-10 left-10">
+                <div className="max-w-[260px] max-h-[140px] h-full font-degular absolute top-7 left-11 flex items-center justify-center">
 
                   <div
                     ref={elements.title.ref}
@@ -68,7 +68,7 @@ const CoverTemplate3 = ({ type, data }) => {
                   >
                     {selectedTopic || "Default Topic"}
                   </div>
-
+{/* 
                   <div
                     ref={elements.subTitle.ref}
                     className="mt-1 font-degular font-semibold max-w-[190px]"
@@ -78,7 +78,7 @@ const CoverTemplate3 = ({ type, data }) => {
                     }}
                   >
                     {selectedSubTopic || "Default Sub Topic"}
-                  </div>
+                  </div> */}
 
                 </div>
               </div>

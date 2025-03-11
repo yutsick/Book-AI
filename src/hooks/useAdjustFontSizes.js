@@ -17,8 +17,8 @@ const useAdjustFontSizes = (elements, dependencies, setFontSizes) => {
         }
         if (maxHeight) {
 
-          ({ fontSize, lineHeight } = adjustFontSizeByHeight(ref, fontSize, maxHeight));
-          console.log(fontSize, lineHeight);
+          ({ fontSize, lineHeight } =  adjustFontSizeByHeight(ref, fontSize, maxHeight));
+
           
         }
   
