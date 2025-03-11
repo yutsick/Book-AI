@@ -130,7 +130,7 @@ const MainScreen = () => {
   }, [isButtonDisabled, currentStep, file]);
 
 
-  const handleApiCall = async () => {
+  const handleApiCall = () => {
     // const payload = {
     //   email: authorEmail,
     //   name: authorName,
@@ -139,7 +139,7 @@ const MainScreen = () => {
     //   genre: selectedGenre,
     //   age: selectedAge.value,
     // };
-    console.log('yep',payload);
+    // console.log('yep',payload);
     
     // try {
     //   const response = await fetch("https://api.booktailor.com/create-draft", {
