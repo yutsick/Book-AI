@@ -2,32 +2,27 @@ import { useEffect } from "react";
 import { adjustFontSizeByWidth, adjustFontSizeByHeight } from "@/utils/fontSizeHelper";
 
 const useAdjustFontSizes = (elements, dependencies, setFontSizes) => {
- 
-  
   useEffect(() => {
     const newFontSizes = {};
-  
+
     Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth, maxHeight }]) => {
-      if (ref.current) {
-        let fontSize = maxFontSize;
-        let lineHeight = fontSize ;
-  
-        if (maxWidth) {
-          ({ fontSize, lineHeight } = adjustFontSizeByWidth(ref, fontSize, maxWidth));
-        }
-        if (maxHeight) {
+      if (!ref.current) return;
 
-          ({ fontSize, lineHeight } =  adjustFontSizeByHeight(ref, fontSize, maxHeight));
+      const sizes = [
+        maxWidth && adjustFontSizeByWidth(ref, maxFontSize, maxWidth),
+        maxHeight && adjustFontSizeByHeight(ref, maxFontSize, maxHeight),
+      ].filter(Boolean);
 
-          
-        }
-  
-        newFontSizes[key] = { fontSize, lineHeight };
-      }
+      const { fontSize, lineHeight } = sizes.reduce((acc, curr) => ({
+        fontSize: Math.max(acc.fontSize, curr.fontSize),
+        lineHeight: Math.max(acc.lineHeight, curr.lineHeight),
+      }), { fontSize: maxFontSize, lineHeight: maxFontSize });
+
+      newFontSizes[key] = { fontSize, lineHeight };
     });
-  
+
     setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
-  },dependencies);
+  }, dependencies);
 };
 
 export default useAdjustFontSizes;
