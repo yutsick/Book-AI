@@ -62,7 +62,7 @@ function Videos() {
                   imageSizes={{ width: 186, height: 340 }}
                   imageClasses={"rounded-lg"}
                   onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-                  initialSlide={0} // Гарантує, що початковий слайд - перший
+                  initialSlide={0} 
                 />
               ) : (
                 <VideoGrid videos={video.slides.slice(0, 4)} />

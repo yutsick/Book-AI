@@ -4,9 +4,9 @@ import CreateGenreContext from "@/contexts/CreateGenreContext";
 import config from "../../config";
 
 const useCreateDraft = () => {
-
   const { questionsUrl } = config;
-    const [questions, setQuestions] = useState(null);
+  const [questions, setQuestions] = useState(null);
+
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -33,6 +33,12 @@ const useCreateDraft = () => {
   const { selectedGenre } = useContext(CreateGenreContext);
 
   const createDraft = async () => {
+    const savedUUID = localStorage.getItem("draftUUID");
+
+    if (savedUUID) {
+      return;
+    }
+
     const payload = {
       email: authorEmail,
       name: authorName,
@@ -46,13 +52,10 @@ const useCreateDraft = () => {
           };
         }),
       genre: selectedGenre,
-      age: selectedAge.value,
+      age: selectedAge?.value,
       gender: selectedGender,
       author_name: authorName,
-
     };
-
-    console.log('yep', payload);
 
     try {
       const response = await fetch("https://api.booktailor.com/create-draft", {

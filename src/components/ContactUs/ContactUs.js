@@ -121,7 +121,6 @@ const ContactUS = () => {
     };
 
     useEffect(() => {
-        // Загружаем скрипт для Cloudflare Turnstile
         const script = document.createElement('script');
         script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
         script.async = true;

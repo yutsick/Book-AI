@@ -72,20 +72,11 @@ const CoverTemplate6 = ({ type, data }) => {
         <div
           className="w-[431px] h-[648px] mx-auto flex flex-col items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat text-[#0D453A] font-degular"
           style={{
-            // backgroundImage: isIOS
-            //   ? "url('/images/create-book/bg/bg4-back-mob.jpg')"
-            //   : "none",
+
             backgroundColor: "#F0EADE",
           }}
         >
-          {/* {!isIOS && (
-            <img
-              src={isMobile()
-                ? "/images/create-book/bg/bg4-back-mob.jpg"
-                : "/images/create-book/bg/bg4-back.png"}
-              alt="Back Cover"
-            />
-          )} */}
+
           {praises ? (
             generateBookBackCover({ author: authorName, praises, metaColor: "#000",praisesColor: "#666", website: "www.booktailor.com"})
           ) : (

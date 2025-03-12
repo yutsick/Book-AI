@@ -13,6 +13,7 @@ export const useTableOfContentsAPI = () => {
     questionsAndAnswers,
     tableOfContents,
     setTableOfContents,
+    setOriginalToc,
     setErrorToc,
     setLoading,
     questions,
@@ -108,6 +109,7 @@ export const useTableOfContentsAPI = () => {
 
         setTableOfContents(formattedContents);
         setLocalTableOfContents(formattedContents);
+        setOriginalToc(data.table_of_contents);
 
       } catch (err) {
         setErrorToc(err.message);

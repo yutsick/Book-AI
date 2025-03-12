@@ -70,7 +70,6 @@ const CoverTemplate8 = ({ type, data }) => {
               ref={elements.frontAuthor.ref}
               style={{
                 fontSize: `${elements.frontAuthor.fontSize}px`,
-                // lineHeight: `${elements.frontAuthor.fontSize}px`
               }}
             >
               {authorName || "Default Author"}

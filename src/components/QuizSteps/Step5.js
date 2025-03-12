@@ -180,7 +180,6 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
 
                   options={[topic]}
                   selectedValue={selectedTopic}
-                  // onChange={(value) => handleTopicChange(value, topic.subtitle)}
                   setIsButtonDisabled={setIsButtonDisabled}
                   type="topic"
                 />

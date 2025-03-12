@@ -53,11 +53,7 @@ const handleBlur = () => {
   setLocalPlaceholder(placeholder);
 
   if (validateLength && type === "text") {
-    // if (!value || value.trim().length === 0 || value.length > maxLength) {
-    //   setIsButtonDisabled(true);
-    // } else {
-    //   setIsButtonDisabled(false);
-    // }
+
   } else if (!value || value.trim().length === 0) {
 
     setIsButtonDisabled(true);

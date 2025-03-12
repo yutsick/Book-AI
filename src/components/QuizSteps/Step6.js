@@ -95,7 +95,6 @@ function Step6  ({ setProgressStep, setIsButtonDisabled,loader, setLoader }) {
     let processedFile = file;
 
     if (isMobile()) {
-      console.log("📱 Mobile detected - resizing image...");
       processedFile = await resizeImage(file, 431 * 1.5, 648 * 1.5);
     }
 

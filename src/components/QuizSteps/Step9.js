@@ -1,10 +1,10 @@
-import React, { useEffect, useContext, useMemo } from 'react';
+import React, { useEffect, useContext, useMemo, useRef } from 'react';
 import CreateBookContext from '@/contexts/CreateBookContext';
-
+import updateDraft from "@/utils/draftUpdater";
+import { debounce } from "lodash";
 function Step9({ setProgressStep }) {
   const {
-    selectedTemplate,
-    authorName,
+
     selectedCopies,
     setSelectedCopies,
     selectedCoverIndex,
@@ -13,9 +13,7 @@ function Step9({ setProgressStep }) {
     setSelectedShippingIndex,
     subtotal,
     setSubtotal,
-    totalPrice,
     setTotalPrice,
-    selectedCover,
     setSelectedCover
   } = useContext(CreateBookContext);
 
@@ -44,6 +42,18 @@ function Step9({ setProgressStep }) {
     }
   ];
 
+  const debouncedUpdateBookType = useRef(
+    debounce((value) => {
+      updateDraft("bookType", value);
+    }, 500)
+  ).current;
+
+  const debouncedUpdateShipping = useRef(
+    debounce((value) => {
+      updateDraft("shipping", value);
+    }, 500)
+  ).current;
+
   const subtotalAndTotalPrice = useMemo(() => {
     if (selectedCopies && typeof selectedCoverIndex === "number" && typeof selectedShippingIndex === "number") {
       const baseCopyCost = selectedCoverIndex === 0 ? 20.00 : 30.00;
@@ -70,21 +80,36 @@ function Step9({ setProgressStep }) {
     setProgressStep(7);
   }, [setProgressStep]);
 
-  useEffect(() => {
-    setSelectedCover(cover[selectedCoverIndex]?.title || '');
-  }, [selectedCoverIndex, setSelectedCover]);
 
-  const handleDecrease = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+  useEffect(() => {
+    const coverTitle = cover[selectedCoverIndex]?.title || '';
+    setSelectedCover(coverTitle);
+    if (coverTitle) debouncedUpdateBookType(coverTitle);
+  }, [selectedCoverIndex]);
+
+  useEffect(() => {
+    const shippingTitle = shipping[selectedShippingIndex]?.title || '';
+  
+    if (shippingTitle) debouncedUpdateShipping(shippingTitle);
+  }, [selectedShippingIndex]);
+
+
+  useEffect(() => {
+    return () => {
+      debouncedUpdateBookType.cancel();
+      debouncedUpdateShipping.cancel();
+    };
+  }, []);
+
+  const handleDecrease = () => {
+
     if (selectedCopies > 1) {
       setSelectedCopies(selectedCopies - 1);
     }
   };
 
-  const handleIncrease = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const handleIncrease = () => {
+
     if (selectedCopies < 15) {
       setSelectedCopies(selectedCopies + 1);
     }

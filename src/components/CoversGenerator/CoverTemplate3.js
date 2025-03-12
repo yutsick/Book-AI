@@ -15,7 +15,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
   const elements = {
     frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280, maxHeight: 40 },
-    title: { ref: useRef(null), maxFontSize: 32, maxHeight: 140, maxWidth: 200 },
+    title: { ref: useRef(null), maxFontSize: 36, maxHeight: 140, maxWidth: 200 },
     subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 190, maxHeight: 85 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
@@ -23,7 +23,7 @@ const CoverTemplate3 = ({ type, data }) => {
 
   const [fontSizes, setFontSizes] = useState({
     frontAuthor: 26,
-    title: 32,
+    title: 36,
     subTitle: 20,
     spineTitle: 28,
     spineAuthor: 17,

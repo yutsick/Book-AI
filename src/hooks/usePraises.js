@@ -19,28 +19,17 @@ const usePraises = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log("🔄 Checking conditions in usePraises...");
-
     if (!contextUpdated && !topicUpdated) {
-      console.log("❌ No context/topic update, skipping fetch.");
       setLoading(false);
       return;
     }
 
     if (!selectedTopic || !selectedSubTopic || !authorName) {
-      console.log("❌ Missing required fields, skipping fetch.");
       setLoading(false);
       return;
     }
 
-    // if (praises?.length > 0) {
-    //   console.log("✅ Praises already exist, skipping fetch.");
-    //   setLoading(false);
-    //   return;
-    // }
-
     const fetchPraises = async () => {
-      console.log("🚀 Fetching praises...");
       setLoading(true);
       setError(null);
 
@@ -61,15 +50,13 @@ const usePraises = () => {
         }
 
         const data = await response.json();
-        console.log("✅ Received praises:", data.praises);
 
         setPraises(Array.isArray(data.praises) ? data.praises : []);
       } catch (err) {
         console.error("❌ Fetch error:", err);
         setError(err.message);
-        setPraises([]); // Гарантуємо, що це масив
+        setPraises([]); 
       } finally {
-        console.log("✅ Finished fetching praises.");
         setLoading(false);
       }
     };

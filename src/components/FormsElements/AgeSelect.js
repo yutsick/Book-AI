@@ -56,8 +56,7 @@ const CustomSelect = ({
         flexShrink: 0,
         position: state.selectProps.value.value ? "static" : "absolute",
         right: "37%",
-        // top: "50%",
-        // transform: "translateY(-50%)", 
+
       };
     },
     indicatorSeparator: () => ({
@@ -89,7 +88,7 @@ const CustomSelect = ({
     }),
     input: (base) => ({
       ...base,
-      // height: 0,
+
       opacity: 0,
       pointerEvents: "none",
     })

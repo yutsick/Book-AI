@@ -58,7 +58,6 @@ export const useBookAPI = () => {
         try {
           const parsedBooks = JSON.parse(storedBooks);
           if (Array.isArray(parsedBooks) && parsedBooks.length > 0) {
-            console.log("📦 Using books from localStorage");
             setBooks(parsedBooks);
             setLoading(false);
             return;
@@ -70,14 +69,12 @@ export const useBookAPI = () => {
     }
 
     if (genreUpdated) {
-      console.log("🔄 Genre changed, regenerating books...");
       localStorage.removeItem(storageKey);
       setBooks([]);
       fetchTriggered.current = false;
     }
 
     if (fetchTriggered.current) {
-      // console.warn("🚫 API call already triggered, skipping...");
       return;
     }
     fetchTriggered.current = true;
@@ -112,7 +109,6 @@ export const useBookAPI = () => {
 
         if (!response.ok) {
           throw new Error("Oops... Something went wrong. Please try again in 20 seconds.");
-          console.log("❌ API Response:", response);
         };
 
         const data = await response.json();

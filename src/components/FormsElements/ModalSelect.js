@@ -23,7 +23,7 @@ const CustomModalSelect = ({
 
   const handleOpen = () => {
     setIsOpen(true);
-    setShowFakeScrollbar(true); // Повертаємо заглушку кожного разу при відкритті
+    setShowFakeScrollbar(true); 
   };
 
   const handleSelect = (option) => {
