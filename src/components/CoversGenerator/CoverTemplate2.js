@@ -73,7 +73,7 @@ const CoverTemplate2 = ({ type, data }) => {
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className=" max-h-[570px] object-cover block"
+              className="min-h-[380px] max-h-[570px] object-cover block object-bottom"
             />
             <div className="h-[210px] w-full bg-gradient-to-b from-transparent to-black/50 absolute" ></div>
             <div className="font-semibold  text-[17px] leading-[17px] max-w-[180px]  text-white absolute left-[52px] bottom-10">
