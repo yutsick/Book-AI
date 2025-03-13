@@ -60,7 +60,7 @@ const CoverTemplate5 = ({ type, data }) => {
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-[570px] object-top object-cover block"
+                className="w-full h-[570px] object-top object-contain block"
               />
             )}
           </div>

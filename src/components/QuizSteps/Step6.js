@@ -72,16 +72,67 @@ function Step6  ({ setProgressStep, setIsButtonDisabled,loader, setLoader }) {
     });
   };
 
+  const trimTransparentPixels = async (imageBlob) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(imageBlob);
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+  
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const { data, width, height } = imageData;
+  
+        let top = null, bottom = null, left = null, right = null;
+  
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const alpha = data[(y * width + x) * 4 + 3];
+            if (alpha !== 0) {
+              if (top === null) top = y;
+              bottom = y;
+              if (left === null || x < left) left = x;
+              if (right === null || x > right) right = x;
+            }
+          }
+        }
+  
+        // Якщо немає непрозорих пікселів — повернути null
+        if (top === null || left === null || right === null || bottom === null) {
+          resolve(null);
+          return;
+        }
+  
+        const trimmedWidth = right - left + 1;
+        const trimmedHeight = bottom - top + 1;
+  
+        const trimmedCanvas = document.createElement('canvas');
+        trimmedCanvas.width = trimmedWidth;
+        trimmedCanvas.height = trimmedHeight;
+  
+        const trimmedCtx = trimmedCanvas.getContext('2d');
+        trimmedCtx.drawImage(canvas, left, top, trimmedWidth, trimmedHeight, 0, 0, trimmedWidth, trimmedHeight);
+  
+        trimmedCanvas.toBlob((blob) => {
+          resolve(blob);
+        }, 'image/png');
+      };
+    });
+  };
+  
   const handleFileChange = async (file) => {
     if (!file) return;
-
+  
     setPreview(URL.createObjectURL(file));
     setIsProcessing(true);
     setCroppedImage(null);
     setAuthorImage(null);
-
+  
     const validationResult = await validateImage(file);
-
+  
     if (!validationResult.valid) {
       setError(validationResult.error);
       if (validationResult.errorType === "unsupported_type") {
@@ -91,45 +142,53 @@ function Step6  ({ setProgressStep, setIsButtonDisabled,loader, setLoader }) {
     } else {
       setError(null);
     }
-
+  
     let processedFile = file;
-
+  
     if (isMobile()) {
       processedFile = await resizeImage(file, 431 * 1.5, 648 * 1.5);
     }
-
+  
     setAuthorImage(file);
-
+  
     try {
       const formData = new FormData();
       formData.append("image", processedFile);
-
+  
       const response = await fetch("https://api.booktailor.com/remove-background", {
         method: "POST",
         body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error("Error removing background");
       }
-
+  
       const data = await response.json();
       const processedUrl = data.data.processed_url;
       setProcessedAuthorImage(processedUrl);
-
+  
       const imageResponse = await fetch(processedUrl);
       if (!imageResponse.ok) {
         throw new Error("Error fetching processed image");
       }
-
+  
       const imageBlob = await imageResponse.blob();
-      const imageFile = new File([imageBlob], "processed-image.png", { type: "image/png" });
-
+  
+      // Обрізаємо прозорі пікселі
+      const trimmedBlob = await trimTransparentPixels(imageBlob);
+  
+      if (!trimmedBlob) {
+        throw new Error("Image is fully transparent or invalid.");
+      }
+  
+      const imageFile = new File([trimmedBlob], "processed-image.png", { type: "image/png" });
+  
       let finalImage = imageFile;
       if (isMobile()) {
         finalImage = await resizeImage(imageFile, 431 * 4, 648 * 4);
       }
-
+  
       setCroppedImage(finalImage);
     } catch (error) {
       console.error("❌ Error processing image:", error);
@@ -139,6 +198,7 @@ function Step6  ({ setProgressStep, setIsButtonDisabled,loader, setLoader }) {
       setSelectedTemplate({});
     }
   };
+  
 
   return (
     <div>
