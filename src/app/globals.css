@@ -173,3 +173,19 @@ textarea {
 .scrollbar-visible::-webkit-scrollbar-track {
   background: #f0f0f0; 
 }
+
+#zoom-slider::-webkit-slider-thumb {
+  width: 24px; 
+  height: 24px;
+
+}
+
+#zoom-slider::-moz-range-thumb {
+  width: 24px;
+
+}
+
+#zoom-slider::-ms-thumb {
+  width: 24px;
+  height: 24px;
+}

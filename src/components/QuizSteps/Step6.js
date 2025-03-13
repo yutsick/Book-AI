@@ -135,7 +135,7 @@ function Step6  ({ setProgressStep, setIsButtonDisabled,loader, setLoader }) {
   
     if (!validationResult.valid) {
       setError(validationResult.error);
-      if (validationResult.errorType === "unsupported_type") {
+      if (validationResult.errorType === "unsupported_type" || validationResult.errorType === "file_too_large") {
         setIsProcessing(false);
         return;
       }

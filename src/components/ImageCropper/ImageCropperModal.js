@@ -177,10 +177,10 @@ const dynamicWidth = screenWidth >= 465 ? 400 : screenWidth - 50;
           <p className="text-gray-500">Loading image...</p>
         )}
 
-        <div className={`flex items-center justify-between px-4 gap-5 bg-white -bottom-14 md:-bottom-12 left-1/2 -translate-x-1/2 absolute h-[45px]`}
+        <div className={`flex items-center justify-between px-4 gap-5 bg-white -bottom-14 md:-bottom-12 left-1/2 -translate-x-1/2 absolute h-[60px]`}
         style={{ width: dynamicWidth }}>
-          <div className="flex items-center gap-2">
-            <label htmlFor="zoom-slider" className="text-[12px] text-gray-500 font-bold">Zoom:</label>
+          <div className="flex items-center gap-2 flex-1">
+            
             <input
               id="zoom-slider"
               type="range"
@@ -193,11 +193,11 @@ const dynamicWidth = screenWidth >= 465 ? 400 : screenWidth - 50;
             />
           </div>
 
-          <div className="flex gap-4 justify-between text-[12px] text-white font-bold">
-            <button className="bg-orange w-[51px] h-[22px] flex justify-center items-center rounded-md" onClick={handleCropSave} disabled={!isImageLoaded}>
+          <div className="flex gap-2 justify-between text-[10.5px] text-white font-semibold">
+            <button className="bg-orange w-[51px] h-[22px] flex justify-center items-center rounded-[3px]" onClick={handleCropSave} disabled={!isImageLoaded}>
               Save
             </button>
-            <button className="bg-black/30 w-[51px] h-[22px] flex justify-center items-center rounded-md" onClick={onClose}>
+            <button className="bg-[#868686] w-[51px] h-[22px] flex justify-center items-center rounded-[3px]" onClick={onClose}>
               Cancel
             </button>
           </div>
