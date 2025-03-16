@@ -1,8 +1,8 @@
 "use client";
 
 import config from '../../../config';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 const OrderStatusInfo = () => {
     const { orderStatusInfoUrl } = config;
@@ -57,9 +57,9 @@ const OrderStatusInfo = () => {
                     </li>
                 </ul>
 
-                <a
+                <Link
                     className="w-full max-w-[260px] sm:max-w-[355px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[16px] sm:text-[18px] rounded-[3px] gap-1 shadow-heroBtnShadow group ]"
-                    href=""
+                    href="/my-account"
                 >
 
                     <span className='mb-[2px]'>{orderStatusInfoData.buttonText}</span>
@@ -77,7 +77,7 @@ const OrderStatusInfo = () => {
                         </svg>
 
                     </span>
-                </a>
+                </Link>
             </div>
         </section >
     ) : null;

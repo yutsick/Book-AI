@@ -2,7 +2,7 @@
 
 import config from '../../../config';
 import React, { useState, useEffect } from 'react';
-
+import Link from 'next/link';
 
 function NeedHelp() {
     const { needHelpUrl } = config;
@@ -24,9 +24,9 @@ function NeedHelp() {
             <div className="mb-[60px]" >
                 <h2 className="font-bold text-[20px] md:text-[24px] leading-[26px] mb-[10px] text-gray" >{needHelpData.title}</h2>
                 <p className="text-gray font-medium text-[16px] mb-[12px]">{needHelpData.text1}</p>
-                <a
+                <Link
                     className="w-full max-w-[165px] h-[32px] flex justify-center items-center border-[1px] border-gray text-[#464646] font-medium text-[15px] rounded-[3px] gap-1 group ] transition hover:bg-gray hover:text-white"
-                    href="#"
+                    href="/contact-us"
                 >
 
                     <span className='mb-[2px]'>{needHelpData.buttonText1}</span>
@@ -56,13 +56,13 @@ function NeedHelp() {
                         </svg>
 
                     </span>
-                </a>
+                </Link>
             </div>
             <div>
                 <p className="text-gray font-medium text-[16px] mb-[18px] text-center md:text-start" >{needHelpData.text2}</p>
-                <a
+                <Link
                     className="w-full max-w-[220px] h-[32px] mx-auto flex justify-center items-center border-[1px] border-gray text-[#464646] font-medium text-[15px] rounded-[3px] gap-1 group ] transition hover:bg-gray hover:text-white"
-                    href="#"
+                    href="/"
                 >
 
                     <span className='mb-[2px]'>{needHelpData.buttonText2}</span>
@@ -82,7 +82,7 @@ function NeedHelp() {
                         </svg>
 
                     </span>
-                </a>
+                </Link>
             </div>
         </section>
     ) : null;
