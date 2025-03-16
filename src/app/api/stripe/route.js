@@ -1,7 +1,4 @@
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
+import { getStripeInstance } from '@/lib/stripe'; 
 export async function POST(req) {
     try {
         const { totalPrice, quantity, returnUrl, draftUUID } = await req.json();
@@ -13,6 +10,7 @@ export async function POST(req) {
                 headers: { 'Content-Type': 'application/json' },
             });
         }
+        const stripe = getStripeInstance();
 
         const session = await stripe.checkout.sessions.create({
             ui_mode: 'embedded',
@@ -23,7 +21,7 @@ export async function POST(req) {
                         product_data: {
                             name: 'Custom Book Order',
                         },
-                        unit_amount: totalPrice * 100, // Stripe очікує суму в найменших одиницях
+                        unit_amount: totalPrice * 100, 
                     },
                     quantity: quantity,
                 },

@@ -4,12 +4,32 @@ import React, { useEffect, useState } from 'react';
 import {
     EmbeddedCheckout,
     EmbeddedCheckoutProvider
-} from '@stripe/react-stripe-js';new Stripe
+} from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 export default function Checkout({ totalPrice, quantity, returnUrl, draftUUID }) {
     const [clientSecret, setClientSecret] = useState('');
+    const [stripePromise, setStripePromise] = useState(null);
+
+    useEffect(() => {
+        const fetchStripeKey = async () => {
+            try {
+                const res = await fetch('/api/stripe-publishable-key');
+                const data = await res.json();
+
+                if (data.publishableKey) {
+                    const stripe = await loadStripe(data.publishableKey);
+                    setStripePromise(stripe);
+                } else {
+                    console.error('Stripe publishable key not found:', data.error);
+                }
+            } catch (error) {
+                console.error('Error fetching Stripe key:', error);
+            }
+        };
+
+        fetchStripeKey();
+    }, []);
 
     useEffect(() => {
         const createCheckoutSession = async () => {
@@ -38,11 +58,15 @@ export default function Checkout({ totalPrice, quantity, returnUrl, draftUUID })
             }
         };
 
-        createCheckoutSession();
-    }, [totalPrice, quantity, returnUrl]);
+        if (stripePromise) {
+            createCheckoutSession();
+        }
+    }, [totalPrice, quantity, returnUrl, draftUUID, stripePromise]);
 
-    if (!clientSecret) {
-        return <div>Loading payment details...</div>;
+    if (!clientSecret || !stripePromise) {
+        return    <div className="flex justify-center items-center h-32">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
+      </div>
     }
 
     return (
