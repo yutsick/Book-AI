@@ -8,9 +8,6 @@ export default {
   ],
   theme: {
     extend: {
-      screens: {
-        'custom-465': '465px',
-      },
       transformStyle: {
         "3d": "preserve-3d",
       },
@@ -18,6 +15,7 @@ export default {
         z: "var(--spineWidth)",
       },
       screens: {
+        'custom-465': '465px',
         'xs': '476px',
         '865': '865px',
       },

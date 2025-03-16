@@ -175,17 +175,43 @@ textarea {
 }
 
 #zoom-slider::-webkit-slider-thumb {
-  width: 24px; 
-  height: 24px;
 
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #EAAC00;
+  cursor: pointer;
+  border: none;
+  @media (max-width: 768px) {
+    width: 23px;
+    height: 23px;
+  }
 }
 
 #zoom-slider::-moz-range-thumb {
-  width: 24px;
-
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #EAAC00;
+  cursor: pointer;
+  border: none;
+  @media (max-width: 768px) {
+    width: 23px;
+    height: 23px;
+  }
 }
 
 #zoom-slider::-ms-thumb {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #EAAC00;
+  cursor: pointer;
+  border: none;
+  @media (max-width: 768px) {
+    width: 23px;
+    height: 23px;
+  }
 }

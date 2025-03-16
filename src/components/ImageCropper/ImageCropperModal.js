@@ -57,7 +57,7 @@ const ImageCropperModal = ({
   const initialSwiperHeight = 420;
 
   const screenWidth = useScreenWidth();
-const dynamicWidth = screenWidth >= 465 ? 400 : screenWidth - 50;
+const dynamicWidth = screenWidth >= 465 ? 488 : screenWidth - 46;
 
   useEffect(() => {
     const updateSize = () => {
@@ -177,10 +177,10 @@ const dynamicWidth = screenWidth >= 465 ? 400 : screenWidth - 50;
           <p className="text-gray-500">Loading image...</p>
         )}
 
-        <div className={`flex items-center justify-between px-4 gap-5 bg-white -bottom-14 md:-bottom-12 left-1/2 -translate-x-1/2 absolute h-[60px]`}
+        <div className={`flex items-center justify-between md:px-4 px-2 md:gap-5 gap-3 bg-white bottom-[-60px] md:bottom-[-68px] left-1/2 -translate-x-1/2 md:-ml-1 absolute h-[60px] md:h-[68px]`}
         style={{ width: dynamicWidth }}>
-          <div className="flex items-center gap-2 flex-1">
-            
+          <div className="flex items-center gap-2 md:gap-5 flex-1">
+            <div className="hidden md:block font-bold text-black">Zoom:</div>
             <input
               id="zoom-slider"
               type="range"
@@ -189,15 +189,15 @@ const dynamicWidth = screenWidth >= 465 ? 400 : screenWidth - 50;
               step={0.01}
               value={zoom}
               onChange={(e) => setZoom(Number(e.target.value))}
-              className="w-full h-1 bg-zinc-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-orange accent-orange"
+              className="w-full h-[6.5px] bg-zinc-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-orange accent-orange "
             />
           </div>
 
-          <div className="flex gap-2 justify-between text-[10.5px] text-white font-semibold">
-            <button className="bg-orange w-[51px] h-[22px] flex justify-center items-center rounded-[3px]" onClick={handleCropSave} disabled={!isImageLoaded}>
+          <div className="flex gap-2 justify-between text-[10.5px] md:text-[15px] text-white font-semibold">
+            <button className="bg-orange w-[51px] md:w-[70px] h-[23px] md:h-[27px] flex justify-center items-center rounded-[3px]" onClick={handleCropSave} disabled={!isImageLoaded}>
               Save
             </button>
-            <button className="bg-[#868686] w-[51px] h-[22px] flex justify-center items-center rounded-[3px]" onClick={onClose}>
+            <button className="bg-[#868686] w-[51px] md:w-[70px] h-[23px] md:h-[27px] flex justify-center items-center rounded-[3px]" onClick={onClose}>
               Cancel
             </button>
           </div>
