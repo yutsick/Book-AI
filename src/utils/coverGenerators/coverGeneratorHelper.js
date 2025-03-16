@@ -19,12 +19,12 @@ const templates = {
   8: CoverTemplate8,
 };
 
-export const generateCoverById = async (contextData, templateId = 1) => {
+export const generateCoverById = async (contextData, templateId = 1, templatesAdjusted = []) => {
   const CoverComponent = templates[templateId];
 
   if (!CoverComponent) {
     throw new Error(`Template with ID ${templateId} does not exist.`);
   }
 
-  return await generateTemplateCovers(contextData, CoverComponent);
+  return await generateTemplateCovers(contextData, CoverComponent, templatesAdjusted, templateId);
 };

@@ -1,10 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, } from "react";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 
-const CoverTemplate2 = ({ type, data }) => {
+
+const CoverTemplate2 = ({ type, data, templatesAdjusted, templateId }) => {
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
+
+
+  const isTemplateAdjusted = templatesAdjusted?.includes(templateId);
 
 
 
@@ -69,11 +73,11 @@ const CoverTemplate2 = ({ type, data }) => {
               {authorName || "Default Author"}
             </div>
           </div>
-          <div className="flex flex-col w-full flex-1 justify-end">
+          <div className={`flex flex-col w-full flex-1 justify-end `}>
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="min-h-[380px] max-h-[570px] object-contain block object-bottom"
+              className={`${!isTemplateAdjusted ? "translate-x-12" : ""} min-h-[380px] max-h-[570px] object-contain block object-top`}
             />
             <div className="h-[210px] w-full bg-gradient-to-b from-transparent to-black/50 absolute" ></div>
             <div className="font-semibold  text-[17px] leading-[17px] max-w-[180px]  text-white absolute left-[52px] bottom-10">

@@ -2,7 +2,7 @@ import { domToBlob } from "modern-screenshot";
 import { createRoot } from "react-dom/client";
 import { createPortal } from "react-dom";
 
-export const generateTemplateCovers = async (contextData, CoverComponent) => {
+export const generateTemplateCovers = async (contextData, CoverComponent, templatesAdjusted, templateId) => {
   return new Promise((resolve, reject) => {
     const hiddenContainer = document.createElement("div");
 
@@ -59,7 +59,14 @@ export const generateTemplateCovers = async (contextData, CoverComponent) => {
 
         const root = createRoot(wrapper);
         root.render(
-          createPortal(<CoverComponent key={type + Date.now()}  type={type} data={contextData} />, wrapper)
+          createPortal(
+          <CoverComponent 
+            key={type + Date.now()}  
+            type={type} 
+            data={contextData} 
+            templatesAdjusted = {templatesAdjusted}
+            templateId = {templateId}
+          />, wrapper)
         );
 
         setTimeout(async () => {

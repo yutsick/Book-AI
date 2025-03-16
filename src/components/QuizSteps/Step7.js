@@ -21,7 +21,7 @@ const previewTemplates = [
 const cropperData = [
   { id: 1, top: null, bottom: 160, left: 0, width: 320, height: 270, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 235 },
   { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 375 },
-  { id: 3, top: null, bottom: 10, left: 12, width: 297, height: 335, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 295 },
+  { id: 3, top: null, bottom: 8, left: 10, width: 300, height: 337, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 295 },
   { id: 4, top: 110, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 168, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true },
   { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 425, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 370 },
   { id: 6, top: 0, bottom: null, left: 0, width: 320, height: 302, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
@@ -66,7 +66,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
 
   useEffect(() => {
     if (croppedImage && !praisesLoading) {
-      fetchGeneratedCover(selectedTemplate.templateId || 1);
+      fetchGeneratedCover(selectedTemplate.templateId || 1, selectedTemplate.templatesAdjusted || []);
     }
   }, [croppedImage, praisesLoading]);
 
@@ -111,7 +111,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
 
 
 
-  const fetchGeneratedCover = async (templateId) => {
+  const fetchGeneratedCover = async (templateId, templatesAdjusted) => {
     if (!croppedImage) {
       console.warn("⚠️ Waiting for `croppedImage`...");
       return;
@@ -131,15 +131,16 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
         authorImage,
         processedAuthorImage,
         croppedImage,
-        praises
+        praises,
       };
 
-      const cover = await generateCoverById(contextData, templateId);
+      const cover = await generateCoverById(contextData, templateId, templatesAdjusted);
       setSelectedCover(cover);
 
       setSelectedTemplate((prevTemplate) => ({
 
         ...prevTemplate,
+ 
         templateId,
         front: cover.frontCover,
         back: cover.backCover,
@@ -170,11 +171,15 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
     }
   }, []);
 
-  const handleCropSave = (newCroppedImage, crop, zoom) => {
+  const handleCropSave = (newCroppedImage, crop, zoom, templateId) => {
     setCroppedImage(newCroppedImage);
 
     setSelectedTemplate((prevTemplate) => ({
       ...prevTemplate,
+      templatesAdjusted: Array.isArray(prevTemplate.templatesAdjusted)
+      ? [...prevTemplate.templatesAdjusted, templateId]
+      : [templateId],
+
       crop: crop ?? prevTemplate.crop,
       zoom: zoom ?? prevTemplate.zoom,
     }));
@@ -229,7 +234,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
                   setIsModalOpen(false);
                 }}
                 onSave={(newCroppedImage, crop, zoom) =>
-                  handleCropSave(newCroppedImage, crop, zoom)
+                  handleCropSave(newCroppedImage, crop, zoom, selectedTemplate?.templateId)
                 }
               />
             </>

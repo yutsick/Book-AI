@@ -19,7 +19,6 @@ export const validateImage = async (file) => {
           const width = img.width;
           const height = img.height;
           const sizeInMB = file.size / (1024 * 1024);
-          console.log(sizeInMB);
           if (sizeInMB >= 40) {
             reject({ errorType: "file_too_large", error: "Your image is too big. Please upload one under 40MB" });
             return;

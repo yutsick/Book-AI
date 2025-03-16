@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
-const CoverTemplate5 = ({ type, data }) => {
+const CoverTemplate5 = ({ type, data, templatesAdjusted, templateId  }) => {
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const canvasRef = useRef(null);
+  const isTemplateAdjusted = templatesAdjusted?.includes(templateId);
 
   useEffect(() => {
     if (isIOS && canvasRef.current) {
@@ -55,12 +56,12 @@ const CoverTemplate5 = ({ type, data }) => {
           {/* Heading */}
           <div className="w-full h-full flex flex-col justify-end">
             {isIOS ? (
-              <canvas ref={canvasRef} className="w-full h-[550px]  object-top object-cover block"></canvas>
+              <canvas ref={canvasRef} className="w-full h-[570px]  object-top object-cover block"></canvas>
             ) : (
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-[570px] object-top object-contain block"
+                className={`w-full  object-bottom object-cover block ${!isTemplateAdjusted ? "h-[550px]" : "h-[570px]"}`}
               />
             )}
           </div>

@@ -3,10 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
 
-const CoverTemplate7 = ({ type, data }) => {
+const CoverTemplate7 = ({ type, data, templatesAdjusted, templateId  }) => {
 
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const { authorName, selectedTopic, authorImage, selectedSubTopic, croppedImage, praises } = data;
+  const isTemplateAdjusted = templatesAdjusted?.includes(templateId);
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -85,7 +86,7 @@ const CoverTemplate7 = ({ type, data }) => {
             <img
               src={authorImageSrc}
               alt={authorName || "Default Author"}
-              className="w-[276px] h-[300px] rounded-full object-contain block object-top mx-auto border border-white bg-gray-200 "
+              className={`w-[276px] h-[300px] rounded-full object-contain block object-top mx-auto border border-white bg-gray-200 ${!isTemplateAdjusted ? "pt-4" : ""}`}
             />
             </div>
             <div className="">

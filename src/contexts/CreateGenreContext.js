@@ -19,14 +19,13 @@ export const GenreProvider = ({ children }) => {
     return defaultValue;
   };
 
-  const [selectedGenre, setSelectedGenre] = useState(() => getStoredValue("selectedGenre", null));
-  const [selectedTopic, setSelectedTopic] = useState(() => getStoredValue("selectedTopic", ""));
-  const [selectedSubTopic, setSelectedSubTopic] = useState(() => getStoredValue("selectedSubTopic", ""));
+  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedSubTopic, setSelectedSubTopic] = useState("");
   const [generatedBooks, setGeneratedBooks] = useState([]);
 
   const [genreUpdated, setGenreUpdated] = useState(false);
   const [topicUpdated, setTopicUpdated] = useState(false);
-
 
   const debouncedUpdateGenre = useRef(debounce((value) => {
     updateDraft("genre", value);
@@ -40,19 +39,33 @@ export const GenreProvider = ({ children }) => {
     updateDraft("subtitle", value);
   }, 500)).current;
 
+  // Завантаження зі сховища тільки раз при монтуванні
   useEffect(() => {
-    localStorage.setItem("selectedGenre", selectedGenre);
-    if (selectedGenre) debouncedUpdateGenre(selectedGenre);
+    setSelectedGenre(getStoredValue("selectedGenre", null));
+    setSelectedTopic(getStoredValue("selectedTopic", ""));
+    setSelectedSubTopic(getStoredValue("selectedSubTopic", ""));
+  }, []);
+
+  // Збереження у сховище тільки після першого завантаження
+  useEffect(() => {
+    if (selectedGenre !== null) {
+      localStorage.setItem("selectedGenre", JSON.stringify(selectedGenre));
+      debouncedUpdateGenre(selectedGenre);
+    }
   }, [selectedGenre]);
 
   useEffect(() => {
-    localStorage.setItem("selectedTopic", selectedTopic);
-    if (selectedTopic) debouncedUpdateTitle(selectedTopic);
+    if (selectedTopic !== "") {
+      localStorage.setItem("selectedTopic", JSON.stringify(selectedTopic));
+      debouncedUpdateTitle(selectedTopic);
+    }
   }, [selectedTopic]);
 
   useEffect(() => {
-    localStorage.setItem("selectedSubTopic", selectedSubTopic);
-    if (selectedSubTopic) debouncedUpdateSubtitle(selectedSubTopic);
+    if (selectedSubTopic !== "") {
+      localStorage.setItem("selectedSubTopic", JSON.stringify(selectedSubTopic));
+      debouncedUpdateSubtitle(selectedSubTopic);
+    }
   }, [selectedSubTopic]);
 
   useEffect(() => {

@@ -27,6 +27,7 @@ export const CreateBookProvider = ({ children }) => {
   const [authorImage, setAuthorImage] = useState("");
   const [croppedImage, setCroppedImage] = useState("");
   const [selectedTemplate, setSelectedTemplate] = useState({
+    templatesAdjusted: [],
     templateId: null,
     front: "",
     back: "",

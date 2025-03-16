@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import useAdjustFontSizes from "@/hooks/useAdjustFontSizes";
 import { generateBookBackCover } from "@/utils/coverGenerators/backGenerator";
-const CoverTemplate8 = ({ type, data }) => {
+const CoverTemplate8 = ({ type, data, templatesAdjusted, templateId  }) => {
 
   const isMobile = (window.innerWidth <= 768);
   const { authorName, selectedTopic, selectedSubTopic, croppedImage, praises } = data;
+  const isTemplateAdjusted = templatesAdjusted?.includes(templateId);
 
   const authorImageSrc =
     croppedImage instanceof File ? URL.createObjectURL(croppedImage) : croppedImage;
@@ -79,7 +80,7 @@ const CoverTemplate8 = ({ type, data }) => {
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className="w-full h-full max-h-[297px] max-w-[245px] object-contain object-top block"
+                className={`w-full h-full  max-w-[245px] object-contain object-right block ${!isTemplateAdjusted ? "max-h-[240px] translate-x-8" : "max-h-[297px]"} `}
               />
             </div>
           </div>
