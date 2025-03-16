@@ -4,10 +4,10 @@ import React, { useEffect, useState } from 'react';
 import {
     EmbeddedCheckout,
     EmbeddedCheckoutProvider
-} from '@stripe/react-stripe-js';
+} from '@stripe/react-stripe-js';new Stripe
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 export default function Checkout({ totalPrice, quantity, returnUrl, draftUUID }) {
     const [clientSecret, setClientSecret] = useState('');
 
