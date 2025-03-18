@@ -2,10 +2,14 @@ import React, { useEffect, useState, useContext } from "react";
 import CreateGenreContext from "@/contexts/CreateGenreContext";
 import CreateBookContext from "@/contexts/CreateBookContext";
 import RadioButtonList from "@/components/FormsElements/RadioButtonList";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useBookAPI } from "@/hooks/useBookAPI";
 import config from "../../../config";
 function Step5({ setProgressStep, setIsButtonDisabled }) {
   const { questionsUrl } = config;
+  const RECAPTCHA_SITE_KEY = "6LceUPgqAAAAAPY7FdQ9Wo9v_bIpM7uCaFXLiJI1"; 
+
+
   const { selectedTopic, setSelectedTopic, setSelectedSubTopic, selectedGenre } = useContext(CreateGenreContext);
   const { authorName, selectedAge, selectedGender, questionsAndAnswers } = useContext(CreateBookContext);
   const { books, loading, error } = useBookAPI();
@@ -14,6 +18,11 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   const [storedTopics, setStoredTopics] = useState([]);
   const [regenerate, setRegenerate] = useState(false);
   const [questions, setQuestions] = useState(null);
+
+  const [regenerateCount, setRegenerateCount] = useState(0);
+  const [showCaptcha, setShowCaptcha] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+
   const toggleLoading = (state) => {
     setRegenerate(state);
     setIsButtonDisabled(state || !selectedTopic); 
@@ -116,8 +125,35 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
     }
   };
 
+  const handleCaptchaVerify = async (token) => {
+    try {
+      const res = await fetch("/api/verify-recaptcha", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+  
+      const data = await res.json();
+      
+      if (data.success) {
+        setRegenerateCount(0);
+        setShowCaptcha(false);
+        setCaptchaVerified(true);
+      } else {
+        alert("Failed reCAPTCHA verification");
+      }
+    } catch (error) {
+      console.error("Error verifying reCAPTCHA:", error);
+    }
+  };
 
   const handleRegenerate = async (index, topic) => {
+    if (regenerateCount >= 3 && !captchaVerified) {
+      setShowCaptcha(true);
+      return;
+    }
+  
+    setRegenerateCount(prevCount => prevCount + 1);
     let savedBooks = JSON.parse(localStorage.getItem("storedBooks")) || [];
   
     if (savedBooks.length === 0) {
@@ -149,54 +185,66 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
       localStorage.removeItem("selectedSubTopic");
     }
   
-    toggleLoading(false); 
+    toggleLoading(false);
   };
   
   
 
   return (
-    <div className="relative">
-       {regenerate && (
-      <div className="absolute w-full h-full bg-transparent  flex justify-center items-center">
-        <div className=" ">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
+
+      <div className="relative">
+        {showCaptcha ? (
+          <div className="absolute w-full h-full bg-transparent flex justify-center items-center">
+          <div className="bg-white p-6 shadow-lg rounded-md">
+            <p className="text-center text-lg font-semibold">Please verify you're human</p>
+            <div className="flex justify-center mt-4">
+              <ReCAPTCHA
+                sitekey={RECAPTCHA_SITE_KEY}
+                onChange={handleCaptchaVerify}
+              />
+            </div>
+          </div>
+        </div>
+        ) : (
+          regenerate && (
+            <div className="absolute w-full h-full bg-transparent flex justify-center items-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
+            </div>
+          )
+        )}
+    
+        <div className="w-full mt-4 md:mt-2 md:px-6">
+          <div className="field-title">Choose a title and subtitle</div>
+          {loading && (
+            <div className="flex justify-center items-center h-32">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
+            </div>
+          )}
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          {visibleTopics.length > 0 && !loading && (
+            <div className="my-8">
+              {visibleTopics.map((topic, index) => (
+                <div key={topic.id || `visible-topic-${index}`} className="flex items-center justify-between mb-3">
+                  <RadioButtonList
+                    options={[topic]}
+                    selectedValue={selectedTopic}
+                    setIsButtonDisabled={setIsButtonDisabled}
+                    type="topic"
+                  />
+                  <button
+                    onClick={() => handleRegenerate(index, topic)}
+                    className="flex flex-col justify-center items-center ml-3 md:ml-2 md:hover:scale-105 text-sm"
+                  >
+                    <img className="w-7" src="images/create-book/icon-regenerate.svg" alt="" />
+                    <span className="hidden md:block">Recreate</span>
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
-       )}
-      <div className="w-full mt-4 md:mt-2 md:px-6">
-        <div className="field-title">Choose a title and subtitle</div>
-        {loading && (
-          <div className="flex justify-center items-center h-32">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-amber-600 border-opacity-50"></div>
-          </div>
-        )}
-
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {visibleTopics.length > 0 && !loading && (
-          <div className="my-8 ">
-            {visibleTopics.map((topic, index) => (
-              <div key={topic.id || `visible-topic-${index}`} className="flex items-center justify-between mb-3">
-                <RadioButtonList
-
-                  options={[topic]}
-                  selectedValue={selectedTopic}
-                  setIsButtonDisabled={setIsButtonDisabled}
-                  type="topic"
-                />
-                <button
-                  onClick={() => handleRegenerate(index, topic)}
-                  className="flex flex-col justify-center items-center ml-3 md:ml-2 md:hover:scale-105 text-sm"
-                 
-                >
-                  <img className="w-7" src="images/create-book/icon-regenerate.svg" alt="" />
-                  <span className="hidden  md:block">Recreate</span>
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
+ 
   );
 }
 
