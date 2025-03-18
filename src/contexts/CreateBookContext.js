@@ -28,9 +28,11 @@ export const CreateBookProvider = ({ children }) => {
   const [questions, setQuestions] = useState([]);
   const [authorImage, setAuthorImage] = useState("");
   const [croppedImage, setCroppedImage] = useState("");
+
+  const savedTemplateId = localStorage.getItem('selectedTemplateId');
   const [selectedTemplate, setSelectedTemplate] = useState({
     templatesAdjusted: [],
-    templateId: null,
+    templateId: savedTemplateId || null,
     front: "",
     back: "",
     spine: "",
@@ -38,13 +40,15 @@ export const CreateBookProvider = ({ children }) => {
     zoom: 1.5,
   });
 
-  const [selectedCopies, setSelectedCopies] = useState(1);
-  const [selectedCoverIndex, setSelectedCoverIndex] = useState(0);
-  const [selectedCover, setSelectedCover] = useState('');
-  const [selectedShippingIndex, setSelectedShippingIndex] = useState(0);
-  const [subtotal, setSubtotal] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [selectedCopies, setSelectedCopies] = useState(() => getStoredValue("selectedCopies", 1));
+  const [selectedCoverIndex, setSelectedCoverIndex] = useState(() => getStoredValue("selectedCoverIndex", 0));
+  const [selectedCover, setSelectedCover] = useState(() => getStoredValue("selectedCover", ''));
+  const [selectedShippingIndex, setSelectedShippingIndex] = useState(() => getStoredValue("selectedShippingIndex", 0));
+  const [subtotal, setSubtotal] = useState(() => getStoredValue("subtotal", 0));
+  const [totalPrice, setTotalPrice] = useState(() => getStoredValue("totalPrice", 0));
+
   const [error, setError] = useState(null);
+
   const [errorToc, setErrorToc] = useState(null);
   const [loading, setLoading] = useState(false);
   const [processedAuthorImage, setProcessedAuthorImage] = useState(null);
@@ -65,49 +69,55 @@ export const CreateBookProvider = ({ children }) => {
     fetchImages();
   }, []);
 
+  useEffect(() => {
+    loadTemplateFromIndexedDB(); 
+    setIsTemplateLoaded(true);
+  }, []);  
+
+  const [isTemplateLoaded, setIsTemplateLoaded] = useState(false);
+
+  useEffect(() => {
+    if (selectedTemplate) {
+      localStorage.setItem('selectedTemplateId', selectedTemplate.templateId);
+
+    }
+  }, [selectedTemplate.templateId]);
+
   // templates
-  const urlToBlob = async (url) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    return blob;
-  };
-  
   const urlToBase64 = async (url) => {
-    // Завантажуємо Blob з URL
+
     const response = await fetch(url);
     const blob = await response.blob();
     
-    // Перетворюємо Blob в Base64
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);  // reader.result буде Base64
+      reader.onloadend = () => resolve(reader.result);  
       reader.onerror = reject;
-      reader.readAsDataURL(blob);  // Перетворюємо в Base64
+      reader.readAsDataURL(blob);  
     });
   };
 
   const saveTemplateToIndexedDB = async (template) => {
-    const frontBase64 = await urlToBase64(selectedTemplate.front);
-    const backBase64 = await urlToBase64(selectedTemplate.back);
-    const spineBase64 = await urlToBase64(selectedTemplate.spine);
-    console.log('Converted Base64 values:', { frontBase64, backBase64, spineBase64 });
+    const frontBase64 = await urlToBase64(template.front);
+    const backBase64 = await urlToBase64(template.back);
+    const spineBase64 = await urlToBase64(template.spine);
     const db = await openIndexedDB();
     const transaction = db.transaction('templates', 'readwrite');
     const store = transaction.objectStore('templates');
-
+  
     store.put({
       front: frontBase64,
       back: backBase64,
       spine: spineBase64,
     }, 'selectedTemplate');
-   
+
     return transaction.complete;
   };
   
-  
-  // useEffect(() => {
-  //   saveTemplateToIndexedDB(selectedTemplate);
-  // }, [selectedTemplate]);
+  useEffect(() => {
+    if(!isTemplateLoaded) return;
+    saveTemplateToIndexedDB(selectedTemplate);
+  }, [selectedTemplate]);
   
   const openIndexedDB = () => {
   return new Promise((resolve, reject) => {
@@ -116,7 +126,6 @@ export const CreateBookProvider = ({ children }) => {
     request.onupgradeneeded = (e) => {
       const db = e.target.result;
 
-      // Створення сховища з простим ключем 'id'
       if (!db.objectStoreNames.contains('templates')) {
         db.createObjectStore('templates');
       }
@@ -131,42 +140,53 @@ const loadTemplateFromIndexedDB = async () => {
   const db = await openIndexedDB();
   const transaction = db.transaction('templates', 'readonly');
   const store = transaction.objectStore('templates');
-  
-  const result = await store.get('selectedTemplate'); 
-   
-  if (result) {
-    
-    
-    // const parsedData = JSON.parse(result);  // Розпарсити збережений JSON
 
-    // Перетворюємо Base64 в Blob
-    console.log(result.front);
-    
-    const frontBlob = base64ToBlob(result.front);
-    // const backBlob = base64ToBlob(result.back);
-    // const spineBlob = base64ToBlob(result.spine);
+  const request = store.get('selectedTemplate');
 
-    // // Оновлюємо контекст з новими Blob
-    // setSelectedTemplate({
-    //   ...result,
-    //   front: frontBlob,
-    //   back: backBlob,
-    //   spine: spineBlob,
-    // });
-  }
+  request.onsuccess = () => {
+    const result = request.result;
+    if (result) {
+      if (result) {
+        const frontBlob = base64ToBlob(result.front);
+        const backBlob = base64ToBlob(result.back);
+        const spineBlob = base64ToBlob(result.spine);
+
+        const frontURL = URL.createObjectURL(frontBlob);
+        const backURL = URL.createObjectURL(backBlob);
+        const spineURL = URL.createObjectURL(spineBlob);
+
+        setSelectedTemplate({
+          ...selectedTemplate,
+          front: frontURL,
+          back: backURL,
+          spine: spineURL,
+
+        });
+        setSelectedCover({
+          frontCover: frontURL,
+          backCover: backURL,
+          spineCover: spineURL,
+        });
+      } else {
+        console.error("Front image is undefined");
+      }
+    } else {
+      console.warn("No template found in IndexedDB");
+    }
+  };
+
+  request.onerror = () => {
+    console.error("Error retrieving template from IndexedDB:", request.error);
+  };
 };
 
-// Функція для перетворення Base64 в Blob
+
 const base64ToBlob = (base64) => {
-  // Перевіряємо, чи є base64 валідною строкою
   if (!base64 || typeof base64 !== 'string') {
     throw new Error('Provided value is not a valid Base64 string');
   }
 
-  // Якщо Base64 не має префікса "data:", додаємо його
-  if (!base64.startsWith('data:')) {
-    base64 = 'data:image/png;base64,' + base64;
-  }
+
 
   const byteCharacters = atob(base64.split(',')[1]);
   const byteArrays = [];
@@ -177,13 +197,11 @@ const base64ToBlob = (base64) => {
   }
 
   const byteArray = new Uint8Array(byteArrays);
-  return new Blob([byteArray], { type: 'image/png' }); // Змінити тип, якщо потрібно
+  return new Blob([byteArray], { type: 'image/png' }); 
 };
 
 
-useEffect(() => {
-  loadTemplateFromIndexedDB(); // Завантажуємо шаблон при першому рендері
-}, []);  // Пустий масив, щоб спрацювало тільки при першому рендері
+
 
   
   // End templates

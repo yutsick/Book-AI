@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useContext, useRef, use } from "react";
 import { generateCoverById } from "@/utils/coverGenerators/coverGeneratorHelper";
 import CoverSlider from "../CoverSlider/CoverSlider";
 import ImageCropperModal from "@/components/ImageCropper/ImageCropperModal";
@@ -60,6 +60,7 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
   const { praises, loading: praisesLoading } = usePraises();
+
   useEffect(() => {
     setProgressStep(5);
   }, [setProgressStep]);
