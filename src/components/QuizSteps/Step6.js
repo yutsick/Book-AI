@@ -53,8 +53,6 @@ function Step6({ setProgressStep, setIsButtonDisabled, loader, setLoader }) {
   }, []);
 
   const validation = async(file) =>{
-    console.log('validation');
-    
     const validationResult = await validateImage(file);
     if (!validationResult.valid) {
       setError(validationResult.error);
@@ -68,16 +66,11 @@ function Step6({ setProgressStep, setIsButtonDisabled, loader, setLoader }) {
   }
   useEffect(() => {
     if (authorImage && authorImage !== "") {
-      console.log('MAVPA');
       validation(authorImage);  
     }
   
     setIsButtonDisabled(false); 
   }, [authorImage, validation, setIsButtonDisabled]);
-
-  
-  
-
 
   const handleFileChange = async (file) => {
     if (!file) return;

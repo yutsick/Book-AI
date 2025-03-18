@@ -2,6 +2,7 @@ import React from 'react';
 import MainButton from "@/components/Button/MainButton";
 
 function BookPreview({ selectedTemplate, authorName, selectedTopic, selectedSubTopic, goToNextStep, disabled = false, hideButton = false }) {
+
   return (
     <div>
     <div className="flex   justify-center gap-6 flex-1 md:gap-12 mt-6">

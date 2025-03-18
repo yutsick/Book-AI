@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useMemo, useRef } from 'react';
 import CreateBookContext from '@/contexts/CreateBookContext';
 import updateDraft from "@/utils/draftUpdater";
-import { debounce } from "lodash";
+import { debounce, set } from "lodash";
 function Step9({ setProgressStep }) {
   const {
 
@@ -13,7 +13,9 @@ function Step9({ setProgressStep }) {
     setSelectedShippingIndex,
     subtotal,
     setSubtotal,
+    totalPrice,
     setTotalPrice,
+    selectedCover,
     setSelectedCover
   } = useContext(CreateBookContext);
 
@@ -54,27 +56,25 @@ function Step9({ setProgressStep }) {
     }, 500)
   ).current;
 
-  const subtotalAndTotalPrice = useMemo(() => {
+  useEffect(() => {
     if (selectedCopies && typeof selectedCoverIndex === "number" && typeof selectedShippingIndex === "number") {
       const baseCopyCost = selectedCoverIndex === 0 ? 20.00 : 30.00;
       const coverCost = cover[selectedCoverIndex]?.cost || 0;
-      const copiesCost = selectedCopies * baseCopyCost;
+      const copiesCost = selectedCopies > 1 ? (selectedCopies - 1) * baseCopyCost : 0;
       const shippingCost = shipping[selectedShippingIndex]?.cost || 0;
+      setSubtotal(coverCost + copiesCost + shippingCost); 
+      setTotalPrice(subtotal);
 
-      const newSubtotal = coverCost + copiesCost + shippingCost;
-      const newTotalPrice = newSubtotal;
+      localStorage.setItem("selectedCopies", JSON.stringify(selectedCopies));
+      localStorage.setItem("selectedCoverIndex", JSON.stringify(selectedCoverIndex));
+      localStorage.setItem("selectedCover", JSON.stringify(selectedCover));
+      localStorage.setItem("selectedShippingIndex", JSON.stringify(selectedShippingIndex));
+      localStorage.setItem("subtotal", JSON.stringify(subtotal));
+      localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
 
-      return { newSubtotal, newTotalPrice };
     }
-    return { newSubtotal: 0, newTotalPrice: 0 };
+
   }, [selectedCoverIndex, selectedCopies, selectedShippingIndex]);
-
-
-
-  useEffect(() => {
-    setSubtotal(subtotalAndTotalPrice.newSubtotal);
-    setTotalPrice(subtotalAndTotalPrice.newTotalPrice);
-  }, [subtotalAndTotalPrice, setSubtotal, setTotalPrice]);
 
   useEffect(() => {
     setProgressStep(7);
@@ -148,7 +148,7 @@ function Step9({ setProgressStep }) {
                   />
                   <div className="pl-[4px]">
                     <h3 className="text-[17px] font-medium text-black px-[6px] pt-[5px]">{option.title}</h3>
-                    <p className="text-black text-[14px] px-[6px] pb-[5px]">{`$${option.cost.toFixed(2)}`}</p>
+                    <p className="text-black text-[14px] px-[6px] pb-[5px]">{`${option.cost.toFixed(2)}`}</p>
                   </div>
                 </label>
               ))}
@@ -229,12 +229,12 @@ function Step9({ setProgressStep }) {
           </div>
           <div className=" flex gap-y-[10px] flex-col">
             <div className="flex justify-between">
-              {/* <span>1 {cover[selectedCoverIndex]?.title} cover book:</span> */}
+
               <span>Paperback Cover Book:</span>
               <span className="text-right">${(cover[selectedCoverIndex]?.cost || 0).toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
-              {/* <span>+ <span>{selectedCopies}</span> copies:</span> */}
+
               <span>Additional Copies:</span>
               <span className="text-right">
                 ${((selectedCopies-1) * (selectedCoverIndex === 0 ? 20.00 : 30.00)).toFixed(2)}
@@ -252,6 +252,7 @@ function Step9({ setProgressStep }) {
         </div>
       </div>
     </div >
+ 
   );
 }
 
