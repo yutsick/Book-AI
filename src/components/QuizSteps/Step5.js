@@ -151,6 +151,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
     if (regenerateCount >= 20 && !captchaVerified) {
       setShowCaptcha(true);
       setRegenerateCount(0);
+      setCaptchaVerified(false);
       return;
     }
   
