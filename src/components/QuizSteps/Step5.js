@@ -148,7 +148,7 @@ function Step5({ setProgressStep, setIsButtonDisabled }) {
   };
 
   const handleRegenerate = async (index, topic) => {
-    if (regenerateCount >= 20 && !captchaVerified) {
+    if (regenerateCount >= 6 ) {
       setShowCaptcha(true);
       setRegenerateCount(0);
       setCaptchaVerified(false);
