@@ -20,7 +20,7 @@ function NeedHelp() {
             });
     }, []);
     return needHelpData ? (
-        <section className="w-full max-w-[840px] py-[40px] md:py-[60px] mx-auto px-[18px]">
+        <section className="w-full max-w-[840px] pb-[40px] md:pb-[60px] pt-[20px] md:pt-[40px] mx-auto px-[18px]">
             <div className="mb-[60px]" >
                 <h2 className="font-bold text-[20px] md:text-[24px] leading-[26px] mb-[10px] text-gray" >{needHelpData.title}</h2>
                 <p className="text-gray font-medium text-[16px] mb-[12px]">{needHelpData.text1}</p>

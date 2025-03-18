@@ -4,6 +4,14 @@
     "imageUrl": "/images/confirmation/img1.png",
     "alt": "Yellow lights fly out of the open book",
     "text": "Your book is now in progress, and we can't wait to bring your story to life",
-    "reactionUrl": "/images/confirmation/reaction.png",
-    "reactionAlt": "A happy smile"
+    "buttonText": "Go to Your Account Page",
+    "processingUrl": "/images/confirmation/processing.png",
+    "processingAlt": "Processing",
+    "processingText": "Processing",
+    "printingUrl": "/images/confirmation/printing.png",
+    "printingAlt": "Printing",
+    "printingText": "Printing",
+    "shippingUrl": "/images/confirmation/shipping.png",
+    "shippingAlt": "Shipping",
+    "shippingText": "Shipping"
 }

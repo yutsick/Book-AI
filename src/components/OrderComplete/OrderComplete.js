@@ -1,5 +1,7 @@
 "use client";
 
+import Link from 'next/link';
+import Image from "next/image";
 import config from '../../../config';
 import { useEffect, useState } from 'react';
 
@@ -23,8 +25,7 @@ const OrderComplete = () => {
             <div className="max-w-[890px] mx-auto py-[40px] md:py-[60px]">
                 <div className="px-[18px]">
                     <div className="flex justify-center">
-
-                        <h2 className="text-[23px] md:text-[34px] leading-[23px] md:leading-[38px] font-semibold text-gray mb-[20px] text-center flex relative justify-center items-center gap-2 sm:gap-2 xs:gap-4" >
+                        <h2 className="text-[24px] md:text-[24px] leading-[23px] md:leading-[26px] font-semibold text-gray mb-[20px] text-center flex relative justify-center items-center gap-2 sm:gap-2 xs:gap-4" >
                             <svg className="sm:mt-0 mt-[-20px] w-[34px] h-[34px] md:w-[47px] md:h-[47px]" viewBox="0 0 53 54" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="26.2677" cy="27.0001" r="26.2677" fill="#EAAC00" />
                                 <path d="M10.875 28.8347L21.3058 39.647" stroke="white" strokeWidth="5.97861" strokeLinecap="round" />
@@ -39,20 +40,72 @@ const OrderComplete = () => {
                         </h2>
                     </div>
 
-                    <p className="text-[15px] md:text-[20px] leading-[18px] md:leading-[28px] font-semibold text-gray text-center">{orderCompleteData.description}</p>
-                    <div className="max-w-[427px] max-h-[270px] mx-auto my-[25px]">
-                        <img className="rounded-[30px] md:rounded-[40px]" src={orderCompleteData.imageUrl} alt={orderCompleteData.alt} />
-                    </div>
-                    <p className="text-[15px] md:text-[20px] leading-[26px] md:leading-[38px] text-gray text-center font-semibold">
-                        {orderCompleteData.text}<span className="inline-block ml-2 relative top-[5px]">
-                            <img
-                                className="max-w-[19px] md:max-w-[26px] max-h-[19px] md:max-h-[26px] object-contain"
-                                src={orderCompleteData.reactionUrl}
-                                alt={orderCompleteData.reactionAlt}
-                            />
-                        </span>
+                    <p className="text-[16px] leading-[24px] font-semibold text-gray text-center">
+                        {orderCompleteData.description}
                     </p>
+                    <ul className="flex justify-center items-end md:items-end gap-x-[9px] sm:gap-x-[10px] gap-y-[35px] md:gap-y-[45px] mt-[40px] mb-[40px] md:mb-[60px] opacity-90">
+
+                        <li>
+                            <Image
+                                src={orderCompleteData.processingUrl}
+                                alt={orderCompleteData.processingAlt}
+                                width={100}
+                                height={100}
+                                className="w-full max-w-[50px] sm:max-w-[100px] md:max-w-[100px] h-auto mx-auto"
+                            />
+                            <div className="text-[15px] sm:text-[17px] md:text-[17px] font-bold text-[#606061] mt-[15px] text-center">
+                                {orderCompleteData.processingText}
+                            </div>
+                        </li>
+                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
+                        <li>
+                            <Image
+                                src={orderCompleteData.printingUrl}
+                                alt={orderCompleteData.printingAlt}
+                                width={110}
+                                height={110}
+                                className="w-full max-w-[60px] sm:max-w-[110px] md:max-w-[110px] h-auto mx-auto"
+                            />
+                            <div className="text-[15px] sm:text-[18px] md:text-[17px] font-bold text-[#606061] mt-[15px] text-center">
+                                {orderCompleteData.printingText}
+                            </div>
+                        </li>
+                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
+                        <li>
+                            <Image
+                                src={orderCompleteData.shippingUrl}
+                                alt={orderCompleteData.shippingAlt}
+                                width={130}
+                                height={130}
+                                className="w-full max-w-[80px] sm:max-w-[130px] md:max-w-[130px] h-auto mx-auto"
+                            />
+                            <div className="text-[15px] sm:text-[18px] md:text-[17px] font-bold text-[#606061] text-center">
+                                {orderCompleteData.shippingText}
+                            </div>
+                        </li>
+
+                    </ul>
                 </div>
+                <Link
+                    className="w-full max-w-[260px] sm:max-w-[355px] h-[50px] mx-auto flex justify-center items-center bg-orange text-white font-semibold text-[16px] sm:text-[18px] rounded-[3px] gap-1 shadow-heroBtnShadow group ]"
+                    href="/my-account"
+                >
+                    <span className='mb-[2px]'>{orderCompleteData.buttonText}</span>
+                    <span className='group-hover:translate-x-1.5 transition'>
+                        <svg className="w-[16px] h-[11px] md:w-[18px] md:h-[13px]" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clipPath="url(#clip0_0_615)">
+                                <path fillRule="evenodd" clipRule="evenodd" d="M1.82983 0.670075C2.29032 0.209585 3.03692 0.209585 3.49741 0.670073L9.61156 6.78422C9.83269 7.00535 9.95692 7.30528 9.95692 7.618C9.95692 7.93074 9.83269 8.23067 9.61156 8.4518L3.49741 14.5659C3.03692 15.0265 2.29032 15.0265 1.82983 14.5659C1.36934 14.1054 1.36934 13.3589 1.82983 12.8984L7.11019 7.618L1.82983 2.33765C1.36934 1.87716 1.36934 1.13056 1.82983 0.670075Z" fill="white" />
+                                <path fillRule="evenodd" clipRule="evenodd" d="M8.9938 0.670075C9.45429 0.209585 10.2009 0.209585 10.6614 0.670073L16.7755 6.78422C16.9966 7.00535 17.1208 7.30528 17.1208 7.618C17.1208 7.93074 16.9966 8.23067 16.7755 8.4518L10.6614 14.5659C10.2009 15.0265 9.45429 15.0265 8.9938 14.5659C8.53332 14.1054 8.53332 13.3589 8.9938 12.8984L14.2742 7.618L8.9938 2.33765C8.53332 1.87716 8.53332 1.13056 8.9938 0.670075Z" fill="white" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_0_615">
+                                    <rect width="17.0323" height="15.7221" fill="white" transform="translate(0.648438 0.193359)" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+
+                    </span>
+                </Link>
             </div>
         </section>
     ) : null;
