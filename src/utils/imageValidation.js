@@ -5,6 +5,10 @@ export const validateImage = async (file) => {
   const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/tiff"];
   const ERROR_PHRASE = "For the best cover quality, use a higher-resolution image"; 
 
+  if (!file) {
+    return null;
+  }
+
   if (!ALLOWED_TYPES.includes(file.type)) {
     return { valid: false, errorType: "unsupported_type", error: "Unsupported file type. Please upload an image in JPEG, PNG, or TIFF format." };
   }

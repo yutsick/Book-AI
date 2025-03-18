@@ -23,7 +23,7 @@ export async function POST(req) {
                         },
                         unit_amount: totalPrice * 100, 
                     },
-                    quantity: quantity,
+                    quantity: 1, //quantity,
                 },
             ],
             mode: 'payment',

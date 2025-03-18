@@ -5,7 +5,7 @@ const TableOfContents = ({ contents }) => {
     <div className="pb-4 pt-4 md:pt-8 md:pb-6 w-full">
       <div className="text-center text-[#404040]">
         <h1 className="text-[24px] font-bold ">Contents</h1>
-        <p className="text-base">240 pages</p>
+        <p className="text-base">250 pages</p>
       </div>
       <div className="mt-6 space-y-6">
         {contents.map((item, index) => (

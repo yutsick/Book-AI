@@ -23,8 +23,11 @@ const MainScreen = () => {
   const totalScreens = 10;
   const totalProgressSteps = 7;
 
-  const [currentStep, setCurrentStep] = useState(1);
-  const [progressStep, setProgressStep] = useState(1);
+  const [currentStep, setCurrentStep] =   useState(() => {
+    const savedStep = localStorage.getItem("currentStep");
+    return savedStep ? parseInt(savedStep) : 1;
+  });
+  const [progressStep, setProgressStep] = useState(1)  
   const [textError, setTextError] = useState(false);
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -63,13 +66,17 @@ const MainScreen = () => {
     } else {
       if (currentStep < totalScreens) setCurrentStep(currentStep + 1);
     }
+    setLocalData('currentStep',currentStep + 1,);
   };
 
   const goToPreviousStep = () => {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
+    setLocalData('currentStep',currentStep - 1,);
   };
 
-
+  const setLocalData = (keyData, data) => {
+    localStorage.setItem(keyData, JSON.stringify(data));
+  };
 
   const handleFileChange = (newFile) => {
     setFile(newFile);
