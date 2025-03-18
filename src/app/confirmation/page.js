@@ -13,7 +13,7 @@ export default function Confirmation() {
         <Header />
         <OrderComplete />
         <WhatHappens />
-        <OrderStatusInfo /> 
+        {/* <OrderStatusInfo />  */}
         <NeedHelp />
         <Footer />
       </main>
