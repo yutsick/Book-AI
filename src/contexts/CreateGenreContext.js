@@ -19,12 +19,15 @@ export const GenreProvider = ({ children }) => {
     return defaultValue;
   };
 
-  const [selectedGenre, setSelectedGenre] = useState(null);
-  const [selectedTopic, setSelectedTopic] = useState("");
-  const [selectedSubTopic, setSelectedSubTopic] = useState("");
+  
+  const [selectedGenre, setSelectedGenre] = useState(() => getStoredValue("selectedGenre", null));
+  const [selectedTopic, setSelectedTopic] = useState(() => getStoredValue("selectedTopic", ""));
+  const [selectedSubTopic, setSelectedSubTopic] = useState(() => getStoredValue("selectedSubTopic", ""));
   const [generatedBooks, setGeneratedBooks] = useState([]);
 
-  const [genreUpdated, setGenreUpdated] = useState(false);
+  const [genreUpdated, setGenreUpdated] =  useState();
+  console.log("genreUpdated (STATE):", genreUpdated);
+  
   const [topicUpdated, setTopicUpdated] = useState(false);
 
   const debouncedUpdateGenre = useRef(debounce((value) => {
@@ -39,14 +42,7 @@ export const GenreProvider = ({ children }) => {
     updateDraft("subtitle", value);
   }, 500)).current;
 
-  // Завантаження зі сховища тільки раз при монтуванні
-  useEffect(() => {
-    setSelectedGenre(getStoredValue("selectedGenre", null));
-    setSelectedTopic(getStoredValue("selectedTopic", ""));
-    setSelectedSubTopic(getStoredValue("selectedSubTopic", ""));
-  }, []);
 
-  // Збереження у сховище тільки після першого завантаження
   useEffect(() => {
     if (selectedGenre !== null) {
       localStorage.setItem("selectedGenre", JSON.stringify(selectedGenre));
@@ -68,7 +64,12 @@ export const GenreProvider = ({ children }) => {
     }
   }, [selectedSubTopic]);
 
+  const isFirstRender = useRef(true);
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return; 
+    }
     setGenreUpdated(true);
   }, [selectedGenre]);
 

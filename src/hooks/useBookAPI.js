@@ -69,6 +69,10 @@ export const useBookAPI = () => {
     }
 
     if (genreUpdated) {
+      console.log(genreUpdated);
+      
+      console.log("Genre updated, clearing stored books...");
+      
       localStorage.removeItem(storageKey);
       setBooks([]);
       fetchTriggered.current = false;

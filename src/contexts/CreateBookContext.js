@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 import { debouncedImageUpdate } from "@/utils/imageUpdater";
 import useDebouncedUpdate from "@/hooks/useDebouncedUpdate";
 import { getImageFromDB, saveImageToDB } from "@/utils/indexedDB";
@@ -47,6 +47,7 @@ export const CreateBookProvider = ({ children }) => {
   const [subtotal, setSubtotal] = useState(() => getStoredValue("subtotal", 0));
   const [totalPrice, setTotalPrice] = useState(() => getStoredValue("totalPrice", 0));
 
+  const [contextUpdated, setContextUpdated] = useState(() => getStoredValue("contextUpdated", false));
   const [error, setError] = useState(null);
 
   const [errorToc, setErrorToc] = useState(null);
@@ -207,6 +208,7 @@ const base64ToBlob = (base64) => {
   // End templates
 
   useEffect(() => {
+    localStorage.setItem("contextUpdated", JSON.stringify(contextUpdated));
     localStorage.setItem("authorName", JSON.stringify(authorName));
     localStorage.setItem("selectedAge", JSON.stringify(selectedAge));
     localStorage.setItem("selectedGender", JSON.stringify(selectedGender));
@@ -215,6 +217,7 @@ const base64ToBlob = (base64) => {
     localStorage.setItem("praises", JSON.stringify(praises));
     localStorage.setItem("tableOfContents", JSON.stringify(tableOfContents));
   }, [
+    contextUpdated,
     authorName,
     selectedAge,
     selectedGender,
@@ -225,7 +228,7 @@ const base64ToBlob = (base64) => {
   ]);
 
   
-  const [contextUpdated, setContextUpdated] = useState(false);
+
 
   const debouncedUpdate = useDebouncedUpdate();
 
@@ -262,7 +265,12 @@ const base64ToBlob = (base64) => {
     
   }, [authorImage, croppedImage, selectedTemplate]);
 
+  const isFirstRender = useRef(true);
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return; 
+    }
     setContextUpdated(true);
   }, [authorName, selectedAge, selectedGender, questionsAndAnswers]);
 
