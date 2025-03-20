@@ -56,13 +56,13 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
 
           <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4 px-8 text-center flex-1 text-black pt-8 pb-11">
             <div className="text-center text-[20px] h-full flex flex-col justify-between items-center w-full">
-              <div className="max-w-[300px] w-full pb-[70px] relative">
+              <div className="max-w-[300px]  w-full pb-[70px] relative">
                 <img src="/images/create-book/bg/title8.png" alt="" />
-                <div className="max-w-[235px]  h-full font-degular absolute top-12 left-6 flex items-center w-full flex-col">
+                <div className="max-w-[230px] -mt-3 gap-1 h-full font-degular absolute top-12 left-6 flex items-center w-full flex-col">
 
                   <div
                     ref={elements.title.ref}
-                    className="font-black w-full max-w-[220px] ml-2"
+                    className="font-black w-full max-w-[200px] ml-2 "
                     style={{
                       fontSize: `${elements.title.fontSize}px`,
                       lineHeight: `${elements.title.lineHeight}px`,
