@@ -43,43 +43,43 @@ const OrderComplete = () => {
                     <p className="text-[16px] leading-[24px] font-semibold text-gray text-center">
                         {orderCompleteData.description}
                     </p>
-                    <ul className="flex justify-center items-end md:items-end gap-x-[9px] sm:gap-x-[10px] gap-y-[35px] md:gap-y-[45px] mt-[40px] mb-[40px] md:mb-[60px] opacity-90">
-
+                    <ul className="flex justify-center items-end md:items-end gap-x-[9px] sm:gap-x-[10px] gap-y-[35px] md:gap-y-[45px] mt-[40px] mb-[25px] md:mb-[45px] opacity-90">
                         <li>
                             <Image
                                 src={orderCompleteData.processingUrl}
                                 alt={orderCompleteData.processingAlt}
-                                width={100}
-                                height={100}
-                                className="w-full max-w-[50px] sm:max-w-[100px] md:max-w-[100px] h-auto mx-auto"
+                                width={70}
+                                height={70}
+                                className="w-full max-w-[45px] sm:max-w-[100px] md:max-w-[100px] h-auto mx-auto"
                             />
-                            <div className="text-[15px] sm:text-[17px] md:text-[17px] font-bold text-[#606061] mt-[15px] text-center">
+                            <div className="text-[15px] sm:text-[17px] md:text-[17px] font-bold text-[#606061] mt-[10px] text-center">
                                 {orderCompleteData.processingText}
                             </div>
                         </li>
-                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
+                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto mt-[30px] sm:mt-[55px]">
+                        </li>
                         <li>
                             <Image
                                 src={orderCompleteData.printingUrl}
                                 alt={orderCompleteData.printingAlt}
-                                width={110}
-                                height={110}
-                                className="w-full max-w-[60px] sm:max-w-[110px] md:max-w-[110px] h-auto mx-auto"
+                                width={80}
+                                height={80}
+                                className="w-full max-w-[50px] sm:max-w-[110px] md:max-w-[110px] h-auto mx-auto"
                             />
-                            <div className="text-[15px] sm:text-[18px] md:text-[17px] font-bold text-[#606061] mt-[15px] text-center">
+                            <div className="text-[15px] sm:text-[18px] md:text-[17px] font-bold text-[#606061] mt-[12px] text-center">
                                 {orderCompleteData.printingText}
                             </div>
                         </li>
-                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
+                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto mt-[30px] sm:mt-[55px]"></li>
                         <li>
                             <Image
                                 src={orderCompleteData.shippingUrl}
                                 alt={orderCompleteData.shippingAlt}
-                                width={130}
-                                height={130}
-                                className="w-full max-w-[80px] sm:max-w-[130px] md:max-w-[130px] h-auto mx-auto"
+                                width={100}
+                                height={100}
+                                className="w-full max-w-[70px] sm:max-w-[130px] md:max-w-[130px] h-auto mx-auto"
                             />
-                            <div className="text-[15px] sm:text-[18px] md:text-[17px] font-bold text-[#606061] text-center">
+                            <div className="text-[15px] sm:text-[18px] md:text-[17px] font-bold text-[#606061] mt-[2px] text-center">
                                 {orderCompleteData.shippingText}
                             </div>
                         </li>
