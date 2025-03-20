@@ -23,7 +23,7 @@ function Choose() {
     return chooseData ? (
         <section className="bg-pink relative overflow-hidden pb-0 md:pb-[70px]">
             <div
-                className="absolute left-[-340px] top-[-400px] md:top-[-130px] w-[900px] h-full md:w-[1150px] md:h-[900px] bg-bottom md:bg-center"
+                className="absolute left-[-340px] top-[-400px] md:top-[-130px] w-[900px] h-full md:w-[1400px] md:h-[930px] bg-bottom md:bg-center z-[-1]"
                 style={{    
                     backgroundImage: `url(${chooseData.backgroundUrl})`,
                     backgroundSize: 'contain',
@@ -31,7 +31,7 @@ function Choose() {
                 }}>
 
             </div>
-            <div className="relative w-full max-w-[1200px] pt-[40px] md:pt-[50px] pb-[70px] md:pb-[50px]  mx-auto">
+            <div className="relative w-full max-w-[1200px] pt-[40px] md:pt-[50px] pb-[30px] md:pb-[50px]  mx-auto">
                 <h2 className="text-gray text-[30px] md:text-[45px] font-bold text-center md:text-right mb-[35px] md:mb-[60px] mr-[10px]">{chooseData.title}</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[25px] gap-y-[20px] md:gap-y-[35px] auto-rows-fr justify-items-center max-w-[870px] w-full mx-auto px-4">
