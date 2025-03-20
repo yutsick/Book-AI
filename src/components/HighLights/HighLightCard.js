@@ -12,7 +12,7 @@ function HighLightCard({ card }) {
           <img
             src={imageUrl}
             alt="Step Illustration"
-            className="w-full rounded-tr-[3px] rounded-tl-[3px] max-h-[182px] object-cover object-[0_30%]"
+            className="w-full rounded-tr-[3px] rounded-tl-[3px] max-h-[182px] object-cover object-[0_44%]"
           />
         </div>
         <div className=" p-[10px]">
