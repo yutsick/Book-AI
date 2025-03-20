@@ -9,6 +9,8 @@ export const adjustFontSizeByHeight = (elementRef, maxFontSize, maxHeight, minFo
 
   setTimeout(() => {
     while (element.scrollHeight > maxHeight && fontSize > minFontSize) {
+      console.log(elementRef + 'H:' + element.scrollHeight + ', MAX:' + maxHeight);
+      
       fontSize -= 1;
       element.style.fontSize = `${fontSize}px`;
       element.style.lineHeight = `${getLineHeight(fontSize)}px`;

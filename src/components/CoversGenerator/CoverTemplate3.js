@@ -16,9 +16,9 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxWidth: 280, maxHeight: 40 },
-    title: { ref: useRef(null), maxFontSize: 36, maxHeight: 100, maxWidth: 180 },
-    subTitle: { ref: useRef(null), maxFontSize: 20, maxWidth: 190, maxHeight: 85 },
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxHeight: 40,  maxWidth: 280},
+    subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65, maxWidth: 210 },
+    title: { ref: useRef(null), maxFontSize: 36, maxHeight: 70, maxWidth: 210 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
   };
@@ -26,7 +26,7 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
   const [fontSizes, setFontSizes] = useState({
     frontAuthor: 26,
     title: 36,
-    subTitle: 20,
+    subTitle:20,
     spineTitle: 28,
     spineAuthor: 17,
   });
@@ -58,7 +58,7 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
             <div className="text-left text-[20px] h-full flex flex-col justify-between w-full">
               <div className="max-w-[300px] w-full pb-[70px] relative">
                 <img src="/images/create-book/bg/title8.png" alt="" />
-                <div className="max-w-[180px] max-h-[100px] h-full font-degular absolute top-12 left-8 flex items-center justify-center">
+                <div className="max-w-[180px] max-h-[100px] h-full font-degular absolute top-12 left-8 flex  flex-col">
 
                   <div
                     ref={elements.title.ref}
@@ -69,6 +69,16 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
                     }}
                   >
                     {selectedTopic || "Default Topic"}
+                  </div>
+                  <div
+                    ref={elements.subTitle.ref}
+                    className="font-semibold font-degular  "
+                    style={{
+                      fontSize: `${elements.subTitle.fontSize}px`,
+                      lineHeight: `${elements.subTitle.lineHeight}px`,
+                    }}
+                  >
+                    {selectedSubTopic || "Default Topic"}
                   </div>
                 </div>
               </div>
