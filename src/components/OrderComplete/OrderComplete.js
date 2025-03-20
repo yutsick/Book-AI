@@ -56,7 +56,8 @@ const OrderComplete = () => {
                                 {orderCompleteData.processingText}
                             </div>
                         </li>
-                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
+                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto mt-[30px] sm:mt-[55px]">
+                        </li>
                         <li>
                             <Image
                                 src={orderCompleteData.printingUrl}
@@ -69,7 +70,7 @@ const OrderComplete = () => {
                                 {orderCompleteData.printingText}
                             </div>
                         </li>
-                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto"></li>
+                        <li className="w-full max-w-[30px] sm:max-w-[50px] md:max-w-[100px] h-[3px] sm:h-[4px] bg-[#606061] rounded-[5px] my-auto mt-[30px] sm:mt-[55px]"></li>
                         <li>
                             <Image
                                 src={orderCompleteData.shippingUrl}
