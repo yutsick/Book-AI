@@ -23,7 +23,7 @@ function Choose() {
     return chooseData ? (
         <section className="bg-pink relative overflow-hidden pb-0 md:pb-[70px]">
             <div
-                className="absolute left-[-340px] top-[-100px] md:top-[-130px] w-[900px] h-full md:w-[1150px] md:h-[900px] bg-bottom md:bg-center"
+                className="absolute left-[-340px] top-[-400px] md:top-[-130px] w-[900px] h-full md:w-[1150px] md:h-[900px] bg-bottom md:bg-center"
                 style={{    
                     backgroundImage: `url(${chooseData.backgroundUrl})`,
                     backgroundSize: 'contain',
