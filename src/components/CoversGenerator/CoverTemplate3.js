@@ -16,9 +16,9 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxHeight: 40,  maxWidth: 280},
-    subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 65, maxWidth: 210 },
-    title: { ref: useRef(null), maxFontSize: 36, maxHeight: 70, maxWidth: 210 },
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxHeight: 40,  maxWidth: 330},
+    subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 55},
+    title: { ref: useRef(null), maxFontSize: 36, maxHeight: 60, maxWidth: 220 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
     spineAuthor: { ref: useRef(null), maxFontSize: 17, maxWidth: 220 },
   };
@@ -55,14 +55,14 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
           </div>
 
           <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4 px-8 text-center flex-1 text-black pt-8 pb-11">
-            <div className="text-left text-[20px] h-full flex flex-col justify-between w-full">
+            <div className="text-center text-[20px] h-full flex flex-col justify-between items-center w-full">
               <div className="max-w-[300px] w-full pb-[70px] relative">
                 <img src="/images/create-book/bg/title8.png" alt="" />
-                <div className="max-w-[180px] max-h-[100px] h-full font-degular absolute top-12 left-8 flex  flex-col">
+                <div className="max-w-[235px]  h-full font-degular absolute top-12 left-6 flex items-centerw-full flex-col">
 
                   <div
                     ref={elements.title.ref}
-                    className="font-black "
+                    className="font-black w-full max-w-[220px] ml-2"
                     style={{
                       fontSize: `${elements.title.fontSize}px`,
                       lineHeight: `${elements.title.lineHeight}px`,
@@ -72,10 +72,10 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
                   </div>
                   <div
                     ref={elements.subTitle.ref}
-                    className="font-semibold font-degular  "
+                    className="font-semibold font-degular max-w-[190px]  self-center"
                     style={{
-                      fontSize: `${elements.subTitle.fontSize}px`,
-                      lineHeight: `${elements.subTitle.lineHeight}px`,
+                      fontSize: `${fontSizes.subTitle?.fontSize || 20}px`,
+                      lineHeight: `${fontSizes.subTitle?.lineHeight || 24}px`,
                     }}
                   >
                     {selectedSubTopic || "Default Topic"}
@@ -94,7 +94,7 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
               >
                 <div className=" rotate-[-3deg]">
 
-                  <div className=" text-black font-degular font-bold mt-3 whitespace-nowrap"
+                  <div className=" text-black font-degular font-bold mt-3 px-4 whitespace-nowrap"
                     ref={elements.frontAuthor.ref}
                     style={{
                       fontSize: `${fontSizes.frontAuthor}px`,

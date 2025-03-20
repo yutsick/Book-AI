@@ -25,9 +25,7 @@ export const GenreProvider = ({ children }) => {
   const [selectedSubTopic, setSelectedSubTopic] = useState(() => getStoredValue("selectedSubTopic", ""));
   const [generatedBooks, setGeneratedBooks] = useState([]);
 
-  const [genreUpdated, setGenreUpdated] =  useState();
-  console.log("genreUpdated (STATE):", genreUpdated);
-  
+  const [genreUpdated, setGenreUpdated] =  useState(false);
   const [topicUpdated, setTopicUpdated] = useState(false);
 
   const debouncedUpdateGenre = useRef(debounce((value) => {

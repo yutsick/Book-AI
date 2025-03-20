@@ -3,26 +3,40 @@ import { adjustFontSizeByWidth, adjustFontSizeByHeight } from "@/utils/fontSizeH
 
 const useAdjustFontSizes = (elements, dependencies, setFontSizes) => {
   useEffect(() => {
-    const newFontSizes = {};
+    const adjustFontSizes = async () => {
+      const newFontSizes = {};
 
-    Object.entries(elements).forEach(([key, { ref, maxFontSize, maxWidth, maxHeight }]) => {
-      if (!ref.current) return;
+      for (const [key, { ref, maxFontSize, maxWidth, maxHeight }] of Object.entries(elements)) {
+        if (!ref.current) continue;
 
-      const sizes = [
-        maxWidth && adjustFontSizeByWidth(ref, maxFontSize, maxWidth),
-        maxHeight && adjustFontSizeByHeight(ref, maxFontSize, maxHeight),
-      ].filter(Boolean);
+        const sizes = await Promise.all(
+          [
+            maxWidth && adjustFontSizeByWidth(ref, maxFontSize, maxWidth),
+            maxHeight && adjustFontSizeByHeight(ref, maxFontSize, maxHeight),
+          ].filter(Boolean)
+        );
 
-      const { fontSize, lineHeight } = sizes.reduce((acc, curr) => ({
-        fontSize: Math.max(acc.fontSize, curr.fontSize),
-        lineHeight: Math.max(acc.lineHeight, curr.lineHeight),
-      }), { fontSize: maxFontSize, lineHeight: maxFontSize });
+        const { fontSize, lineHeight } = sizes.reduce((acc, curr) => ({
+          fontSize: Math.min(acc.fontSize, curr.fontSize),
+          lineHeight: Math.max(acc.lineHeight, curr.lineHeight),
+        }), { fontSize: maxFontSize, lineHeight: maxFontSize });
 
-      newFontSizes[key] = { fontSize, lineHeight };
-    });
+        newFontSizes[key] = { fontSize, lineHeight };
 
-    setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
+        // Гарантоване застосування стилів через прямий доступ
+        const el = ref.current;
+        el.style.fontSize = `${fontSize}px`;
+        el.style.lineHeight = `${lineHeight}px`;
+        console.log("Прямий доступ до елемента:", key, el.style.fontSize, el.style.lineHeight);
+      }
+
+      setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
+    };
+
+    adjustFontSizes();
   }, dependencies);
 };
 
 export default useAdjustFontSizes;
+
+

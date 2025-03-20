@@ -12,16 +12,14 @@ export const adjustFontSizeByHeight = (elementRef, maxFontSize, maxHeight, minFo
       fontSize -= 1;
       element.style.fontSize = `${fontSize}px`;
       element.style.lineHeight = `${getLineHeight(fontSize)}px`;
+      console.log(element.scrollHeight, maxHeight, fontSize);
+      
 
-      element.offsetHeight;
     }
   }, 100);
 
   return { fontSize, lineHeight: getLineHeight(fontSize) };
 };
-
-
-
 
 
 const getLineHeight = (fontSize) => {
