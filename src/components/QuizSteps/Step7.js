@@ -170,7 +170,8 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
       setImageSrc("");
       setTimeout(() => setImageSrc(croppedImage), 10);
     }
-  }, []);
+    
+  }, [croppedImage]);
 
   const handleCropSave = (newCroppedImage, crop, zoom, templateId) => {
     setCroppedImage(newCroppedImage);
@@ -220,7 +221,8 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
           {/* Modal crop window */}
           {isCropperOpen && selectedTemplate.templateId && (
             <>
-
+              
+              
               <ImageCropperModal
                 ref={modalRef}
                 imageSrc={imageSrc}

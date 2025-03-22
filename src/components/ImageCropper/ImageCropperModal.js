@@ -27,11 +27,16 @@ const ImageCropperModal = ({
   selectedTemplate, 
   setSelectedTemplate  
 }) => {
+
+
+  
   const defaultCrop = { x: 0, y: 0 };
   const defaultZoom = 1.5;
 
   const savedCrop = selectedTemplate?.crop || defaultCrop;
   const savedZoom = selectedTemplate?.zoom ?? defaultZoom;
+
+
 
   const [crop, setCrop] = useState(savedCrop);
   const [zoom, setZoom] = useState(savedZoom);
@@ -39,7 +44,13 @@ const ImageCropperModal = ({
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [imageURL, setImageURL] = useState(null);
 
-  const selectedTemplateData = cropperData.find((item) => item.id === templateId);
+  const selectedTemplateData = cropperData.find(
+    (item) => Number(item.id) === Number(templateId)
+  );
+
+
+
+  
   if (!selectedTemplateData) return null;
 
   const { top, bottom, left, width, height, mobTop, mobLeft, mobWidth, mobHeight, mobBottom, radius, rounded } = selectedTemplateData;
@@ -85,22 +96,25 @@ const dynamicWidth = screenWidth >= 465 ? 488 : screenWidth - 46;
   }, [swiperWidth, swiperHeight, width, height, mobWidth, mobHeight, top, bottom, left, mobTop, mobBottom, mobLeft]);
 
   const styles = isMobile
-    ? {
-        left: cropLeft !== undefined ? `${cropLeft}px` : "50%",
-        transform: cropLeft !== undefined ? "none" : "translateX(-50%)",
-        top: cropTop !== undefined ? `${cropTop}px` : undefined,
-        bottom: cropBottom !== undefined ? `${cropBottom}px` : undefined,
-        width: cropWidth,
-        height: cropHeight,
-        borderRadius: radius ? "50%" : "0",
-      }
-    : {
-        top: cropTop !== undefined ? `${cropTop}px` : undefined,
-        bottom: cropBottom !== undefined ? `${cropBottom}px` : undefined,
-        left: cropLeft !== undefined ? `${cropLeft}px` : undefined,
-        width: cropWidth !== undefined ? `${cropWidth}px` : undefined,
-        height: cropHeight !== undefined ? `${cropHeight}px` : undefined,
-      };
+  ? {
+      left: cropLeft != null ? `${cropLeft}px` : "50%",
+      transform: cropLeft != null ? "none" : "translateX(-50%)",
+      top: cropTop != null ? `${cropTop}px` : undefined,
+      bottom: cropBottom != null ? `${cropBottom}px` : undefined,
+      width: cropWidth,
+      height: cropHeight,
+      borderRadius: radius ? "50%" : "0",
+    }
+  : {
+      top: cropTop != null ? `${cropTop}px` : undefined,
+      bottom: cropBottom != null ? `${cropBottom}px` : undefined,
+      left: cropLeft != null ? `${cropLeft}px` : undefined,
+      width: cropWidth != null ? `${cropWidth}px` : undefined,
+      height: cropHeight != null ? `${cropHeight}px` : undefined,
+    };
+
+
+    
 
   useEffect(() => {
     if (!imageSrc) return;
@@ -112,8 +126,12 @@ const dynamicWidth = screenWidth >= 465 ? 488 : screenWidth - 46;
     } else {
       setImageURL(imageSrc);
     }
+
   }, [imageSrc]);
 
+
+ 
+  
   useEffect(() => {
     if (imageURL) {
       const img = new Image();

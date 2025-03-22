@@ -23,11 +23,9 @@ const useAdjustFontSizes = (elements, dependencies, setFontSizes) => {
 
         newFontSizes[key] = { fontSize, lineHeight };
 
-        // Гарантоване застосування стилів через прямий доступ
         const el = ref.current;
         el.style.fontSize = `${fontSize}px`;
         el.style.lineHeight = `${lineHeight}px`;
-        console.log("Прямий доступ до елемента:", key, el.style.fontSize, el.style.lineHeight);
       }
 
       setFontSizes((prev) => ({ ...prev, ...newFontSizes }));
