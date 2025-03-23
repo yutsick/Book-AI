@@ -56,7 +56,7 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
 
           <div className="absolute w-full h-full top-0 left-0 flex flex-col justify-center items-center gap-4 px-8 text-center flex-1 text-black pt-8 pb-11">
             <div className="text-center text-[20px] h-full flex flex-col justify-between items-center w-full">
-              <div className="max-w-[300px]  w-full pb-[70px] relative">
+              <div className="max-w-[300px]  w-full pb-[70px] relative self-start">
                 <img src="/images/create-book/bg/title8.png" alt="" />
                 <div className="max-w-[230px] -mt-3 gap-1 h-full font-degular absolute top-12 left-6 flex items-center w-full flex-col">
 
@@ -72,7 +72,7 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
                   </div>
                   <div
                     ref={elements.subTitle.ref}
-                    className="font-semibold font-degular max-w-[190px]  self-center"
+                    className="font-semibold font-degular max-w-[190px] mr-[6px] self-center"
                     style={{
                       fontSize: `${fontSizes.subTitle?.fontSize || 20}px`,
                       lineHeight: `${fontSizes.subTitle?.lineHeight || 24}px`,
@@ -84,7 +84,7 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
               </div>
 
               <div
-                className="h-[80px] flex items-center justify-center font-bold min-w-[220px]"
+                className="h-[80px] flex items-center justify-center font-bold w-[330px]"
                 style={{
                   backgroundImage: "url('/images/create-book/bg/author8.png')",
                   backgroundRepeat: "no-repeat",
