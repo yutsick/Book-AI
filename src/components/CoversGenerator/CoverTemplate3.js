@@ -84,11 +84,11 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
               </div>
 
               <div
-                className="h-[80px] flex items-center justify-center font-bold w-[330px]"
+                className="h-[87px] flex items-center justify-center font-bold w-[332px]"
                 style={{
-                  backgroundImage: "url('/images/create-book/bg/author8.png')",
+                  backgroundImage: "url('/images/create-book/bg/author3.png')",
                   backgroundRepeat: "no-repeat",
-                  backgroundSize: "contain",
+                  backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
               >
