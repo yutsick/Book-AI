@@ -16,7 +16,7 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
   const isMobile = () => /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   const elements = {
-    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxHeight: 40,  maxWidth: 380},
+    frontAuthor: { ref: useRef(null), maxFontSize: 26, maxHeight: 40,  maxWidth: 320},
     subTitle: { ref: useRef(null), maxFontSize: 20, maxHeight: 55},
     title: { ref: useRef(null), maxFontSize: 36, maxHeight: 60, maxWidth: 220 },
     spineTitle: { ref: useRef(null), maxFontSize: 28, maxWidth: 375 },
@@ -84,11 +84,11 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
               </div>
 
               <div
-                className="h-[87px] flex items-center justify-center font-bold w-[332px]"
+                className="h-[87px] px-2 flex items-center justify-center font-bold min-w-[280px] max-w-[332px]"
                 style={{
                   backgroundImage: "url('/images/create-book/bg/author3.png')",
                   backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
+                  backgroundSize: "contain",
                   backgroundPosition: "center",
                 }}
               >
