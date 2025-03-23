@@ -33,13 +33,13 @@ function Step9({ setProgressStep }) {
 
   const shipping = [
     {
-      title: 'Free Shipping',
-      description: '10-14 business days',
+      title: 'Standard Shipping',
+      description: '9-14 business days',
       cost: 0.00
     },
     {
-      title: 'Express Shipping',
-      description: '3-5 business days',
+      title: 'Expedited Shipping',
+      description: '7-10 business days',
       cost: 15.00
     }
   ];
