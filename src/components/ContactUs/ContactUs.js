@@ -139,7 +139,7 @@ const ContactUS = () => {
     }, []);
 
     useEffect(() => {
-        const isFormValid = authorFullName && isValidEmail && selectedOption && reason && captchaToken;
+        const isFormValid = authorFullName && isValidEmail  && reason && captchaToken;
         setIsButtonDisabled(!isFormValid);
     }, [authorFullName, isValidEmail, selectedOption, reason, captchaToken]);
 
