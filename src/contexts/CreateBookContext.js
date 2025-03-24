@@ -29,7 +29,7 @@ export const CreateBookProvider = ({ children }) => {
   const [authorImage, setAuthorImage] = useState("");
   const [croppedImage, setCroppedImage] = useState("");
 
-  const savedTemplateId = localStorage.getItem('selectedTemplateId');
+  const savedTemplateId = localStorage.getItem('selectedTemplateId') || 1;
   const [selectedTemplate, setSelectedTemplate] = useState({
     templatesAdjusted: [],
     templateId: savedTemplateId || null,

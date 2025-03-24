@@ -75,4 +75,38 @@ export const trimTransparentPixels = async (imageBlob) => {
     });
   };
 
+  // Author image preview creation
+  export const createPreview = async (file, maxWidth = 1024) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+  
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+  
+        const scaleFactor = Math.min(maxWidth / img.width, 1);
+        const width = img.width * scaleFactor;
+        const height = img.height * scaleFactor;
+  
+        canvas.width = width;
+        canvas.height = height;
+  
+        // Якісне згладжування
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = "high";
+        ctx.drawImage(img, 0, 0, width, height);
+  
+        canvas.toBlob((blob) => {
+          const previewUrl = URL.createObjectURL(blob);
+          resolve(previewUrl); 
+        }, "image/jpeg", 0.9);
+      };
+  
+      img.onerror = (err) => {
+        console.error("Preview creation error:", err);
+        resolve(null);
+      };
+    });
+  };
   

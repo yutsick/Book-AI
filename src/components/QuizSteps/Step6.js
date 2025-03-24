@@ -3,7 +3,7 @@ import CreateBookContext from "@/contexts/CreateBookContext";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import { validateImage } from "@/utils/imageValidation";
 import { useTableOfContentsAPI } from "@/hooks/useTableOfContentsAPI";
-import { trimTransparentPixels, resizeImage } from "@/utils/imageProcesses";
+import { trimTransparentPixels, resizeImage, createPreview } from "@/utils/imageProcesses";
 import { saveImageToDB, getImageFromDB } from "@/utils/indexedDB"; // ✅ IndexedDB
 
 function Step6({ setProgressStep, setIsButtonDisabled, loader, setLoader }) {
@@ -30,13 +30,15 @@ function Step6({ setProgressStep, setIsButtonDisabled, loader, setLoader }) {
   }, [setProgressStep]);
 
   useEffect(() => {
-    if (authorImage && typeof authorImage === "string" && authorImage.startsWith("data:image")) {
-      setPreview(authorImage);
-    } else if (authorImage instanceof File) {
-      setPreview(URL.createObjectURL(authorImage));
+    if (!preview) { // Якщо прев'юшка ще не встановлена
+      if (authorImage && typeof authorImage === "string" && authorImage.startsWith("data:image")) {
+        setPreview(authorImage);
+      } else if (authorImage instanceof File) {
+        setPreview(URL.createObjectURL(authorImage));
+      }
     }
- 
-  }, [authorImage]);
+  }, [authorImage, preview]);
+  
 
   useEffect(() => {
     setIsButtonDisabled(isProcessing || !croppedImage);
@@ -72,10 +74,18 @@ function Step6({ setProgressStep, setIsButtonDisabled, loader, setLoader }) {
     setIsButtonDisabled(false); 
   }, [authorImage, validation, setIsButtonDisabled]);
 
+
+  // Preview
+
   const handleFileChange = async (file) => {
     if (!file) return;
   
-    setPreview(URL.createObjectURL(file));
+    // Preview setting
+    const preview = await createPreview(file, 1024);
+    if (preview) {
+      setPreview(preview); 
+    }
+
     setIsProcessing(true);
     setCroppedImage(null);
     setAuthorImage(null);
