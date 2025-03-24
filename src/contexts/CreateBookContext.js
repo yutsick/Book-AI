@@ -28,6 +28,7 @@ export const CreateBookProvider = ({ children }) => {
   const [questions, setQuestions] = useState([]);
   const [authorImage, setAuthorImage] = useState("");
   const [croppedImage, setCroppedImage] = useState("");
+  const [authorTransparentImage, setAuthorTransparentImage] = useState("");
 
   const savedTemplateId = localStorage.getItem('selectedTemplateId') || 1;
   const [selectedTemplate, setSelectedTemplate] = useState({
@@ -62,6 +63,11 @@ export const CreateBookProvider = ({ children }) => {
 
         const storedCroppedImage = await getImageFromDB("croppedImage");
         if (storedCroppedImage) setCroppedImage(storedCroppedImage);
+
+        const storedAuthorTransparentImage = await getImageFromDB("authorTransparentImage");
+        if (storedAuthorTransparentImage) setAuthorTransparentImage(storedAuthorTransparentImage);
+
+
       } catch (error) {
         console.error("❌ Error loading images from IndexedDB:", error);
       }
@@ -323,6 +329,8 @@ const base64ToBlob = (base64) => {
         setAuthorImage,
         croppedImage,
         setCroppedImage,
+        authorTransparentImage,
+        setAuthorTransparentImage,
         processedAuthorImage,
         setProcessedAuthorImage,
         selectedTemplate,

@@ -13,6 +13,7 @@ function Step6({ setProgressStep, setIsButtonDisabled, loader, setLoader }) {
     croppedImage,
     setCroppedImage,
     setProcessedAuthorImage,
+    setAuthorTransparentImage,
     authorName,
     error,
     setError,
@@ -142,7 +143,10 @@ function Step6({ setProgressStep, setIsButtonDisabled, loader, setLoader }) {
       }
   
       await saveImageToDB("croppedImage", finalImage);
+      await saveImageToDB("authorTransparentImage", finalImage);
+
       setCroppedImage(finalImage);
+      setAuthorTransparentImage(finalImage);
     } catch (error) {
       console.error("❌ Error processing image:", error);
       setError("Failed to process the image.");

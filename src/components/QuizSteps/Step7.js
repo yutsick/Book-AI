@@ -36,6 +36,8 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
     processedAuthorImage,
     croppedImage,
     setCroppedImage,
+    authorTransparentImage,
+    setAuthorTransparentImage,
     selectedTemplate,
     setSelectedTemplate
   } = useContext(CreateBookContext);
@@ -166,6 +168,8 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
         setTimeout(() => setImageSrc(reader.result), 10);
       };
       reader.readAsDataURL(croppedImage);
+    }  else if (processedAuthorImage) {
+      setImageSrc(processedAuthorImage);  
     } else {
       setImageSrc("");
       setTimeout(() => setImageSrc(croppedImage), 10);
@@ -225,7 +229,8 @@ function Step7({ setProgressStep, setIsButtonDisabled }) {
               
               <ImageCropperModal
                 ref={modalRef}
-                imageSrc={imageSrc}
+                imageSrc={authorTransparentImage}
+                // imageSrc={imageSrc}
                 cropperData={cropperData}
                 swiperSize={swiperSize}
                 templateId={selectedTemplate?.templateId}
