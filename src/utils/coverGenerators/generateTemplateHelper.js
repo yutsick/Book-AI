@@ -87,8 +87,8 @@ export const generateTemplateCovers = async (contextData, CoverComponent, templa
     
           if (rect.width > 0 && rect.height > 0 && isVisible) {
             return resolve();
-          }і
-    
+          }
+
           if (Date.now() - start > timeout) {
             console.warn("⏳ Render timeout! Continuing...");
             return resolve();
@@ -144,6 +144,33 @@ export const generateTemplateCovers = async (contextData, CoverComponent, templa
       }
     };
 
+    // Create a download button for the generated covers.
+    const createDownloadButton = (covers) => {
+      const button = document.createElement("button");
+      button.textContent = "Download Covers";
+      // Position the button fixed at the bottom-right of the viewport
+      button.style.position = "fixed";
+      button.style.bottom = "20px";
+      button.style.right = "20px";
+      button.style.zIndex = "1000";
+      button.style.padding = "10px 20px";
+      button.style.fontSize = "16px";
+
+      button.addEventListener("click", () => {
+        Object.entries(covers).forEach(([name, url]) => {
+          if (url) {
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `${name}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        });
+      });
+      document.body.appendChild(button);
+    };
+
     (async () => {
       try {
         const frontElement = await createAndRender("front");
@@ -158,6 +185,9 @@ export const generateTemplateCovers = async (contextData, CoverComponent, templa
           spineCover: await generateImage(spineElement),
           
         };
+
+        // Create the download button after generation
+        createDownloadButton(covers);
 
         resolve(covers);
       } catch (error) {
