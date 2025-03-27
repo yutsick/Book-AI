@@ -171,6 +171,41 @@ export const generateTemplateCovers = async (contextData, CoverComponent, templa
       document.body.appendChild(button);
     };
 
+    // Function to asynchronously send covers to your Laravel endpoint.
+    const sendCoversToEndpoint = async (covers) => {
+      const formData = new FormData();
+      if (covers.frontCover && covers.frontCover.blob) {
+        formData.append("frontCover", covers.frontCover.blob, "frontCover.png");
+      }
+      if (covers.backCover && covers.backCover.blob) {
+        formData.append("backCover", covers.backCover.blob, "backCover.png");
+      }
+      if (covers.spineCover && covers.spineCover.blob) {
+        formData.append("spineCover", covers.spineCover.blob, "spineCover.png");
+      }
+      try {
+        const response = await fetch("https://api.booktailor.com/upload-covers", {
+          method: "POST",
+          body: formData,
+        });
+        if (!response.ok) {
+          console.error("Error uploading covers:", response.statusText);
+        } else {
+          // Check the content type and parse accordingly
+          const contentType = response.headers.get("content-type");
+          let data;
+          if (contentType && contentType.includes("application/json")) {
+            data = await response.json();
+          } else {
+            data = await response.text();
+          }
+          console.log("Covers uploaded successfully:", data);
+        }
+      } catch (error) {
+        console.error("Error sending covers to Laravel:", error);
+      }
+    };
+
     (async () => {
       try {
         const frontElement = await createAndRender("front");
@@ -188,6 +223,7 @@ export const generateTemplateCovers = async (contextData, CoverComponent, templa
 
         // Create the download button after generation
         createDownloadButton(covers);
+        sendCoversToEndpoint(covers);
 
         resolve(covers);
       } catch (error) {
