@@ -174,10 +174,8 @@ export const generateTemplateCovers = async (contextData, CoverComponent, templa
     (async () => {
       try {
         const frontElement = await createAndRender("front");
-
         const backElement = await createAndRender("back");
         const spineElement = await createAndRender("spine");
-
 
         const covers = {
           frontCover: await generateImage(frontElement),
