@@ -80,7 +80,7 @@ const CoverTemplate8 = ({ type, data, templatesAdjusted, templateId  }) => {
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
-                className={`w-full h-full  max-w-[245px] object-contain object-right block ${!isTemplateAdjusted ? "max-h-[240px] translate-x-8" : "max-h-[297px]"} `}
+                className={`w-full h-full  max-w-[245px] object-contain object-right-bottom block ${!isTemplateAdjusted ? "max-h-[240px] translate-x-8" : "max-h-[297px]"} `}
               />
             </div>
           </div>

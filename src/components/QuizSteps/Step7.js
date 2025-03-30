@@ -21,7 +21,7 @@ const previewTemplates = [
 const cropperData = [
   { id: 1, top: null, bottom: 160, left: 0, width: 320, height: 270, mobBottom: 140, mobLeft: 0, mobWidth: 280, mobHeight: 235 },
   { id: 2, top: null, bottom: 0, left: 0, width: 320, height: 420, mobTop: 0, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 375 },
-  { id: 3, top: null, bottom: 8, left: 10, width: 300, height: 337, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 295 },
+  { id: 3, top: null, bottom: 14, left: 12, width: 296, height: 337, mobTop: null, mobBottom: 8, mobLeft: 0, mobWidth: 260, mobHeight: 295 },
   { id: 4, top: 110, left: 70, width: 180, height: 180, mobTop: null, mobBottom: 168, mobLeft: 0, mobWidth: 155, mobHeight: 155, rounded: true },
   { id: 5, top: null, bottom: 0, left: 0, width: 320, height: 425, mobTop: null, mobBottom: 0.01, mobLeft: 0, mobWidth: 280, mobHeight: 370 },
   { id: 6, top: 0, bottom: null, left: 0, width: 320, height: 302, mobTop: 0, mobLeft: 0, mobWidth: 280, mobHeight: 265 },
