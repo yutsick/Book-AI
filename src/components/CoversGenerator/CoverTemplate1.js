@@ -54,7 +54,13 @@ const CoverTemplate1 = ({ type, data }) => {
   return (
     <>
       {type === "front" && (
-        <div className="w-[431px] h-[648px] bg-black mx-auto flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-degular">
+        <div className="w-[443px] h-[672px] bg-black relative flex flex-col items-center justify-between bg-cover bg-center bg-no-repeat font-degular">
+
+          {/*/!* Debug guideline for 431x648 resolution aligned left *!/*/}
+          {/*<div className="absolute inset-0 flex items-center justify-start pointer-events-none z-50">*/}
+          {/*  <div className="w-[431px] h-[648px] border border-dashed border-red-500"></div>*/}
+          {/*</div>*/}
+
           <div className="w-full relative h-[433px] flex flex-col justify-end">
             {isIOS ? (
               <canvas ref={canvasRef} className="w-full h-full max-h-[360px] object-bottomobject-contain block"></canvas>
@@ -92,9 +98,14 @@ const CoverTemplate1 = ({ type, data }) => {
 
       {type === "back" && (
         <div
-          className="w-[431px] h-[648px] mx-auto flex items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-black text-white font-degular"
+          // className="w-[431px] h-[648px] mx-auto flex items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-black text-white font-degular"
+            className="w-[443px] h-[672px] relative flex items-center justify-between space-y-6 bg-cover bg-center bg-no-repeat bg-black text-white font-degular"
         >
 
+          {/*/!* Debug guideline for 431x648 resolution aligned left *!/*/}
+          <div className="absolute inset-0 flex items-center justify-start pointer-events-none z-50">
+            <div className="w-[431px] h-[648px] border border-dashed border-red-500"></div>
+          </div>
           {praises ? (
             generateBookBackCover({ author: authorName, praises, metaColor: "#fff", website: "www.booktailor.com" })
           ) : (
@@ -105,8 +116,8 @@ const CoverTemplate1 = ({ type, data }) => {
       )}
 
       {type === "spine" && (
-        <div className="h-[648px] flex justify-center relative w-full">
-          <div className="flex items-center  h-[57px] w-[648px]  bg-black  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular font-black">
+        <div className="h-[672px] flex justify-center relative w-full">
+          <div className="flex items-center  h-[62px] w-[672px]  bg-black  justify-between absolute rotate-90 origin-top-left left-[calc(50%+28px)] font-degular font-black">
             <div className="w-[433px]  h-full flex justify-center items-center  ">
               <div
                 ref={elements.spineTitle.ref}
