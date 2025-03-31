@@ -76,23 +76,22 @@ export const CreateBookProvider = ({ children }) => {
     fetchImages();
   }, []);
 
+  const [isTemplateLoaded, setIsTemplateLoaded] = useState(false);
+
   useEffect(() => {
     loadTemplateFromIndexedDB(); 
-    setIsTemplateLoaded(true);
   }, []);  
 
-  const [isTemplateLoaded, setIsTemplateLoaded] = useState(false);
+ 
 
   useEffect(() => {
     if (selectedTemplate) {
       localStorage.setItem('selectedTemplateId', selectedTemplate.templateId);
-
     }
   }, [selectedTemplate.templateId]);
 
   // templates
   const urlToBase64 = async (url) => {
-
     const response = await fetch(url);
     const blob = await response.blob();
     
@@ -105,6 +104,7 @@ export const CreateBookProvider = ({ children }) => {
   };
 
   const saveTemplateToIndexedDB = async (template) => {
+    
     const frontBase64 = await urlToBase64(template.front);
     const backBase64 = await urlToBase64(template.back);
     const spineBase64 = await urlToBase64(template.spine);
@@ -122,9 +122,8 @@ export const CreateBookProvider = ({ children }) => {
   };
   
   useEffect(() => {
-    if(!isTemplateLoaded) return;
     saveTemplateToIndexedDB(selectedTemplate);
-  }, [selectedTemplate]);
+  }, [selectedTemplate.templateId]);
   
   const openIndexedDB = () => {
   return new Promise((resolve, reject) => {
@@ -149,11 +148,10 @@ const loadTemplateFromIndexedDB = async () => {
   const store = transaction.objectStore('templates');
 
   const request = store.get('selectedTemplate');
-
   request.onsuccess = () => {
     const result = request.result;
     if (result) {
-      if (result) {
+ 
         const frontBlob = base64ToBlob(result.front);
         const backBlob = base64ToBlob(result.back);
         const spineBlob = base64ToBlob(result.spine);
@@ -161,6 +159,8 @@ const loadTemplateFromIndexedDB = async () => {
         const frontURL = URL.createObjectURL(frontBlob);
         const backURL = URL.createObjectURL(backBlob);
         const spineURL = URL.createObjectURL(spineBlob);
+
+        setIsTemplateLoaded(true);
 
         setSelectedTemplate({
           ...selectedTemplate,
@@ -174,9 +174,7 @@ const loadTemplateFromIndexedDB = async () => {
           backCover: backURL,
           spineCover: spineURL,
         });
-      } else {
-        console.error("Front image is undefined");
-      }
+    
     } else {
       console.warn("No template found in IndexedDB");
     }
