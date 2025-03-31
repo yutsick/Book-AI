@@ -58,12 +58,16 @@ function Step9({ setProgressStep }) {
 
   useEffect(() => {
     if (selectedCopies && typeof selectedCoverIndex === "number" && typeof selectedShippingIndex === "number") {
+      
+      
       const baseCopyCost = selectedCoverIndex === 0 ? 20.00 : 30.00;
       const coverCost = cover[selectedCoverIndex]?.cost || 0;
       const copiesCost = selectedCopies > 1 ? (selectedCopies - 1) * baseCopyCost : 0;
       const shippingCost = shipping[selectedShippingIndex]?.cost || 0;
-      setSubtotal(coverCost + copiesCost + shippingCost); 
-      setTotalPrice(subtotal);
+
+      const calculatedSubtotal = coverCost + copiesCost + shippingCost;
+      setSubtotal(calculatedSubtotal); 
+      setTotalPrice(calculatedSubtotal);
 
       localStorage.setItem("selectedCopies", JSON.stringify(selectedCopies));
       localStorage.setItem("selectedCoverIndex", JSON.stringify(selectedCoverIndex));

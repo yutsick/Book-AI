@@ -30,7 +30,7 @@ export const CreateBookProvider = ({ children }) => {
   const [croppedImage, setCroppedImage] = useState("");
   const [authorTransparentImage, setAuthorTransparentImage] = useState("");
 
-  const savedTemplateId = localStorage.getItem('selectedTemplateId') || 1;
+  const savedTemplateId = localStorage.getItem('selectedTemplateId') || null;
   const [selectedTemplate, setSelectedTemplate] = useState({
     templatesAdjusted: [],
     templateId: savedTemplateId || null,
@@ -85,13 +85,15 @@ export const CreateBookProvider = ({ children }) => {
  
 
   useEffect(() => {
-    if (selectedTemplate) {
+    if(!isTemplateLoaded) return;
+    if (selectedTemplate.templateId) {
       localStorage.setItem('selectedTemplateId', selectedTemplate.templateId);
     }
   }, [selectedTemplate.templateId]);
 
   // templates
   const urlToBase64 = async (url) => {
+
     const response = await fetch(url);
     const blob = await response.blob();
     
@@ -104,7 +106,6 @@ export const CreateBookProvider = ({ children }) => {
   };
 
   const saveTemplateToIndexedDB = async (template) => {
-    
     const frontBase64 = await urlToBase64(template.front);
     const backBase64 = await urlToBase64(template.back);
     const spineBase64 = await urlToBase64(template.spine);
@@ -122,6 +123,8 @@ export const CreateBookProvider = ({ children }) => {
   };
   
   useEffect(() => {
+    if(!selectedTemplate.templateId) return;
+    
     saveTemplateToIndexedDB(selectedTemplate);
   }, [selectedTemplate.templateId]);
   
@@ -143,19 +146,19 @@ export const CreateBookProvider = ({ children }) => {
 };
 // Load from DB
 const loadTemplateFromIndexedDB = async () => {
+  
   const db = await openIndexedDB();
   const transaction = db.transaction('templates', 'readonly');
   const store = transaction.objectStore('templates');
 
   const request = store.get('selectedTemplate');
   request.onsuccess = () => {
+    
     const result = request.result;
     if (result) {
- 
         const frontBlob = base64ToBlob(result.front);
         const backBlob = base64ToBlob(result.back);
         const spineBlob = base64ToBlob(result.spine);
-
         const frontURL = URL.createObjectURL(frontBlob);
         const backURL = URL.createObjectURL(backBlob);
         const spineURL = URL.createObjectURL(spineBlob);
@@ -190,8 +193,6 @@ const base64ToBlob = (base64) => {
   if (!base64 || typeof base64 !== 'string') {
     throw new Error('Provided value is not a valid Base64 string');
   }
-
-
 
   const byteCharacters = atob(base64.split(',')[1]);
   const byteArrays = [];
