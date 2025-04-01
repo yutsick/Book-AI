@@ -30,7 +30,7 @@ export const CreateBookProvider = ({ children }) => {
   const [croppedImage, setCroppedImage] = useState("");
   const [authorTransparentImage, setAuthorTransparentImage] = useState("");
 
-  const savedTemplateId = localStorage.getItem('selectedTemplateId') || 1;
+  const savedTemplateId = localStorage.getItem('selectedTemplateId') || null;
   const [selectedTemplate, setSelectedTemplate] = useState({
     templatesAdjusted: [],
     templateId: savedTemplateId || null,
@@ -76,17 +76,18 @@ export const CreateBookProvider = ({ children }) => {
     fetchImages();
   }, []);
 
-  useEffect(() => {
-    loadTemplateFromIndexedDB(); 
-    setIsTemplateLoaded(true);
-  }, []);  
-
   const [isTemplateLoaded, setIsTemplateLoaded] = useState(false);
 
   useEffect(() => {
-    if (selectedTemplate) {
-      localStorage.setItem('selectedTemplateId', selectedTemplate.templateId);
+    loadTemplateFromIndexedDB(); 
+  }, []);  
 
+ 
+
+  useEffect(() => {
+    if(!isTemplateLoaded) return;
+    if (selectedTemplate.templateId) {
+      localStorage.setItem('selectedTemplateId', selectedTemplate.templateId);
     }
   }, [selectedTemplate.templateId]);
 
@@ -122,9 +123,10 @@ export const CreateBookProvider = ({ children }) => {
   };
   
   useEffect(() => {
-    if(!isTemplateLoaded) return;
+    if(!selectedTemplate.templateId) return;
+    
     saveTemplateToIndexedDB(selectedTemplate);
-  }, [selectedTemplate]);
+  }, [selectedTemplate.templateId]);
   
   const openIndexedDB = () => {
   return new Promise((resolve, reject) => {
@@ -144,23 +146,24 @@ export const CreateBookProvider = ({ children }) => {
 };
 // Load from DB
 const loadTemplateFromIndexedDB = async () => {
+  
   const db = await openIndexedDB();
   const transaction = db.transaction('templates', 'readonly');
   const store = transaction.objectStore('templates');
 
   const request = store.get('selectedTemplate');
-
   request.onsuccess = () => {
+    
     const result = request.result;
     if (result) {
-      if (result) {
         const frontBlob = base64ToBlob(result.front);
         const backBlob = base64ToBlob(result.back);
         const spineBlob = base64ToBlob(result.spine);
-
         const frontURL = URL.createObjectURL(frontBlob);
         const backURL = URL.createObjectURL(backBlob);
         const spineURL = URL.createObjectURL(spineBlob);
+
+        setIsTemplateLoaded(true);
 
         setSelectedTemplate({
           ...selectedTemplate,
@@ -174,9 +177,7 @@ const loadTemplateFromIndexedDB = async () => {
           backCover: backURL,
           spineCover: spineURL,
         });
-      } else {
-        console.error("Front image is undefined");
-      }
+    
     } else {
       console.warn("No template found in IndexedDB");
     }
@@ -192,8 +193,6 @@ const base64ToBlob = (base64) => {
   if (!base64 || typeof base64 !== 'string') {
     throw new Error('Provided value is not a valid Base64 string');
   }
-
-
 
   const byteCharacters = atob(base64.split(',')[1]);
   const byteArrays = [];

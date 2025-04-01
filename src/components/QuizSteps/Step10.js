@@ -8,8 +8,8 @@ function Step10({ setProgressStep }) {
   const {
     authorName,
     selectedTemplate,
-    selectedCopies, // кількість
-    totalPrice      // ціна
+    selectedCopies, 
+    totalPrice      
 } = useContext(CreateBookContext);
 
     const { selectedTopic, selectedSubTopic } = useContext(GenreContext);

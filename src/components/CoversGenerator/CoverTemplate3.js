@@ -45,7 +45,7 @@ const CoverTemplate3 = ({ type, data, templatesAdjusted, templateId  }) => {
             style={{ backgroundImage: "url('/images/create-book/bg/bg8.png')" }}
           >
             {/* Heading */}
-            <div className="w-full h-full flex items-end p-[0_4px_1px_4px]">
+            <div className="w-full h-full flex items-end">
               <img
                 src={authorImageSrc}
                 alt={authorName || "Default Author"}
